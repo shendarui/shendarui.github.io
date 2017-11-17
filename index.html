@@ -91,7 +91,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2017/11/17/分页/" data-id="cja3xd9pj0003iemzx8koy4qg" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2017/11/17/分页/" data-id="cja3xj0mb0004q6mzn4uemooc" class="article-share-link">Share</a>
       
       
     </footer>
@@ -163,7 +163,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2017/11/17/浅谈前后台交互/" data-id="cja3xd9pl0004iemz5bpv8p9t" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2017/11/17/浅谈前后台交互/" data-id="cja3xj0md0005q6mz0gv5r52t" class="article-share-link">Share</a>
       
       
     </footer>
@@ -256,59 +256,7 @@ this;  //调用本次ajax请求时传递的options参数
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2017/11/16/ajax和jsonp区别/" data-id="cja3xd9ph0002iemzvuiypss7" class="article-share-link">Share</a>
-      
-      
-    </footer>
-  </div>
-  
-</article>
-
-
-  
-    <article id="post-AJAX" class="article article-type-post" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2017/11/15/AJAX/" class="article-date">
-  <time datetime="2017-11-15T14:42:50.000Z" itemprop="datePublished">2017-11-15</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h2 id="创建XMLHttpRequest对象"><a href="#创建XMLHttpRequest对象" class="headerlink" title="创建XMLHttpRequest对象"></a>创建XMLHttpRequest对象</h2><p>Ajax是对Asc也能长荣偶数JavaScript+ XML的简写，这一技术弄呢狗狗向服务器请求额外的数据而无需卸载页面，Ajax技术的核心是XMLHttpRequest（简称XHR）对象，XHR为服务器发送请求和解析服务器响应提供了流畅的接口，能够以异步方式从服务器区获取更多信息而不必刷新页面。使用XML对象取得新数据然后再通过DOM将数据插入到页面中。<br><img src="http://upload-images.jianshu.io/upload_images/7426605-4515edd921cdd883.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="image.png"></p>
-<h2 id="XML请求"><a href="#XML请求" class="headerlink" title="XML请求"></a>XML请求</h2><ul>
-<li><h4 id="GET请求"><a href="#GET请求" class="headerlink" title="GET请求"></a>GET请求</h4>  对XHR而言，位于传入open（）方法的URL末尾的查询字符串必须经过正确的编码才行。使用GET请求经常发生一个错误，就是查询字符串格式有问题。查询字符串中每个参数的名称和值都必须使用encodeURIComponent()进行编码，然后才能放到URL的末尾，而且所用名-值都必须有&amp;分割</li>
-<li><h4 id="POST请求"><a href="#POST请求" class="headerlink" title="POST请求"></a>POST请求</h4>  服务器对post请求不一样，所以，服务器端必须有程序来读取发送过来的原始数据，并从中解析有用的部分。<br><img src="http://upload-images.jianshu.io/upload_images/7426605-758bd1c84499fbfb.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="image.png"></li>
-</ul>
-<p>通过上面的两个ajax的实例，我们可以看出get请求和post请求的一些特点：</p>
-<ol>
-<li><p>get请求：</p>
-<ul>
-<li>GET 请求可被缓存</li>
-<li>GET 请求保留在浏览器历史记录中</li>
-<li>GET 请求可被收藏为书签</li>
-<li>GET 请求不应在处理敏感数据时使用</li>
-<li>GET 请求有长度限制</li>
-<li>GET 请求只应当用于取回数据</li>
-</ul>
-</li>
-<li><p>post请求：</p>
-<ul>
-<li>POST 请求不会被缓存</li>
-<li>POST 请求不会保留在浏览器历史记录中</li>
-<li>POST 不能被收藏为书签</li>
-<li>POST 请求对数据长度没有要求<h2 id="XML响应"><a href="#XML响应" class="headerlink" title="XML响应"></a>XML响应</h2>responseText 将响应信息作为字符串返回。 XMLHTTP尝试将响应信息解码为Unicode字符串，XMLHTTP默认将响应数据的编码定为UTF-8，如果服务器返回的数据带BOM(byte-order mark)，XMLHTTP可以解码任何UCS-2 (big or little endian)或者UCS-4 数据。注意，如果服务器返回的是xml文档，此属性并不处理xml文档中的编码声明。你需要使用responseXML来处理。<br>js代码会等到服务器响应之后再继续执行。收到响应后，响应数据会自动填充XHR对象的属性，相关属性如下：<br>responseText：作为响应主体被返回的文本；<br>responseXML：作为相应的内容类型是text/xml或application/xml，这个属性中将保存包含着相应数据的XMLDOM文档；<br>status：相应的http状态；<br>statusText：http状态的说明。<br><img src="http://upload-images.jianshu.io/upload_images/7426605-9fc5a75070dc9b10.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="image.png"><br><img src="http://upload-images.jianshu.io/upload_images/7426605-615489ee7cc32445.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="image.png"><h2 id="XML-readyState"><a href="#XML-readyState" class="headerlink" title="XML readyState"></a>XML readyState</h2>在接收到响应之后，第一步检查status属性，当xhr.status为200时候，说明接受成功.<br>0：未初始化，尚未调用open()方法。<br>1.启动。已经调用open()方法，但尚未调用send()方法。<br>2.发送，已经调用send()方法，为接受到响应。<br>3.接受。已经接受部分响应数据。<br>4.完成。全部接受响应的数据，并且可以在客户端使用。<br><img src="http://upload-images.jianshu.io/upload_images/7426605-fc5c216ca48b3028.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="image.png"><br><img src="http://upload-images.jianshu.io/upload_images/7426605-42884c20c738ab1c.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="image.png"><br>当执行xhr.onload = function(){}方法的时候 表明XML已经响应完毕</li>
-</ul>
-</li>
-</ol>
-
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://yoursite.com/2017/11/15/AJAX/" data-id="cja3xd9p70000iemz0xvca2k2" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2017/11/16/ajax和jsonp区别/" data-id="cja3xj0m80002q6mzbn6b5fd4" class="article-share-link">Share</a>
       
       
     </footer>
@@ -332,7 +280,7 @@ this;  //调用本次ajax请求时传递的options参数
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2017/11/15/JSONP 的工作原理/">分页</a>
+      <a class="article-title" href="/2017/11/15/JSONP 的工作原理/">JSONP 的工作原理</a>
     </h1>
   
 
@@ -353,7 +301,7 @@ this;  //调用本次ajax请求时传递的options参数
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2017/11/15/JSONP 的工作原理/" data-id="cja3xd9pc0001iemzuumjvfbb" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2017/11/15/JSONP 的工作原理/" data-id="cja3xj0m50001q6mzgdq5sfk7" class="article-share-link">Share</a>
       
       
     </footer>
@@ -377,7 +325,7 @@ this;  //调用本次ajax请求时传递的options参数
         
   
     <h1 itemprop="name">
-      <a class="article-title" href="/2017/11/15/json/">分页</a>
+      <a class="article-title" href="/2017/11/15/json/">json_encode</a>
     </h1>
   
 
@@ -411,7 +359,69 @@ this;  //调用本次ajax请求时传递的options参数
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2017/11/15/json/" data-id="cja3xd9q60005iemzp3v0hlkh" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2017/11/15/json/" data-id="cja3xj0ma0003q6mzrutslpwj" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="XMLHttpRequest-AJAX" class="article article-type-XMLHttpRequest" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2017/11/14/AJAX/" class="article-date">
+  <time datetime="2017-11-14T13:06:47.000Z" itemprop="datePublished">2017-11-14</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2017/11/14/AJAX/">XMLHttpRequest</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="创建XMLHttpRequest对象"><a href="#创建XMLHttpRequest对象" class="headerlink" title="创建XMLHttpRequest对象"></a>创建XMLHttpRequest对象</h2><p>Ajax是对Asc也能长荣偶数JavaScript+ XML的简写，这一技术弄呢狗狗向服务器请求额外的数据而无需卸载页面，Ajax技术的核心是XMLHttpRequest（简称XHR）对象，XHR为服务器发送请求和解析服务器响应提供了流畅的接口，能够以异步方式从服务器区获取更多信息而不必刷新页面。使用XML对象取得新数据然后再通过DOM将数据插入到页面中。<br><img src="http://upload-images.jianshu.io/upload_images/7426605-4515edd921cdd883.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="image.png"></p>
+<h2 id="XML请求"><a href="#XML请求" class="headerlink" title="XML请求"></a>XML请求</h2><ul>
+<li><h4 id="GET请求"><a href="#GET请求" class="headerlink" title="GET请求"></a>GET请求</h4>  对XHR而言，位于传入open（）方法的URL末尾的查询字符串必须经过正确的编码才行。使用GET请求经常发生一个错误，就是查询字符串格式有问题。查询字符串中每个参数的名称和值都必须使用encodeURIComponent()进行编码，然后才能放到URL的末尾，而且所用名-值都必须有&amp;分割</li>
+<li><h4 id="POST请求"><a href="#POST请求" class="headerlink" title="POST请求"></a>POST请求</h4>  服务器对post请求不一样，所以，服务器端必须有程序来读取发送过来的原始数据，并从中解析有用的部分。<br><img src="http://upload-images.jianshu.io/upload_images/7426605-758bd1c84499fbfb.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="image.png"></li>
+</ul>
+<p>通过上面的两个ajax的实例，我们可以看出get请求和post请求的一些特点：</p>
+<ol>
+<li><p>get请求：</p>
+<ul>
+<li>GET 请求可被缓存</li>
+<li>GET 请求保留在浏览器历史记录中</li>
+<li>GET 请求可被收藏为书签</li>
+<li>GET 请求不应在处理敏感数据时使用</li>
+<li>GET 请求有长度限制</li>
+<li>GET 请求只应当用于取回数据</li>
+</ul>
+</li>
+<li><p>post请求：</p>
+<ul>
+<li>POST 请求不会被缓存</li>
+<li>POST 请求不会保留在浏览器历史记录中</li>
+<li>POST 不能被收藏为书签</li>
+<li>POST 请求对数据长度没有要求<h2 id="XML响应"><a href="#XML响应" class="headerlink" title="XML响应"></a>XML响应</h2>responseText 将响应信息作为字符串返回。 XMLHTTP尝试将响应信息解码为Unicode字符串，XMLHTTP默认将响应数据的编码定为UTF-8，如果服务器返回的数据带BOM(byte-order mark)，XMLHTTP可以解码任何UCS-2 (big or little endian)或者UCS-4 数据。注意，如果服务器返回的是xml文档，此属性并不处理xml文档中的编码声明。你需要使用responseXML来处理。<br>js代码会等到服务器响应之后再继续执行。收到响应后，响应数据会自动填充XHR对象的属性，相关属性如下：<br>responseText：作为响应主体被返回的文本；<br>responseXML：作为相应的内容类型是text/xml或application/xml，这个属性中将保存包含着相应数据的XMLDOM文档；<br>status：相应的http状态；<br>statusText：http状态的说明。<br><img src="http://upload-images.jianshu.io/upload_images/7426605-9fc5a75070dc9b10.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="image.png"><br><img src="http://upload-images.jianshu.io/upload_images/7426605-615489ee7cc32445.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="image.png"><h2 id="XML-readyState"><a href="#XML-readyState" class="headerlink" title="XML readyState"></a>XML readyState</h2>在接收到响应之后，第一步检查status属性，当xhr.status为200时候，说明接受成功.<br>0：未初始化，尚未调用open()方法。<br>1.启动。已经调用open()方法，但尚未调用send()方法。<br>2.发送，已经调用send()方法，为接受到响应。<br>3.接受。已经接受部分响应数据。<br>4.完成。全部接受响应的数据，并且可以在客户端使用。<br><img src="http://upload-images.jianshu.io/upload_images/7426605-fc5c216ca48b3028.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="image.png"><br><img src="http://upload-images.jianshu.io/upload_images/7426605-42884c20c738ab1c.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="image.png"><br>当执行xhr.onload = function(){}方法的时候 表明XML已经响应完毕</li>
+</ul>
+</li>
+</ol>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2017/11/14/AJAX/" data-id="cja3xj0lz0000q6mza6iulny8" class="article-share-link">Share</a>
       
       
     </footer>
@@ -463,11 +473,11 @@ this;  //调用本次ajax请求时传递的options参数
           </li>
         
           <li>
-            <a href="/2017/11/15/AJAX/">(no title)</a>
+            <a href="/2017/11/15/JSONP 的工作原理/">JSONP 的工作原理</a>
           </li>
         
           <li>
-            <a href="/2017/11/15/JSONP 的工作原理/">分页</a>
+            <a href="/2017/11/15/json/">json_encode</a>
           </li>
         
       </ul>
