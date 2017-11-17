@@ -61,6 +61,46 @@
       <div class="outer">
         <section id="main">
   
+    <article id="简易版-分页" class="article article-type-简易版" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2017/11/17/分页/" class="article-date">
+  <time datetime="2017-11-17T13:06:47.000Z" itemprop="datePublished">2017-11-17</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2017/11/17/分页/">分页</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>HTML 代码段</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br></pre></td><td class="code"><pre><span class="line">&lt;!DOCTYPE html&gt;</span><br><span class="line">&lt;html&gt;</span><br><span class="line">	&lt;head&gt;</span><br><span class="line">		&lt;meta charset=&quot;UTF-8&quot;&gt;</span><br><span class="line">		&lt;title&gt;&lt;/title&gt;</span><br><span class="line">	&lt;/head&gt;</span><br><span class="line">	&lt;style type=&quot;text/css&quot;&gt;</span><br><span class="line">		.wrap &#123;</span><br><span class="line">			width: 400px;</span><br><span class="line">			height: 200px;</span><br><span class="line">		&#125;</span><br><span class="line">		#pagenav &#123;</span><br><span class="line">			overflow: hidden;</span><br><span class="line">			width: 300px;</span><br><span class="line">			margin: 0 auto;</span><br><span class="line">		&#125;</span><br><span class="line">		a &#123;</span><br><span class="line">			display: block;</span><br><span class="line">			border: 1px solid lightgray;</span><br><span class="line">			width: 30px;</span><br><span class="line">			height: 20px;</span><br><span class="line">			float: left;</span><br><span class="line">			font-size: 12px;</span><br><span class="line">			text-align: center;</span><br><span class="line">			line-height: 20px;</span><br><span class="line">			text-decoration: none;</span><br><span class="line">		&#125;</span><br><span class="line">		#content &#123;</span><br><span class="line">			width: 400px;</span><br><span class="line">			height: 200px;</span><br><span class="line">			background: #f5f5f5;</span><br><span class="line">		&#125;</span><br><span class="line">	&lt;/style&gt;</span><br><span class="line">	&lt;body&gt;</span><br><span class="line">		&lt;div class=&quot;wrap&quot;&gt;</span><br><span class="line">			&lt;div id=&quot;content&quot;&gt;&lt;/div&gt;</span><br><span class="line">			&lt;!--页码导航 --&gt;</span><br><span class="line">			&lt;div id=&quot;pagenav&quot;&gt;&lt;/div&gt;</span><br><span class="line">		&lt;/div&gt;</span><br><span class="line">	&lt;/body&gt;</span><br><span class="line">	&lt;script src=&quot;http://libs.baidu.com/jquery/2.0.0/jquery.min.js&quot;&gt;&lt;/script&gt;</span><br><span class="line">	&lt;script type=&quot;text/javascript&quot;&gt;</span><br><span class="line">		totalNum = 100;//总页数 </span><br><span class="line">		pageSize = 3;//每页显示数量 </span><br><span class="line">		totalPage = Math.ceil(totalNum/pageSize);//总页数的计算公式</span><br><span class="line">		createPageNav(1);</span><br><span class="line">		function createPageNav(pageIndex) &#123;</span><br><span class="line">			//每页页码不超过9页</span><br><span class="line">			//pageIndex保持在中间</span><br><span class="line">			var pageIndex = parseInt(pageIndex);</span><br><span class="line">			start = pageIndex - 4 &gt; 0 ? pageIndex - 4 : 1;</span><br><span class="line">			end = pageIndex + 4 &lt; totalPage ? pageIndex + 4 : totalPage;</span><br><span class="line">			end = end - start &lt; 8 ? (start+8&gt;totalPage ? totalPage : start+8) : end;</span><br><span class="line">			//如果是最后一页，向前保持所有的</span><br><span class="line">			if(end == totalPage) &#123;</span><br><span class="line">				start = totalPage - 8 &gt; 0 ? totalPage - 8 : 1;</span><br><span class="line">			&#125;</span><br><span class="line">			document.getElementById(&apos;pagenav&apos;).innerHTML = &quot;&quot;;</span><br><span class="line">			for(var i=start; i&lt;=end; i++)&#123;	</span><br><span class="line">				var a = document.createElement(&apos;a&apos;);</span><br><span class="line">				a.innerHTML = i;</span><br><span class="line">				//自定义属性  在标签a里面会显示 &lt;a data-page=&quot;i&quot;&gt;i&lt;/a&gt;</span><br><span class="line">				a.dataset.page = i;</span><br><span class="line">				a.href = &quot;###&quot;;</span><br><span class="line">				a.onclick = ViewNews;</span><br><span class="line">				document.getElementById(&apos;pagenav&apos;).appendChild(a);</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line">		function ViewNews()&#123;</span><br><span class="line">			var pageIndex = this.dataset.page;</span><br><span class="line">			createPageNav(pageIndex);</span><br><span class="line">			$.ajax(&#123;</span><br><span class="line">				type: &quot;get&quot;,</span><br><span class="line">				url: &quot;news.php&quot;,</span><br><span class="line">				data: &#123;&quot;pageIndex&quot;:pageIndex&#125;,</span><br><span class="line">				async: true,</span><br><span class="line">				dataType: &quot;json&quot;,</span><br><span class="line">				success: function(data) &#123;</span><br><span class="line">					//将新闻数据显示出来</span><br><span class="line">					createNews(data);</span><br><span class="line">				&#125;</span><br><span class="line">			&#125;)</span><br><span class="line">		&#125;</span><br><span class="line">		function createNews(data) &#123;</span><br><span class="line">			var news = &quot;&quot;;</span><br><span class="line">			for(var i = 0;i&lt; data.length;i++) &#123;</span><br><span class="line">				news += &quot;&lt;li&gt;&quot;+data[i][0]+&quot;&lt;/li&gt;&quot;;</span><br><span class="line">			&#125;</span><br><span class="line">			$(&apos;#content&apos;).html(news);</span><br><span class="line">		&#125;</span><br><span class="line">	&lt;/script&gt;</span><br><span class="line">&lt;/html&gt;</span><br></pre></td></tr></table></figure>
+<p>PHP代码段</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line">&lt;?php</span><br><span class="line">	/**</span><br><span class="line">	 * intval 将字符串转换成整数</span><br><span class="line">	 * pageIndex  第几页新闻</span><br><span class="line">	 * pageIndex = 3  (从1 开始)</span><br><span class="line">	 * pageSize = 3  每页显示几条新闻</span><br><span class="line">	 */</span><br><span class="line">	$news = array();</span><br><span class="line">	for($i=0;$i&lt;100;$i++) &#123;</span><br><span class="line">		$news[] = array(&quot;新闻$i&quot;);</span><br><span class="line">	&#125;</span><br><span class="line">	$pagaIndex = empty($_GET[&apos;pageIndex&apos;]) ? 1 : intval($_GET[&apos;pageIndex&apos;]);</span><br><span class="line">	$pageSize = 3;</span><br><span class="line">	$start = ($pagaIndex - 1) * $pageSize;</span><br><span class="line">	$outNews = array();</span><br><span class="line">	for($i=0;$i&lt;$pageSize;$i++) &#123;</span><br><span class="line">		if(!empty($news[$start + $i]))&#123;</span><br><span class="line">			$outNews[] = $news[$start + $i];</span><br><span class="line">		&#125;	</span><br><span class="line">	&#125;</span><br><span class="line">	echo json_encode($outNews);</span><br><span class="line">?&gt;</span><br></pre></td></tr></table></figure>
+<h3 id="欢迎来到大瑞的微博"><a href="#欢迎来到大瑞的微博" class="headerlink" title="欢迎来到大瑞的微博"></a>欢迎来到<a href="https://shendarui.github.io/" target="_blank" rel="external">大瑞的微博</a></h3>
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2017/11/17/分页/" data-id="cja3x7ckv0005a1mzl1zsww0i" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
     <article id="post-浅谈前后台交互" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
     <a href="/2017/11/17/浅谈前后台交互/" class="article-date">
@@ -123,7 +163,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2017/11/17/浅谈前后台交互/" data-id="cja3ut4qg00008xmza6iiw2lo" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2017/11/17/浅谈前后台交互/" data-id="cja3x7ckt0004a1mzupea9f4q" class="article-share-link">Share</a>
       
       
     </footer>
@@ -216,7 +256,7 @@ this;  //调用本次ajax请求时传递的options参数
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2017/11/16/ajax和jsonp区别/" data-id="cja3urj7u00016hmzcyqp7wqv" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2017/11/16/ajax和jsonp区别/" data-id="cja3x7ckq0002a1mzkaqsistw" class="article-share-link">Share</a>
       
       
     </footer>
@@ -268,7 +308,7 @@ this;  //调用本次ajax请求时传递的options参数
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2017/11/15/AJAX/" data-id="cja3urj7l00006hmzlrmlq0zz" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2017/11/15/AJAX/" data-id="cja3x7ckl0001a1mzq6kp9ps1" class="article-share-link">Share</a>
       
       
     </footer>
@@ -316,7 +356,7 @@ this;  //调用本次ajax请求时传递的options参数
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2017/11/15/json/" data-id="cja3urj8000036hmzps1wkc7i" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2017/11/15/json/" data-id="cja3x7ckr0003a1mzoinhtaau" class="article-share-link">Share</a>
       
       
     </footer>
@@ -351,7 +391,7 @@ this;  //调用本次ajax请求时传递的options参数
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2017/11/13/JSONP 的工作原理/" data-id="cja3urj7z00026hmz30p6xd1u" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2017/11/13/JSONP 的工作原理/" data-id="cja3x7ckg0000a1mzcrkua7xy" class="article-share-link">Share</a>
       
       
     </footer>
@@ -391,6 +431,10 @@ this;  //调用本次ajax请求时传递的options参数
       <ul>
         
           <li>
+            <a href="/2017/11/17/分页/">分页</a>
+          </li>
+        
+          <li>
             <a href="/2017/11/17/浅谈前后台交互/">浅谈前后台交互</a>
           </li>
         
@@ -404,10 +448,6 @@ this;  //调用本次ajax请求时传递的options参数
         
           <li>
             <a href="/2017/11/15/json/">(no title)</a>
-          </li>
-        
-          <li>
-            <a href="/2017/11/13/JSONP 的工作原理/">(no title)</a>
           </li>
         
       </ul>
