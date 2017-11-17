@@ -1,0 +1,239 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>浅谈前后台交互 | 大瑞</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="举例：外卖餐厅订餐 初识状态：  1234&amp;lt;form method=&amp;quot;get&amp;quot;&amp;gt;    &amp;lt;div&amp;gt;丽德快餐厅&amp;lt;/div&amp;gt; 	&amp;lt;input type=&amp;quot;button&amp;quot; name=&amp;quot;button&amp;quot; id=&amp;quot;btn&amp;quot; value=&amp;quot;立即订餐&amp;quot;&amp;gt;  &amp;lt;">
+<meta property="og:type" content="article">
+<meta property="og:title" content="浅谈前后台交互">
+<meta property="og:url" content="http://yoursite.com/2017/11/17/浅谈前后台交互/index.html">
+<meta property="og:site_name" content="大瑞">
+<meta property="og:description" content="举例：外卖餐厅订餐 初识状态：  1234&amp;lt;form method=&amp;quot;get&amp;quot;&amp;gt;    &amp;lt;div&amp;gt;丽德快餐厅&amp;lt;/div&amp;gt; 	&amp;lt;input type=&amp;quot;button&amp;quot; name=&amp;quot;button&amp;quot; id=&amp;quot;btn&amp;quot; value=&amp;quot;立即订餐&amp;quot;&amp;gt;  &amp;lt;">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/7426605-337273f35a65ddad.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/7426605-ea3cdf88d4d58935.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/7426605-b83a2d7c3f7b00ed.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/7426605-83ea505458d4ada2.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:updated_time" content="2017-11-17T12:01:21.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="浅谈前后台交互">
+<meta name="twitter:description" content="举例：外卖餐厅订餐 初识状态：  1234&amp;lt;form method=&amp;quot;get&amp;quot;&amp;gt;    &amp;lt;div&amp;gt;丽德快餐厅&amp;lt;/div&amp;gt; 	&amp;lt;input type=&amp;quot;button&amp;quot; name=&amp;quot;button&amp;quot; id=&amp;quot;btn&amp;quot; value=&amp;quot;立即订餐&amp;quot;&amp;gt;  &amp;lt;">
+<meta name="twitter:image" content="http://upload-images.jianshu.io/upload_images/7426605-337273f35a65ddad.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+  
+    <link rel="alternate" href="/atom.xml" title="大瑞" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  <link rel="stylesheet" href="/css/style.css">
+  
+
+</head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">大瑞</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://yoursite.com"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-浅谈前后台交互" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2017/11/17/浅谈前后台交互/" class="article-date">
+  <time datetime="2017-11-17T11:55:22.000Z" itemprop="datePublished">2017-11-17</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      浅谈前后台交互
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p><img src="http://upload-images.jianshu.io/upload_images/7426605-337273f35a65ddad.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="前后台交互"></p>
+<h3 id="举例：外卖餐厅订餐"><a href="#举例：外卖餐厅订餐" class="headerlink" title="举例：外卖餐厅订餐"></a>举例：外卖餐厅订餐</h3><ul>
+<li>初识状态：</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&lt;form method=&quot;get&quot;&gt;</span><br><span class="line">    &lt;div&gt;丽德快餐厅&lt;/div&gt;</span><br><span class="line"> 	&lt;input type=&quot;button&quot; name=&quot;button&quot; id=&quot;btn&quot; value=&quot;立即订餐&quot;&gt;  </span><br><span class="line">&lt;/form&gt;</span><br></pre></td></tr></table></figure>
+<ul>
+<li>具体的菜单（菜品+价格），前台要从后台获取，这时就要前台想后台发送一个数据，jquery将Ajax封装。以GET方式向后台提交数据，链接后台的地址存在URL里面，async判断是否异步，一般都会选择true，异步，因为同步会出现卡顿现象，dataType，要求后台给我们返回的数据类型，success数据传送成功后生成的函数，函数里面的参数就是后台给我们返回的数据。<br>根据上图的流程，可以理解为，用户 通过脚本语言的 Ajax，向服务器传送HTTP请求，服务器将请求处理后返回一组数据到Ajax，经过一些列编码成HTML和CSS呈现给用户。毕竟所有的程序最终都要转化为HTML和CSS用户才能看到。</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">$.ajax(&#123;</span><br><span class="line">		type: &quot;get&quot;, //数据提交类型</span><br><span class="line">		url: &quot;form-2.php?action=num&quot;,</span><br><span class="line">		data: &#123;&#125;,</span><br><span class="line">		dataType: &quot;json&quot;,</span><br><span class="line">		async: true,</span><br><span class="line">		success: function(data)&#123;</span><br><span class="line">			for(i in data) &#123;	</span><br><span class="line">				var div = document.createElement(&apos;div&apos;);</span><br><span class="line">				document.body.appendChild(div);</span><br><span class="line">				$(&quot;&lt;span&gt;&quot;+data[i][0]+&quot;&lt;/span&gt; &lt;span class=&apos;price&apos;&gt;&quot;+data[i][1]+&quot;&lt;/span&gt; &lt;input type=&apos;checkbox&apos; name=&apos;key[]&apos; value=&quot;+i+&quot;/&gt; 订餐份数：&lt;input type=&apos;text&apos; name=&apos;amount_&quot;+i+&quot;&apos;/&gt;&quot;).appendTo(div);</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;);</span><br></pre></td></tr></table></figure>
+<ul>
+<li>前台通过GET传送的请求，后台也要用GET方法接受，接受后将前台的需求返回。</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">$menu = array();</span><br><span class="line">	$menu[] = array(&quot;红烧肉&quot;,10);</span><br><span class="line">	$menu[] = array(&quot;烤鸡&quot;, 20);</span><br><span class="line">	$menu[] = array( &quot;鲍鱼&quot;, 30);</span><br><span class="line">	$menu[] = array( &quot;青菜汤&quot;,4);</span><br><span class="line">	//返回界面所需要的数据</span><br><span class="line">	if(!empty($_GET[&quot;action&quot;])) &#123;</span><br><span class="line">		$jsonstr = json_encode($menu);</span><br><span class="line">		echo $jsonstr;</span><br><span class="line">	&#125;</span><br></pre></td></tr></table></figure>
+<ul>
+<li>这样前台的界面就会形成。</li>
+</ul>
+<p><img src="http://upload-images.jianshu.io/upload_images/7426605-ea3cdf88d4d58935.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="image.png"></p>
+<ul>
+<li>界面形成后，用户开始订餐</li>
+</ul>
+<p><img src="http://upload-images.jianshu.io/upload_images/7426605-b83a2d7c3f7b00ed.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="image.png"></p>
+<ul>
+<li>此时前台需要将用户选中的菜品和所选份数的数据传递给后台，后台将所选菜品对应的价格与份数相加，计算出总价，返回给前台，前台将接受到的数据呈现给用户</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line">$(&quot;#btn&quot;)[0].onclick = function() &#123;</span><br><span class="line">		var arrIndex = [];</span><br><span class="line">		var strIndex = &apos;&apos;;</span><br><span class="line">		var arrCount = [];</span><br><span class="line">		var strCount = &apos;&apos;;</span><br><span class="line">        //遍历界面中的复选框，将勾选中的下标和对应的份数保存到数组里面</span><br><span class="line">		$(&apos;input:checkbox&apos;).each(function(index,val) &#123;</span><br><span class="line">			if(val.checked == true) &#123;</span><br><span class="line">				arrIndex.push(index);</span><br><span class="line">				arrCount.push($(&apos;input:text&apos;)[index].value)</span><br><span class="line">			&#125;</span><br><span class="line">        //将数组变成字符串：=&gt; 用字符串传递比较安全</span><br><span class="line">			strIndex = arrIndex.join();</span><br><span class="line">			strCount = arrCount.join();</span><br><span class="line">		&#125;)</span><br><span class="line">		$.ajax(&#123;</span><br><span class="line">			type: &quot;post&quot;, //数据提交类型</span><br><span class="line">			url: &quot;form-2.php&quot;,</span><br><span class="line">			data: &#123;&quot;key&quot;:strIndex,&quot;amount_&quot;:strCount&#125;,</span><br><span class="line">			dataType: &quot;json&quot;,</span><br><span class="line">			async: true,</span><br><span class="line">			success: function(data)&#123;</span><br><span class="line">				$(&quot;&lt;h4&gt;您的总订单：&lt;/h4&gt;&quot;).appendTo(document.body);</span><br><span class="line">				for(var i =0;i&lt;data.length-1;i++) &#123;</span><br><span class="line">					$(&quot;&lt;div&gt;&lt;/div&gt;&quot;).html(data[i].name+&quot;　份数：&quot;+data[i].amount+&quot;　小计：&quot;+data[i].price).appendTo(document.body);</span><br><span class="line">				&#125;</span><br><span class="line">				$(&quot;&lt;span&gt;&lt;/span&gt;&quot;).html(&quot;总价:&quot;).appendTo(document.body);</span><br><span class="line">				$(&quot;&lt;span&gt;&lt;/span&gt;&quot;).html(data[2].total).appendTo(document.body);</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;);</span><br><span class="line">	&#125;</span><br></pre></td></tr></table></figure>
+<ul>
+<li>前台通过POST方法，将勾选框的下标 key 和对应的份数  amount_ 传送到后台，后台接受到数据之后进行处理，将小计与最后的总价返回给前端。</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">if(!empty($_POST[&quot;key&quot;]))&#123;</span><br><span class="line">	    $totalPrice = 0;</span><br><span class="line">	    $userSelected = array();</span><br><span class="line">	    $keys = explode(&apos;,&apos;,$_POST[&apos;key&apos;]);</span><br><span class="line">	    $amount = explode(&apos;,&apos;,$_POST[&apos;amount_&apos;]);</span><br><span class="line">	    foreach($keys as $key =&gt; $val)&#123;</span><br><span class="line">		     $amount1 = $amount[$key];</span><br><span class="line">		     $userSelected[$key][&apos;name&apos;] = $menu[$val][0];</span><br><span class="line">		     $userSelected[$key][&apos;price&apos;]= $menu[$val][1]*$amount1;</span><br><span class="line">		     $userSelected[$key][&apos;amount&apos;] = $amount[$key];</span><br><span class="line">		     $totalPrice += $userSelected[$key][&apos;price&apos;];</span><br><span class="line">	    &#125;</span><br><span class="line">	    $userSelected[][&apos;total&apos;] = $totalPrice;</span><br><span class="line">//	     recordMenu($userSelected);</span><br><span class="line">	     echo json_encode($userSelected);</span><br><span class="line">	&#125;</span><br></pre></td></tr></table></figure>
+<ul>
+<li>结果如下（简易版网上订餐）</li>
+</ul>
+<p><img src="http://upload-images.jianshu.io/upload_images/7426605-83ea505458d4ada2.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="image.png"></p>
+<ul>
+<li>旁白：前端与服务器的交互。一个请求对应一个回应。</li>
+</ul>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2017/11/17/浅谈前后台交互/" data-id="cja3ut4qg00008xmza6iiw2lo" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+  
+    <a href="/2017/11/16/ajax和jsonp区别/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">ajax和jsonp区别</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+
+  
+    
+
+  
+    
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/11/">November 2017</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2017/11/17/浅谈前后台交互/">浅谈前后台交互</a>
+          </li>
+        
+          <li>
+            <a href="/2017/11/16/ajax和jsonp区别/">ajax和jsonp区别</a>
+          </li>
+        
+          <li>
+            <a href="/2017/11/15/AJAX/">(no title)</a>
+          </li>
+        
+          <li>
+            <a href="/2017/11/15/json/">(no title)</a>
+          </li>
+        
+          <li>
+            <a href="/2017/11/13/JSONP 的工作原理/">(no title)</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2017 John Doe<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  <script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="/js/script.js"></script>
+
+  </div>
+</body>
+</html>
