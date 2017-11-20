@@ -64,6 +64,66 @@
       <div class="outer">
         <section id="main">
   
+    <article id="post-Cookie和Session详解" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2017/11/20/Cookie和Session详解/" class="article-date">
+  <time datetime="2017-11-20T14:25:53.000Z" itemprop="datePublished">2017-11-20</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2017/11/20/Cookie和Session详解/">Cookie和Session详解</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="Cookie"><a href="#Cookie" class="headerlink" title="Cookie"></a>Cookie</h2><h4 id="1-什么是Cookie"><a href="#1-什么是Cookie" class="headerlink" title="1. 什么是Cookie"></a>1. 什么是Cookie</h4><p>Cookie实际上是一小段的文本信息。客户请求服务器，如果服务器需要记录该用户状态，就使用response想客户端浏览器颁发一个Cookie。客户端浏览器会把Cookie保存起来。当浏览器再次请求该网站时，浏览器把请求的网址连同该Cookie一同提交给服务器。服务器检查该Cookie，以此来辨认用户状态。服务器还可以根据需要修改Cookie的内容，换句话说，Cookie不适合用带有隐私类信息。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">&lt;?php</span><br><span class="line">	print_r($_COOKIE);</span><br><span class="line">	if(!empty($_COOKIE[&apos;num&apos;])) &#123;</span><br><span class="line">		$_COOKIE[&apos;num&apos;]++;</span><br><span class="line">		setcookie(&quot;num&quot;,$_COOKIE[&apos;num&apos;]);</span><br><span class="line">		echo $_COOKIE[&apos;num&apos;];</span><br><span class="line">	&#125;else &#123;</span><br><span class="line">		setcookie(&apos;num&apos;,1);</span><br><span class="line">	&#125;</span><br><span class="line">	setcookie(&apos;name&apos;,&apos;da&apos;,time()+24*3600);</span><br><span class="line">?&gt;</span><br></pre></td></tr></table></figure>
+<p>例如上端代码，当每次刷新界面的时候num都会自增1，实现界面浏览次数。</p>
+<h4 id="2-Cookie的不可跨域性"><a href="#2-Cookie的不可跨域性" class="headerlink" title="2. Cookie的不可跨域性"></a>2. Cookie的不可跨域性</h4><p>Cookie在客户端是由浏览器管理的，浏览器能够保证Google只会操作Google的Cookie，而不会操作baidu的Cookie，从而保证用户的隐私安全</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">&lt;script type=&quot;text/javascript&quot;&gt;</span><br><span class="line">		var indexDate = new Date();</span><br><span class="line">		$.ajax(&#123;</span><br><span class="line">			type:&quot;get&quot;,</span><br><span class="line">			url:&quot;count.php?actionC=content&quot;,</span><br><span class="line">			async:true,</span><br><span class="line">			data: &#123;&#125;,</span><br><span class="line">			success: function(data) &#123;</span><br><span class="line">				$(&quot;#boxContent&quot;).html(&quot;这是content的数据：　&quot;+data);</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;);</span><br><span class="line">		document.cookie = &quot;contentTime=&quot;+indexDate;	</span><br><span class="line">	&lt;/script&gt;</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">&lt;?php</span><br><span class="line">			if(!empty($_COOKIE[$val1])) &#123;</span><br><span class="line">				$_COOKIE[$val1]++;</span><br><span class="line">				setcookie($val1,$_COOKIE[$val1]);</span><br><span class="line">				echo $_COOKIE[$val1];</span><br><span class="line">			&#125;else &#123;</span><br><span class="line">				setcookie($val1,1);</span><br><span class="line">			&#125;	</span><br><span class="line">?&gt;</span><br></pre></td></tr></table></figure>
+<h4 id="3-Cookie的值"><a href="#3-Cookie的值" class="headerlink" title="3. Cookie的值"></a>3. Cookie的值</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">&lt;script type=&quot;text/javascript&quot;&gt;</span><br><span class="line">			//设置一个cookie</span><br><span class="line">			document.cookie = &quot;user=sdr;&quot;;</span><br><span class="line">			//获取所有的cookie</span><br><span class="line">			var str = document.cookie;</span><br><span class="line">			//如何从所有cookie中取出特定名的cookie值</span><br><span class="line">			//cookie特点：  以键值对形式存储 用分号空格分隔每一个cookie</span><br><span class="line">			//取num值</span><br><span class="line">			var start = str.indexOf(&apos;num=&apos;)+4;</span><br><span class="line">			var end = str.indexOf(&apos;;&apos;,start);</span><br><span class="line">			//使用substring获取值</span><br><span class="line">			var val = str.substring(start,end);</span><br><span class="line">&lt;/script&gt;</span><br></pre></td></tr></table></figure>
+<h4 id="4-Cookie的有效期"><a href="#4-Cookie的有效期" class="headerlink" title="4. Cookie的有效期"></a>4. Cookie的有效期</h4><ul>
+<li>后台设置</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">//设置一个有生命期的cookie</span><br><span class="line">	//过期时间是时间数，比如 一天后失效  那就是24*3600秒后失效</span><br><span class="line">	setcookie(&quot;newMember&quot;,&quot;rrrr&quot;,time()+24*3600);</span><br></pre></td></tr></table></figure>
+<ul>
+<li>前台设置</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">&lt;script type=&quot;text/javascript&quot;&gt;</span><br><span class="line">			function setCookie(name,value,path,expires) &#123;</span><br><span class="line">				//设置一天之后失效</span><br><span class="line">				var current_data = new Date();</span><br><span class="line">				//将日期设置为一天之后的日期</span><br><span class="line">				current_data.setDate(current_data.getDate() + expires);</span><br><span class="line">				//将日期转成GMT字符串  得到的是对象</span><br><span class="line">				var expires_str = current_data.toGMTString();</span><br><span class="line">				//设置cookie的过期日期</span><br><span class="line">				document.cookie = name+&quot;=&quot;+value+&quot;; path=&quot;+path+&quot;;expires=&quot;+expires_str;</span><br><span class="line">			&#125;</span><br><span class="line">			setCookie(&quot;user&quot;,&quot;dddd&quot;,&quot;/&quot;,1);	</span><br><span class="line">		&lt;/script&gt;</span><br></pre></td></tr></table></figure>
+<p>###Cookie总结</p>
+<pre><code> - Cookie 是存储在浏览器哭护短的一片数据
+- 可以同时被前台和后台操作。当前台刷新后，刷新后台，此时num会在前台基础上增1。
+- 可以跨页面存储
+- Cookie是由生命期，默认与浏览器进程相同，如果浏览器退出，  Cookie会被注销
+- Cookie特点，以键值对形式存储，用分号空格分隔每一个Cookie
+</code></pre><h2 id="Session"><a href="#Session" class="headerlink" title="Session"></a>Session</h2><h4 id="1-什么是Session"><a href="#1-什么是Session" class="headerlink" title="1. 什么是Session"></a>1. 什么是Session</h4><p>Session是一种记录客户状态的机制，不同的是Cookie保存在客户端浏览器中，为Session保存在服务器上。客户端浏览器访问服务器的时候，服务器把客户端信息以某种形式记录在服务器上。这就是Session。客户端浏览器再次访问时只需要从该Session中查找客户的状态就可以了。<br>如果说Cookie是通过检查客户身上的“通行证”来确定客户身份的话，那么Session机制就是通过检查服务器上的“客户明细表”来确认客户身份。Session相当于程序在服务器上建立的一份客户档案，客户来访的时候只需要查询客户档案袋就可以了。</p>
+<h4 id="2-Session实现用户登录"><a href="#2-Session实现用户登录" class="headerlink" title="2. Session实现用户登录"></a>2. Session实现用户登录</h4><p>上面提到过，Session数据存储在服务器中，每个会话分配一个单独的Sessioin_id，该Session_id通过Cookie传送到前台，默认的session_id名称就是PHPSESSION，前台只能看到Session的id，为不能修改Session，这样我们就可以用Session来保存一些隐私信息。</p>
+<h4 id="3-Session-使用"><a href="#3-Session-使用" class="headerlink" title="3. Session 使用"></a>3. Session 使用</h4><p>使用Session之前，需要先开启会话。Session存储在Session数组$_SESSION里面。相对于Cookie，Session存储比较安全，但如果Session数量较多，会导致服务器性能下降。</p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2017/11/20/Cookie和Session详解/" data-id="cja8admo200007zmzfimfqzsi" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
     <article id="post-简易版网上订餐" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
     <a href="/2017/11/18/简易版网上订餐/" class="article-date">
@@ -94,7 +154,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2017/11/18/简易版网上订餐/" data-id="cja56s4ci00037hmzc8x9c2wo" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2017/11/18/简易版网上订餐/" data-id="cja8admoh00067zmzcq119o45" class="article-share-link">Share</a>
       
       
     </footer>
@@ -134,7 +194,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2017/11/17/分页/" data-id="cja56s4cq00067hmzz5dyfkr0" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2017/11/17/分页/" data-id="cja8admoc00047zmzsp90uc6q" class="article-share-link">Share</a>
       
       
     </footer>
@@ -206,7 +266,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2017/11/17/浅谈前后台交互/" data-id="cja56s4cj00047hmz408fxad6" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2017/11/17/浅谈前后台交互/" data-id="cja8admoi00077zmzon7x79us" class="article-share-link">Share</a>
       
       
     </footer>
@@ -299,52 +359,7 @@ this;  //调用本次ajax请求时传递的options参数
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2017/11/16/ajax和jsonp区别/" data-id="cja56s4c700007hmzf8nn5kvx" class="article-share-link">Share</a>
-      
-      
-    </footer>
-  </div>
-  
-</article>
-
-
-  
-    <article id="JSONP 的工作原理-JSONP 的工作原理" class="article article-type-JSONP 的工作原理" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2017/11/15/JSONP 的工作原理/" class="article-date">
-  <time datetime="2017-11-15T13:06:47.000Z" itemprop="datePublished">2017-11-15</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2017/11/15/JSONP 的工作原理/">JSONP 的工作原理</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h1 id="JSONP-的工作原理"><a href="#JSONP-的工作原理" class="headerlink" title="JSONP 的工作原理"></a>JSONP 的工作原理</h1><h2 id="1-JSONP由来"><a href="#1-JSONP由来" class="headerlink" title="1. JSONP由来"></a>1. JSONP由来</h2><p>根据浏览器同源策略，所谓同源就是协议、主机、端口号都相同时成为同源。a 域的js不能直接访问 b域名的信息，但是script 标签的src属性可以跨域引用文件，jsonp是请求之后后台包装好一段json，并且把数据放在一个callback函数，返回一个js文件，动态引入这个文件，下载完成js之后，会去调用这个callback,通过这样访问数据。</p>
-<h2 id="2-JSONP有什么用"><a href="#2-JSONP有什么用" class="headerlink" title="2. JSONP有什么用"></a>2. JSONP有什么用</h2><p>由于同源从略的限制，XMLHttpRequest只允许请求前源（域名、协议、端口）的资源，为了实现跨域请求，可以通过script标签实现跨域请求，然后再服务端输出JSON数据并执行回调函数，从而解决跨域数据请求</p>
-<h2 id="3-如何使用JSONP"><a href="#3-如何使用JSONP" class="headerlink" title="3. 如何使用JSONP"></a>3. 如何使用JSONP</h2><ul>
-<li>HTML代码<br><img src="http://upload-images.jianshu.io/upload_images/7426605-d8020506f468db57.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="HTML代码"></li>
-<li>PHP代码<br><img src="http://upload-images.jianshu.io/upload_images/7426605-1ec09b04fd0d1745.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="PHP代码"></li>
-</ul>
-<h2 id="4-JSONP原理"><a href="#4-JSONP原理" class="headerlink" title="4. JSONP原理"></a>4. JSONP原理</h2><p>首先在客户端注册一个callback，然后把callback的名字传给服务器。此时，服务器先生成json数据，然后以javascript语法的方式，生成function，function名字就是传递上来I带参数jsonp。最后将json数据直接以入参的方式，放置function中，这样就生成js语法的文档，返回给客户端。客户端浏览器，解析script变迁，并执行返回javascript文档，此时数据作为参数，传入了客户端预先定义好的callback函数里。<br>简单的说，就是利用script标签没有跨域限制的“漏洞”来达到与第三方通讯的目的。</p>
-<h2 id="5-备注"><a href="#5-备注" class="headerlink" title="5. 备注"></a>5. 备注</h2><p>#####json 是一种数据格式</p>
-<p>#####jsonp 是一种数据调用的方式，</p>
-<h5 id="联系-带callback的json就是jsonp"><a href="#联系-带callback的json就是jsonp" class="headerlink" title="联系 带callback的json就是jsonp"></a>联系 带callback的json就是jsonp</h5>
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://yoursite.com/2017/11/15/JSONP 的工作原理/" data-id="cja56s4ch00027hmzamrjzoew" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2017/11/16/ajax和jsonp区别/" data-id="cja8admo700017zmzlhpx2qib" class="article-share-link">Share</a>
       
       
     </footer>
@@ -402,7 +417,52 @@ this;  //调用本次ajax请求时传递的options参数
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2017/11/15/json/" data-id="cja56s4cl00057hmz9u1a2jw7" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2017/11/15/json/" data-id="cja8admoa00027zmzpsgohhd1" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="JSONP 的工作原理-JSONP 的工作原理" class="article article-type-JSONP 的工作原理" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2017/11/15/JSONP 的工作原理/" class="article-date">
+  <time datetime="2017-11-15T13:06:47.000Z" itemprop="datePublished">2017-11-15</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2017/11/15/JSONP 的工作原理/">JSONP 的工作原理</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="JSONP-的工作原理"><a href="#JSONP-的工作原理" class="headerlink" title="JSONP 的工作原理"></a>JSONP 的工作原理</h1><h2 id="1-JSONP由来"><a href="#1-JSONP由来" class="headerlink" title="1. JSONP由来"></a>1. JSONP由来</h2><p>根据浏览器同源策略，所谓同源就是协议、主机、端口号都相同时成为同源。a 域的js不能直接访问 b域名的信息，但是script 标签的src属性可以跨域引用文件，jsonp是请求之后后台包装好一段json，并且把数据放在一个callback函数，返回一个js文件，动态引入这个文件，下载完成js之后，会去调用这个callback,通过这样访问数据。</p>
+<h2 id="2-JSONP有什么用"><a href="#2-JSONP有什么用" class="headerlink" title="2. JSONP有什么用"></a>2. JSONP有什么用</h2><p>由于同源从略的限制，XMLHttpRequest只允许请求前源（域名、协议、端口）的资源，为了实现跨域请求，可以通过script标签实现跨域请求，然后再服务端输出JSON数据并执行回调函数，从而解决跨域数据请求</p>
+<h2 id="3-如何使用JSONP"><a href="#3-如何使用JSONP" class="headerlink" title="3. 如何使用JSONP"></a>3. 如何使用JSONP</h2><ul>
+<li>HTML代码<br><img src="http://upload-images.jianshu.io/upload_images/7426605-d8020506f468db57.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="HTML代码"></li>
+<li>PHP代码<br><img src="http://upload-images.jianshu.io/upload_images/7426605-1ec09b04fd0d1745.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="PHP代码"></li>
+</ul>
+<h2 id="4-JSONP原理"><a href="#4-JSONP原理" class="headerlink" title="4. JSONP原理"></a>4. JSONP原理</h2><p>首先在客户端注册一个callback，然后把callback的名字传给服务器。此时，服务器先生成json数据，然后以javascript语法的方式，生成function，function名字就是传递上来I带参数jsonp。最后将json数据直接以入参的方式，放置function中，这样就生成js语法的文档，返回给客户端。客户端浏览器，解析script变迁，并执行返回javascript文档，此时数据作为参数，传入了客户端预先定义好的callback函数里。<br>简单的说，就是利用script标签没有跨域限制的“漏洞”来达到与第三方通讯的目的。</p>
+<h2 id="5-备注"><a href="#5-备注" class="headerlink" title="5. 备注"></a>5. 备注</h2><p>#####json 是一种数据格式</p>
+<p>#####jsonp 是一种数据调用的方式，</p>
+<h5 id="联系-带callback的json就是jsonp"><a href="#联系-带callback的json就是jsonp" class="headerlink" title="联系 带callback的json就是jsonp"></a>联系 带callback的json就是jsonp</h5>
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2017/11/15/JSONP 的工作原理/" data-id="cja8admob00037zmz2s219uuz" class="article-share-link">Share</a>
       
       
     </footer>
@@ -464,7 +524,7 @@ this;  //调用本次ajax请求时传递的options参数
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2017/11/14/AJAX/" data-id="cja56s4cd00017hmzt9omt2b1" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2017/11/14/AJAX/" data-id="cja8admoe00057zmz7a4fedqt" class="article-share-link">Share</a>
       
       
     </footer>
@@ -504,6 +564,10 @@ this;  //调用本次ajax请求时传递的options参数
       <ul>
         
           <li>
+            <a href="/2017/11/20/Cookie和Session详解/">Cookie和Session详解</a>
+          </li>
+        
+          <li>
             <a href="/2017/11/18/简易版网上订餐/">简易版网上订餐</a>
           </li>
         
@@ -517,10 +581,6 @@ this;  //调用本次ajax请求时传递的options参数
         
           <li>
             <a href="/2017/11/16/ajax和jsonp区别/">ajax和jsonp区别</a>
-          </li>
-        
-          <li>
-            <a href="/2017/11/15/JSONP 的工作原理/">JSONP 的工作原理</a>
           </li>
         
       </ul>
