@@ -1,0 +1,251 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  
+  <title>mysqli用法 | 大瑞</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+  <meta name="description" content="一、mysql与mysqli的概念相关： mysql与mysqli都是php方面的函数集，与mysql数据库关联不大。  在php5版本之前，一般是用php的mysql函数去驱动mysql数据库的，比如mysql_query()的函数，属于面向过程3、在php5版本以后，增加了mysqli的函数功能，某种意义上讲，它是mysql系统函数的增强版，更稳定更高效更安全，与mysql_query()对应">
+<meta property="og:type" content="article">
+<meta property="og:title" content="mysqli用法">
+<meta property="og:url" content="http://yoursite.com/2017/11/22/mysqli用法/index.html">
+<meta property="og:site_name" content="大瑞">
+<meta property="og:description" content="一、mysql与mysqli的概念相关： mysql与mysqli都是php方面的函数集，与mysql数据库关联不大。  在php5版本之前，一般是用php的mysql函数去驱动mysql数据库的，比如mysql_query()的函数，属于面向过程3、在php5版本以后，增加了mysqli的函数功能，某种意义上讲，它是mysql系统函数的增强版，更稳定更高效更安全，与mysql_query()对应">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/7426605-8f4c18c346afffdd.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/7426605-aef25c06258a145e.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:updated_time" content="2017-11-22T14:18:02.000Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="mysqli用法">
+<meta name="twitter:description" content="一、mysql与mysqli的概念相关： mysql与mysqli都是php方面的函数集，与mysql数据库关联不大。  在php5版本之前，一般是用php的mysql函数去驱动mysql数据库的，比如mysql_query()的函数，属于面向过程3、在php5版本以后，增加了mysqli的函数功能，某种意义上讲，它是mysql系统函数的增强版，更稳定更高效更安全，与mysql_query()对应">
+<meta name="twitter:image" content="http://upload-images.jianshu.io/upload_images/7426605-8f4c18c346afffdd.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+  
+    <link rel="alternate" href="/atom.xml" title="大瑞" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+  
+    <link href="//fonts.googleapis.com/css?family=Source+Code+Pro" rel="stylesheet" type="text/css">
+  
+  <link rel="stylesheet" href="/css/style.css">
+  
+
+</head>
+
+<body>
+  <div id="container">
+    <div id="wrap">
+      <header id="header">
+  <div id="banner"></div>
+  <div id="header-outer" class="outer">
+    <div id="header-title" class="inner">
+      <h1 id="logo-wrap">
+        <a href="/" id="logo">大瑞</a>
+      </h1>
+      
+    </div>
+    <div id="header-inner" class="inner">
+      <nav id="main-nav">
+        <a id="main-nav-toggle" class="nav-icon"></a>
+        
+          <a class="main-nav-link" href="/">Home</a>
+        
+          <a class="main-nav-link" href="/archives">Archives</a>
+        
+      </nav>
+      <nav id="sub-nav">
+        
+          <a id="nav-rss-link" class="nav-icon" href="/atom.xml" title="RSS Feed"></a>
+        
+        <a id="nav-search-btn" class="nav-icon" title="Search"></a>
+      </nav>
+      <div id="search-form-wrap">
+        <form action="//google.com/search" method="get" accept-charset="UTF-8" class="search-form"><input type="search" name="q" class="search-form-input" placeholder="Search"><button type="submit" class="search-form-submit">&#xF002;</button><input type="hidden" name="sitesearch" value="http://yoursite.com"></form>
+      </div>
+    </div>
+  </div>
+</header>
+      <div class="outer">
+        <section id="main"><article id="post-mysqli用法" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2017/11/22/mysqli用法/" class="article-date">
+  <time datetime="2017-11-22T14:14:42.000Z" itemprop="datePublished">2017-11-22</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 class="article-title" itemprop="name">
+      mysqli用法
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="一、mysql与mysqli的概念相关："><a href="#一、mysql与mysqli的概念相关：" class="headerlink" title="一、mysql与mysqli的概念相关："></a>一、mysql与mysqli的概念相关：</h2><ol>
+<li><p>mysql与mysqli都是php方面的函数集，与mysql数据库关联不大。</p>
+<ol>
+<li>在php5版本之前，一般是用php的mysql函数去驱动mysql数据库的，比如mysql_query()的函数，属于面向过程3、在php5版本以后，增加了mysqli的函数功能，某种意义上讲，它是mysql系统函数的增强版，更稳定更高效更安全，与mysql_query()对应的有mysqli_query()，属于面向对象，用对象的方式操作驱动mysql数据库</li>
+</ol>
+</li>
+<li><p>mysql_connect()与mysqli_connect()</p>
+<ul>
+<li><p>使用mysqli，可以把数据库名称当作参数传给mysqli_connect()函数，也可以传递给mysqli的构造函数；</p>
+</li>
+<li><p>如果调用mysqli_query()或mysqli的对象查询query()方法，则连接标识是必需的。</p>
+</li>
+</ul>
+</li>
+<li><p>mysql与mysqli的区别：</p>
+<ul>
+<li><p>mysql是非持继连接函数，mysql每次链接都会打开一个连接的进程。</p>
+</li>
+<li><p>mysqli是永远连接函数，mysqli多次运行mysqli将使用同一连接进程,从而减少了服务器的开销。mysqli封装了诸如事务等一些高级操作，同时封装了DB操作过程中的很多可用的方法。返回记录集类型为array mysql_fetch_array ( resource $result [, int $ result_type ] )有一点很重要必须指出，用 mysql_fetch_array() 并不比用 mysql_fetch_row()慢，而且还提供了明显更多的值。 mysql_fetch_array() 中可选的第二个参数 是一个常量，可以接受以下值：MYSQL_ASSOC，MYSQL_NUM 和 MYSQL_BOTH。参数的默认值是 MYSQL_BOTH。如果用了 MYSQL_BOTH，将得到一个同时包含关联和数字索引的数组。用 MYSQL_ASSOC 只得到关联索引（如同 mysql_fetch_assoc()那样 mysql_fetch_assoc() 函数从结果集中取得一行作为关联数组。返回根据从结果集取得的行生成的关联数组，如果没有更多行，则返回 false。），用 MYSQL_NUM 只得到数字索引[]。例如：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">   $con = mysqli_connect(&quot;localhost&quot;,&quot;root&quot;,&quot;&quot;,&quot;mydb&quot;);    </span><br><span class="line">   $select1 = &quot;select * from mysql_table where age &gt; 20&quot;;</span><br><span class="line">$re_select1 = mysqli_query($con, $select1);</span><br><span class="line">print_r($re_select1);</span><br><span class="line">$data = mysqli_fetch_all($re_select1,MYSQLI_ASSOC);</span><br><span class="line">print_r($data);</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+</li>
+</ol>
+<div style="text-align:center"><br>    <img width="500" src="http://upload-images.jianshu.io/upload_images/7426605-8f4c18c346afffdd.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240"><br></div>
+
+<h2 id="数据库操作关键函数"><a href="#数据库操作关键函数" class="headerlink" title="数据库操作关键函数"></a>数据库操作关键函数</h2><blockquote>
+<p>  * mysqli_connect: 连接数据库</p>
+<pre><code>* mysqli_error: 最后一次SQL动作错误信息
+ * mysql_errno(): 函数返回上一个 MySQL 操作中的错误信息的数字编码。
+                      返回上一个 MySQL 函数的错误号码，如果没有出错则返回 0（零）。
+ * mysqli_query: 执行SQL语句，增删改查
+ * mysqli_select_db: 选择数据库
+ * mysqli_fetch_array(): 从查询结果去1条查询记录
+ * mysqli_fetch_all()： 函数从结果集中取得所有行作为关联数组
+ * mysqli_close: 关闭数据库
+</code></pre><p> 假设数据库的名称为mydb</p>
+</blockquote>
+<h3 id="连接数据库"><a href="#连接数据库" class="headerlink" title="连接数据库"></a>连接数据库</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">/**</span><br><span class="line">*&apos;localhost&apos;,  /* The host to connect to 连接MySQL地址 */     </span><br><span class="line">*&apos;root&apos;,      /* The user to connect as 连接MySQL用户名 */     </span><br><span class="line">*&apos;password&apos;,  /* The password to use 连接MySQL密码 */     </span><br><span class="line">*&apos;mydb&apos;);    /* The default database to query 连接数据库名称*/ </span><br><span class="line">/</span><br><span class="line">$connect = mysqli_connect(&quot;localhost&quot;,&quot;root&quot;,&quot;&quot;,&quot;mydb&quot;);</span><br></pre></td></tr></table></figure>
+<h3 id="创建数据表-person"><a href="#创建数据表-person" class="headerlink" title="创建数据表 person"></a>创建数据表 person</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$create_table = &quot;create table mysql_table(id int NOT NULL AUTO_INCREMENT,PRIMARY KEY(id),name varchar(15),age int)&quot;;</span><br><span class="line">mysqli_query($con,$create_table);</span><br></pre></td></tr></table></figure>
+<h3 id="插入数据"><a href="#插入数据" class="headerlink" title="插入数据"></a>插入数据</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">   $insert1 = &quot;insert into mysql_table (`name`, `age`) values(&apos;yyy&apos;,90)&quot;;</span><br><span class="line">mysqli_query($con,$insert1);</span><br></pre></td></tr></table></figure>
+<h3 id="查询数据"><a href="#查询数据" class="headerlink" title="查询数据"></a>查询数据</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$select1 = &quot;select * from mysql_table where age &gt; 20&quot;;</span><br><span class="line">$re_select1 = mysqli_query($con, $select1);</span><br><span class="line">print_r($re_select1);</span><br></pre></td></tr></table></figure>
+<h3 id="关闭数据"><a href="#关闭数据" class="headerlink" title="关闭数据"></a>关闭数据</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mysqli_close($con);</span><br></pre></td></tr></table></figure>
+<h4 id="如何将创建的文档放到指定目录"><a href="#如何将创建的文档放到指定目录" class="headerlink" title="如何将创建的文档放到指定目录"></a>如何将创建的文档放到指定目录</h4><ul>
+<li>例如如何将创建的txt文件到指定的txt目录下，或者如何将拷贝后的图片放入img目录下</li>
+</ul>
+<div style="text-align:center"><br>    <img width="700" src="http://upload-images.jianshu.io/upload_images/7426605-aef25c06258a145e.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240"><br></div>
+
+
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">//html 文件</span><br><span class="line"></span><br><span class="line">   &lt;body&gt;</span><br><span class="line">	&lt;form action=&quot;../php/test.php&quot; method=&quot;post&quot; enctype=&quot;multipart/form-data&quot;&gt;</span><br><span class="line">		&lt;input type=&quot;file&quot; name=&quot;pic&quot; id=&quot;pic&quot; value=&quot;&quot; /&gt;</span><br><span class="line">		&lt;input type=&quot;submit&quot; name=&quot;submit&quot; value=&quot;提交&quot;/&gt;</span><br><span class="line">	&lt;/form&gt;</span><br><span class="line">&lt;/body&gt;</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line">// php 文件</span><br><span class="line"></span><br><span class="line">&lt;?php</span><br><span class="line">	if(!empty($_POST[&apos;submit&apos;])) &#123;</span><br><span class="line">		if(!empty($_FILES[&apos;pic&apos;][&apos;name&apos;])) &#123;</span><br><span class="line">			$type = $_FILES[&apos;pic&apos;][&apos;type&apos;];</span><br><span class="line">			if($type == &quot;image/jpeg&quot; || $type == &quot;image/png&quot;) &#123;</span><br><span class="line">             </span><br><span class="line">                // 定义一个变量，存储相对该PHP的相对位置</span><br><span class="line">				$path = &quot;../img/&quot;;</span><br><span class="line">				//								path. 将拷贝完成的图片，拼接好指定目录</span><br><span class="line">				$result = move_uploaded_file($_FILES[&apos;pic&apos;][&apos;tmp_name&apos;],$path.$_FILES[&apos;pic&apos;][&apos;name&apos;]);</span><br><span class="line">			&#125;</span><br><span class="line">			if($result) &#123;</span><br><span class="line">				$val = $_FILES[&apos;pic&apos;][&apos;name&apos;];</span><br><span class="line">				// 在创建文件的时候将文件创建到指定位置</span><br><span class="line">				$fp = fopen(&quot;../txt/test.txt&quot;,&quot;a+&quot;);</span><br><span class="line">				fwrite($fp,$val);</span><br><span class="line">				fclose($fp);</span><br><span class="line">			&#125;		</span><br><span class="line">		&#125;		</span><br><span class="line">	&#125;</span><br><span class="line">?&gt;</span><br></pre></td></tr></table></figure>
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2017/11/22/mysqli用法/" data-id="cjab4w9uh0002homzyhd7ykse" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+    
+<nav id="article-nav">
+  
+  
+    <a href="/2017/11/20/Cookie和Session详解/" id="article-nav-older" class="article-nav-link-wrap">
+      <strong class="article-nav-caption">Older</strong>
+      <div class="article-nav-title">Cookie和Session详解</div>
+    </a>
+  
+</nav>
+
+  
+</article>
+
+</section>
+        
+          <aside id="sidebar">
+  
+    
+
+  
+    
+
+  
+    
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Archives</h3>
+    <div class="widget">
+      <ul class="archive-list"><li class="archive-list-item"><a class="archive-list-link" href="/archives/2017/11/">November 2017</a></li></ul>
+    </div>
+  </div>
+
+
+  
+    
+  <div class="widget-wrap">
+    <h3 class="widget-title">Recent Posts</h3>
+    <div class="widget">
+      <ul>
+        
+          <li>
+            <a href="/2017/11/22/mysqli用法/">mysqli用法</a>
+          </li>
+        
+          <li>
+            <a href="/2017/11/20/Cookie和Session详解/">Cookie和Session详解</a>
+          </li>
+        
+          <li>
+            <a href="/2017/11/18/简易版网上订餐/">简易版网上订餐</a>
+          </li>
+        
+          <li>
+            <a href="/2017/11/17/分页/">分页</a>
+          </li>
+        
+          <li>
+            <a href="/2017/11/17/浅谈前后台交互/">浅谈前后台交互</a>
+          </li>
+        
+      </ul>
+    </div>
+  </div>
+
+  
+</aside>
+        
+      </div>
+      <footer id="footer">
+  
+  <div class="outer">
+    <div id="footer-info" class="inner">
+      &copy; 2017 daRui<br>
+      Powered by <a href="http://hexo.io/" target="_blank">Hexo</a>
+    </div>
+  </div>
+</footer>
+    </div>
+    <nav id="mobile-nav">
+  
+    <a href="/" class="mobile-nav-link">Home</a>
+  
+    <a href="/archives" class="mobile-nav-link">Archives</a>
+  
+</nav>
+    
+
+<script src="//ajax.googleapis.com/ajax/libs/jquery/2.0.3/jquery.min.js"></script>
+
+
+  <link rel="stylesheet" href="/fancybox/jquery.fancybox.css">
+  <script src="/fancybox/jquery.fancybox.pack.js"></script>
+
+
+<script src="/js/script.js"></script>
+
+  </div>
+</body>
+</html>
