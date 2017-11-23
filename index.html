@@ -64,6 +64,60 @@
       <div class="outer">
         <section id="main">
   
+    <article id="post-前后台小程序" class="article article-type-post" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2017/11/23/前后台小程序/" class="article-date">
+  <time datetime="2017-11-23T14:36:56.000Z" itemprop="datePublished">2017-11-23</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2017/11/23/前后台小程序/">前后台小程序</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h4 id="1-前台添加菜单"><a href="#1-前台添加菜单" class="headerlink" title="1. 前台添加菜单"></a>1. 前台添加菜单</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">&lt;!--增加菜单前台页面--&gt;</span><br><span class="line">		&lt;form name=&quot;menu&quot; enctype=&quot;multipart/form-data&quot; action=&quot;php/menu/addmenu.php&quot; method=&quot;post&quot;&gt;</span><br><span class="line">			菜名： &lt;input type=&quot;text&quot; name=&quot;menuname&quot; id=&quot;menuname&quot; value=&quot;&quot; /&gt;&lt;br&gt;</span><br><span class="line">			价格： &lt;input type=&quot;text&quot; name=&quot;price&quot; id=&quot;&quot; value=&quot;&quot; /&gt;&lt;br&gt;</span><br><span class="line">			图片： &lt;input type=&quot;file&quot; name=&quot;pic&quot; id=&quot;pic&quot; value=&quot;&quot; /&gt;&lt;br&gt;</span><br><span class="line">			&lt;input type=&quot;submit&quot; name=&quot;submit&quot; value=&quot;添加菜单&quot;/&gt;</span><br><span class="line">		&lt;/form&gt;</span><br></pre></td></tr></table></figure>
+<h4 id="2-后台接受请求，接受数据并创建menu数据库，将上传的数据存储到menu数据库"><a href="#2-后台接受请求，接受数据并创建menu数据库，将上传的数据存储到menu数据库" class="headerlink" title="2. 后台接受请求，接受数据并创建menu数据库，将上传的数据存储到menu数据库"></a>2. 后台接受请求，接受数据并创建menu数据库，将上传的数据存储到menu数据库</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line">&lt;?php</span><br><span class="line">	//判断用户有没有输入</span><br><span class="line">	if(!empty($_POST[&apos;submit&apos;])) &#123;</span><br><span class="line">		//判定有没有上传图片</span><br><span class="line">		if(!empty($_FILES[&apos;pic&apos;])) &#123;</span><br><span class="line">			//后台需要检查上传类型（放置直接上传PHP文件）</span><br><span class="line">			if($_FILES[&apos;pic&apos;][&apos;type&apos;] == &quot;image/jpeg&quot; || $_FILES[&apos;pic&apos;][&apos;type&apos;] == &quot;image/png&quot;) &#123;</span><br><span class="line">				$path = &quot;../../uploads/&quot;;</span><br><span class="line">				$result = move_uploaded_file($_FILES[&apos;pic&apos;][&apos;tmp_name&apos;],$path.$_FILES[&apos;pic&apos;][&apos;name&apos;]);</span><br><span class="line">			&#125;</span><br><span class="line">			//比如要求增加菜单时一定要上传图片</span><br><span class="line">			if($result) &#123;</span><br><span class="line">				$menuname = htmlspecialchars($_POST[&apos;menuname&apos;]);</span><br><span class="line">				$price = floatval($_POST[&apos;price&apos;]); //转成浮点数</span><br><span class="line">				$pic = $_FILES[&apos;pic&apos;][&apos;name&apos;];</span><br><span class="line">				include &quot;../common/mysql.php&quot;;</span><br><span class="line">				$fields = array(</span><br><span class="line">					&apos;name&apos; =&gt; $menuname,</span><br><span class="line">					&apos;price&apos; =&gt; $price,</span><br><span class="line">					&apos;picture&apos; =&gt; $pic</span><br><span class="line">				);</span><br><span class="line">				insert($link, $fields, &quot;menu&quot;);</span><br><span class="line">				mysqli_close($link);</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">?&gt;</span><br></pre></td></tr></table></figure>
+<p><img src="http://upload-images.jianshu.io/upload_images/7426605-9b66b34f235992cd.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="image.png"></p>
+<h4 id="3-前台发送数据，向后台请求刚才上传的数据，然后将获取到的数据遍历形成菜单界面"><a href="#3-前台发送数据，向后台请求刚才上传的数据，然后将获取到的数据遍历形成菜单界面" class="headerlink" title="3. 前台发送数据，向后台请求刚才上传的数据，然后将获取到的数据遍历形成菜单界面"></a>3. 前台发送数据，向后台请求刚才上传的数据，然后将获取到的数据遍历形成菜单界面</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">//使用Ajax获得菜单数据</span><br><span class="line">var xhr = new XMLHttpRequest();</span><br><span class="line">xhr.onload = function() &#123;</span><br><span class="line">	var menu = JSON.parse(this.responseText);</span><br><span class="line">	createMenu(menu);</span><br><span class="line">&#125;</span><br><span class="line">xhr.open(&quot;get&quot;,&quot;php/menu/listmenu.php&quot;);</span><br><span class="line">xhr.send();</span><br><span class="line">function createMenu(data) &#123;</span><br><span class="line">	line = &quot;&quot;;</span><br><span class="line">	for(i in data) &#123;</span><br><span class="line">		line += &quot;&lt;li&gt;&lt;input type=\&quot;checkbox\&quot; name=\&quot;menu_id[]\&quot; value=\&quot;&quot;+data[i].id+&quot;\&quot; /&gt;　&lt;img width=&apos;50px&apos; src=\&quot;uploads/&quot;+data[i].picture+&quot;\&quot;&gt;　&lt;span id=\&quot;&quot;+data[i].id+&quot;\&quot; &gt;&quot;+data[i].name+&quot;&lt;/span&gt;&lt;span id=\&quot;&quot;+data[i].id+&quot;\&quot; &gt;&quot;+data[i].price+&quot;&lt;/span&gt;元　订购份数： &lt;input type=\&quot;text\&quot; name=\&quot;num_&quot;+data[i].id+&quot;\&quot;/&gt;&lt;/li&gt;&quot;</span><br><span class="line">		document.getElementById(&quot;menuUl&quot;).innerHTML = line;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h4 id="4-后台接受请求，打开menu数据库，将数据返回给前段"><a href="#4-后台接受请求，打开menu数据库，将数据返回给前段" class="headerlink" title="4. 后台接受请求，打开menu数据库，将数据返回给前段"></a>4. 后台接受请求，打开menu数据库，将数据返回给前段</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">&lt;?php</span><br><span class="line">	//mysql.php  数据库操作函数库文件</span><br><span class="line">	include &quot;../common/mysql.php&quot;;</span><br><span class="line">	$data = getAll($link, &quot;*&quot;, &quot;menu&quot;, &quot;1=1&quot;);</span><br><span class="line">	echo json_encode($data);</span><br><span class="line">?&gt;</span><br></pre></td></tr></table></figure>
+<p><img src="http://upload-images.jianshu.io/upload_images/7426605-c4b2e9f853efeace.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="image.png"></p>
+<h4 id="5-前台注册界面"><a href="#5-前台注册界面" class="headerlink" title="5. 前台注册界面"></a>5. 前台注册界面</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br></pre></td><td class="code"><pre><span class="line">&lt;script src=&quot;http://libs.baidu.com/jquery/2.0.0/jquery.min.js&quot;&gt;&lt;/script&gt;</span><br><span class="line">	&lt;body&gt;</span><br><span class="line">		&lt;div id=&quot;nav&quot;&gt;&lt;/div&gt;</span><br><span class="line">		&lt;form action=&quot;php/member/register.php&quot; method=&quot;post&quot; name=&quot;form1&quot;&gt;</span><br><span class="line">			密　　码： &lt;input type=&quot;password&quot; name=&quot;member_password&quot; /&gt; &lt;br&gt;</span><br><span class="line">			确认密码： &lt;input type=&quot;password&quot; name=&quot;member_password_confirm&quot; /&gt; &lt;br&gt;</span><br><span class="line">			用户姓名： &lt;input type=&quot;text&quot; name=&quot;member_name&quot;/&gt; &lt;br&gt;</span><br><span class="line">			用户电话： &lt;input type=&quot;text&quot; name=&quot;member_mobile&quot;/&gt; &lt;br&gt;</span><br><span class="line">			用户地址： &lt;input type=&quot;text&quot; name=&quot;member_address&quot;/&gt; &lt;br&gt;</span><br><span class="line">			&lt;input type=&quot;hidden&quot; name=&quot;member&quot; value=&quot;1&quot; /&gt;</span><br><span class="line">			&lt;input type=&quot;button&quot; name=&quot;btn&quot; value=&quot;立即注册&quot;/&gt;</span><br><span class="line">		&lt;/form&gt;</span><br><span class="line">	&lt;/body&gt;</span><br><span class="line">	&lt;script type=&quot;text/javascript&quot;&gt;</span><br><span class="line">		$(&quot;#nav&quot;).load(&quot;tpl/nav.html&quot;);</span><br><span class="line">		document.form1.btn.onclick = checkdata;</span><br><span class="line">		var isOk = true;</span><br><span class="line">		function checkdata() &#123;</span><br><span class="line">			if(document.form1.member_password.value != document.form1.member_password_confirm.value)&#123;</span><br><span class="line">				alert(&quot;两次密码输入不一致&quot;);</span><br><span class="line">				return false;</span><br><span class="line">			&#125;</span><br><span class="line">				document.form1.submit();</span><br><span class="line">		&#125;</span><br><span class="line">		function checkuser(value) &#123;</span><br><span class="line">			var xhr = new XMLHttpRequest();</span><br><span class="line">			xhr.onload = function() &#123;</span><br><span class="line">				if(this.responseText == &quot;fail&quot;) &#123;</span><br><span class="line">					document.form1.btn.disabled = true;</span><br><span class="line">					document.form1.member_username.className = &quot;error&quot;;</span><br><span class="line">				&#125;else &#123;</span><br><span class="line">					document.form1.btn.disabled = false;</span><br><span class="line">					document.form1.member_username.className = &quot;&quot;;</span><br><span class="line">				&#125;</span><br><span class="line">			&#125;</span><br><span class="line">			var formData = new FormData();</span><br><span class="line">			formData.append(&quot;member_username&quot;,value)</span><br><span class="line">			xhr.open(&quot;POST&quot;,&quot;php/member/checkuser.php&quot;);</span><br><span class="line">			xhr.send(formData);</span><br><span class="line">		&#125;</span><br><span class="line">	&lt;/script&gt;</span><br></pre></td></tr></table></figure>
+<h4 id="6-注册用户的时候检测该用户名是否已经被注册，如果没被注册，可以注册"><a href="#6-注册用户的时候检测该用户名是否已经被注册，如果没被注册，可以注册" class="headerlink" title="6. 注册用户的时候检测该用户名是否已经被注册，如果没被注册，可以注册"></a>6. 注册用户的时候检测该用户名是否已经被注册，如果没被注册，可以注册</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">&lt;?php</span><br><span class="line">	//验证用户名的合法性</span><br><span class="line">	if(!empty($_POST[&apos;member_username&apos;])) &#123;</span><br><span class="line">		include &quot;../common/mysql.php&quot;;</span><br><span class="line">		$username = htmlspecialchars($_POST[&apos;member_username&apos;]);</span><br><span class="line">		//查询该用户名是否已经存在</span><br><span class="line">		$member = getOne($link,&quot;*&quot;,&quot;member&quot;,&quot;member_username=&apos;&quot;.$username.&quot;&apos;&quot;);</span><br><span class="line">		//如果查询结果为空 表示没有相同的用户注册</span><br><span class="line">		if(empty($member)) &#123;</span><br><span class="line">			echo &quot;ok&quot;;</span><br><span class="line">		&#125;else &#123;</span><br><span class="line">			echo &quot;fail&quot;;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">?&gt;</span><br></pre></td></tr></table></figure>
+<h4 id="7-将可以注册的用户名即其他信息，插入到member数据表里面"><a href="#7-将可以注册的用户名即其他信息，插入到member数据表里面" class="headerlink" title="7. 将可以注册的用户名即其他信息，插入到member数据表里面"></a>7. 将可以注册的用户名即其他信息，插入到member数据表里面</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">&lt;?php</span><br><span class="line">	//会员注册</span><br><span class="line">	if(!empty($_POST[&apos;member&apos;])) &#123;</span><br><span class="line">		//引入数据库函数库</span><br><span class="line">		include &quot;../common/mysql.php&quot;;</span><br><span class="line">		foreach($_POST as $key =&gt; $val) &#123;</span><br><span class="line">			$_POST[$key] = htmlspecialchars($val);</span><br><span class="line">		&#125;</span><br><span class="line">		$member = array(</span><br><span class="line">			&apos;member_name&apos; =&gt; $_POST[&apos;member_name&apos;],</span><br><span class="line">			&apos;member_mobile&apos; =&gt; $_POST[&apos;member_mobile&apos;],</span><br><span class="line">			&apos;member_address&apos; =&gt; $_POST[&apos;member_address&apos;],</span><br><span class="line">			&apos;member_username&apos; =&gt; $_POST[&apos;member_username&apos;],</span><br><span class="line">			&apos;member_password&apos; =&gt; sha1($_POST[&apos;member_password&apos;])</span><br><span class="line">		);</span><br><span class="line">		insert($link, $member, &apos;member&apos;);</span><br><span class="line">	&#125;</span><br><span class="line">?&gt;</span><br></pre></td></tr></table></figure>
+<p><img src="http://upload-images.jianshu.io/upload_images/7426605-d551567d045b7b44.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="会员界面"></p>
+<h4 id="8-会员登录页面，将前台输入的用户名和密码传送到后台"><a href="#8-会员登录页面，将前台输入的用户名和密码传送到后台" class="headerlink" title="8. 会员登录页面，将前台输入的用户名和密码传送到后台"></a>8. 会员登录页面，将前台输入的用户名和密码传送到后台</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">&lt;body&gt;</span><br><span class="line">		&lt;div id=&quot;nav&quot;&gt;&lt;/div&gt;&lt;br&gt;</span><br><span class="line">		&lt;!--登陆页面--&gt;</span><br><span class="line">		&lt;form action=&quot;php/member/login.php&quot; name=&quot;form1&quot; method=&quot;post&quot;&gt;</span><br><span class="line">			用户名： &lt;input type=&quot;text&quot; name=&quot;username&quot; /&gt;&lt;br&gt;</span><br><span class="line">			密　码： &lt;input type=&quot;password&quot; name=&quot;password&quot; /&gt;&lt;br&gt;</span><br><span class="line">			&lt;input type=&quot;submit&quot; name=&quot;btn&quot; value=&quot;立即登录&quot;/&gt;</span><br><span class="line">		&lt;/form&gt;</span><br><span class="line">	&lt;/body&gt;</span><br><span class="line">	&lt;script type=&quot;text/javascript&quot;&gt;</span><br><span class="line">		$(&quot;#nav&quot;).load(&quot;tpl/nav.html&quot;);</span><br><span class="line">	&lt;/script&gt;</span><br></pre></td></tr></table></figure>
+<h4 id="9-将前台输入的信息进行核实，如果信息不符合留在本页，如果符合，跳转到首页。并以此在member表中查找该会员信息，将会员用户名，名称，电话存储到Session里面，备用"><a href="#9-将前台输入的信息进行核实，如果信息不符合留在本页，如果符合，跳转到首页。并以此在member表中查找该会员信息，将会员用户名，名称，电话存储到Session里面，备用" class="headerlink" title="9. 将前台输入的信息进行核实，如果信息不符合留在本页，如果符合，跳转到首页。并以此在member表中查找该会员信息，将会员用户名，名称，电话存储到Session里面，备用"></a>9. 将前台输入的信息进行核实，如果信息不符合留在本页，如果符合，跳转到首页。并以此在member表中查找该会员信息，将会员用户名，名称，电话存储到Session里面，备用</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">&lt;?php</span><br><span class="line">	session_start();</span><br><span class="line">	if(!empty($_POST[&apos;username&apos;]) &amp;&amp; !empty($_POST[&apos;password&apos;])) &#123;</span><br><span class="line">		include &quot;../common/mysql.php&quot;;</span><br><span class="line">		//对提交的数据进行预处理</span><br><span class="line">		$username = htmlspecialchars($_POST[&apos;username&apos;]);</span><br><span class="line">		$password = sha1($_POST[&apos;password&apos;]);</span><br><span class="line">		$member = getOne($link,&quot;*&quot;,&quot;member&quot;,&quot;member_username=&apos;&quot;.$username.&quot;&apos; and member_password=&apos;&quot;.$password.&quot;&apos;&quot;);</span><br><span class="line">		if(!empty($member[&apos;member_username&apos;])) &#123;</span><br><span class="line">			$_SESSION[&apos;member&apos;][&apos;username&apos;] = $member[&apos;member_username&apos;];</span><br><span class="line">			$_SESSION[&apos;member&apos;][&apos;name&apos;] = $member[&apos;member_name&apos;];</span><br><span class="line">			$_SESSION[&apos;member&apos;][&apos;mobile&apos;] = $member[&apos;member_mobile&apos;];</span><br><span class="line">			header(&quot;Location: /php/db/index.html&quot;);</span><br><span class="line">		&#125;else &#123;</span><br><span class="line">			header(&quot;Location: /php/db/login.html&quot;);</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">?&gt;</span><br></pre></td></tr></table></figure>
+<h4 id="10-判断用户是否登录，如果登录成功返回上述存储在Session里面的数据"><a href="#10-判断用户是否登录，如果登录成功返回上述存储在Session里面的数据" class="headerlink" title="10. 判断用户是否登录，如果登录成功返回上述存储在Session里面的数据"></a>10. 判断用户是否登录，如果登录成功返回上述存储在Session里面的数据</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">&lt;?php</span><br><span class="line">	session_start();</span><br><span class="line">	if(!empty($_SESSION[&apos;member&apos;])) &#123;</span><br><span class="line">		//将用户登录信息输出到前台</span><br><span class="line">		echo json_encode($_SESSION[&apos;member&apos;]);</span><br><span class="line">	&#125;else &#123;</span><br><span class="line">		//nologin  表示用户尚未登录</span><br><span class="line">		echo json_encode(array(&quot;no login&quot;));</span><br><span class="line">	&#125;</span><br><span class="line">?&gt;</span><br></pre></td></tr></table></figure>
+<h4 id="11-前台想后台发送请求，如果用户登录，界面显示-欢迎”-data-name-”来到商城-用户中心"><a href="#11-前台想后台发送请求，如果用户登录，界面显示-欢迎”-data-name-”来到商城-用户中心" class="headerlink" title="11. 前台想后台发送请求，如果用户登录，界面显示  欢迎”+data.name+”来到商城 用户中心"></a>11. 前台想后台发送请求，如果用户登录，界面显示  欢迎”+data.name+”来到商城 <a href="">用户中心</a></h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">&lt;script type=&quot;text/javascript&quot;&gt;</span><br><span class="line">			$(&apos;#nav&apos;).load(&quot;tpl/nav.html&quot;);</span><br><span class="line">			$.get(&quot;php/member/member_status.php&quot;,&#123;&#125;,function(data) &#123;</span><br><span class="line">				console.log(data);</span><br><span class="line">				if(typeof(data.name) != &quot;undefined&quot;) &#123;</span><br><span class="line">					$(&apos;#member_status&apos;).html(&quot;欢迎&quot;+data.name+&quot;来到商城 &lt;a href=&apos;&apos;&gt;用户中心&lt;/a&gt;&quot;);</span><br><span class="line">				&#125;</span><br><span class="line">			&#125;,&quot;json&quot;);</span><br><span class="line">		&lt;/script&gt;</span><br></pre></td></tr></table></figure>
+<h4 id="12-前台将选中的菜品和分数传送到后台"><a href="#12-前台将选中的菜品和分数传送到后台" class="headerlink" title="12. 前台将选中的菜品和分数传送到后台"></a>12. 前台将选中的菜品和分数传送到后台</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">var xhr = new XMLHttpRequest();</span><br><span class="line">xhr.onload = function() &#123;</span><br><span class="line">	document.getElementById(&quot;tips&quot;).innerHTML = this.responseText;</span><br><span class="line">&#125;</span><br><span class="line">var formData = new FormData();</span><br><span class="line">formData.append(&quot;menu&quot;,JSON.stringify(userSelected));</span><br><span class="line">xhr.open(&quot;POST&quot;,&quot;php/orders/dingdan.php&quot;);</span><br><span class="line">xhr.send(formData);</span><br></pre></td></tr></table></figure>
+<h4 id="13-后台接受数据，遍历数组，将数据插入到listorder表中"><a href="#13-后台接受数据，遍历数组，将数据插入到listorder表中" class="headerlink" title="13. 后台接受数据，遍历数组，将数据插入到listorder表中"></a>13. 后台接受数据，遍历数组，将数据插入到listorder表中</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line">&lt;?php</span><br><span class="line">	session_start();</span><br><span class="line">	//将用户订餐数据记录到数据库</span><br><span class="line">	//接受提交的订单数据</span><br><span class="line">	if(!empty($_POST[&apos;menu&apos;])) &#123;</span><br><span class="line">		include &quot;../common/mysql.php&quot;;</span><br><span class="line">		//$_POST[&apos;menu&apos;]是前台传来的JSON串</span><br><span class="line">		//json_decode 将JSON字符串转变成数组</span><br><span class="line">		$menu = json_decode($_POST[&apos;menu&apos;],true);</span><br><span class="line">		print_r($menu);</span><br><span class="line">		//用户选择的checkbox - menu_id</span><br><span class="line">		foreach($menu as $key =&gt; $val) &#123;</span><br><span class="line">			$menu_id = $val[&apos;menu_id&apos;];</span><br><span class="line">			//订购的份数 num_id</span><br><span class="line">			$amount = intval($val[&apos;amount&apos;]);</span><br><span class="line">			echo &quot;订单的菜单id=&quot;.$menu_id.&quot;&lt;br&gt;&quot;;</span><br><span class="line">			echo &quot;订单的份数amount=&quot;.$amount.&quot;&lt;br&gt;&lt;br&gt;&quot;;	</span><br><span class="line">			$row = getOne($link, &quot;name,price&quot;,&quot;menu&quot;,&quot;id=&quot;.$menu_id);</span><br><span class="line">			$fields = array(</span><br><span class="line">				&quot;menu_name&quot; =&gt; $row[&apos;name&apos;],</span><br><span class="line">				&quot;menu_price&quot; =&gt; $row[&apos;price&apos;],</span><br><span class="line">				&apos;amount&apos; =&gt; $amount,</span><br><span class="line">				&apos;createDate&apos; =&gt; date(&quot;Y-m-d H:i:s&quot;),</span><br><span class="line">				&apos;name&apos; =&gt; $_SESSION[&apos;member&apos;][&apos;name&apos;],</span><br><span class="line">				&apos;number&apos; =&gt; $_SESSION[&apos;member&apos;][&apos;mobile&apos;]</span><br><span class="line">			);</span><br><span class="line">			insert($link, $fields, &apos;orderlist&apos;);	</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">?&gt;</span><br></pre></td></tr></table></figure>
+<p><img src="http://upload-images.jianshu.io/upload_images/7426605-fb7e622131c1d527.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="image.png"></p>
+<p><img src="http://upload-images.jianshu.io/upload_images/7426605-526c61592a926d66.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="image.png"></p>
+
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2017/11/23/前后台小程序/" data-id="cjacl1tk10003cnmzro761105" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
     <article id="post-mysqli用法" class="article article-type-post" itemscope itemprop="blogPost">
   <div class="article-meta">
     <a href="/2017/11/22/mysqli用法/" class="article-date">
@@ -140,7 +194,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2017/11/22/mysqli用法/" data-id="cjab4w9uh0002homzyhd7ykse" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2017/11/22/mysqli用法/" data-id="cjacl1tk00002cnmzelnswq33" class="article-share-link">Share</a>
       
       
     </footer>
@@ -200,7 +254,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2017/11/20/Cookie和Session详解/" data-id="cjab4w9ud0001homzkegc4gh7" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2017/11/20/Cookie和Session详解/" data-id="cjacl1tjr0000cnmzgl7bhbnt" class="article-share-link">Share</a>
       
       
     </footer>
@@ -240,7 +294,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2017/11/18/简易版网上订餐/" data-id="cjab4w9ur0007homz45thsg7v" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2017/11/18/简易版网上订餐/" data-id="cjacl1tkg0008cnmzqm9pcd2e" class="article-share-link">Share</a>
       
       
     </footer>
@@ -280,7 +334,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2017/11/17/分页/" data-id="cjab4w9uv0008homzivgueips" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2017/11/17/分页/" data-id="cjacl1tka0007cnmz425ce2aw" class="article-share-link">Share</a>
       
       
     </footer>
@@ -352,7 +406,7 @@
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2017/11/17/浅谈前后台交互/" data-id="cjab4w9uk0004homzivrysonk" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2017/11/17/浅谈前后台交互/" data-id="cjacl1tk40005cnmz8fvoibnt" class="article-share-link">Share</a>
       
       
     </footer>
@@ -445,52 +499,7 @@ this;  //调用本次ajax请求时传递的options参数
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2017/11/16/ajax和jsonp区别/" data-id="cjab4w9up0006homznzb892fj" class="article-share-link">Share</a>
-      
-      
-    </footer>
-  </div>
-  
-</article>
-
-
-  
-    <article id="JSONP 的工作原理-JSONP 的工作原理" class="article article-type-JSONP 的工作原理" itemscope itemprop="blogPost">
-  <div class="article-meta">
-    <a href="/2017/11/15/JSONP 的工作原理/" class="article-date">
-  <time datetime="2017-11-15T13:06:47.000Z" itemprop="datePublished">2017-11-15</time>
-</a>
-    
-  </div>
-  <div class="article-inner">
-    
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2017/11/15/JSONP 的工作原理/">JSONP 的工作原理</a>
-    </h1>
-  
-
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h1 id="JSONP-的工作原理"><a href="#JSONP-的工作原理" class="headerlink" title="JSONP 的工作原理"></a>JSONP 的工作原理</h1><h2 id="1-JSONP由来"><a href="#1-JSONP由来" class="headerlink" title="1. JSONP由来"></a>1. JSONP由来</h2><p>根据浏览器同源策略，所谓同源就是协议、主机、端口号都相同时成为同源。a 域的js不能直接访问 b域名的信息，但是script 标签的src属性可以跨域引用文件，jsonp是请求之后后台包装好一段json，并且把数据放在一个callback函数，返回一个js文件，动态引入这个文件，下载完成js之后，会去调用这个callback,通过这样访问数据。</p>
-<h2 id="2-JSONP有什么用"><a href="#2-JSONP有什么用" class="headerlink" title="2. JSONP有什么用"></a>2. JSONP有什么用</h2><p>由于同源从略的限制，XMLHttpRequest只允许请求前源（域名、协议、端口）的资源，为了实现跨域请求，可以通过script标签实现跨域请求，然后再服务端输出JSON数据并执行回调函数，从而解决跨域数据请求</p>
-<h2 id="3-如何使用JSONP"><a href="#3-如何使用JSONP" class="headerlink" title="3. 如何使用JSONP"></a>3. 如何使用JSONP</h2><ul>
-<li>HTML代码<br><img src="http://upload-images.jianshu.io/upload_images/7426605-d8020506f468db57.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="HTML代码"></li>
-<li>PHP代码<br><img src="http://upload-images.jianshu.io/upload_images/7426605-1ec09b04fd0d1745.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="PHP代码"></li>
-</ul>
-<h2 id="4-JSONP原理"><a href="#4-JSONP原理" class="headerlink" title="4. JSONP原理"></a>4. JSONP原理</h2><p>首先在客户端注册一个callback，然后把callback的名字传给服务器。此时，服务器先生成json数据，然后以javascript语法的方式，生成function，function名字就是传递上来I带参数jsonp。最后将json数据直接以入参的方式，放置function中，这样就生成js语法的文档，返回给客户端。客户端浏览器，解析script变迁，并执行返回javascript文档，此时数据作为参数，传入了客户端预先定义好的callback函数里。<br>简单的说，就是利用script标签没有跨域限制的“漏洞”来达到与第三方通讯的目的。</p>
-<h2 id="5-备注"><a href="#5-备注" class="headerlink" title="5. 备注"></a>5. 备注</h2><p>#####json 是一种数据格式</p>
-<p>#####jsonp 是一种数据调用的方式，</p>
-<h5 id="联系-带callback的json就是jsonp"><a href="#联系-带callback的json就是jsonp" class="headerlink" title="联系 带callback的json就是jsonp"></a>联系 带callback的json就是jsonp</h5>
-      
-    </div>
-    <footer class="article-footer">
-      <a data-url="http://yoursite.com/2017/11/15/JSONP 的工作原理/" data-id="cjab4w9u70000homzglvd0g6g" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2017/11/16/ajax和jsonp区别/" data-id="cjacl1tk70006cnmz5t1iur0o" class="article-share-link">Share</a>
       
       
     </footer>
@@ -548,7 +557,52 @@ this;  //调用本次ajax请求时传递的options参数
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2017/11/15/json/" data-id="cjab4w9um0005homzz8y2jlqp" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2017/11/15/json/" data-id="cjacl1tk30004cnmzyeb2n6lo" class="article-share-link">Share</a>
+      
+      
+    </footer>
+  </div>
+  
+</article>
+
+
+  
+    <article id="JSONP 的工作原理-JSONP 的工作原理" class="article article-type-JSONP 的工作原理" itemscope itemprop="blogPost">
+  <div class="article-meta">
+    <a href="/2017/11/15/JSONP 的工作原理/" class="article-date">
+  <time datetime="2017-11-15T13:06:47.000Z" itemprop="datePublished">2017-11-15</time>
+</a>
+    
+  </div>
+  <div class="article-inner">
+    
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2017/11/15/JSONP 的工作原理/">JSONP 的工作原理</a>
+    </h1>
+  
+
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="JSONP-的工作原理"><a href="#JSONP-的工作原理" class="headerlink" title="JSONP 的工作原理"></a>JSONP 的工作原理</h1><h2 id="1-JSONP由来"><a href="#1-JSONP由来" class="headerlink" title="1. JSONP由来"></a>1. JSONP由来</h2><p>根据浏览器同源策略，所谓同源就是协议、主机、端口号都相同时成为同源。a 域的js不能直接访问 b域名的信息，但是script 标签的src属性可以跨域引用文件，jsonp是请求之后后台包装好一段json，并且把数据放在一个callback函数，返回一个js文件，动态引入这个文件，下载完成js之后，会去调用这个callback,通过这样访问数据。</p>
+<h2 id="2-JSONP有什么用"><a href="#2-JSONP有什么用" class="headerlink" title="2. JSONP有什么用"></a>2. JSONP有什么用</h2><p>由于同源从略的限制，XMLHttpRequest只允许请求前源（域名、协议、端口）的资源，为了实现跨域请求，可以通过script标签实现跨域请求，然后再服务端输出JSON数据并执行回调函数，从而解决跨域数据请求</p>
+<h2 id="3-如何使用JSONP"><a href="#3-如何使用JSONP" class="headerlink" title="3. 如何使用JSONP"></a>3. 如何使用JSONP</h2><ul>
+<li>HTML代码<br><img src="http://upload-images.jianshu.io/upload_images/7426605-d8020506f468db57.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="HTML代码"></li>
+<li>PHP代码<br><img src="http://upload-images.jianshu.io/upload_images/7426605-1ec09b04fd0d1745.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="PHP代码"></li>
+</ul>
+<h2 id="4-JSONP原理"><a href="#4-JSONP原理" class="headerlink" title="4. JSONP原理"></a>4. JSONP原理</h2><p>首先在客户端注册一个callback，然后把callback的名字传给服务器。此时，服务器先生成json数据，然后以javascript语法的方式，生成function，function名字就是传递上来I带参数jsonp。最后将json数据直接以入参的方式，放置function中，这样就生成js语法的文档，返回给客户端。客户端浏览器，解析script变迁，并执行返回javascript文档，此时数据作为参数，传入了客户端预先定义好的callback函数里。<br>简单的说，就是利用script标签没有跨域限制的“漏洞”来达到与第三方通讯的目的。</p>
+<h2 id="5-备注"><a href="#5-备注" class="headerlink" title="5. 备注"></a>5. 备注</h2><p>#####json 是一种数据格式</p>
+<p>#####jsonp 是一种数据调用的方式，</p>
+<h5 id="联系-带callback的json就是jsonp"><a href="#联系-带callback的json就是jsonp" class="headerlink" title="联系 带callback的json就是jsonp"></a>联系 带callback的json就是jsonp</h5>
+      
+    </div>
+    <footer class="article-footer">
+      <a data-url="http://yoursite.com/2017/11/15/JSONP 的工作原理/" data-id="cjacl1tkh0009cnmzp0h5zqyi" class="article-share-link">Share</a>
       
       
     </footer>
@@ -610,7 +664,7 @@ this;  //调用本次ajax请求时传递的options参数
       
     </div>
     <footer class="article-footer">
-      <a data-url="http://yoursite.com/2017/11/14/AJAX/" data-id="cjab4w9ui0003homzrkrddjbq" class="article-share-link">Share</a>
+      <a data-url="http://yoursite.com/2017/11/14/AJAX/" data-id="cjacl1tjw0001cnmzrv5zix4m" class="article-share-link">Share</a>
       
       
     </footer>
@@ -650,6 +704,10 @@ this;  //调用本次ajax请求时传递的options参数
       <ul>
         
           <li>
+            <a href="/2017/11/23/前后台小程序/">前后台小程序</a>
+          </li>
+        
+          <li>
             <a href="/2017/11/22/mysqli用法/">mysqli用法</a>
           </li>
         
@@ -663,10 +721,6 @@ this;  //调用本次ajax请求时传递的options参数
         
           <li>
             <a href="/2017/11/17/分页/">分页</a>
-          </li>
-        
-          <li>
-            <a href="/2017/11/17/浅谈前后台交互/">浅谈前后台交互</a>
           </li>
         
       </ul>
