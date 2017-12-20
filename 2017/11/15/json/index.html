@@ -53,7 +53,7 @@
     <canvas id="anm-canvas" class="anm-canvas"></canvas>
     <div class="left-col" q-class="show:isShow">
       
-<div class="overlay" style="background: /img/1.png"></div>
+<div class="overlay" style="background: linear-gradient(200deg,#a0cfe4,#e8c37e)"></div>
 <div class="intrude-less">
 	<header id="header" class="inner">
 		<a href="/" class="profilepic">
@@ -110,7 +110,7 @@
     <div class="mid-col" q-class="show:isShow,hide:isShow|isFalse">
       
 <nav id="mobile-nav">
-  	<div class="overlay js-overlay" style="background: /img/1.png"></div>
+  	<div class="overlay js-overlay" style="background: linear-gradient(200deg,#a0cfe4,#e8c37e)"></div>
 	<div class="btnctn js-mobile-btnctn">
   		<div class="slider-trigger list" q-on="click: openSlider(e)"><i class="icon icon-sort"></i></div>
 	</div>
@@ -313,18 +313,18 @@
   
 <nav id="article-nav">
   
-    <a href="/2017/11/15/JSONP 的工作原理/" id="article-nav-newer" class="article-nav-link-wrap">
+    <a href="/2017/11/16/ajax和jsonp区别/" id="article-nav-newer" class="article-nav-link-wrap">
       <i class="icon-circle-left"></i>
       <div class="article-nav-title">
         
-          JSONP 的工作原理
+          ajax和jsonp区别
         
       </div>
     </a>
   
   
-    <a href="/2017/11/14/AJAX/" id="article-nav-older" class="article-nav-link-wrap">
-      <div class="article-nav-title">XMLHttpRequest</div>
+    <a href="/2017/11/15/JSONP 的工作原理/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">JSONP 的工作原理</div>
       <i class="icon-circle-right"></i>
     </a>
   
@@ -478,6 +478,10 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
             <input type="checkbox" q-on="click:toggleTag(e)" q-attr="checked:showTags">
           </label>
           <ul class="article-tag-list" q-show="showTags">
+             
+              <li class="article-tag-list-item">
+                <a href="javascript:void(0)" class="js-tag color1">浅谈OOP</a>
+              </li>
             
             <div class="clearfix"></div>
           </ul>
