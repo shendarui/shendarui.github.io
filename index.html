@@ -158,6 +158,89 @@
           <div id="js-content" class="content-ll">
             
   
+    <article id="post-typeof与instanceof用法小记" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2017/12/21/typeof与instanceof用法小记/">typeof与instanceof用法小记</a>
+    </h1>
+  
+
+        
+        <a href="/2017/12/21/typeof与instanceof用法小记/" class="archive-article-date">
+  	<time datetime="2017-12-21T13:54:06.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-12-21</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h3 id="JavaScript中typeof-instanceof常用老判断一个变量是否为空，或者是什么类型的。但是他们之间还是有区别的"><a href="#JavaScript中typeof-instanceof常用老判断一个变量是否为空，或者是什么类型的。但是他们之间还是有区别的" class="headerlink" title="JavaScript中typeof instanceof常用老判断一个变量是否为空，或者是什么类型的。但是他们之间还是有区别的"></a>JavaScript中typeof instanceof常用老判断一个变量是否为空，或者是什么类型的。但是他们之间还是有区别的</h3><h2 id="1-typeof"><a href="#1-typeof" class="headerlink" title="1. typeof"></a>1. typeof</h2><p>typeof是一个一元运算，放在一个运算数之前，运算数可以是任意类型<br>它返回值是一个字符串，该字符串说明运算符的类型<br>typeof一般只能返回如下几个结果：“number”,“string”,“boolean”,“object”,“function”,“undefined”.</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">&lt;script type=&quot;text/javascript&quot;&gt;</span><br><span class="line">	var str = &quot;hhhh&quot;;</span><br><span class="line">	var num = 12334;</span><br><span class="line">	var obj = &#123;&#125;;</span><br><span class="line">	var fn = function()&#123;</span><br><span class="line">		console.log(11111)</span><br><span class="line">	&#125;</span><br><span class="line">	var arr = [];</span><br><span class="line">	var boolea = false;</span><br><span class="line">	var a = null;</span><br><span class="line">	var b;</span><br><span class="line">	//            string       number      object     function     object      boolean     object   undefined</span><br><span class="line">	console.log(typeof str, typeof(num), typeof obj, typeof fn, typeof arr, typeof boolea, typeof a, typeof b)</span><br><span class="line">&lt;/script&gt;</span><br></pre></td></tr></table></figure>
+<p>即我们可以通过typeof判断一个变量是否存在。例如</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">if(typeof a!=&quot;undefined&quot;)&#123;alert(&quot;ok&quot;)&#125;</span><br></pre></td></tr></table></figure>
+<p>而不要去使用if(a)，因为如果a不存在（为声明）则会报错。对于 Array,Null 等特殊对象使用 typeof 一律返回 object，这正是 typeof 的局限性。</p>
+<p>经常会在js里用到数组,比如 多个名字相同的input, 若是动态生成的, 提交时就需要判断其是否是数组. </p>
+<p>if(document.mylist.length != “undefined” ) {} //这个用法有误. </p>
+<p>正确的是<br>if( typeof(document.mylist.length) != “undefined” ) {} </p>
+<p>或 if( !isNaN(document.mylist.length) ) {} </p>
+<p>在JavaScript中，判断一个变量的类型常常会用typeof运算符，在使用该运算符时采用引用类型存储值会出现一个问题，无论引用的是什么类型的对象，他都返回”object“，这时就要用到instanceof</p>
+<h2 id="2-instanceof-检测某个对象是不是另一个对象的实例，即测试一个对象在其原型链中是否存在一个构造函数的prototype属性"><a href="#2-instanceof-检测某个对象是不是另一个对象的实例，即测试一个对象在其原型链中是否存在一个构造函数的prototype属性" class="headerlink" title="2. instanceof 检测某个对象是不是另一个对象的实例，即测试一个对象在其原型链中是否存在一个构造函数的prototype属性"></a>2. instanceof 检测某个对象是不是另一个对象的实例，即测试一个对象在其原型链中是否存在一个构造函数的prototype属性</h2><p>语法： object(要检测是对象) instanceof constructor（某个构造函数）<br>如 :var a=new Array();</p>
+<p>alert(a instanceof Array); // true，</p>
+<p>同时 alert(a instanceof Object) //也会返回 true;</p>
+<p>这是因为 Array 是 object 的子类。</p>
+<p>再如：function test(){};</p>
+<p>var a=new test();</p>
+<p>alert(a instanceof test) 会返回true</p>
+<p>另外，更重的一点是 instanceof 可以在继承关系中用来判断一个实例是否属于它的父类型。</p>
+<p>例如：</p>
+<p>function Foo(){}<br>Foo.prototype = new Aoo();//JavaScript 原型继承<br>var foo = new Foo();<br>console.log(foo instanceof Foo)//true<br>console.log(foo instanceof Aoo)//true</p>
+<p>上面的代码中是判断了一层继承关系中的父类，在多层继承关系中，instanceof 运算符同样适用。</p>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2017/12/21/typeof与instanceof用法小记/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
     <article id="面向对象-解决增删改查" class="article article-type-面向对象  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -882,104 +965,6 @@
       
         <p class="article-more-link">
           <a class="article-more-a" href="/2017/11/17/分页/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-浅谈前后台交互" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2017/11/17/浅谈前后台交互/">浅谈前后台交互</a>
-    </h1>
-  
-
-        
-        <a href="/2017/11/17/浅谈前后台交互/" class="archive-article-date">
-  	<time datetime="2017-11-17T11:55:22.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-11-17</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p><img src="http://upload-images.jianshu.io/upload_images/7426605-337273f35a65ddad.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="前后台交互"></p>
-<h3 id="举例：外卖餐厅订餐"><a href="#举例：外卖餐厅订餐" class="headerlink" title="举例：外卖餐厅订餐"></a>举例：外卖餐厅订餐</h3><ul>
-<li>初识状态：</li>
-</ul>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">&lt;form method=&quot;get&quot;&gt;</span><br><span class="line">    &lt;div&gt;丽德快餐厅&lt;/div&gt;</span><br><span class="line"> 	&lt;input type=&quot;button&quot; name=&quot;button&quot; id=&quot;btn&quot; value=&quot;立即订餐&quot;&gt;  </span><br><span class="line">&lt;/form&gt;</span><br></pre></td></tr></table></figure>
-<ul>
-<li>具体的菜单（菜品+价格），前台要从后台获取，这时就要前台想后台发送一个数据，jquery将Ajax封装。以GET方式向后台提交数据，链接后台的地址存在URL里面，async判断是否异步，一般都会选择true，异步，因为同步会出现卡顿现象，dataType，要求后台给我们返回的数据类型，success数据传送成功后生成的函数，函数里面的参数就是后台给我们返回的数据。<br>根据上图的流程，可以理解为，用户 通过脚本语言的 Ajax，向服务器传送HTTP请求，服务器将请求处理后返回一组数据到Ajax，经过一些列编码成HTML和CSS呈现给用户。毕竟所有的程序最终都要转化为HTML和CSS用户才能看到。</li>
-</ul>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">$.ajax(&#123;</span><br><span class="line">		type: &quot;get&quot;, //数据提交类型</span><br><span class="line">		url: &quot;form-2.php?action=num&quot;,</span><br><span class="line">		data: &#123;&#125;,</span><br><span class="line">		dataType: &quot;json&quot;,</span><br><span class="line">		async: true,</span><br><span class="line">		success: function(data)&#123;</span><br><span class="line">			for(i in data) &#123;	</span><br><span class="line">				var div = document.createElement(&apos;div&apos;);</span><br><span class="line">				document.body.appendChild(div);</span><br><span class="line">				$(&quot;&lt;span&gt;&quot;+data[i][0]+&quot;&lt;/span&gt; &lt;span class=&apos;price&apos;&gt;&quot;+data[i][1]+&quot;&lt;/span&gt; &lt;input type=&apos;checkbox&apos; name=&apos;key[]&apos; value=&quot;+i+&quot;/&gt; 订餐份数：&lt;input type=&apos;text&apos; name=&apos;amount_&quot;+i+&quot;&apos;/&gt;&quot;).appendTo(div);</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;);</span><br></pre></td></tr></table></figure>
-<ul>
-<li>前台通过GET传送的请求，后台也要用GET方法接受，接受后将前台的需求返回。</li>
-</ul>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">$menu = array();</span><br><span class="line">	$menu[] = array(&quot;红烧肉&quot;,10);</span><br><span class="line">	$menu[] = array(&quot;烤鸡&quot;, 20);</span><br><span class="line">	$menu[] = array( &quot;鲍鱼&quot;, 30);</span><br><span class="line">	$menu[] = array( &quot;青菜汤&quot;,4);</span><br><span class="line">	//返回界面所需要的数据</span><br><span class="line">	if(!empty($_GET[&quot;action&quot;])) &#123;</span><br><span class="line">		$jsonstr = json_encode($menu);</span><br><span class="line">		echo $jsonstr;</span><br><span class="line">	&#125;</span><br></pre></td></tr></table></figure>
-<ul>
-<li>这样前台的界面就会形成。</li>
-</ul>
-<p><img src="http://upload-images.jianshu.io/upload_images/7426605-ea3cdf88d4d58935.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="image.png"></p>
-<ul>
-<li>界面形成后，用户开始订餐</li>
-</ul>
-<p><img src="http://upload-images.jianshu.io/upload_images/7426605-b83a2d7c3f7b00ed.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="image.png"></p>
-<ul>
-<li>此时前台需要将用户选中的菜品和所选份数的数据传递给后台，后台将所选菜品对应的价格与份数相加，计算出总价，返回给前台，前台将接受到的数据呈现给用户</li>
-</ul>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br></pre></td><td class="code"><pre><span class="line">$(&quot;#btn&quot;)[0].onclick = function() &#123;</span><br><span class="line">		var arrIndex = [];</span><br><span class="line">		var strIndex = &apos;&apos;;</span><br><span class="line">		var arrCount = [];</span><br><span class="line">		var strCount = &apos;&apos;;</span><br><span class="line">        //遍历界面中的复选框，将勾选中的下标和对应的份数保存到数组里面</span><br><span class="line">		$(&apos;input:checkbox&apos;).each(function(index,val) &#123;</span><br><span class="line">			if(val.checked == true) &#123;</span><br><span class="line">				arrIndex.push(index);</span><br><span class="line">				arrCount.push($(&apos;input:text&apos;)[index].value)</span><br><span class="line">			&#125;</span><br><span class="line">        //将数组变成字符串：=&gt; 用字符串传递比较安全</span><br><span class="line">			strIndex = arrIndex.join();</span><br><span class="line">			strCount = arrCount.join();</span><br><span class="line">		&#125;)</span><br><span class="line">		$.ajax(&#123;</span><br><span class="line">			type: &quot;post&quot;, //数据提交类型</span><br><span class="line">			url: &quot;form-2.php&quot;,</span><br><span class="line">			data: &#123;&quot;key&quot;:strIndex,&quot;amount_&quot;:strCount&#125;,</span><br><span class="line">			dataType: &quot;json&quot;,</span><br><span class="line">			async: true,</span><br><span class="line">			success: function(data)&#123;</span><br><span class="line">				$(&quot;&lt;h4&gt;您的总订单：&lt;/h4&gt;&quot;).appendTo(document.body);</span><br><span class="line">				for(var i =0;i&lt;data.length-1;i++) &#123;</span><br><span class="line">					$(&quot;&lt;div&gt;&lt;/div&gt;&quot;).html(data[i].name+&quot;　份数：&quot;+data[i].amount+&quot;　小计：&quot;+data[i].price).appendTo(document.body);</span><br><span class="line">				&#125;</span><br><span class="line">				$(&quot;&lt;span&gt;&lt;/span&gt;&quot;).html(&quot;总价:&quot;).appendTo(document.body);</span><br><span class="line">				$(&quot;&lt;span&gt;&lt;/span&gt;&quot;).html(data[2].total).appendTo(document.body);</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;);</span><br><span class="line">	&#125;</span><br></pre></td></tr></table></figure>
-<ul>
-<li>前台通过POST方法，将勾选框的下标 key 和对应的份数  amount_ 传送到后台，后台接受到数据之后进行处理，将小计与最后的总价返回给前端。</li>
-</ul>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">if(!empty($_POST[&quot;key&quot;]))&#123;</span><br><span class="line">	    $totalPrice = 0;</span><br><span class="line">	    $userSelected = array();</span><br><span class="line">	    $keys = explode(&apos;,&apos;,$_POST[&apos;key&apos;]);</span><br><span class="line">	    $amount = explode(&apos;,&apos;,$_POST[&apos;amount_&apos;]);</span><br><span class="line">	    foreach($keys as $key =&gt; $val)&#123;</span><br><span class="line">		     $amount1 = $amount[$key];</span><br><span class="line">		     $userSelected[$key][&apos;name&apos;] = $menu[$val][0];</span><br><span class="line">		     $userSelected[$key][&apos;price&apos;]= $menu[$val][1]*$amount1;</span><br><span class="line">		     $userSelected[$key][&apos;amount&apos;] = $amount[$key];</span><br><span class="line">		     $totalPrice += $userSelected[$key][&apos;price&apos;];</span><br><span class="line">	    &#125;</span><br><span class="line">	    $userSelected[][&apos;total&apos;] = $totalPrice;</span><br><span class="line">//	     recordMenu($userSelected);</span><br><span class="line">	     echo json_encode($userSelected);</span><br><span class="line">	&#125;</span><br></pre></td></tr></table></figure>
-<ul>
-<li>结果如下（简易版网上订餐）</li>
-</ul>
-<p><img src="http://upload-images.jianshu.io/upload_images/7426605-83ea505458d4ada2.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="image.png"></p>
-<ul>
-<li>旁白：前端与服务器的交互。一个请求对应一个回应。</li>
-</ul>
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2017/11/17/浅谈前后台交互/">展开全文 >></a>
         </p>
       
 
