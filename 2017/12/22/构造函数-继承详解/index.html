@@ -6,18 +6,18 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="http://yoursite.com">
-  <title>typeof与instanceof用法小记 | 大瑞</title>
+  <title>构造函数--继承详解 | 大瑞</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="JavaScript中typeof instanceof常用老判断一个变量是否为空，或者是什么类型的。但是他们之间还是有区别的1. typeoftypeof是一个一元运算，放在一个运算数之前，运算数可以是任意类型它返回值是一个字符串，该字符串说明运算符的类型typeof一般只能返回如下几个结果：“number”,“string”,“boolean”,“object”,“function”,“und">
+  <meta name="description" content="先写一个父级的构造函数 12345678910111213      function Parent(name)&amp;#123;	this.name = name;	this.money = 10000000;	this.hobby = function()&amp;#123;		console.log(&amp;quot;Parent this.hobby&amp;quot;);	&amp;#125;&amp;#125;Parent.pr">
 <meta property="og:type" content="article">
-<meta property="og:title" content="typeof与instanceof用法小记">
-<meta property="og:url" content="http://yoursite.com/2017/12/21/typeof与instanceof用法小记/index.html">
+<meta property="og:title" content="构造函数--继承详解">
+<meta property="og:url" content="http://yoursite.com/2017/12/22/构造函数-继承详解/index.html">
 <meta property="og:site_name" content="大瑞">
-<meta property="og:description" content="JavaScript中typeof instanceof常用老判断一个变量是否为空，或者是什么类型的。但是他们之间还是有区别的1. typeoftypeof是一个一元运算，放在一个运算数之前，运算数可以是任意类型它返回值是一个字符串，该字符串说明运算符的类型typeof一般只能返回如下几个结果：“number”,“string”,“boolean”,“object”,“function”,“und">
-<meta property="og:updated_time" content="2017-12-21T13:54:54.000Z">
+<meta property="og:description" content="先写一个父级的构造函数 12345678910111213      function Parent(name)&amp;#123;	this.name = name;	this.money = 10000000;	this.hobby = function()&amp;#123;		console.log(&amp;quot;Parent this.hobby&amp;quot;);	&amp;#125;&amp;#125;Parent.pr">
+<meta property="og:updated_time" content="2017-12-22T13:43:48.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="typeof与instanceof用法小记">
-<meta name="twitter:description" content="JavaScript中typeof instanceof常用老判断一个变量是否为空，或者是什么类型的。但是他们之间还是有区别的1. typeoftypeof是一个一元运算，放在一个运算数之前，运算数可以是任意类型它返回值是一个字符串，该字符串说明运算符的类型typeof一般只能返回如下几个结果：“number”,“string”,“boolean”,“object”,“function”,“und">
+<meta name="twitter:title" content="构造函数--继承详解">
+<meta name="twitter:description" content="先写一个父级的构造函数 12345678910111213      function Parent(name)&amp;#123;	this.name = name;	this.money = 10000000;	this.hobby = function()&amp;#123;		console.log(&amp;quot;Parent this.hobby&amp;quot;);	&amp;#125;&amp;#125;Parent.pr">
   
     <link rel="alternative" href="/atom.xml" title="大瑞" type="application/atom+xml">
   
@@ -157,48 +157,80 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            <article id="post-typeof与instanceof用法小记" class="article article-type-post " itemscope itemprop="blogPost">
+            <article id="post-构造函数-继承详解" class="article article-type-post " itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
     <h1 class="article-title" itemprop="name">
-      typeof与instanceof用法小记
+      构造函数--继承详解
     </h1>
   
 
         
-        <a href="/2017/12/21/typeof与instanceof用法小记/" class="archive-article-date">
-  	<time datetime="2017-12-21T13:54:06.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-12-21</time>
+        <a href="/2017/12/22/构造函数-继承详解/" class="archive-article-date">
+  	<time datetime="2017-12-22T13:41:34.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-12-22</time>
 </a>
         
       </header>
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h3 id="JavaScript中typeof-instanceof常用老判断一个变量是否为空，或者是什么类型的。但是他们之间还是有区别的"><a href="#JavaScript中typeof-instanceof常用老判断一个变量是否为空，或者是什么类型的。但是他们之间还是有区别的" class="headerlink" title="JavaScript中typeof instanceof常用老判断一个变量是否为空，或者是什么类型的。但是他们之间还是有区别的"></a>JavaScript中typeof instanceof常用老判断一个变量是否为空，或者是什么类型的。但是他们之间还是有区别的</h3><h2 id="1-typeof"><a href="#1-typeof" class="headerlink" title="1. typeof"></a>1. typeof</h2><p>typeof是一个一元运算，放在一个运算数之前，运算数可以是任意类型<br>它返回值是一个字符串，该字符串说明运算符的类型<br>typeof一般只能返回如下几个结果：“number”,“string”,“boolean”,“object”,“function”,“undefined”.</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">&lt;script type=&quot;text/javascript&quot;&gt;</span><br><span class="line">	var str = &quot;hhhh&quot;;</span><br><span class="line">	var num = 12334;</span><br><span class="line">	var obj = &#123;&#125;;</span><br><span class="line">	var fn = function()&#123;</span><br><span class="line">		console.log(11111)</span><br><span class="line">	&#125;</span><br><span class="line">	var arr = [];</span><br><span class="line">	var boolea = false;</span><br><span class="line">	var a = null;</span><br><span class="line">	var b;</span><br><span class="line">	//            string       number      object     function     object      boolean     object   undefined</span><br><span class="line">	console.log(typeof str, typeof(num), typeof obj, typeof fn, typeof arr, typeof boolea, typeof a, typeof b)</span><br><span class="line">&lt;/script&gt;</span><br></pre></td></tr></table></figure>
-<p>即我们可以通过typeof判断一个变量是否存在。例如</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">if(typeof a!=&quot;undefined&quot;)&#123;alert(&quot;ok&quot;)&#125;</span><br></pre></td></tr></table></figure>
-<p>而不要去使用if(a)，因为如果a不存在（为声明）则会报错。对于 Array,Null 等特殊对象使用 typeof 一律返回 object，这正是 typeof 的局限性。</p>
-<p>经常会在js里用到数组,比如 多个名字相同的input, 若是动态生成的, 提交时就需要判断其是否是数组. </p>
-<p>if(document.mylist.length != “undefined” ) {} //这个用法有误. </p>
-<p>正确的是<br>if( typeof(document.mylist.length) != “undefined” ) {} </p>
-<p>或 if( !isNaN(document.mylist.length) ) {} </p>
-<p>在JavaScript中，判断一个变量的类型常常会用typeof运算符，在使用该运算符时采用引用类型存储值会出现一个问题，无论引用的是什么类型的对象，他都返回”object“，这时就要用到instanceof</p>
-<h2 id="2-instanceof-检测某个对象是不是另一个对象的实例，即测试一个对象在其原型链中是否存在一个构造函数的prototype属性"><a href="#2-instanceof-检测某个对象是不是另一个对象的实例，即测试一个对象在其原型链中是否存在一个构造函数的prototype属性" class="headerlink" title="2. instanceof 检测某个对象是不是另一个对象的实例，即测试一个对象在其原型链中是否存在一个构造函数的prototype属性"></a>2. instanceof 检测某个对象是不是另一个对象的实例，即测试一个对象在其原型链中是否存在一个构造函数的prototype属性</h2><p>语法： object(要检测是对象) instanceof constructor（某个构造函数）<br>如 :var a=new Array();</p>
-<p>alert(a instanceof Array); // true，</p>
-<p>同时 alert(a instanceof Object) //也会返回 true;</p>
-<p>这是因为 Array 是 object 的子类。</p>
-<p>再如：function test(){};</p>
-<p>var a=new test();</p>
-<p>alert(a instanceof test) 会返回true</p>
-<p>另外，更重的一点是 instanceof 可以在继承关系中用来判断一个实例是否属于它的父类型。</p>
-<p>例如：</p>
-<p>function Foo(){}<br>Foo.prototype = new Aoo();//JavaScript 原型继承<br>var foo = new Foo();<br>console.log(foo instanceof Foo)//true<br>console.log(foo instanceof Aoo)//true</p>
-<p>上面的代码中是判断了一层继承关系中的父类，在多层继承关系中，instanceof 运算符同样适用。</p>
-
+        <p>先写一个父级的构造函数</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">      function Parent(name)&#123;</span><br><span class="line">	this.name = name;</span><br><span class="line">	this.money = 10000000;</span><br><span class="line">	this.hobby = function()&#123;</span><br><span class="line">		console.log(&quot;Parent this.hobby&quot;);</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line">Parent.prototype.active = function()&#123;</span><br><span class="line">	console.log(&quot;Parent.prototype&quot;);</span><br><span class="line">&#125;</span><br><span class="line">Parent.prototype.eat = function()&#123;</span><br><span class="line">	console.log(&quot;Parent.prototype.eat&quot;);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>接着子集的构造方法</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">function Son(name)&#123;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>子集想要继承父级里面的内容就要在里面加上</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">function Son(name)&#123;</span><br><span class="line">	Parent.call(this,name);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>这样就可以继承父级里面的内容</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">var newSon = new Son(&quot;rrrr&quot;);</span><br><span class="line">console.log(newSon.name);  // rrrr</span><br><span class="line">console.log(newSon.money); // 10000000</span><br><span class="line">newSon.hobby(); // Parent this.hobby</span><br></pre></td></tr></table></figure>
+<p>这样写看似没什么问题，但是当我们在子集里面写上与父级相同的属性或者方法呢？</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">function Son(name)&#123;</span><br><span class="line">	Parent.call(this,name);  // rrrr</span><br><span class="line">	this.money = 10; </span><br><span class="line">	this.hobby = function()&#123;</span><br><span class="line">		console.log(&quot;Son this.hobby&quot;);</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line">var newSon = new Son(&quot;rrrr&quot;);</span><br><span class="line">console.log(newSon.name);  // rrrr</span><br><span class="line">console.log(newSon.money); // 10</span><br><span class="line">newSon.hobby(); // Son this.hobby</span><br></pre></td></tr></table></figure>
+<p>上述代码表明，子集继承父级，在自身重写该方法的时候以自身为准<br>回到上述继承   <strong><em>构造继承</em></strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line">            function Parent(name)&#123;</span><br><span class="line">          //属性</span><br><span class="line">	this.name = name;</span><br><span class="line">	this.money = 10000000</span><br><span class="line">          //实例方法</span><br><span class="line">	this.hobby = function()&#123;</span><br><span class="line">		console.log(&quot;Parent this.hobby&quot;);</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line">      //原型方法</span><br><span class="line">Parent.prototype.active = function()&#123;</span><br><span class="line">	console.log(&quot;Parent.prototype&quot;);</span><br><span class="line">&#125;</span><br><span class="line">Parent.prototype.eat = function()&#123;</span><br><span class="line">	console.log(&quot;Parent.prototype.eat&quot;);</span><br><span class="line">&#125;</span><br><span class="line">function Son(name)&#123;</span><br><span class="line">	Parent.call(this,name);</span><br><span class="line">&#125;</span><br><span class="line">var newSon = new Son(&quot;rrrr&quot;);</span><br><span class="line">console.log(newSon.name);  // rrrr</span><br><span class="line">console.log(newSon.money);  // 100000</span><br><span class="line">console.log(newSon instanceof Parent); // false</span><br><span class="line">console.log(newSon instanceof Son); // true</span><br><span class="line">newSon.hobby()  //  Parent this.hobby</span><br><span class="line">newSon.active();  // 报错</span><br><span class="line">newSon.eat();  // 报错</span><br></pre></td></tr></table></figure>
+<p>由上述可知，子集继承父级，只继承父级本身的属性和方法，不会继承父级原型上的方法，因为构造继承的核心就是使用父类的构造函数来增强子类的实例，等于是复制父类的实例属性给子类（没用到原型）</p>
+<p>特点：</p>
+<ul>
+<li>解决子类实例共享父类引用属性的问题</li>
+<li>创建子类实例时，可以向父类传参数</li>
+<li>可以实现多继承，（call多个父类对象）</li>
+</ul>
+<p>缺点：</p>
+<ul>
+<li>实例并不是父类的实例，只是子类的实例</li>
+<li>只能继承父类的实例属性和方法，不能继承原型属性和方法</li>
+<li>无法实现函数复用，每个子类都有父类实力函数的副本，影响性能</li>
+</ul>
+<p>这就可以利用到   <strong><em>实例继承</em></strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">function Son(name)&#123;</span><br><span class="line">	var ins = new Parent(name);</span><br><span class="line">	return ins;</span><br><span class="line">&#125;</span><br><span class="line">var newSon = new Son(&quot;ggg&quot;);</span><br><span class="line">console.log(newSon.name);   // ggg</span><br><span class="line">console.log(newSon.money);   // 10000000</span><br><span class="line">console.log(newSon instanceof Parent);   // true</span><br><span class="line">console.log(newSon instanceof Son);   // false</span><br><span class="line">newSon.hobby()  //  Parent this.hobby</span><br><span class="line">newSon.active();  //  Parent.prototype</span><br><span class="line">newSon.eat(); //  Parent.prototype.eat</span><br></pre></td></tr></table></figure>
+<p>实例继承的核心。为父类实例添加新特性，作为子类实例返回</p>
+<p>特点：</p>
+<ul>
+<li>不限制调用方式，不管是 new 子类（） 还是 子类（） ，返回的对象具有相同的效果</li>
+</ul>
+<p>缺点：</p>
+<ul>
+<li>实例是父级的实例，不是子类的实例</li>
+<li>不支持多继承</li>
+</ul>
+<p>再有  <strong><em>组合继承</em></strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">function Son(name)&#123;</span><br><span class="line">	Parent.call(this,name);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">Son.prototype.eat = function()&#123;</span><br><span class="line">	console.log(&quot;Son.prototype.eat&quot;);</span><br><span class="line">&#125;</span><br><span class="line">Son.prototype = new Parent();</span><br><span class="line">var newSon = new Son(&quot;ggg&quot;);</span><br><span class="line">console.log(newSon.name);   // ggg</span><br><span class="line">console.log(newSon.money);   // 10000000</span><br><span class="line">console.log(newSon instanceof Parent);   // true</span><br><span class="line">console.log(newSon instanceof Son);   // true</span><br><span class="line">newSon.hobby()  //  Parent this.hobby</span><br><span class="line">newSon.active();  //  Parent.prototype</span><br><span class="line">newSon.eat(); //  Parent.prototype.eat</span><br></pre></td></tr></table></figure>
+<p>  <strong><em>组合继承</em></strong>的核心是通过父类构造，继承父类的属性并保留传参的优点，然后通过降幅及实例子类原型，实现函数复用</p>
+<p>特点：</p>
+<ul>
+<li>可以继承实例属性、方法，也可以继承原型属性、方法</li>
+<li>即是子类的实例，也是父类的实例</li>
+<li>不存在引用属性共享问题</li>
+<li>可传参</li>
+<li>函数可复用</li>
+</ul>
+<p>缺点：</p>
+<ul>
+<li>调用了两次父类构造函数，生成两份实例（父类实例将子类原型上的那份屏蔽了），</li>
+</ul>
+<p>最后<strong><em>寄生组合继承</em></strong>，通过创建一个空的构造函数。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line">function Son(name)&#123;</span><br><span class="line">	Parent.call(this,name);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">Son.prototype.eat = function()&#123;</span><br><span class="line">	console.log(&quot;Son.prototype.eat&quot;);</span><br><span class="line">&#125;</span><br><span class="line">//创建一个空的构造函数</span><br><span class="line">function Link()&#123;&#125;</span><br><span class="line">//将Person4 里面的构造函数的原型 传址赋值 到 Link构造函数的原型里面</span><br><span class="line">Link.prototype = Parent.prototype;</span><br><span class="line">//实例化Student的构造方法的原型。此时  实例化的时候会重新创建一个新的地址存储，所以改变</span><br><span class="line">//Student里面的方法的时候 不会影响Link  当然 也不会影响Person4</span><br><span class="line">Son.prototype = new Link();</span><br><span class="line">var newSon = new Son(&quot;tt&quot;)</span><br><span class="line">console.log(newSon.name);   // tt</span><br><span class="line">console.log(newSon.money);   // 10000000</span><br><span class="line">console.log(newSon instanceof Parent);   // true</span><br><span class="line">console.log(newSon instanceof Son);   // true</span><br><span class="line">newSon.hobby()  //  Parent this.hobby</span><br><span class="line">newSon.active();  //  Parent.prototype</span><br><span class="line">newSon.eat(); //  Parent.prototype.eat</span><br></pre></td></tr></table></figure>
       
 
       
@@ -287,7 +319,7 @@
     <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
     <p>扫一扫，分享到微信</p>
     <div class="wx-qrcode">
-      <img src="//pan.baidu.com/share/qrcode?url=http://yoursite.com/2017/12/21/typeof与instanceof用法小记/" alt="微信分享二维码">
+      <img src="//pan.baidu.com/share/qrcode?url=http://yoursite.com/2017/12/22/构造函数-继承详解/" alt="微信分享二维码">
     </div>
 </div>
 
@@ -301,18 +333,9 @@
   
 <nav id="article-nav">
   
-    <a href="/2017/12/22/构造函数-继承详解/" id="article-nav-newer" class="article-nav-link-wrap">
-      <i class="icon-circle-left"></i>
-      <div class="article-nav-title">
-        
-          构造函数--继承详解
-        
-      </div>
-    </a>
   
-  
-    <a href="/2017/12/21/解决增删改查/" id="article-nav-older" class="article-nav-link-wrap">
-      <div class="article-nav-title">解决增删改查</div>
+    <a href="/2017/12/21/typeof与instanceof用法小记/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">typeof与instanceof用法小记</div>
       <i class="icon-circle-right"></i>
     </a>
   
@@ -340,7 +363,7 @@
   
   <div class="duoshuo">
 	<!-- 多说评论框 start -->
-	<div class="ds-thread" data-thread-key="typeof与instanceof用法小记" data-title="typeof与instanceof用法小记" data-url="http://yoursite.com/2017/12/21/typeof与instanceof用法小记/"></div>
+	<div class="ds-thread" data-thread-key="构造函数-继承详解" data-title="构造函数--继承详解" data-url="http://yoursite.com/2017/12/22/构造函数-继承详解/"></div>
 	<!-- 多说评论框 end -->
 	<!-- 多说公共JS代码 start (一个网页只需插入一次) -->
 	<script type="text/javascript">
@@ -362,7 +385,7 @@
   
 
   
-  <div id="SOHUCS" sid="typeof与instanceof用法小记" ></div> 
+  <div id="SOHUCS" sid="构造函数-继承详解" ></div> 
 <script charset="utf-8" type="text/javascript" src="//changyan.sohu.com/upload/changyan.js" ></script>
 <script type="text/javascript">
     window.changyan.api.config({
