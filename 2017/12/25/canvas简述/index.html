@@ -6,25 +6,18 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="http://yoursite.com">
-  <title>ajax和jsonp区别 | 大瑞</title>
+  <title>canvas简述 | 大瑞</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="ajax和jsonp区别 ajax和jsonp的调用方式很像 目的一样，都是请求url，然后把服务器返回的数据进行处理，因此jquery和ext等框架都把jsonp作为ajax的一种形式进行了封装；   实质不同 ajax的核心是通过xmlHttpRequest获取非本页内容 jsonp的核心是动态添加script标签调用服务器提供的js脚本   区别联系 不在于是否跨域 ajax通过服务端代理一">
+  <meta name="description" content="1. 绘制三角形fill是填充面（实心），stroke是画线（空心）1234567891011121314151617181920212223	&amp;lt;script type=&amp;quot;text/javascript&amp;quot;&amp;gt;		//首先，找到 &amp;lt;canvas&amp;gt; 元素:		var canvas = document.getElementById(&amp;apos;myCanvas">
 <meta property="og:type" content="article">
-<meta property="og:title" content="ajax和jsonp区别">
-<meta property="og:url" content="http://yoursite.com/2017/11/16/ajax和jsonp区别/index.html">
+<meta property="og:title" content="canvas简述">
+<meta property="og:url" content="http://yoursite.com/2017/12/25/canvas简述/index.html">
 <meta property="og:site_name" content="大瑞">
-<meta property="og:description" content="ajax和jsonp区别 ajax和jsonp的调用方式很像 目的一样，都是请求url，然后把服务器返回的数据进行处理，因此jquery和ext等框架都把jsonp作为ajax的一种形式进行了封装；   实质不同 ajax的核心是通过xmlHttpRequest获取非本页内容 jsonp的核心是动态添加script标签调用服务器提供的js脚本   区别联系 不在于是否跨域 ajax通过服务端代理一">
-<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/7426605-96b990cb852f5788.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
-<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/7426605-dd3d037d5021aef1.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
-<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/7426605-cfda422e56168a5a.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
-<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/7426605-dd3d037d5021aef1.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
-<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/7426605-7b3137e896dc4e4d.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
-<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/7426605-679e789c1e446351.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
-<meta property="og:updated_time" content="2017-11-16T13:53:21.000Z">
+<meta property="og:description" content="1. 绘制三角形fill是填充面（实心），stroke是画线（空心）1234567891011121314151617181920212223	&amp;lt;script type=&amp;quot;text/javascript&amp;quot;&amp;gt;		//首先，找到 &amp;lt;canvas&amp;gt; 元素:		var canvas = document.getElementById(&amp;apos;myCanvas">
+<meta property="og:updated_time" content="2017-12-25T14:36:36.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="ajax和jsonp区别">
-<meta name="twitter:description" content="ajax和jsonp区别 ajax和jsonp的调用方式很像 目的一样，都是请求url，然后把服务器返回的数据进行处理，因此jquery和ext等框架都把jsonp作为ajax的一种形式进行了封装；   实质不同 ajax的核心是通过xmlHttpRequest获取非本页内容 jsonp的核心是动态添加script标签调用服务器提供的js脚本   区别联系 不在于是否跨域 ajax通过服务端代理一">
-<meta name="twitter:image" content="http://upload-images.jianshu.io/upload_images/7426605-96b990cb852f5788.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta name="twitter:title" content="canvas简述">
+<meta name="twitter:description" content="1. 绘制三角形fill是填充面（实心），stroke是画线（空心）1234567891011121314151617181920212223	&amp;lt;script type=&amp;quot;text/javascript&amp;quot;&amp;gt;		//首先，找到 &amp;lt;canvas&amp;gt; 元素:		var canvas = document.getElementById(&amp;apos;myCanvas">
   
     <link rel="alternative" href="/atom.xml" title="大瑞" type="application/atom+xml">
   
@@ -164,83 +157,66 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            <article id="post-ajax和jsonp区别" class="article article-type-post " itemscope itemprop="blogPost">
+            <article id="post-canvas简述" class="article article-type-post " itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
     <h1 class="article-title" itemprop="name">
-      ajax和jsonp区别
+      canvas简述
     </h1>
   
 
         
-        <a href="/2017/11/16/ajax和jsonp区别/" class="archive-article-date">
-  	<time datetime="2017-11-16T13:47:14.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-11-16</time>
+        <a href="/2017/12/25/canvas简述/" class="archive-article-date">
+  	<time datetime="2017-12-25T14:33:55.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-12-25</time>
 </a>
         
       </header>
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h2 id="ajax和jsonp区别"><a href="#ajax和jsonp区别" class="headerlink" title="ajax和jsonp区别"></a>ajax和jsonp区别</h2><ol>
-<li>ajax和jsonp的调用方式很像<ul>
-<li>目的一样，都是请求url，然后把服务器返回的数据进行处理，因此jquery和ext等框架都把jsonp作为ajax的一种形式进行了封装；</li>
+        <h3 id="1-绘制三角形"><a href="#1-绘制三角形" class="headerlink" title="1. 绘制三角形"></a>1. 绘制三角形</h3><h5 id="fill是填充面（实心），stroke是画线（空心）"><a href="#fill是填充面（实心），stroke是画线（空心）" class="headerlink" title="fill是填充面（实心），stroke是画线（空心）"></a>fill是填充面（实心），stroke是画线（空心）</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line">	&lt;script type=&quot;text/javascript&quot;&gt;</span><br><span class="line">		//首先，找到 &lt;canvas&gt; 元素:</span><br><span class="line">		var canvas = document.getElementById(&apos;myCanvas&apos;);</span><br><span class="line">		//然后，创建 context 对象：</span><br><span class="line">		//getContext(&quot;2d&quot;) 对象是内建的 HTML5 对象，</span><br><span class="line">		//拥有多种绘制路径、矩形、圆形、字符以及添加图像的方法。</span><br><span class="line">		var context = canvas.getContext(&apos;2d&apos;);</span><br><span class="line">		</span><br><span class="line">		//canvas 是一个二维网格。</span><br><span class="line">		//canvas 的左上角坐标为 (0,0)</span><br><span class="line">		context.beginPath();</span><br><span class="line">		//moveTo(x,y) 定义线条开始坐标</span><br><span class="line">		context.moveTo(0,0);</span><br><span class="line">		//lineTo(x,y) 定义线条结束坐标</span><br><span class="line">		//绘制三角形</span><br><span class="line">		context.lineTo(0,100);</span><br><span class="line">		context.lineTo(100,100);</span><br><span class="line">		context.lineTo(0,0)</span><br><span class="line">		context.strokeStyle = &quot;#0000FF&quot;;</span><br><span class="line">		context.stroke();</span><br><span class="line">//		context.lineWidth = 10;</span><br><span class="line">//		context.fillStyle = &quot;#008000&quot;;</span><br><span class="line">//		context.fill();</span><br></pre></td></tr></table></figure>
+<h3 id="2-画圆"><a href="#2-画圆" class="headerlink" title="2. 画圆"></a>2. 画圆</h3><h5 id="lineCap-线帽-有三个参数"><a href="#lineCap-线帽-有三个参数" class="headerlink" title="lineCap:线帽 有三个参数"></a>lineCap:线帽 有三个参数</h5><ul>
+<li>butt    默认。向线条的每个末端添加平直的边缘。</li>
+<li>round    向线条的每个末端添加圆形线帽。</li>
+<li>square    向线条的每个末端添加正方形线帽。</li>
 </ul>
-</li>
-<li>实质不同<ul>
-<li>ajax的核心是通过xmlHttpRequest获取非本页内容</li>
-<li>jsonp的核心是动态添加script标签调用服务器提供的js脚本</li>
+<h5 id="context-arc-参数1-参数2-参数3-参数4-参数5-参数6"><a href="#context-arc-参数1-参数2-参数3-参数4-参数5-参数6" class="headerlink" title="context.arc(参数1,参数2,参数3,参数4,参数5,参数6);"></a>context.arc(参数1,参数2,参数3,参数4,参数5,参数6);</h5><ul>
+<li>参数1 参数2 圆形原点的坐标</li>
+<li>参数3 半径</li>
+<li>参数4 绘制圆形的起始角度</li>
+<li>参数5 绘制圆形的结束角度</li>
+<li>参数6 顺时针 | 逆时针 参数是布尔：true  逆时针，false  顺时针</li>
 </ul>
-</li>
-<li>区别联系<ul>
-<li>不在于是否跨域</li>
-<li>ajax通过服务端代理一样跨域</li>
-<li>jsonp也不并不排斥同域的数据的获取</li>
+<p>context.arc(200,100,100,0,Math.PI,false);</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">//画圆 </span><br><span class="line">context.beginPath(); // 重新开启一个新的图层</span><br><span class="line">context.arc(200,100,100,0,Math.PI,false);</span><br><span class="line">context.lineCap = &quot;round&quot;;</span><br><span class="line">context.lineWidth = 15;</span><br><span class="line">context.strokeStyle = &quot;aquamarine&quot;;</span><br><span class="line">context.stroke();</span><br></pre></td></tr></table></figure>
+<h3 id="3-矩形"><a href="#3-矩形" class="headerlink" title="3. 矩形"></a>3. 矩形</h3><h5 id="context-rect-参数1-参数2-参数3-参数4"><a href="#context-rect-参数1-参数2-参数3-参数4" class="headerlink" title="context.rect(参数1,参数2,参数3,参数4);"></a>context.rect(参数1,参数2,参数3,参数4);</h5><ul>
+<li>参数1 ,参数2 矩形绘制的起点位置（参数1为X轴的坐标，参数2为Y轴的坐标）</li>
+<li>参数3,矩形的宽</li>
+<li>参数4矩形的高<h5 id="创建线条渐变-context-createLinearGradient-参数1-参数2-参数3-参数4"><a href="#创建线条渐变-context-createLinearGradient-参数1-参数2-参数3-参数4" class="headerlink" title="创建线条渐变 context.createLinearGradient(参数1,参数2,参数3,参数4);"></a>创建线条渐变 context.createLinearGradient(参数1,参数2,参数3,参数4);</h5></li>
+<li>参数1 ,参数2 渐变颜色开始的位置（参数1为X轴的坐标，参数2为Y轴的坐标）</li>
+<li>参数3,参数4 渐变颜色结束的位置（参数3为X轴的坐标，参数4为Y轴的坐标）<h5 id="grd-addColorStop-参数1-参数2"><a href="#grd-addColorStop-参数1-参数2" class="headerlink" title="grd.addColorStop(参数1,参数2);"></a>grd.addColorStop(参数1,参数2);</h5></li>
+<li>参数1 ,0~1之间的数</li>
+<li>参数3,参数4  颜色</li>
 </ul>
-</li>
-<li>jsonp是一种方式或者说非强制性的协议<ul>
-<li>ajax也不一定非要用json格式来传递数据</li>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">//矩形</span><br><span class="line">context.beginPath();</span><br><span class="line">context.rect(0,200,200,100);</span><br><span class="line">var grd = context.createLinearGradient(0,200,200,200);</span><br><span class="line">grd.addColorStop(0,&quot;red&quot;);</span><br><span class="line">grd.addColorStop(0.5,&quot;green&quot;);</span><br><span class="line">grd.addColorStop(1,&quot;blue&quot;);</span><br><span class="line">context.fillStyle = grd;</span><br><span class="line">context.fill();</span><br></pre></td></tr></table></figure>
+<h5 id="创建一个径向-圆渐变-context-createRadialGradient-xStart-yStart-radiusStart-xEnd-yEnd-radiusEnd"><a href="#创建一个径向-圆渐变-context-createRadialGradient-xStart-yStart-radiusStart-xEnd-yEnd-radiusEnd" class="headerlink" title="创建一个径向/圆渐变 context.createRadialGradient(xStart, yStart,radiusStart,xEnd, yEnd,radiusEnd);"></a>创建一个径向/圆渐变 context.createRadialGradient(xStart, yStart,radiusStart,xEnd, yEnd,radiusEnd);</h5><ul>
+<li>xStart, yStart    开始圆的圆心的坐标。</li>
+<li>radiusStart    开始圆的半径。</li>
+<li>xEnd, yEnd    结束圆的圆心的坐标。</li>
+<li>radiusEnd    结束圆的半径。</li>
 </ul>
-</li>
-</ol>
-<ul>
-<li><h3 id="原生script跨域方法–jsonp"><a href="#原生script跨域方法–jsonp" class="headerlink" title="原生script跨域方法–jsonp"></a>原生script跨域方法–jsonp</h3><img src="http://upload-images.jianshu.io/upload_images/7426605-96b990cb852f5788.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="script跨域方法"><br><img src="http://upload-images.jianshu.io/upload_images/7426605-dd3d037d5021aef1.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="script跨域方法"></li>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">context.beginPath();</span><br><span class="line">context.rect(0,200,200,100);</span><br><span class="line">var grd = context.createRadialGradient(200,200,50,200,200,200);</span><br><span class="line">grd.addColorStop(0,&quot;red&quot;);</span><br><span class="line">grd.addColorStop(0.5,&quot;green&quot;);</span><br><span class="line">grd.addColorStop(1,&quot;blue&quot;);</span><br><span class="line">context.fillStyle = grd;</span><br><span class="line">context.fill();</span><br></pre></td></tr></table></figure>
+<h3 id="4-文本"><a href="#4-文本" class="headerlink" title="4. 文本"></a>4. 文本</h3><ul>
+<li>font - 定义字体</li>
+<li>fillText(text,x,y) - 在 canvas 上绘制实心的文本</li>
+<li>strokeText(text,x,y) - 在 canvas 上绘制空心的文本</li>
+<li>context.textBaseline 垂直对齐方式</li>
+<li>context.textAlign 水平对齐方式 </li>
 </ul>
-<ul>
-<li><h3 id="JQ对jsonp进行封装"><a href="#JQ对jsonp进行封装" class="headerlink" title="JQ对jsonp进行封装"></a>JQ对jsonp进行封装</h3><img src="http://upload-images.jianshu.io/upload_images/7426605-cfda422e56168a5a.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="image.png"></li>
-</ul>
-<p><img src="http://upload-images.jianshu.io/upload_images/7426605-dd3d037d5021aef1.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="script跨域方法"></p>
-<ul>
-<li><h3 id="ajax-方法参数详解"><a href="#ajax-方法参数详解" class="headerlink" title="$.ajax()方法参数详解"></a>$.ajax()方法参数详解</h3><ul>
-<li>data:<br>要求为 Object或String类型的参数，发送到服务器的数据。如果已经不是字符串，将自动转换为字符串格式。get请求中将附加在url后。防止这种自动 转换，可以查看　　processData选项。对象必须为key/value格式，例如{foo1:”bar1”,foo2:”bar2”}转换 为&amp;foo1=bar1&amp;foo2=bar2。如果是数组，JQuery将自动为不同值对应同一个名称。例如{foo: [“bar1”,”bar2”]}转换为&amp;foo=bar1&amp;foo=bar2。</li>
-<li>dataType:<br>要求为String类型的参数，预期服务器返回的数据类型。如果不指定，JQuery将自动根据http包mime信息返回responseXML或responseText，并作为回调函数参数传递。可用的类型如下：<ul>
-<li>xml：返回XML文档，可用JQuery处理。</li>
-<li>html：返回纯文本HTML信息；包含的script标签会在插入DOM时执行。</li>
-<li>script：返回纯文本JavaScript代码。不会自动缓存结果。除非设置了cache参数。注意在远程请求时（不在同一个域下），所有post请求都将转为get请求。</li>
-<li>json：返回JSON数据。</li>
-<li>jsonp：JSONP格式。使用SONP形式调用函数时，例如myurl?callback=?，JQuery将自动替换后一个“?”为正确的函数名，以执行回调函数。</li>
-<li>text：返回纯文本字符串。</li>
-</ul>
-</li>
-<li>success：要求为Function类型的参数，请求成功后调用的回调函数，有两个参数。<br>   (1)由服务器返回，并根据dataType参数进行处理后的数据。<br>   (2)描述状态的字符串。<br>   function(data, textStatus){<pre><code>//data可能是xmlDoc、jsonObj、html、text等等
-this;  //调用本次ajax请求时传递的options参数
-</code></pre>   }</li>
-<li><p>jsonp：<br>要求 为String类型的参数，在一个jsonp请求中重写回调函数的名字。该值用来替代在”callback=?”这种GET或POST请求中URL参数里 的”callback”部分，例如{jsonp:’onJsonPLoad’}会导致将”onJsonPLoad=?”传给服务器。</p>
-</li>
-<li><p>processData：<br>要 求为Boolean类型的参数，默认为true。默认情况下，发送的数据将被转换为对象（从技术角度来讲并非字符串）以配合默认内容类 型”application/x-www-form-urlencoded”。如果要发送DOM树信息或者其他不希望转换的信息，请设置为false。</p>
-</li>
-<li><p>contentType：<br>要求为String类型的参数，当发送信息至服务器时，内容编码类型默认为”application/x-www-form-urlencoded”。该默认值适合大多数应用场合。</p>
-</li>
-</ul>
-</li>
-</ul>
-<ul>
-<li><h3 id="利用JQ封装的Ajax实现文件上传"><a href="#利用JQ封装的Ajax实现文件上传" class="headerlink" title="利用JQ封装的Ajax实现文件上传"></a>利用JQ封装的Ajax实现文件上传</h3></li>
-</ul>
-<p><img src="http://upload-images.jianshu.io/upload_images/7426605-7b3137e896dc4e4d.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="image.png"></p>
-<p><img src="http://upload-images.jianshu.io/upload_images/7426605-679e789c1e446351.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="image.png"></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">// bold 可以省略   Arial 不可以省略</span><br><span class="line">context.font = &quot;bold 50px Arial&quot;;</span><br><span class="line">context.textBaseline = &quot;middle&quot;;</span><br><span class="line">context.textAlign = &quot;center&quot;;</span><br><span class="line">var grd = context.createLinearGradient(0,0,200,0);</span><br><span class="line">grd.addColorStop(0,&quot;blue&quot;);</span><br><span class="line">grd.addColorStop(0.5,&quot;yellow&quot;);</span><br><span class="line">grd.addColorStop(1,&quot;red&quot;);</span><br><span class="line">context.fillStyle = grd; </span><br><span class="line">context.fillText(&quot;hello&quot;,100,100);</span><br></pre></td></tr></table></figure>
 
       
 
@@ -330,7 +306,7 @@ this;  //调用本次ajax请求时传递的options参数
     <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
     <p>扫一扫，分享到微信</p>
     <div class="wx-qrcode">
-      <img src="//pan.baidu.com/share/qrcode?url=http://yoursite.com/2017/11/16/ajax和jsonp区别/" alt="微信分享二维码">
+      <img src="//pan.baidu.com/share/qrcode?url=http://yoursite.com/2017/12/25/canvas简述/" alt="微信分享二维码">
     </div>
 </div>
 
@@ -344,18 +320,9 @@ this;  //调用本次ajax请求时传递的options参数
   
 <nav id="article-nav">
   
-    <a href="/2017/11/17/浅谈前后台交互/" id="article-nav-newer" class="article-nav-link-wrap">
-      <i class="icon-circle-left"></i>
-      <div class="article-nav-title">
-        
-          浅谈前后台交互
-        
-      </div>
-    </a>
   
-  
-    <a href="/2017/11/15/json/" id="article-nav-older" class="article-nav-link-wrap">
-      <div class="article-nav-title">json_encode</div>
+    <a href="/2017/12/22/构造函数-继承详解/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">构造函数--继承详解</div>
       <i class="icon-circle-right"></i>
     </a>
   
@@ -383,7 +350,7 @@ this;  //调用本次ajax请求时传递的options参数
   
   <div class="duoshuo">
 	<!-- 多说评论框 start -->
-	<div class="ds-thread" data-thread-key="ajax和jsonp区别" data-title="ajax和jsonp区别" data-url="http://yoursite.com/2017/11/16/ajax和jsonp区别/"></div>
+	<div class="ds-thread" data-thread-key="canvas简述" data-title="canvas简述" data-url="http://yoursite.com/2017/12/25/canvas简述/"></div>
 	<!-- 多说评论框 end -->
 	<!-- 多说公共JS代码 start (一个网页只需插入一次) -->
 	<script type="text/javascript">
@@ -405,7 +372,7 @@ this;  //调用本次ajax请求时传递的options参数
   
 
   
-  <div id="SOHUCS" sid="ajax和jsonp区别" ></div> 
+  <div id="SOHUCS" sid="canvas简述" ></div> 
 <script charset="utf-8" type="text/javascript" src="//changyan.sohu.com/upload/changyan.js" ></script>
 <script type="text/javascript">
     window.changyan.api.config({
