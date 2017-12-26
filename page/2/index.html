@@ -158,6 +158,118 @@
           <div id="js-content" class="content-ll">
             
   
+    <article id="post-mysqli用法" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2017/11/22/mysqli用法/">mysqli用法</a>
+    </h1>
+  
+
+        
+        <a href="/2017/11/22/mysqli用法/" class="archive-article-date">
+  	<time datetime="2017-11-22T14:14:42.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-11-22</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="一、mysql与mysqli的概念相关："><a href="#一、mysql与mysqli的概念相关：" class="headerlink" title="一、mysql与mysqli的概念相关："></a>一、mysql与mysqli的概念相关：</h2><ol>
+<li><p>mysql与mysqli都是php方面的函数集，与mysql数据库关联不大。</p>
+<ol>
+<li>在php5版本之前，一般是用php的mysql函数去驱动mysql数据库的，比如mysql_query()的函数，属于面向过程3、在php5版本以后，增加了mysqli的函数功能，某种意义上讲，它是mysql系统函数的增强版，更稳定更高效更安全，与mysql_query()对应的有mysqli_query()，属于面向对象，用对象的方式操作驱动mysql数据库</li>
+</ol>
+</li>
+<li><p>mysql_connect()与mysqli_connect()</p>
+<ul>
+<li><p>使用mysqli，可以把数据库名称当作参数传给mysqli_connect()函数，也可以传递给mysqli的构造函数；</p>
+</li>
+<li><p>如果调用mysqli_query()或mysqli的对象查询query()方法，则连接标识是必需的。</p>
+</li>
+</ul>
+</li>
+<li><p>mysql与mysqli的区别：</p>
+<ul>
+<li><p>mysql是非持继连接函数，mysql每次链接都会打开一个连接的进程。</p>
+</li>
+<li><p>mysqli是永远连接函数，mysqli多次运行mysqli将使用同一连接进程,从而减少了服务器的开销。mysqli封装了诸如事务等一些高级操作，同时封装了DB操作过程中的很多可用的方法。返回记录集类型为array mysql_fetch_array ( resource $result [, int $ result_type ] )有一点很重要必须指出，用 mysql_fetch_array() 并不比用 mysql_fetch_row()慢，而且还提供了明显更多的值。 mysql_fetch_array() 中可选的第二个参数 是一个常量，可以接受以下值：MYSQL_ASSOC，MYSQL_NUM 和 MYSQL_BOTH。参数的默认值是 MYSQL_BOTH。如果用了 MYSQL_BOTH，将得到一个同时包含关联和数字索引的数组。用 MYSQL_ASSOC 只得到关联索引（如同 mysql_fetch_assoc()那样 mysql_fetch_assoc() 函数从结果集中取得一行作为关联数组。返回根据从结果集取得的行生成的关联数组，如果没有更多行，则返回 false。），用 MYSQL_NUM 只得到数字索引[]。例如：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">   $con = mysqli_connect(&quot;localhost&quot;,&quot;root&quot;,&quot;&quot;,&quot;mydb&quot;);    </span><br><span class="line">   $select1 = &quot;select * from mysql_table where age &gt; 20&quot;;</span><br><span class="line">$re_select1 = mysqli_query($con, $select1);</span><br><span class="line">print_r($re_select1);</span><br><span class="line">$data = mysqli_fetch_all($re_select1,MYSQLI_ASSOC);</span><br><span class="line">print_r($data);</span><br></pre></td></tr></table></figure>
+</li>
+</ul>
+</li>
+</ol>
+<div style="text-align:center"><br>    <img width="500" src="http://upload-images.jianshu.io/upload_images/7426605-8f4c18c346afffdd.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240"><br></div>
+
+<h2 id="数据库操作关键函数"><a href="#数据库操作关键函数" class="headerlink" title="数据库操作关键函数"></a>数据库操作关键函数</h2><blockquote>
+<p>  * mysqli_connect: 连接数据库</p>
+<pre><code>* mysqli_error: 最后一次SQL动作错误信息
+ * mysql_errno(): 函数返回上一个 MySQL 操作中的错误信息的数字编码。
+                      返回上一个 MySQL 函数的错误号码，如果没有出错则返回 0（零）。
+ * mysqli_query: 执行SQL语句，增删改查
+ * mysqli_select_db: 选择数据库
+ * mysqli_fetch_array(): 从查询结果去1条查询记录
+ * mysqli_fetch_all()： 函数从结果集中取得所有行作为关联数组
+ * mysqli_close: 关闭数据库
+</code></pre><p> 假设数据库的名称为mydb</p>
+</blockquote>
+<h3 id="连接数据库"><a href="#连接数据库" class="headerlink" title="连接数据库"></a>连接数据库</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">/**</span><br><span class="line">*&apos;localhost&apos;,  /* The host to connect to 连接MySQL地址 */     </span><br><span class="line">*&apos;root&apos;,      /* The user to connect as 连接MySQL用户名 */     </span><br><span class="line">*&apos;password&apos;,  /* The password to use 连接MySQL密码 */     </span><br><span class="line">*&apos;mydb&apos;);    /* The default database to query 连接数据库名称*/ </span><br><span class="line">/</span><br><span class="line">$connect = mysqli_connect(&quot;localhost&quot;,&quot;root&quot;,&quot;&quot;,&quot;mydb&quot;);</span><br></pre></td></tr></table></figure>
+<h3 id="创建数据表-person"><a href="#创建数据表-person" class="headerlink" title="创建数据表 person"></a>创建数据表 person</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$create_table = &quot;create table mysql_table(id int NOT NULL AUTO_INCREMENT,PRIMARY KEY(id),name varchar(15),age int)&quot;;</span><br><span class="line">mysqli_query($con,$create_table);</span><br></pre></td></tr></table></figure>
+<h3 id="插入数据"><a href="#插入数据" class="headerlink" title="插入数据"></a>插入数据</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">   $insert1 = &quot;insert into mysql_table (`name`, `age`) values(&apos;yyy&apos;,90)&quot;;</span><br><span class="line">mysqli_query($con,$insert1);</span><br></pre></td></tr></table></figure>
+<h3 id="查询数据"><a href="#查询数据" class="headerlink" title="查询数据"></a>查询数据</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$select1 = &quot;select * from mysql_table where age &gt; 20&quot;;</span><br><span class="line">$re_select1 = mysqli_query($con, $select1);</span><br><span class="line">print_r($re_select1);</span><br></pre></td></tr></table></figure>
+<h3 id="关闭数据"><a href="#关闭数据" class="headerlink" title="关闭数据"></a>关闭数据</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mysqli_close($con);</span><br></pre></td></tr></table></figure>
+<h4 id="如何将创建的文档放到指定目录"><a href="#如何将创建的文档放到指定目录" class="headerlink" title="如何将创建的文档放到指定目录"></a>如何将创建的文档放到指定目录</h4><ul>
+<li>例如如何将创建的txt文件到指定的txt目录下，或者如何将拷贝后的图片放入img目录下</li>
+</ul>
+<div style="text-align:center"><br>    <img width="700" src="http://upload-images.jianshu.io/upload_images/7426605-aef25c06258a145e.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240"><br></div>
+
+
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">//html 文件</span><br><span class="line"></span><br><span class="line">   &lt;body&gt;</span><br><span class="line">	&lt;form action=&quot;../php/test.php&quot; method=&quot;post&quot; enctype=&quot;multipart/form-data&quot;&gt;</span><br><span class="line">		&lt;input type=&quot;file&quot; name=&quot;pic&quot; id=&quot;pic&quot; value=&quot;&quot; /&gt;</span><br><span class="line">		&lt;input type=&quot;submit&quot; name=&quot;submit&quot; value=&quot;提交&quot;/&gt;</span><br><span class="line">	&lt;/form&gt;</span><br><span class="line">&lt;/body&gt;</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line">// php 文件</span><br><span class="line"></span><br><span class="line">&lt;?php</span><br><span class="line">	if(!empty($_POST[&apos;submit&apos;])) &#123;</span><br><span class="line">		if(!empty($_FILES[&apos;pic&apos;][&apos;name&apos;])) &#123;</span><br><span class="line">			$type = $_FILES[&apos;pic&apos;][&apos;type&apos;];</span><br><span class="line">			if($type == &quot;image/jpeg&quot; || $type == &quot;image/png&quot;) &#123;</span><br><span class="line">             </span><br><span class="line">                // 定义一个变量，存储相对该PHP的相对位置</span><br><span class="line">				$path = &quot;../img/&quot;;</span><br><span class="line">				//								path. 将拷贝完成的图片，拼接好指定目录</span><br><span class="line">				$result = move_uploaded_file($_FILES[&apos;pic&apos;][&apos;tmp_name&apos;],$path.$_FILES[&apos;pic&apos;][&apos;name&apos;]);</span><br><span class="line">			&#125;</span><br><span class="line">			if($result) &#123;</span><br><span class="line">				$val = $_FILES[&apos;pic&apos;][&apos;name&apos;];</span><br><span class="line">				// 在创建文件的时候将文件创建到指定位置</span><br><span class="line">				$fp = fopen(&quot;../txt/test.txt&quot;,&quot;a+&quot;);</span><br><span class="line">				fwrite($fp,$val);</span><br><span class="line">				fclose($fp);</span><br><span class="line">			&#125;		</span><br><span class="line">		&#125;		</span><br><span class="line">	&#125;</span><br><span class="line">?&gt;</span><br></pre></td></tr></table></figure>
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2017/11/22/mysqli用法/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
     <article id="post-Cookie和Session详解" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -593,77 +705,6 @@ this;  //调用本次ajax请求时传递的options参数
 
 
   
-    <article id="JSONP 的工作原理-JSONP 的工作原理" class="article article-type-JSONP 的工作原理  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2017/11/15/JSONP 的工作原理/">JSONP 的工作原理</a>
-    </h1>
-  
-
-        
-        <a href="/2017/11/15/JSONP 的工作原理/" class="archive-article-date">
-  	<time datetime="2017-11-15T13:06:47.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-11-15</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h1 id="JSONP-的工作原理"><a href="#JSONP-的工作原理" class="headerlink" title="JSONP 的工作原理"></a>JSONP 的工作原理</h1><h2 id="1-JSONP由来"><a href="#1-JSONP由来" class="headerlink" title="1. JSONP由来"></a>1. JSONP由来</h2><p>根据浏览器同源策略，所谓同源就是协议、主机、端口号都相同时成为同源。a 域的js不能直接访问 b域名的信息，但是script 标签的src属性可以跨域引用文件，jsonp是请求之后后台包装好一段json，并且把数据放在一个callback函数，返回一个js文件，动态引入这个文件，下载完成js之后，会去调用这个callback,通过这样访问数据。</p>
-<h2 id="2-JSONP有什么用"><a href="#2-JSONP有什么用" class="headerlink" title="2. JSONP有什么用"></a>2. JSONP有什么用</h2><p>由于同源从略的限制，XMLHttpRequest只允许请求前源（域名、协议、端口）的资源，为了实现跨域请求，可以通过script标签实现跨域请求，然后再服务端输出JSON数据并执行回调函数，从而解决跨域数据请求</p>
-<h2 id="3-如何使用JSONP"><a href="#3-如何使用JSONP" class="headerlink" title="3. 如何使用JSONP"></a>3. 如何使用JSONP</h2><ul>
-<li>HTML代码<br><img src="http://upload-images.jianshu.io/upload_images/7426605-d8020506f468db57.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="HTML代码"></li>
-<li>PHP代码<br><img src="http://upload-images.jianshu.io/upload_images/7426605-1ec09b04fd0d1745.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="PHP代码"></li>
-</ul>
-<h2 id="4-JSONP原理"><a href="#4-JSONP原理" class="headerlink" title="4. JSONP原理"></a>4. JSONP原理</h2><p>首先在客户端注册一个callback，然后把callback的名字传给服务器。此时，服务器先生成json数据，然后以javascript语法的方式，生成function，function名字就是传递上来I带参数jsonp。最后将json数据直接以入参的方式，放置function中，这样就生成js语法的文档，返回给客户端。客户端浏览器，解析script变迁，并执行返回javascript文档，此时数据作为参数，传入了客户端预先定义好的callback函数里。<br>简单的说，就是利用script标签没有跨域限制的“漏洞”来达到与第三方通讯的目的。</p>
-<h2 id="5-备注"><a href="#5-备注" class="headerlink" title="5. 备注"></a>5. 备注</h2><p>#####json 是一种数据格式</p>
-<p>#####jsonp 是一种数据调用的方式，</p>
-<h5 id="联系-带callback的json就是jsonp"><a href="#联系-带callback的json就是jsonp" class="headerlink" title="联系 带callback的json就是jsonp"></a>联系 带callback的json就是jsonp</h5>
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2017/11/15/JSONP 的工作原理/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
     <article id="json_encode-json" class="article article-type-json_encode  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -719,6 +760,77 @@ this;  //调用本次ajax请求时传递的options参数
       
         <p class="article-more-link">
           <a class="article-more-a" href="/2017/11/15/json/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
+    <article id="JSONP 的工作原理-JSONP 的工作原理" class="article article-type-JSONP 的工作原理  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2017/11/15/JSONP 的工作原理/">JSONP 的工作原理</a>
+    </h1>
+  
+
+        
+        <a href="/2017/11/15/JSONP 的工作原理/" class="archive-article-date">
+  	<time datetime="2017-11-15T13:06:47.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-11-15</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h1 id="JSONP-的工作原理"><a href="#JSONP-的工作原理" class="headerlink" title="JSONP 的工作原理"></a>JSONP 的工作原理</h1><h2 id="1-JSONP由来"><a href="#1-JSONP由来" class="headerlink" title="1. JSONP由来"></a>1. JSONP由来</h2><p>根据浏览器同源策略，所谓同源就是协议、主机、端口号都相同时成为同源。a 域的js不能直接访问 b域名的信息，但是script 标签的src属性可以跨域引用文件，jsonp是请求之后后台包装好一段json，并且把数据放在一个callback函数，返回一个js文件，动态引入这个文件，下载完成js之后，会去调用这个callback,通过这样访问数据。</p>
+<h2 id="2-JSONP有什么用"><a href="#2-JSONP有什么用" class="headerlink" title="2. JSONP有什么用"></a>2. JSONP有什么用</h2><p>由于同源从略的限制，XMLHttpRequest只允许请求前源（域名、协议、端口）的资源，为了实现跨域请求，可以通过script标签实现跨域请求，然后再服务端输出JSON数据并执行回调函数，从而解决跨域数据请求</p>
+<h2 id="3-如何使用JSONP"><a href="#3-如何使用JSONP" class="headerlink" title="3. 如何使用JSONP"></a>3. 如何使用JSONP</h2><ul>
+<li>HTML代码<br><img src="http://upload-images.jianshu.io/upload_images/7426605-d8020506f468db57.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="HTML代码"></li>
+<li>PHP代码<br><img src="http://upload-images.jianshu.io/upload_images/7426605-1ec09b04fd0d1745.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="PHP代码"></li>
+</ul>
+<h2 id="4-JSONP原理"><a href="#4-JSONP原理" class="headerlink" title="4. JSONP原理"></a>4. JSONP原理</h2><p>首先在客户端注册一个callback，然后把callback的名字传给服务器。此时，服务器先生成json数据，然后以javascript语法的方式，生成function，function名字就是传递上来I带参数jsonp。最后将json数据直接以入参的方式，放置function中，这样就生成js语法的文档，返回给客户端。客户端浏览器，解析script变迁，并执行返回javascript文档，此时数据作为参数，传入了客户端预先定义好的callback函数里。<br>简单的说，就是利用script标签没有跨域限制的“漏洞”来达到与第三方通讯的目的。</p>
+<h2 id="5-备注"><a href="#5-备注" class="headerlink" title="5. 备注"></a>5. 备注</h2><p>#####json 是一种数据格式</p>
+<p>#####jsonp 是一种数据调用的方式，</p>
+<h5 id="联系-带callback的json就是jsonp"><a href="#联系-带callback的json就是jsonp" class="headerlink" title="联系 带callback的json就是jsonp"></a>联系 带callback的json就是jsonp</h5>
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2017/11/15/JSONP 的工作原理/">展开全文 >></a>
         </p>
       
 

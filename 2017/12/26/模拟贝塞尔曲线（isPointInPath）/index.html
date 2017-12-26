@@ -6,25 +6,18 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="http://yoursite.com">
-  <title>ajax和jsonp区别 | 大瑞</title>
+  <title>模拟贝塞尔曲线（isPointInPath） | 大瑞</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="ajax和jsonp区别 ajax和jsonp的调用方式很像 目的一样，都是请求url，然后把服务器返回的数据进行处理，因此jquery和ext等框架都把jsonp作为ajax的一种形式进行了封装；   实质不同 ajax的核心是通过xmlHttpRequest获取非本页内容 jsonp的核心是动态添加script标签调用服务器提供的js脚本   区别联系 不在于是否跨域 ajax通过服务端代理一">
+  <meta name="description" content="贝塞尔曲线bezierCurveTo(cpx,cpy,cpx2,cpx2,dx,dy);创建一条表示贝塞尔曲线的路径. 该函数接受六个参数,分别代表三个点. (cpx,cpy),(cpx2,cpx2)代表控制点,决定曲线的形状 (dx,dy)代表终点 模拟贝塞尔曲线（isPointInPath）isPointInPath方法isPointInPath是 Canvas 2D API 用于检测某点是否">
 <meta property="og:type" content="article">
-<meta property="og:title" content="ajax和jsonp区别">
-<meta property="og:url" content="http://yoursite.com/2017/11/16/ajax和jsonp区别/index.html">
+<meta property="og:title" content="模拟贝塞尔曲线（isPointInPath）">
+<meta property="og:url" content="http://yoursite.com/2017/12/26/模拟贝塞尔曲线（isPointInPath）/index.html">
 <meta property="og:site_name" content="大瑞">
-<meta property="og:description" content="ajax和jsonp区别 ajax和jsonp的调用方式很像 目的一样，都是请求url，然后把服务器返回的数据进行处理，因此jquery和ext等框架都把jsonp作为ajax的一种形式进行了封装；   实质不同 ajax的核心是通过xmlHttpRequest获取非本页内容 jsonp的核心是动态添加script标签调用服务器提供的js脚本   区别联系 不在于是否跨域 ajax通过服务端代理一">
-<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/7426605-96b990cb852f5788.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
-<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/7426605-dd3d037d5021aef1.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
-<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/7426605-cfda422e56168a5a.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
-<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/7426605-dd3d037d5021aef1.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
-<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/7426605-7b3137e896dc4e4d.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
-<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/7426605-679e789c1e446351.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
-<meta property="og:updated_time" content="2017-11-16T13:53:21.000Z">
+<meta property="og:description" content="贝塞尔曲线bezierCurveTo(cpx,cpy,cpx2,cpx2,dx,dy);创建一条表示贝塞尔曲线的路径. 该函数接受六个参数,分别代表三个点. (cpx,cpy),(cpx2,cpx2)代表控制点,决定曲线的形状 (dx,dy)代表终点 模拟贝塞尔曲线（isPointInPath）isPointInPath方法isPointInPath是 Canvas 2D API 用于检测某点是否">
+<meta property="og:updated_time" content="2017-12-26T14:35:20.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="ajax和jsonp区别">
-<meta name="twitter:description" content="ajax和jsonp区别 ajax和jsonp的调用方式很像 目的一样，都是请求url，然后把服务器返回的数据进行处理，因此jquery和ext等框架都把jsonp作为ajax的一种形式进行了封装；   实质不同 ajax的核心是通过xmlHttpRequest获取非本页内容 jsonp的核心是动态添加script标签调用服务器提供的js脚本   区别联系 不在于是否跨域 ajax通过服务端代理一">
-<meta name="twitter:image" content="http://upload-images.jianshu.io/upload_images/7426605-96b990cb852f5788.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta name="twitter:title" content="模拟贝塞尔曲线（isPointInPath）">
+<meta name="twitter:description" content="贝塞尔曲线bezierCurveTo(cpx,cpy,cpx2,cpx2,dx,dy);创建一条表示贝塞尔曲线的路径. 该函数接受六个参数,分别代表三个点. (cpx,cpy),(cpx2,cpx2)代表控制点,决定曲线的形状 (dx,dy)代表终点 模拟贝塞尔曲线（isPointInPath）isPointInPath方法isPointInPath是 Canvas 2D API 用于检测某点是否">
   
     <link rel="alternative" href="/atom.xml" title="大瑞" type="application/atom+xml">
   
@@ -164,84 +157,34 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            <article id="post-ajax和jsonp区别" class="article article-type-post " itemscope itemprop="blogPost">
+            <article id="post-模拟贝塞尔曲线（isPointInPath）" class="article article-type-post " itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
     <h1 class="article-title" itemprop="name">
-      ajax和jsonp区别
+      模拟贝塞尔曲线（isPointInPath）
     </h1>
   
 
         
-        <a href="/2017/11/16/ajax和jsonp区别/" class="archive-article-date">
-  	<time datetime="2017-11-16T13:47:14.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-11-16</time>
+        <a href="/2017/12/26/模拟贝塞尔曲线（isPointInPath）/" class="archive-article-date">
+  	<time datetime="2017-12-26T14:34:46.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-12-26</time>
 </a>
         
       </header>
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h2 id="ajax和jsonp区别"><a href="#ajax和jsonp区别" class="headerlink" title="ajax和jsonp区别"></a>ajax和jsonp区别</h2><ol>
-<li>ajax和jsonp的调用方式很像<ul>
-<li>目的一样，都是请求url，然后把服务器返回的数据进行处理，因此jquery和ext等框架都把jsonp作为ajax的一种形式进行了封装；</li>
-</ul>
-</li>
-<li>实质不同<ul>
-<li>ajax的核心是通过xmlHttpRequest获取非本页内容</li>
-<li>jsonp的核心是动态添加script标签调用服务器提供的js脚本</li>
-</ul>
-</li>
-<li>区别联系<ul>
-<li>不在于是否跨域</li>
-<li>ajax通过服务端代理一样跨域</li>
-<li>jsonp也不并不排斥同域的数据的获取</li>
-</ul>
-</li>
-<li>jsonp是一种方式或者说非强制性的协议<ul>
-<li>ajax也不一定非要用json格式来传递数据</li>
-</ul>
-</li>
-</ol>
-<ul>
-<li><h3 id="原生script跨域方法–jsonp"><a href="#原生script跨域方法–jsonp" class="headerlink" title="原生script跨域方法–jsonp"></a>原生script跨域方法–jsonp</h3><img src="http://upload-images.jianshu.io/upload_images/7426605-96b990cb852f5788.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="script跨域方法"><br><img src="http://upload-images.jianshu.io/upload_images/7426605-dd3d037d5021aef1.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="script跨域方法"></li>
-</ul>
-<ul>
-<li><h3 id="JQ对jsonp进行封装"><a href="#JQ对jsonp进行封装" class="headerlink" title="JQ对jsonp进行封装"></a>JQ对jsonp进行封装</h3><img src="http://upload-images.jianshu.io/upload_images/7426605-cfda422e56168a5a.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="image.png"></li>
-</ul>
-<p><img src="http://upload-images.jianshu.io/upload_images/7426605-dd3d037d5021aef1.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="script跨域方法"></p>
-<ul>
-<li><h3 id="ajax-方法参数详解"><a href="#ajax-方法参数详解" class="headerlink" title="$.ajax()方法参数详解"></a>$.ajax()方法参数详解</h3><ul>
-<li>data:<br>要求为 Object或String类型的参数，发送到服务器的数据。如果已经不是字符串，将自动转换为字符串格式。get请求中将附加在url后。防止这种自动 转换，可以查看　　processData选项。对象必须为key/value格式，例如{foo1:”bar1”,foo2:”bar2”}转换 为&amp;foo1=bar1&amp;foo2=bar2。如果是数组，JQuery将自动为不同值对应同一个名称。例如{foo: [“bar1”,”bar2”]}转换为&amp;foo=bar1&amp;foo=bar2。</li>
-<li>dataType:<br>要求为String类型的参数，预期服务器返回的数据类型。如果不指定，JQuery将自动根据http包mime信息返回responseXML或responseText，并作为回调函数参数传递。可用的类型如下：<ul>
-<li>xml：返回XML文档，可用JQuery处理。</li>
-<li>html：返回纯文本HTML信息；包含的script标签会在插入DOM时执行。</li>
-<li>script：返回纯文本JavaScript代码。不会自动缓存结果。除非设置了cache参数。注意在远程请求时（不在同一个域下），所有post请求都将转为get请求。</li>
-<li>json：返回JSON数据。</li>
-<li>jsonp：JSONP格式。使用SONP形式调用函数时，例如myurl?callback=?，JQuery将自动替换后一个“?”为正确的函数名，以执行回调函数。</li>
-<li>text：返回纯文本字符串。</li>
-</ul>
-</li>
-<li>success：要求为Function类型的参数，请求成功后调用的回调函数，有两个参数。<br>   (1)由服务器返回，并根据dataType参数进行处理后的数据。<br>   (2)描述状态的字符串。<br>   function(data, textStatus){<pre><code>//data可能是xmlDoc、jsonObj、html、text等等
-this;  //调用本次ajax请求时传递的options参数
-</code></pre>   }</li>
-<li><p>jsonp：<br>要求 为String类型的参数，在一个jsonp请求中重写回调函数的名字。该值用来替代在”callback=?”这种GET或POST请求中URL参数里 的”callback”部分，例如{jsonp:’onJsonPLoad’}会导致将”onJsonPLoad=?”传给服务器。</p>
-</li>
-<li><p>processData：<br>要 求为Boolean类型的参数，默认为true。默认情况下，发送的数据将被转换为对象（从技术角度来讲并非字符串）以配合默认内容类 型”application/x-www-form-urlencoded”。如果要发送DOM树信息或者其他不希望转换的信息，请设置为false。</p>
-</li>
-<li><p>contentType：<br>要求为String类型的参数，当发送信息至服务器时，内容编码类型默认为”application/x-www-form-urlencoded”。该默认值适合大多数应用场合。</p>
-</li>
-</ul>
-</li>
-</ul>
-<ul>
-<li><h3 id="利用JQ封装的Ajax实现文件上传"><a href="#利用JQ封装的Ajax实现文件上传" class="headerlink" title="利用JQ封装的Ajax实现文件上传"></a>利用JQ封装的Ajax实现文件上传</h3></li>
-</ul>
-<p><img src="http://upload-images.jianshu.io/upload_images/7426605-7b3137e896dc4e4d.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="image.png"></p>
-<p><img src="http://upload-images.jianshu.io/upload_images/7426605-679e789c1e446351.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="image.png"></p>
-
+        <h3 id="贝塞尔曲线"><a href="#贝塞尔曲线" class="headerlink" title="贝塞尔曲线"></a>贝塞尔曲线</h3><p>bezierCurveTo(cpx,cpy,cpx2,cpx2,dx,dy);创建一条表示贝塞尔曲线的路径.</p>
+<p>该函数接受六个参数,分别代表三个点.</p>
+<p>(cpx,cpy),(cpx2,cpx2)代表控制点,决定曲线的形状</p>
+<p>(dx,dy)代表终点</p>
+<h4 id="模拟贝塞尔曲线（isPointInPath）"><a href="#模拟贝塞尔曲线（isPointInPath）" class="headerlink" title="模拟贝塞尔曲线（isPointInPath）"></a>模拟贝塞尔曲线（isPointInPath）</h4><h5 id="isPointInPath方法"><a href="#isPointInPath方法" class="headerlink" title="isPointInPath方法"></a>isPointInPath方法</h5><h6 id="isPointInPath"><a href="#isPointInPath" class="headerlink" title="isPointInPath"></a>isPointInPath</h6><p>是 Canvas 2D API 用于检测某点是否在路径的描边线上的方法。返回值是一个布尔值，当这个点在路径的描边线上，则返回true，否则返回false。<br>首先强调isPointInPath(x,y)方法是针对路径的，比如canvas中的rect、arc方法都可以用，但是fillRect不可以用，因为它不是路径；而且仅对当前的路径有效，而且如果当前路径有多个子路径（currentPath可以有多个subPath：比如进行了rect()之后，再进行arc()，最后关闭路径，进行stroke，那么rect()和arc()所绘制的就是当前路径的两个子路径），只对第一个子路径有效<br>所以要在每次判断之前要创建要移动的元素</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br></pre></td><td class="code"><pre><span class="line">&lt;script type=&quot;text/javascript&quot;&gt;</span><br><span class="line">		var canvas = document.getElementById(&quot;myCanvas&quot;);</span><br><span class="line">		var context = canvas.getContext(&quot;2d&quot;);</span><br><span class="line">		var redX1 = 100;</span><br><span class="line">		var redY1 = 200;</span><br><span class="line">		var blueX1 = 400;</span><br><span class="line">		var blueY1 = 200;</span><br><span class="line">		function createLine(moveTo1,moveTo2,lineTo1,lineTo2,lineWidth,color)&#123;</span><br><span class="line">			context.beginPath();</span><br><span class="line">			context.moveTo(moveTo1,moveTo2);</span><br><span class="line">			context.lineTo(lineTo1,lineTo2);</span><br><span class="line">			context.lineWidth = lineWidth;</span><br><span class="line">			context.strokeStyle = color;</span><br><span class="line">			context.stroke();</span><br><span class="line">		&#125;</span><br><span class="line">		drawLine(redX1,redY1,blueX1,blueY1);</span><br><span class="line">		function drawLine(redX1,redY1,blueX1,blueY1)&#123;</span><br><span class="line">			//半透明的粗线</span><br><span class="line">			createLine(0,500,500,0,10,&quot;rgba(0,0,0,0.2)&quot;);</span><br><span class="line">			//连接到红色小球的黑线</span><br><span class="line">			createLine(0,500,redX1,redY1,5,&quot;black&quot;);</span><br><span class="line">			//连接到蓝球的黑线</span><br><span class="line">			createLine(500,0,blueX1,blueY1,5,&quot;black&quot;);</span><br><span class="line">			//绘制贝塞尔曲线</span><br><span class="line">			context.beginPath();</span><br><span class="line">			context.moveTo(0,500);</span><br><span class="line">			context.bezierCurveTo(redX1,redY1,blueX1,blueY1,500,0);</span><br><span class="line">			context.stroke();</span><br><span class="line">			function createBall(color,x,y)&#123;</span><br><span class="line">				console.log(x,y)</span><br><span class="line">				context.beginPath();</span><br><span class="line">				context.fillStyle = color;</span><br><span class="line">				context.arc(x,y,10,0,Math.PI*2);</span><br><span class="line">				context.fill();</span><br><span class="line">			&#125;</span><br><span class="line">			function createBallB(color,x,y)&#123;</span><br><span class="line">				console.log(x,y)</span><br><span class="line">				context.beginPath();</span><br><span class="line">				context.fillStyle = color;</span><br><span class="line">				context.arc(x,y,10,0,Math.PI*2);</span><br><span class="line">				context.fill();</span><br><span class="line">			&#125;</span><br><span class="line">			//蓝球</span><br><span class="line">			createBallB(&quot;blue&quot;,blueX1,blueY1);</span><br><span class="line">			//红球</span><br><span class="line">			createBall(&quot;red&quot;,redX1,redY1);</span><br><span class="line">			</span><br><span class="line">			canvas.onmousedown = function(e)&#123;</span><br><span class="line">				var ev = window.event || e;</span><br><span class="line">				var x = ev.clientX - canvas.offsetLeft;</span><br><span class="line">				var y = ev.clientY - canvas.offsetTop;</span><br><span class="line">				createBallB(&quot;blue&quot;,blueX1,blueY1);</span><br><span class="line">				if(context.isPointInPath(x,y))&#123;</span><br><span class="line">					canvas.onmousemove = function(e)&#123;</span><br><span class="line">						var ev = window.event || e;</span><br><span class="line">						var xx = ev.clientX - canvas.offsetLeft;</span><br><span class="line">						var yy = ev.clientY - canvas.offsetTop;</span><br><span class="line">						blueX1 = xx;</span><br><span class="line">						blueY1 = yy;</span><br><span class="line">						context.clearRect(0,0,canvas.offsetWidth,canvas.offsetHeight);</span><br><span class="line">						drawLine(redX1,redY1,blueX1,blueY1);</span><br><span class="line">					&#125;</span><br><span class="line">				&#125;</span><br><span class="line">				createBall(&quot;red&quot;,redX1,redY1);</span><br><span class="line">				if(context.isPointInPath(x,y))&#123;</span><br><span class="line">					canvas.onmousemove = function(e)&#123;</span><br><span class="line">						var ev = window.event || e;</span><br><span class="line">						var xx = ev.clientX - canvas.offsetLeft;</span><br><span class="line">						var yy = ev.clientY - canvas.offsetTop;</span><br><span class="line">						redX1 = xx;</span><br><span class="line">						redY1 = yy;</span><br><span class="line">						context.clearRect(0,0,canvas.offsetWidth,canvas.offsetHeight);</span><br><span class="line">						drawLine(redX1,redY1,blueX1,blueY1);</span><br><span class="line">					&#125;</span><br><span class="line">				&#125;</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line">		document.onmouseup = function()&#123;</span><br><span class="line">			canvas.onmousemove = &quot;&quot;;</span><br><span class="line">		&#125;</span><br><span class="line">	&lt;/script&gt;</span><br></pre></td></tr></table></figure>
+<h4 id="原生方法"><a href="#原生方法" class="headerlink" title="原生方法"></a>原生方法</h4><p>利用点击该点的位置到圆心的距离与半径相比，如果大于半径，则表明点击的位置不在小球内部，反之，则在小球内部</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br></pre></td><td class="code"><pre><span class="line">&lt;script type=&quot;text/javascript&quot;&gt;</span><br><span class="line">		var canvas = document.getElementById(&quot;myCanvas&quot;);</span><br><span class="line">		var context = canvas.getContext(&quot;2d&quot;);</span><br><span class="line">		var x1 = 100;</span><br><span class="line">		var y1 = 100;</span><br><span class="line">		var x2 = 400;</span><br><span class="line">		var y2 = 400;</span><br><span class="line">		draw(x1,y1,x2,y2);</span><br><span class="line">		function draw(x1,y1,x2,y2)&#123;</span><br><span class="line">			//画半透明的线</span><br><span class="line">			context.beginPath();</span><br><span class="line">			context.moveTo(500,0);</span><br><span class="line">			context.lineTo(0,500);</span><br><span class="line">			context.lineWidth = 10;</span><br><span class="line">			context.strokeStyle = &quot;rgba(0,0,0,0.2)&quot;;</span><br><span class="line">			context.stroke();</span><br><span class="line">			</span><br><span class="line">			//画连接线</span><br><span class="line">			context.beginPath();</span><br><span class="line">			context.moveTo(0,500);</span><br><span class="line">			context.lineTo(x1,y1);</span><br><span class="line">			context.lineWidth = 4;</span><br><span class="line">			context.strokeStyle = &quot;#000000&quot;;</span><br><span class="line">			context.stroke()</span><br><span class="line">			</span><br><span class="line">			//画连接线</span><br><span class="line">			context.beginPath();</span><br><span class="line">			context.moveTo(500,0);</span><br><span class="line">			context.lineTo(x2,y2);</span><br><span class="line">			context.lineWidth = 4;</span><br><span class="line">			context.strokeStyle = &quot;#000000&quot;;</span><br><span class="line">			context.stroke()</span><br><span class="line">			</span><br><span class="line">			//花红球</span><br><span class="line">			context.beginPath();</span><br><span class="line">			context.arc(x1,y1,10,0,Math.PI*2);</span><br><span class="line">			context.fillStyle = &quot;#FF0000&quot;;</span><br><span class="line">			context.fill();</span><br><span class="line">			//花蓝球</span><br><span class="line">			context.beginPath();</span><br><span class="line">			context.arc(x2,y2,10,0,Math.PI*2);</span><br><span class="line">			context.fillStyle = &quot;blue&quot;;</span><br><span class="line">			context.fill();</span><br><span class="line">			</span><br><span class="line">			//画贝塞尔曲线</span><br><span class="line">			context.beginPath();</span><br><span class="line">			context.moveTo(0,500);</span><br><span class="line">			context.bezierCurveTo(x1,y1,x2,y2,500,0);</span><br><span class="line">			context.lineWidth = 10;</span><br><span class="line">			context.stroke();</span><br><span class="line">			//拖动小球 做动画</span><br><span class="line">			//判断是否拖动小球</span><br><span class="line">			//如果在小球上就做动画</span><br><span class="line">			canvas.onmousedown = function(e)&#123;</span><br><span class="line">				var ev = e || window.event;</span><br><span class="line">				var x= ev.clientX - canvas.offsetLeft;</span><br><span class="line">				var y = ev.clientY - canvas.offsetTop;</span><br><span class="line">				//判断是否在红球上</span><br><span class="line">				var disRed = Math.pow((x - x1),2) + Math.pow((y - y1),2);</span><br><span class="line">				if(disRed &lt; 100)&#123;</span><br><span class="line">					console.log(&quot;鼠标在红球上&quot;);</span><br><span class="line">					canvas.onmousemove = function(e)&#123;</span><br><span class="line">						var ev = window.event || e;</span><br><span class="line">						var xx = ev.clientX - canvas.offsetLeft;</span><br><span class="line">						var yy = ev.clientY - canvas.offsetTop;</span><br><span class="line">						//清除画布</span><br><span class="line">						context.clearRect(0,0,canvas.width,canvas.height);</span><br><span class="line">						//重绘</span><br><span class="line">						x1 = xx;</span><br><span class="line">						y1 = yy;</span><br><span class="line">						draw(x1,y1,x2,y2);</span><br><span class="line">					&#125;</span><br><span class="line">				&#125;</span><br><span class="line">				//判断是否在蓝球上</span><br><span class="line">				var disBlue = Math.pow((x - x2),2) + Math.pow((y - y2),2);</span><br><span class="line">				if(disBlue &lt; 100)&#123;</span><br><span class="line">					console.log(&quot;鼠标在红球上&quot;);</span><br><span class="line">					canvas.onmousemove = function(e)&#123;</span><br><span class="line">						var ev = window.event || e;</span><br><span class="line">						var xx = ev.clientX - canvas.offsetLeft;</span><br><span class="line">						var yy = ev.clientY - canvas.offsetTop;</span><br><span class="line">						//清除画布</span><br><span class="line">						context.clearRect(0,0,canvas.width,canvas.height);</span><br><span class="line">						//重绘</span><br><span class="line">						x2 = xx;</span><br><span class="line">						y2 = yy;</span><br><span class="line">						draw(x1,y1,x2,y2);</span><br><span class="line">					&#125;</span><br><span class="line">				&#125;</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line">		document.onmouseup = function()&#123;</span><br><span class="line">			canvas.onmousemove = &quot;&quot;;</span><br><span class="line">		&#125;</span><br><span class="line">	&lt;/script&gt;</span><br></pre></td></tr></table></figure>
       
 
       
@@ -330,7 +273,7 @@ this;  //调用本次ajax请求时传递的options参数
     <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
     <p>扫一扫，分享到微信</p>
     <div class="wx-qrcode">
-      <img src="//pan.baidu.com/share/qrcode?url=http://yoursite.com/2017/11/16/ajax和jsonp区别/" alt="微信分享二维码">
+      <img src="//pan.baidu.com/share/qrcode?url=http://yoursite.com/2017/12/26/模拟贝塞尔曲线（isPointInPath）/" alt="微信分享二维码">
     </div>
 </div>
 
@@ -344,18 +287,9 @@ this;  //调用本次ajax请求时传递的options参数
   
 <nav id="article-nav">
   
-    <a href="/2017/11/17/浅谈前后台交互/" id="article-nav-newer" class="article-nav-link-wrap">
-      <i class="icon-circle-left"></i>
-      <div class="article-nav-title">
-        
-          浅谈前后台交互
-        
-      </div>
-    </a>
   
-  
-    <a href="/2017/11/15/json/" id="article-nav-older" class="article-nav-link-wrap">
-      <div class="article-nav-title">json_encode</div>
+    <a href="/2017/12/26/高级版刮刮乐/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">高级版刮刮乐</div>
       <i class="icon-circle-right"></i>
     </a>
   
@@ -383,7 +317,7 @@ this;  //调用本次ajax请求时传递的options参数
   
   <div class="duoshuo">
 	<!-- 多说评论框 start -->
-	<div class="ds-thread" data-thread-key="ajax和jsonp区别" data-title="ajax和jsonp区别" data-url="http://yoursite.com/2017/11/16/ajax和jsonp区别/"></div>
+	<div class="ds-thread" data-thread-key="模拟贝塞尔曲线（isPointInPath）" data-title="模拟贝塞尔曲线（isPointInPath）" data-url="http://yoursite.com/2017/12/26/模拟贝塞尔曲线（isPointInPath）/"></div>
 	<!-- 多说评论框 end -->
 	<!-- 多说公共JS代码 start (一个网页只需插入一次) -->
 	<script type="text/javascript">
@@ -405,7 +339,7 @@ this;  //调用本次ajax请求时传递的options参数
   
 
   
-  <div id="SOHUCS" sid="ajax和jsonp区别" ></div> 
+  <div id="SOHUCS" sid="模拟贝塞尔曲线（isPointInPath）" ></div> 
 <script charset="utf-8" type="text/javascript" src="//changyan.sohu.com/upload/changyan.js" ></script>
 <script type="text/javascript">
     window.changyan.api.config({
