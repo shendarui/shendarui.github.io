@@ -158,6 +158,98 @@
           <div id="js-content" class="content-ll">
             
   
+    <article id="post-JS版base64获取" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2017/12/27/JS版base64获取/">JS版base64获取</a>
+    </h1>
+  
+
+        
+        <a href="/2017/12/27/JS版base64获取/" class="archive-article-date">
+  	<time datetime="2017-12-27T14:19:17.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-12-27</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h3 id="1-JS版base64获取"><a href="#1-JS版base64获取" class="headerlink" title="1. JS版base64获取"></a>1. JS版base64获取</h3><p>html代码</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&lt;body&gt;</span><br><span class="line">	&lt;input type=&quot;file&quot; id=&quot;myFile&quot; onchange=&quot;sub()&quot; /&gt;</span><br><span class="line">&lt;/body&gt;</span><br></pre></td></tr></table></figure>
+<p>JS代码</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">&lt;script type=&quot;text/javascript&quot;&gt;</span><br><span class="line">	function sub()&#123;</span><br><span class="line">		var myFile = document.getElementById(&quot;myFile&quot;).files[0];</span><br><span class="line">		var fileRead = new FileReader();</span><br><span class="line">		fileRead.readAsDataURL(myFile);</span><br><span class="line">		fileRead.onload = function(e)&#123;</span><br><span class="line">			var base64 = e.target.result;</span><br><span class="line">			var img = new Image();</span><br><span class="line">			img.src = base64;</span><br><span class="line">			document.getElementsByTagName(&quot;body&quot;)[0].appendChild(img);</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">&lt;/script&gt;</span><br></pre></td></tr></table></figure>
+<p>解释：</p>
+<ol>
+<li>var myFile = document.getElementById(“myFile”).files[0];<br>.files[0] 获取 在input上传的图片</li>
+<li><p>var fileRead = new FileReader();<br>HTML5 定义了 FileReader 作为文件API的重要成员用于读取文件，根据W3C的定义FileReader接口提供了读取文件的方法和包含读取结果的事件模型<br>new FileReader的实例有4个方法<br><img src="http://upload-images.jianshu.io/upload_images/7426605-95d86059022d5cf0.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="new FileReader"></p>
+<ul>
+<li><p>readAsText：该方法有两个参数，其中第二个参数是文本的编码方式，默认值为 UTF-8。这个方法非常容易理解，将文件以文本方式读取，读取的结果即是这个文本文件中的内容。</p>
+</li>
+<li><p>readAsBinaryString：该方法将文件读取为二进制字符串，通常我们将它传送到后端，后端可以通过这段字符串存储文件。</p>
+</li>
+<li><p>readAsDataURL：这是例子程序中用到的方法，该方法将文件读取为一段以 data: 开头的字符串，这段字符串的实质就是 Data URL，Data URL是一种将小文件直接嵌入文档的方案。这里的小文件通常是指图像与 html 等格式的文件。</p>
+</li>
+</ul>
+</li>
+</ol>
+<ol>
+<li>fileRead.readAsDataURL(myFile);<br>FileReader随想的readAsDataURL方法可以将读取到的文件编码成Data URL，Data URL是一项特殊技术，可以讲资料（图片）内嵌在网页之中，不用放在外部文件。使用Data URL的好处是，不需要额外的发送一个HTTP请求到服务器端取得的额外资料，缺点是，网页的大小可能会变大，它适合应用在内嵌小图片。</li>
+<li><p>fileRead.onload = function(e)中的e<br>如下图所示，e是一个对象，e.target.result就是我们想获取的上传图片转化为的base64<br><img src="http://upload-images.jianshu.io/upload_images/7426605-1643e51fc6694e05.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="image.png"></p>
+</li>
+<li><p>var img = new Image();<br>最后我们创建一个img图片，将img的src设置成我们获取到的base64</p>
+</li>
+</ol>
+<h3 id="2-canvas版base64获取"><a href="#2-canvas版base64获取" class="headerlink" title="2. canvas版base64获取"></a>2. canvas版base64获取</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">&lt;body&gt;</span><br><span class="line">		&lt;canvas id=&quot;myCanvas&quot; width=&quot;500&quot; height=&quot;500&quot;&gt;&lt;/canvas&gt;</span><br><span class="line">		&lt;button onclick=&quot;sub()&quot;&gt;点击&lt;/button&gt;</span><br><span class="line">	&lt;/body&gt;</span><br><span class="line">	&lt;script type=&quot;text/javascript&quot;&gt;</span><br><span class="line">		var canvas = document.getElementById(&quot;myCanvas&quot;);</span><br><span class="line">		var context = canvas.getContext(&quot;2d&quot;);</span><br><span class="line">		</span><br><span class="line">		context.beginPath();</span><br><span class="line">		context.fillStyle = &quot;red&quot;;</span><br><span class="line">		context.fillRect(100,100,100,100);</span><br><span class="line">		function sub()&#123;</span><br><span class="line">			var base64 = canvas.toDataURL();</span><br><span class="line">			console.log(base64)</span><br><span class="line">			var img = new Image();</span><br><span class="line">			img.src = base64;</span><br><span class="line">			document.getElementsByTagName(&quot;body&quot;)[0].appendChild(img);</span><br><span class="line">		&#125;</span><br><span class="line">	&lt;/script&gt;</span><br></pre></td></tr></table></figure>
+<p>解释：</p>
+<ol>
+<li>canvas.toDataURL()<br>FileReader对象也有类似的方法，比如.readAsDataURL()，然而它只接受file或blob类型，而这两种类型一般只能通过<input[type=file]>元素的files属性获取，或者用Blob()构造函数手工创建一个新的对象。尴尬的是我们当前只有图片路径，受制于浏览器的安全策略，<input[type=file]>的files属性是只读的，而Blob()构造函数只接受文件内容，两种方式都无法通过图片路径直接获取。上文中假设的应用场景迫使我们必先考虑如何通过路径获取到图片内容。<img>是可以的，并且可以被绘制到<canvas>中，而<canvas>正巧拥有.toDataURL()方法。</canvas></canvas></input[type=file]></input[type=file]></li>
+</ol>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2017/12/27/JS版base64获取/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
     <article id="post-模拟贝塞尔曲线（isPointInPath）" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -931,86 +1023,6 @@
       
         <p class="article-more-link">
           <a class="article-more-a" href="/2017/11/23/如何将创建的文档放到指定目录/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-前后台小程序" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2017/11/23/前后台小程序/">前后台小程序</a>
-    </h1>
-  
-
-        
-        <a href="/2017/11/23/前后台小程序/" class="archive-article-date">
-  	<time datetime="2017-11-23T14:36:56.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-11-23</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h4 id="1-前台添加菜单"><a href="#1-前台添加菜单" class="headerlink" title="1. 前台添加菜单"></a>1. 前台添加菜单</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">&lt;!--增加菜单前台页面--&gt;</span><br><span class="line">		&lt;form name=&quot;menu&quot; enctype=&quot;multipart/form-data&quot; action=&quot;php/menu/addmenu.php&quot; method=&quot;post&quot;&gt;</span><br><span class="line">			菜名： &lt;input type=&quot;text&quot; name=&quot;menuname&quot; id=&quot;menuname&quot; value=&quot;&quot; /&gt;&lt;br&gt;</span><br><span class="line">			价格： &lt;input type=&quot;text&quot; name=&quot;price&quot; id=&quot;&quot; value=&quot;&quot; /&gt;&lt;br&gt;</span><br><span class="line">			图片： &lt;input type=&quot;file&quot; name=&quot;pic&quot; id=&quot;pic&quot; value=&quot;&quot; /&gt;&lt;br&gt;</span><br><span class="line">			&lt;input type=&quot;submit&quot; name=&quot;submit&quot; value=&quot;添加菜单&quot;/&gt;</span><br><span class="line">		&lt;/form&gt;</span><br></pre></td></tr></table></figure>
-<h4 id="2-后台接受请求，接受数据并创建menu数据库，将上传的数据存储到menu数据库"><a href="#2-后台接受请求，接受数据并创建menu数据库，将上传的数据存储到menu数据库" class="headerlink" title="2. 后台接受请求，接受数据并创建menu数据库，将上传的数据存储到menu数据库"></a>2. 后台接受请求，接受数据并创建menu数据库，将上传的数据存储到menu数据库</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line">&lt;?php</span><br><span class="line">	//判断用户有没有输入</span><br><span class="line">	if(!empty($_POST[&apos;submit&apos;])) &#123;</span><br><span class="line">		//判定有没有上传图片</span><br><span class="line">		if(!empty($_FILES[&apos;pic&apos;])) &#123;</span><br><span class="line">			//后台需要检查上传类型（放置直接上传PHP文件）</span><br><span class="line">			if($_FILES[&apos;pic&apos;][&apos;type&apos;] == &quot;image/jpeg&quot; || $_FILES[&apos;pic&apos;][&apos;type&apos;] == &quot;image/png&quot;) &#123;</span><br><span class="line">				$path = &quot;../../uploads/&quot;;</span><br><span class="line">				$result = move_uploaded_file($_FILES[&apos;pic&apos;][&apos;tmp_name&apos;],$path.$_FILES[&apos;pic&apos;][&apos;name&apos;]);</span><br><span class="line">			&#125;</span><br><span class="line">			//比如要求增加菜单时一定要上传图片</span><br><span class="line">			if($result) &#123;</span><br><span class="line">				$menuname = htmlspecialchars($_POST[&apos;menuname&apos;]);</span><br><span class="line">				$price = floatval($_POST[&apos;price&apos;]); //转成浮点数</span><br><span class="line">				$pic = $_FILES[&apos;pic&apos;][&apos;name&apos;];</span><br><span class="line">				include &quot;../common/mysql.php&quot;;</span><br><span class="line">				$fields = array(</span><br><span class="line">					&apos;name&apos; =&gt; $menuname,</span><br><span class="line">					&apos;price&apos; =&gt; $price,</span><br><span class="line">					&apos;picture&apos; =&gt; $pic</span><br><span class="line">				);</span><br><span class="line">				insert($link, $fields, &quot;menu&quot;);</span><br><span class="line">				mysqli_close($link);</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">?&gt;</span><br></pre></td></tr></table></figure>
-<p><img src="http://upload-images.jianshu.io/upload_images/7426605-9b66b34f235992cd.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="image.png"></p>
-<h4 id="3-前台发送数据，向后台请求刚才上传的数据，然后将获取到的数据遍历形成菜单界面"><a href="#3-前台发送数据，向后台请求刚才上传的数据，然后将获取到的数据遍历形成菜单界面" class="headerlink" title="3. 前台发送数据，向后台请求刚才上传的数据，然后将获取到的数据遍历形成菜单界面"></a>3. 前台发送数据，向后台请求刚才上传的数据，然后将获取到的数据遍历形成菜单界面</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">//使用Ajax获得菜单数据</span><br><span class="line">var xhr = new XMLHttpRequest();</span><br><span class="line">xhr.onload = function() &#123;</span><br><span class="line">	var menu = JSON.parse(this.responseText);</span><br><span class="line">	createMenu(menu);</span><br><span class="line">&#125;</span><br><span class="line">xhr.open(&quot;get&quot;,&quot;php/menu/listmenu.php&quot;);</span><br><span class="line">xhr.send();</span><br><span class="line">function createMenu(data) &#123;</span><br><span class="line">	line = &quot;&quot;;</span><br><span class="line">	for(i in data) &#123;</span><br><span class="line">		line += &quot;&lt;li&gt;&lt;input type=\&quot;checkbox\&quot; name=\&quot;menu_id[]\&quot; value=\&quot;&quot;+data[i].id+&quot;\&quot; /&gt;　&lt;img width=&apos;50px&apos; src=\&quot;uploads/&quot;+data[i].picture+&quot;\&quot;&gt;　&lt;span id=\&quot;&quot;+data[i].id+&quot;\&quot; &gt;&quot;+data[i].name+&quot;&lt;/span&gt;&lt;span id=\&quot;&quot;+data[i].id+&quot;\&quot; &gt;&quot;+data[i].price+&quot;&lt;/span&gt;元　订购份数： &lt;input type=\&quot;text\&quot; name=\&quot;num_&quot;+data[i].id+&quot;\&quot;/&gt;&lt;/li&gt;&quot;</span><br><span class="line">		document.getElementById(&quot;menuUl&quot;).innerHTML = line;</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h4 id="4-后台接受请求，打开menu数据库，将数据返回给前段"><a href="#4-后台接受请求，打开menu数据库，将数据返回给前段" class="headerlink" title="4. 后台接受请求，打开menu数据库，将数据返回给前段"></a>4. 后台接受请求，打开menu数据库，将数据返回给前段</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">&lt;?php</span><br><span class="line">	//mysql.php  数据库操作函数库文件</span><br><span class="line">	include &quot;../common/mysql.php&quot;;</span><br><span class="line">	$data = getAll($link, &quot;*&quot;, &quot;menu&quot;, &quot;1=1&quot;);</span><br><span class="line">	echo json_encode($data);</span><br><span class="line">?&gt;</span><br></pre></td></tr></table></figure>
-<p><img src="http://upload-images.jianshu.io/upload_images/7426605-c4b2e9f853efeace.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="image.png"></p>
-<h4 id="5-前台注册界面"><a href="#5-前台注册界面" class="headerlink" title="5. 前台注册界面"></a>5. 前台注册界面</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br></pre></td><td class="code"><pre><span class="line">&lt;script src=&quot;http://libs.baidu.com/jquery/2.0.0/jquery.min.js&quot;&gt;&lt;/script&gt;</span><br><span class="line">	&lt;body&gt;</span><br><span class="line">		&lt;div id=&quot;nav&quot;&gt;&lt;/div&gt;</span><br><span class="line">		&lt;form action=&quot;php/member/register.php&quot; method=&quot;post&quot; name=&quot;form1&quot;&gt;</span><br><span class="line">			密　　码： &lt;input type=&quot;password&quot; name=&quot;member_password&quot; /&gt; &lt;br&gt;</span><br><span class="line">			确认密码： &lt;input type=&quot;password&quot; name=&quot;member_password_confirm&quot; /&gt; &lt;br&gt;</span><br><span class="line">			用户姓名： &lt;input type=&quot;text&quot; name=&quot;member_name&quot;/&gt; &lt;br&gt;</span><br><span class="line">			用户电话： &lt;input type=&quot;text&quot; name=&quot;member_mobile&quot;/&gt; &lt;br&gt;</span><br><span class="line">			用户地址： &lt;input type=&quot;text&quot; name=&quot;member_address&quot;/&gt; &lt;br&gt;</span><br><span class="line">			&lt;input type=&quot;hidden&quot; name=&quot;member&quot; value=&quot;1&quot; /&gt;</span><br><span class="line">			&lt;input type=&quot;button&quot; name=&quot;btn&quot; value=&quot;立即注册&quot;/&gt;</span><br><span class="line">		&lt;/form&gt;</span><br><span class="line">	&lt;/body&gt;</span><br><span class="line">	&lt;script type=&quot;text/javascript&quot;&gt;</span><br><span class="line">		$(&quot;#nav&quot;).load(&quot;tpl/nav.html&quot;);</span><br><span class="line">		document.form1.btn.onclick = checkdata;</span><br><span class="line">		var isOk = true;</span><br><span class="line">		function checkdata() &#123;</span><br><span class="line">			if(document.form1.member_password.value != document.form1.member_password_confirm.value)&#123;</span><br><span class="line">				alert(&quot;两次密码输入不一致&quot;);</span><br><span class="line">				return false;</span><br><span class="line">			&#125;</span><br><span class="line">				document.form1.submit();</span><br><span class="line">		&#125;</span><br><span class="line">		function checkuser(value) &#123;</span><br><span class="line">			var xhr = new XMLHttpRequest();</span><br><span class="line">			xhr.onload = function() &#123;</span><br><span class="line">				if(this.responseText == &quot;fail&quot;) &#123;</span><br><span class="line">					document.form1.btn.disabled = true;</span><br><span class="line">					document.form1.member_username.className = &quot;error&quot;;</span><br><span class="line">				&#125;else &#123;</span><br><span class="line">					document.form1.btn.disabled = false;</span><br><span class="line">					document.form1.member_username.className = &quot;&quot;;</span><br><span class="line">				&#125;</span><br><span class="line">			&#125;</span><br><span class="line">			var formData = new FormData();</span><br><span class="line">			formData.append(&quot;member_username&quot;,value)</span><br><span class="line">			xhr.open(&quot;POST&quot;,&quot;php/member/checkuser.php&quot;);</span><br><span class="line">			xhr.send(formData);</span><br><span class="line">		&#125;</span><br><span class="line">	&lt;/script&gt;</span><br></pre></td></tr></table></figure>
-<h4 id="6-注册用户的时候检测该用户名是否已经被注册，如果没被注册，可以注册"><a href="#6-注册用户的时候检测该用户名是否已经被注册，如果没被注册，可以注册" class="headerlink" title="6. 注册用户的时候检测该用户名是否已经被注册，如果没被注册，可以注册"></a>6. 注册用户的时候检测该用户名是否已经被注册，如果没被注册，可以注册</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">&lt;?php</span><br><span class="line">	//验证用户名的合法性</span><br><span class="line">	if(!empty($_POST[&apos;member_username&apos;])) &#123;</span><br><span class="line">		include &quot;../common/mysql.php&quot;;</span><br><span class="line">		$username = htmlspecialchars($_POST[&apos;member_username&apos;]);</span><br><span class="line">		//查询该用户名是否已经存在</span><br><span class="line">		$member = getOne($link,&quot;*&quot;,&quot;member&quot;,&quot;member_username=&apos;&quot;.$username.&quot;&apos;&quot;);</span><br><span class="line">		//如果查询结果为空 表示没有相同的用户注册</span><br><span class="line">		if(empty($member)) &#123;</span><br><span class="line">			echo &quot;ok&quot;;</span><br><span class="line">		&#125;else &#123;</span><br><span class="line">			echo &quot;fail&quot;;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">?&gt;</span><br></pre></td></tr></table></figure>
-<h4 id="7-将可以注册的用户名即其他信息，插入到member数据表里面"><a href="#7-将可以注册的用户名即其他信息，插入到member数据表里面" class="headerlink" title="7. 将可以注册的用户名即其他信息，插入到member数据表里面"></a>7. 将可以注册的用户名即其他信息，插入到member数据表里面</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">&lt;?php</span><br><span class="line">	//会员注册</span><br><span class="line">	if(!empty($_POST[&apos;member&apos;])) &#123;</span><br><span class="line">		//引入数据库函数库</span><br><span class="line">		include &quot;../common/mysql.php&quot;;</span><br><span class="line">		foreach($_POST as $key =&gt; $val) &#123;</span><br><span class="line">			$_POST[$key] = htmlspecialchars($val);</span><br><span class="line">		&#125;</span><br><span class="line">		$member = array(</span><br><span class="line">			&apos;member_name&apos; =&gt; $_POST[&apos;member_name&apos;],</span><br><span class="line">			&apos;member_mobile&apos; =&gt; $_POST[&apos;member_mobile&apos;],</span><br><span class="line">			&apos;member_address&apos; =&gt; $_POST[&apos;member_address&apos;],</span><br><span class="line">			&apos;member_username&apos; =&gt; $_POST[&apos;member_username&apos;],</span><br><span class="line">			&apos;member_password&apos; =&gt; sha1($_POST[&apos;member_password&apos;])</span><br><span class="line">		);</span><br><span class="line">		insert($link, $member, &apos;member&apos;);</span><br><span class="line">	&#125;</span><br><span class="line">?&gt;</span><br></pre></td></tr></table></figure>
-<p><img src="http://upload-images.jianshu.io/upload_images/7426605-d551567d045b7b44.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="会员界面"></p>
-<h4 id="8-会员登录页面，将前台输入的用户名和密码传送到后台"><a href="#8-会员登录页面，将前台输入的用户名和密码传送到后台" class="headerlink" title="8. 会员登录页面，将前台输入的用户名和密码传送到后台"></a>8. 会员登录页面，将前台输入的用户名和密码传送到后台</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">&lt;body&gt;</span><br><span class="line">		&lt;div id=&quot;nav&quot;&gt;&lt;/div&gt;&lt;br&gt;</span><br><span class="line">		&lt;!--登陆页面--&gt;</span><br><span class="line">		&lt;form action=&quot;php/member/login.php&quot; name=&quot;form1&quot; method=&quot;post&quot;&gt;</span><br><span class="line">			用户名： &lt;input type=&quot;text&quot; name=&quot;username&quot; /&gt;&lt;br&gt;</span><br><span class="line">			密　码： &lt;input type=&quot;password&quot; name=&quot;password&quot; /&gt;&lt;br&gt;</span><br><span class="line">			&lt;input type=&quot;submit&quot; name=&quot;btn&quot; value=&quot;立即登录&quot;/&gt;</span><br><span class="line">		&lt;/form&gt;</span><br><span class="line">	&lt;/body&gt;</span><br><span class="line">	&lt;script type=&quot;text/javascript&quot;&gt;</span><br><span class="line">		$(&quot;#nav&quot;).load(&quot;tpl/nav.html&quot;);</span><br><span class="line">	&lt;/script&gt;</span><br></pre></td></tr></table></figure>
-<h4 id="9-将前台输入的信息进行核实，如果信息不符合留在本页，如果符合，跳转到首页。并以此在member表中查找该会员信息，将会员用户名，名称，电话存储到Session里面，备用"><a href="#9-将前台输入的信息进行核实，如果信息不符合留在本页，如果符合，跳转到首页。并以此在member表中查找该会员信息，将会员用户名，名称，电话存储到Session里面，备用" class="headerlink" title="9. 将前台输入的信息进行核实，如果信息不符合留在本页，如果符合，跳转到首页。并以此在member表中查找该会员信息，将会员用户名，名称，电话存储到Session里面，备用"></a>9. 将前台输入的信息进行核实，如果信息不符合留在本页，如果符合，跳转到首页。并以此在member表中查找该会员信息，将会员用户名，名称，电话存储到Session里面，备用</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">&lt;?php</span><br><span class="line">	session_start();</span><br><span class="line">	if(!empty($_POST[&apos;username&apos;]) &amp;&amp; !empty($_POST[&apos;password&apos;])) &#123;</span><br><span class="line">		include &quot;../common/mysql.php&quot;;</span><br><span class="line">		//对提交的数据进行预处理</span><br><span class="line">		$username = htmlspecialchars($_POST[&apos;username&apos;]);</span><br><span class="line">		$password = sha1($_POST[&apos;password&apos;]);</span><br><span class="line">		$member = getOne($link,&quot;*&quot;,&quot;member&quot;,&quot;member_username=&apos;&quot;.$username.&quot;&apos; and member_password=&apos;&quot;.$password.&quot;&apos;&quot;);</span><br><span class="line">		if(!empty($member[&apos;member_username&apos;])) &#123;</span><br><span class="line">			$_SESSION[&apos;member&apos;][&apos;username&apos;] = $member[&apos;member_username&apos;];</span><br><span class="line">			$_SESSION[&apos;member&apos;][&apos;name&apos;] = $member[&apos;member_name&apos;];</span><br><span class="line">			$_SESSION[&apos;member&apos;][&apos;mobile&apos;] = $member[&apos;member_mobile&apos;];</span><br><span class="line">			header(&quot;Location: /php/db/index.html&quot;);</span><br><span class="line">		&#125;else &#123;</span><br><span class="line">			header(&quot;Location: /php/db/login.html&quot;);</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">?&gt;</span><br></pre></td></tr></table></figure>
-<h4 id="10-判断用户是否登录，如果登录成功返回上述存储在Session里面的数据"><a href="#10-判断用户是否登录，如果登录成功返回上述存储在Session里面的数据" class="headerlink" title="10. 判断用户是否登录，如果登录成功返回上述存储在Session里面的数据"></a>10. 判断用户是否登录，如果登录成功返回上述存储在Session里面的数据</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">&lt;?php</span><br><span class="line">	session_start();</span><br><span class="line">	if(!empty($_SESSION[&apos;member&apos;])) &#123;</span><br><span class="line">		//将用户登录信息输出到前台</span><br><span class="line">		echo json_encode($_SESSION[&apos;member&apos;]);</span><br><span class="line">	&#125;else &#123;</span><br><span class="line">		//nologin  表示用户尚未登录</span><br><span class="line">		echo json_encode(array(&quot;no login&quot;));</span><br><span class="line">	&#125;</span><br><span class="line">?&gt;</span><br></pre></td></tr></table></figure>
-<h4 id="11-前台想后台发送请求，如果用户登录，界面显示-欢迎”-data-name-”来到商城-用户中心"><a href="#11-前台想后台发送请求，如果用户登录，界面显示-欢迎”-data-name-”来到商城-用户中心" class="headerlink" title="11. 前台想后台发送请求，如果用户登录，界面显示  欢迎”+data.name+”来到商城 用户中心"></a>11. 前台想后台发送请求，如果用户登录，界面显示  欢迎”+data.name+”来到商城 <a href="">用户中心</a></h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">&lt;script type=&quot;text/javascript&quot;&gt;</span><br><span class="line">			$(&apos;#nav&apos;).load(&quot;tpl/nav.html&quot;);</span><br><span class="line">			$.get(&quot;php/member/member_status.php&quot;,&#123;&#125;,function(data) &#123;</span><br><span class="line">				console.log(data);</span><br><span class="line">				if(typeof(data.name) != &quot;undefined&quot;) &#123;</span><br><span class="line">					$(&apos;#member_status&apos;).html(&quot;欢迎&quot;+data.name+&quot;来到商城 &lt;a href=&apos;&apos;&gt;用户中心&lt;/a&gt;&quot;);</span><br><span class="line">				&#125;</span><br><span class="line">			&#125;,&quot;json&quot;);</span><br><span class="line">		&lt;/script&gt;</span><br></pre></td></tr></table></figure>
-<h4 id="12-前台将选中的菜品和分数传送到后台"><a href="#12-前台将选中的菜品和分数传送到后台" class="headerlink" title="12. 前台将选中的菜品和分数传送到后台"></a>12. 前台将选中的菜品和分数传送到后台</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">var xhr = new XMLHttpRequest();</span><br><span class="line">xhr.onload = function() &#123;</span><br><span class="line">	document.getElementById(&quot;tips&quot;).innerHTML = this.responseText;</span><br><span class="line">&#125;</span><br><span class="line">var formData = new FormData();</span><br><span class="line">formData.append(&quot;menu&quot;,JSON.stringify(userSelected));</span><br><span class="line">xhr.open(&quot;POST&quot;,&quot;php/orders/dingdan.php&quot;);</span><br><span class="line">xhr.send(formData);</span><br></pre></td></tr></table></figure>
-<h4 id="13-后台接受数据，遍历数组，将数据插入到listorder表中"><a href="#13-后台接受数据，遍历数组，将数据插入到listorder表中" class="headerlink" title="13. 后台接受数据，遍历数组，将数据插入到listorder表中"></a>13. 后台接受数据，遍历数组，将数据插入到listorder表中</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br></pre></td><td class="code"><pre><span class="line">&lt;?php</span><br><span class="line">	session_start();</span><br><span class="line">	//将用户订餐数据记录到数据库</span><br><span class="line">	//接受提交的订单数据</span><br><span class="line">	if(!empty($_POST[&apos;menu&apos;])) &#123;</span><br><span class="line">		include &quot;../common/mysql.php&quot;;</span><br><span class="line">		//$_POST[&apos;menu&apos;]是前台传来的JSON串</span><br><span class="line">		//json_decode 将JSON字符串转变成数组</span><br><span class="line">		$menu = json_decode($_POST[&apos;menu&apos;],true);</span><br><span class="line">		print_r($menu);</span><br><span class="line">		//用户选择的checkbox - menu_id</span><br><span class="line">		foreach($menu as $key =&gt; $val) &#123;</span><br><span class="line">			$menu_id = $val[&apos;menu_id&apos;];</span><br><span class="line">			//订购的份数 num_id</span><br><span class="line">			$amount = intval($val[&apos;amount&apos;]);</span><br><span class="line">			echo &quot;订单的菜单id=&quot;.$menu_id.&quot;&lt;br&gt;&quot;;</span><br><span class="line">			echo &quot;订单的份数amount=&quot;.$amount.&quot;&lt;br&gt;&lt;br&gt;&quot;;	</span><br><span class="line">			$row = getOne($link, &quot;name,price&quot;,&quot;menu&quot;,&quot;id=&quot;.$menu_id);</span><br><span class="line">			$fields = array(</span><br><span class="line">				&quot;menu_name&quot; =&gt; $row[&apos;name&apos;],</span><br><span class="line">				&quot;menu_price&quot; =&gt; $row[&apos;price&apos;],</span><br><span class="line">				&apos;amount&apos; =&gt; $amount,</span><br><span class="line">				&apos;createDate&apos; =&gt; date(&quot;Y-m-d H:i:s&quot;),</span><br><span class="line">				&apos;name&apos; =&gt; $_SESSION[&apos;member&apos;][&apos;name&apos;],</span><br><span class="line">				&apos;number&apos; =&gt; $_SESSION[&apos;member&apos;][&apos;mobile&apos;]</span><br><span class="line">			);</span><br><span class="line">			insert($link, $fields, &apos;orderlist&apos;);	</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">?&gt;</span><br></pre></td></tr></table></figure>
-<p><img src="http://upload-images.jianshu.io/upload_images/7426605-fb7e622131c1d527.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="image.png"></p>
-<p><img src="http://upload-images.jianshu.io/upload_images/7426605-526c61592a926d66.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="image.png"></p>
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2017/11/23/前后台小程序/">展开全文 >></a>
         </p>
       
 
