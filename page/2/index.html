@@ -158,6 +158,82 @@
           <div id="js-content" class="content-ll">
             
   
+    <article id="面向对象-解决增删改查" class="article article-type-面向对象  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2017/12/21/解决增删改查/">解决增删改查</a>
+    </h1>
+  
+
+        
+        <a href="/2017/12/21/解决增删改查/" class="archive-article-date">
+  	<time datetime="2017-12-21T12:40:09.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-12-21</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="面向对象"><a href="#面向对象" class="headerlink" title="面向对象"></a>面向对象</h2><h4 id="1-用构造函数方法"><a href="#1-用构造函数方法" class="headerlink" title="1. 用构造函数方法"></a>1. 用构造函数方法</h4><p>构造函数类似于类，但不是类，在ES6出来之前常规用法。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br></pre></td><td class="code"><pre><span class="line">&lt;!DOCTYPE html&gt;</span><br><span class="line">&lt;html&gt;</span><br><span class="line">	&lt;head&gt;</span><br><span class="line">		&lt;meta charset=&quot;UTF-8&quot;&gt;</span><br><span class="line">		&lt;title&gt;&lt;/title&gt;</span><br><span class="line">	&lt;/head&gt;</span><br><span class="line">	&lt;body&gt;</span><br><span class="line">		&lt;div class=&quot;wrap&quot;&gt;&lt;/div&gt;</span><br><span class="line">		姓名：&lt;input class=&quot;addName&quot; type=&quot;text&quot; /&gt; 电话：&lt;input class=&quot;addPhone&quot; type=&quot;text&quot; /&gt;&lt;button onclick=&quot;addPhone()&quot;&gt;添加电话&lt;/button&gt;&lt;br /&gt;</span><br><span class="line">		姓名：&lt;input class=&quot;searchName&quot; type=&quot;text&quot; /&gt;&lt;button onclick=&quot;searchBtn()&quot;&gt;查询电话&lt;/button&gt;&lt;br /&gt;</span><br><span class="line">		姓名：&lt;input class=&quot;delName&quot; type=&quot;text&quot; /&gt;&lt;button onclick=&quot;delBtn()&quot;&gt;删除电话&lt;/button&gt;&lt;br /&gt;</span><br><span class="line">	&lt;/body&gt;</span><br><span class="line">	&lt;script src=&quot;http://libs.baidu.com/jquery/2.0.0/jquery.min.js&quot;&gt;&lt;/script&gt;</span><br><span class="line">	&lt;script type=&quot;text/javascript&quot;&gt;</span><br><span class="line">		var data = [&#123;name:&quot;张三&quot;,tel:&quot;11111111&quot;&#125;,&#123;name:&quot;李四&quot;,tel:&quot;2222222&quot;&#125;];</span><br><span class="line">		function PhoneBook(data)&#123;</span><br><span class="line">			this.data = data;</span><br><span class="line">		&#125;</span><br><span class="line">		PhoneBook.prototype.showPhone = function()&#123;</span><br><span class="line">			console.log(1111111)</span><br><span class="line">			$(&apos;.wrap&apos;).html(&quot;&quot;);</span><br><span class="line">			var html = &quot;&quot;;</span><br><span class="line">			console.log(this.data)</span><br><span class="line">			for(let i = 0; i &lt; this.data.length;i++)&#123;</span><br><span class="line">				html += `&lt;p&gt;姓名:$&#123;this.data[i].name&#125;;电话:$&#123;this.data[i].tel&#125;&lt;/p&gt;`;</span><br><span class="line">			&#125;</span><br><span class="line">			$(html).appendTo(&quot;.wrap&quot;);</span><br><span class="line">		&#125;</span><br><span class="line">		PhoneBook.prototype.addPhone = function(name, tel)&#123;</span><br><span class="line">			var obj = &#123;name,tel&#125;;</span><br><span class="line">			this.data.push(obj);</span><br><span class="line">		&#125;</span><br><span class="line">		PhoneBook.prototype.searchPhone = function(name)&#123;</span><br><span class="line">			for(var i = 0; i &lt; this.data.length; i++)&#123;</span><br><span class="line">				if(name == this.data[i].name)&#123;</span><br><span class="line">					alert(this.data[i].tel)</span><br><span class="line">				&#125;</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line">		PhoneBook.prototype.delPhone = function(name)&#123;</span><br><span class="line">			for(var i = 0; i &lt; this.data.length; i++)&#123;</span><br><span class="line">				if(name == this.data[i].name)&#123;</span><br><span class="line">					this.data.splice(i,1);	</span><br><span class="line">				&#125;</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line">		var newPhoneBook = new PhoneBook(data);</span><br><span class="line">		newPhoneBook.showPhone();</span><br><span class="line">		function addPhone()&#123;</span><br><span class="line">			console.log(11111)</span><br><span class="line">			var myName = $(&apos;.addName&apos;).val();</span><br><span class="line">			var myTel = $(&apos;.addPhone&apos;).val();</span><br><span class="line">			newPhoneBook.addPhone(myName, myTel);</span><br><span class="line">			newPhoneBook.showPhone();</span><br><span class="line">		&#125;</span><br><span class="line">		function searchBtn()&#123;</span><br><span class="line">			var myName = $(&apos;.searchName&apos;).val();</span><br><span class="line">			newPhoneBook.searchPhone(myName);</span><br><span class="line">		&#125;</span><br><span class="line">		function delBtn()&#123;</span><br><span class="line">			var myName = $(&apos;.delName&apos;).val();</span><br><span class="line">			newPhoneBook.delPhone(myName);</span><br><span class="line">			newPhoneBook.showPhone();</span><br><span class="line">		&#125;</span><br><span class="line">	&lt;/script&gt;</span><br><span class="line">&lt;/html&gt;</span><br></pre></td></tr></table></figure>
+<h4 id="2-用类方法"><a href="#2-用类方法" class="headerlink" title="2. 用类方法"></a>2. 用类方法</h4><p>ES6出来之后，逐渐取代构造函数，代表着JS越来越像正规军靠近</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br></pre></td><td class="code"><pre><span class="line">&lt;!DOCTYPE html&gt;</span><br><span class="line">&lt;html&gt;</span><br><span class="line">	&lt;head&gt;</span><br><span class="line">		&lt;meta charset=&quot;UTF-8&quot;&gt;</span><br><span class="line">		&lt;title&gt;&lt;/title&gt;</span><br><span class="line">	&lt;/head&gt;</span><br><span class="line">	&lt;body&gt;</span><br><span class="line">		&lt;div class=&quot;wrap&quot;&gt;&lt;/div&gt;</span><br><span class="line">		姓名：&lt;input class=&quot;addName&quot; type=&quot;text&quot; /&gt; 电话：&lt;input class=&quot;addPhone&quot; type=&quot;text&quot; /&gt;&lt;button onclick=&quot;addPhone()&quot;&gt;添加电话&lt;/button&gt;&lt;br /&gt;</span><br><span class="line">		姓名：&lt;input class=&quot;searchName&quot; type=&quot;text&quot; /&gt;&lt;button onclick=&quot;searchBtn()&quot;&gt;查询电话&lt;/button&gt;&lt;br /&gt;</span><br><span class="line">		姓名：&lt;input class=&quot;delName&quot; type=&quot;text&quot; /&gt;&lt;button onclick=&quot;delBtn()&quot;&gt;删除电话&lt;/button&gt;&lt;br /&gt;</span><br><span class="line">	&lt;/body&gt;</span><br><span class="line">	&lt;script src=&quot;http://libs.baidu.com/jquery/2.0.0/jquery.min.js&quot;&gt;&lt;/script&gt;</span><br><span class="line">	&lt;script type=&quot;text/javascript&quot;&gt;</span><br><span class="line">		var data = [&#123;name:&quot;张三&quot;,tel:&quot;11111111&quot;&#125;,&#123;name:&quot;李四&quot;,tel:&quot;2222222&quot;&#125;];</span><br><span class="line">		class PhoneBook&#123;</span><br><span class="line">			constructor(data)&#123;</span><br><span class="line">				this.data = data;</span><br><span class="line">			&#125;</span><br><span class="line">			showPhone()&#123;</span><br><span class="line">				$(&apos;.wrap&apos;).html(&quot;&quot;);</span><br><span class="line">				var html = &quot;&quot;;</span><br><span class="line">				for(let i = 0; i &lt; this.data.length;i++)&#123;</span><br><span class="line">					html += `&lt;p&gt;姓名:$&#123;this.data[i].name&#125;;电话:$&#123;this.data[i].tel&#125;&lt;/p&gt;`;</span><br><span class="line">				&#125;</span><br><span class="line">				$(html).appendTo(&quot;.wrap&quot;);</span><br><span class="line">			&#125;</span><br><span class="line">			addPhone(name, tel)&#123;</span><br><span class="line">				var obj = &#123;name,tel&#125;;</span><br><span class="line">				this.data.push(obj);</span><br><span class="line">			&#125;</span><br><span class="line">			searchPhone(name)&#123;</span><br><span class="line">				for(var i = 0; i &lt; this.data.length; i++)&#123;</span><br><span class="line">					if(name == this.data[i].name)&#123;</span><br><span class="line">						alert(this.data[i].tel)</span><br><span class="line">					&#125;</span><br><span class="line">				&#125;</span><br><span class="line">			&#125;</span><br><span class="line">			delPhone(name)&#123;</span><br><span class="line">				for(var i = 0; i &lt; this.data.length; i++)&#123;</span><br><span class="line">					if(name == this.data[i].name)&#123;</span><br><span class="line">						this.data.splice(i,1);	</span><br><span class="line">					&#125;</span><br><span class="line">				&#125;</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line">		var newPhoneBook = new PhoneBook(data);</span><br><span class="line">		newPhoneBook.showPhone();</span><br><span class="line">		function addPhone()&#123;</span><br><span class="line">			var myName = $(&apos;.addName&apos;).val();</span><br><span class="line">			var myTel = $(&apos;.addPhone&apos;).val();</span><br><span class="line">			newPhoneBook.addPhone(myName, myTel);</span><br><span class="line">			newPhoneBook.showPhone();</span><br><span class="line">		&#125;</span><br><span class="line">		function searchBtn()&#123;</span><br><span class="line">			var myName = $(&apos;.searchName&apos;).val();</span><br><span class="line">			newPhoneBook.searchPhone(myName);</span><br><span class="line">		&#125;</span><br><span class="line">		function delBtn()&#123;</span><br><span class="line">			var myName = $(&apos;.delName&apos;).val();</span><br><span class="line">			newPhoneBook.delPhone(myName);</span><br><span class="line">			newPhoneBook.showPhone();</span><br><span class="line">		&#125;</span><br><span class="line">	&lt;/script&gt;</span><br><span class="line">&lt;/html&gt;</span><br></pre></td></tr></table></figure>
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+	<div class="article-tag tagcloud">
+		<i class="icon-price-tags icon"></i>
+		<ul class="article-tag-list">
+			 
+        		<li class="article-tag-list-item">
+        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">面向对象</a>
+        		</li>
+      		
+		</ul>
+	</div>
+
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2017/12/21/解决增删改查/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
     <article id="post-浅谈OOP" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -933,125 +1009,6 @@
 
 
   
-    <article id="post-ajax和jsonp区别" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2017/11/16/ajax和jsonp区别/">ajax和jsonp区别</a>
-    </h1>
-  
-
-        
-        <a href="/2017/11/16/ajax和jsonp区别/" class="archive-article-date">
-  	<time datetime="2017-11-16T13:47:14.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-11-16</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h2 id="ajax和jsonp区别"><a href="#ajax和jsonp区别" class="headerlink" title="ajax和jsonp区别"></a>ajax和jsonp区别</h2><ol>
-<li>ajax和jsonp的调用方式很像<ul>
-<li>目的一样，都是请求url，然后把服务器返回的数据进行处理，因此jquery和ext等框架都把jsonp作为ajax的一种形式进行了封装；</li>
-</ul>
-</li>
-<li>实质不同<ul>
-<li>ajax的核心是通过xmlHttpRequest获取非本页内容</li>
-<li>jsonp的核心是动态添加script标签调用服务器提供的js脚本</li>
-</ul>
-</li>
-<li>区别联系<ul>
-<li>不在于是否跨域</li>
-<li>ajax通过服务端代理一样跨域</li>
-<li>jsonp也不并不排斥同域的数据的获取</li>
-</ul>
-</li>
-<li>jsonp是一种方式或者说非强制性的协议<ul>
-<li>ajax也不一定非要用json格式来传递数据</li>
-</ul>
-</li>
-</ol>
-<ul>
-<li><h3 id="原生script跨域方法–jsonp"><a href="#原生script跨域方法–jsonp" class="headerlink" title="原生script跨域方法–jsonp"></a>原生script跨域方法–jsonp</h3><img src="http://upload-images.jianshu.io/upload_images/7426605-96b990cb852f5788.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="script跨域方法"><br><img src="http://upload-images.jianshu.io/upload_images/7426605-dd3d037d5021aef1.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="script跨域方法"></li>
-</ul>
-<ul>
-<li><h3 id="JQ对jsonp进行封装"><a href="#JQ对jsonp进行封装" class="headerlink" title="JQ对jsonp进行封装"></a>JQ对jsonp进行封装</h3><img src="http://upload-images.jianshu.io/upload_images/7426605-cfda422e56168a5a.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="image.png"></li>
-</ul>
-<p><img src="http://upload-images.jianshu.io/upload_images/7426605-dd3d037d5021aef1.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="script跨域方法"></p>
-<ul>
-<li><h3 id="ajax-方法参数详解"><a href="#ajax-方法参数详解" class="headerlink" title="$.ajax()方法参数详解"></a>$.ajax()方法参数详解</h3><ul>
-<li>data:<br>要求为 Object或String类型的参数，发送到服务器的数据。如果已经不是字符串，将自动转换为字符串格式。get请求中将附加在url后。防止这种自动 转换，可以查看　　processData选项。对象必须为key/value格式，例如{foo1:”bar1”,foo2:”bar2”}转换 为&amp;foo1=bar1&amp;foo2=bar2。如果是数组，JQuery将自动为不同值对应同一个名称。例如{foo: [“bar1”,”bar2”]}转换为&amp;foo=bar1&amp;foo=bar2。</li>
-<li>dataType:<br>要求为String类型的参数，预期服务器返回的数据类型。如果不指定，JQuery将自动根据http包mime信息返回responseXML或responseText，并作为回调函数参数传递。可用的类型如下：<ul>
-<li>xml：返回XML文档，可用JQuery处理。</li>
-<li>html：返回纯文本HTML信息；包含的script标签会在插入DOM时执行。</li>
-<li>script：返回纯文本JavaScript代码。不会自动缓存结果。除非设置了cache参数。注意在远程请求时（不在同一个域下），所有post请求都将转为get请求。</li>
-<li>json：返回JSON数据。</li>
-<li>jsonp：JSONP格式。使用SONP形式调用函数时，例如myurl?callback=?，JQuery将自动替换后一个“?”为正确的函数名，以执行回调函数。</li>
-<li>text：返回纯文本字符串。</li>
-</ul>
-</li>
-<li>success：要求为Function类型的参数，请求成功后调用的回调函数，有两个参数。<br>   (1)由服务器返回，并根据dataType参数进行处理后的数据。<br>   (2)描述状态的字符串。<br>   function(data, textStatus){<pre><code>//data可能是xmlDoc、jsonObj、html、text等等
-this;  //调用本次ajax请求时传递的options参数
-</code></pre>   }</li>
-<li><p>jsonp：<br>要求 为String类型的参数，在一个jsonp请求中重写回调函数的名字。该值用来替代在”callback=?”这种GET或POST请求中URL参数里 的”callback”部分，例如{jsonp:’onJsonPLoad’}会导致将”onJsonPLoad=?”传给服务器。</p>
-</li>
-<li><p>processData：<br>要 求为Boolean类型的参数，默认为true。默认情况下，发送的数据将被转换为对象（从技术角度来讲并非字符串）以配合默认内容类 型”application/x-www-form-urlencoded”。如果要发送DOM树信息或者其他不希望转换的信息，请设置为false。</p>
-</li>
-<li><p>contentType：<br>要求为String类型的参数，当发送信息至服务器时，内容编码类型默认为”application/x-www-form-urlencoded”。该默认值适合大多数应用场合。</p>
-</li>
-</ul>
-</li>
-</ul>
-<ul>
-<li><h3 id="利用JQ封装的Ajax实现文件上传"><a href="#利用JQ封装的Ajax实现文件上传" class="headerlink" title="利用JQ封装的Ajax实现文件上传"></a>利用JQ封装的Ajax实现文件上传</h3></li>
-</ul>
-<p><img src="http://upload-images.jianshu.io/upload_images/7426605-7b3137e896dc4e4d.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="image.png"></p>
-<p><img src="http://upload-images.jianshu.io/upload_images/7426605-679e789c1e446351.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="image.png"></p>
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2017/11/16/ajax和jsonp区别/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
   
     <nav id="page-nav">
       <a class="extend prev" rel="prev" href="/">&laquo; Prev</a><a class="page-number" href="/">1</a><span class="page-number current">2</span><a class="page-number" href="/page/3/">3</a><a class="extend next" rel="next" href="/page/3/">Next &raquo;</a>
@@ -1149,11 +1106,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
           <ul class="article-tag-list" q-show="showTags">
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">面向对象</a>
+                <a href="javascript:void(0)" class="js-tag color1">浅谈OOP</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">浅谈OOP</a>
+                <a href="javascript:void(0)" class="js-tag color5">面向对象</a>
               </li>
             
             <div class="clearfix"></div>
