@@ -6,18 +6,18 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="http://yoursite.com">
-  <title>canvas简述 | 大瑞</title>
+  <title>理解Promise运行原理 | 大瑞</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="1. 绘制三角形fill是填充面（实心），stroke是画线（空心）1234567891011121314151617181920212223	&amp;lt;script type=&amp;quot;text/javascript&amp;quot;&amp;gt;		//首先，找到 &amp;lt;canvas&amp;gt; 元素:		var canvas = document.getElementById(&amp;apos;myCanvas">
+  <meta name="description" content="1.什么是PromisePromise可以认为是一种用来解决异步处理的代码规范。常见的异步处理是使用回调函数，回调函数有两种模式，同步的回调和异步的回调。一般回调函数指的是异步的回调。 同步回调 12345function add(a, b, callback) &amp;#123; callback(a + b) &amp;#125;                console.log(&amp;apos;befor">
 <meta property="og:type" content="article">
-<meta property="og:title" content="canvas简述">
-<meta property="og:url" content="http://yoursite.com/2017/12/25/canvas简述/index.html">
+<meta property="og:title" content="理解Promise运行原理">
+<meta property="og:url" content="http://yoursite.com/2018/01/18/理解Promise运行原理/index.html">
 <meta property="og:site_name" content="大瑞">
-<meta property="og:description" content="1. 绘制三角形fill是填充面（实心），stroke是画线（空心）1234567891011121314151617181920212223	&amp;lt;script type=&amp;quot;text/javascript&amp;quot;&amp;gt;		//首先，找到 &amp;lt;canvas&amp;gt; 元素:		var canvas = document.getElementById(&amp;apos;myCanvas">
-<meta property="og:updated_time" content="2017-12-25T14:36:36.000Z">
+<meta property="og:description" content="1.什么是PromisePromise可以认为是一种用来解决异步处理的代码规范。常见的异步处理是使用回调函数，回调函数有两种模式，同步的回调和异步的回调。一般回调函数指的是异步的回调。 同步回调 12345function add(a, b, callback) &amp;#123; callback(a + b) &amp;#125;                console.log(&amp;apos;befor">
+<meta property="og:updated_time" content="2018-01-18T13:06:04.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="canvas简述">
-<meta name="twitter:description" content="1. 绘制三角形fill是填充面（实心），stroke是画线（空心）1234567891011121314151617181920212223	&amp;lt;script type=&amp;quot;text/javascript&amp;quot;&amp;gt;		//首先，找到 &amp;lt;canvas&amp;gt; 元素:		var canvas = document.getElementById(&amp;apos;myCanvas">
+<meta name="twitter:title" content="理解Promise运行原理">
+<meta name="twitter:description" content="1.什么是PromisePromise可以认为是一种用来解决异步处理的代码规范。常见的异步处理是使用回调函数，回调函数有两种模式，同步的回调和异步的回调。一般回调函数指的是异步的回调。 同步回调 12345function add(a, b, callback) &amp;#123; callback(a + b) &amp;#125;                console.log(&amp;apos;befor">
   
     <link rel="alternative" href="/atom.xml" title="大瑞" type="application/atom+xml">
   
@@ -157,66 +157,71 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            <article id="post-canvas简述" class="article article-type-post " itemscope itemprop="blogPost">
+            <article id="post-理解Promise运行原理" class="article article-type-post " itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
     <h1 class="article-title" itemprop="name">
-      canvas简述
+      理解Promise运行原理
     </h1>
   
 
         
-        <a href="/2017/12/25/canvas简述/" class="archive-article-date">
-  	<time datetime="2017-12-25T14:33:55.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-12-25</time>
+        <a href="/2018/01/18/理解Promise运行原理/" class="archive-article-date">
+  	<time datetime="2018-01-18T13:04:57.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-01-18</time>
 </a>
         
       </header>
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h3 id="1-绘制三角形"><a href="#1-绘制三角形" class="headerlink" title="1. 绘制三角形"></a>1. 绘制三角形</h3><h5 id="fill是填充面（实心），stroke是画线（空心）"><a href="#fill是填充面（实心），stroke是画线（空心）" class="headerlink" title="fill是填充面（实心），stroke是画线（空心）"></a>fill是填充面（实心），stroke是画线（空心）</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line">	&lt;script type=&quot;text/javascript&quot;&gt;</span><br><span class="line">		//首先，找到 &lt;canvas&gt; 元素:</span><br><span class="line">		var canvas = document.getElementById(&apos;myCanvas&apos;);</span><br><span class="line">		//然后，创建 context 对象：</span><br><span class="line">		//getContext(&quot;2d&quot;) 对象是内建的 HTML5 对象，</span><br><span class="line">		//拥有多种绘制路径、矩形、圆形、字符以及添加图像的方法。</span><br><span class="line">		var context = canvas.getContext(&apos;2d&apos;);</span><br><span class="line">		</span><br><span class="line">		//canvas 是一个二维网格。</span><br><span class="line">		//canvas 的左上角坐标为 (0,0)</span><br><span class="line">		context.beginPath();</span><br><span class="line">		//moveTo(x,y) 定义线条开始坐标</span><br><span class="line">		context.moveTo(0,0);</span><br><span class="line">		//lineTo(x,y) 定义线条结束坐标</span><br><span class="line">		//绘制三角形</span><br><span class="line">		context.lineTo(0,100);</span><br><span class="line">		context.lineTo(100,100);</span><br><span class="line">		context.lineTo(0,0)</span><br><span class="line">		context.strokeStyle = &quot;#0000FF&quot;;</span><br><span class="line">		context.stroke();</span><br><span class="line">//		context.lineWidth = 10;</span><br><span class="line">//		context.fillStyle = &quot;#008000&quot;;</span><br><span class="line">//		context.fill();</span><br></pre></td></tr></table></figure>
-<h3 id="2-画圆"><a href="#2-画圆" class="headerlink" title="2. 画圆"></a>2. 画圆</h3><h5 id="lineCap-线帽-有三个参数"><a href="#lineCap-线帽-有三个参数" class="headerlink" title="lineCap:线帽 有三个参数"></a>lineCap:线帽 有三个参数</h5><ul>
-<li>butt    默认。向线条的每个末端添加平直的边缘。</li>
-<li>round    向线条的每个末端添加圆形线帽。</li>
-<li>square    向线条的每个末端添加正方形线帽。</li>
+        <p>1.什么是Promise<br>Promise可以认为是一种用来解决异步处理的代码规范。常见的异步处理是使用回调函数，回调函数有两种模式，同步的回调和异步的回调。一般回调函数指的是异步的回调。</p>
+<p>同步回调</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">function add(a, b, callback) &#123; callback(a + b) &#125;</span><br><span class="line">        </span><br><span class="line">        console.log(&apos;before&apos;);</span><br><span class="line">        add(1, 2, result =&gt; console.log(&apos;Result: &apos; + result);</span><br><span class="line">        console.log(&apos;after&apos;);</span><br></pre></td></tr></table></figure>
+<p>输出结果为： before Result：3 after</p>
+<p>异步回调</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">function addAsync(a, b, callback) &#123;</span><br><span class="line">        setTimeout( () =&gt; callback(a + b), 1000);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    console.log(&apos;before&apos;);</span><br><span class="line">    addAsync(1, 2, result =&gt; console.log(&apos;Result: &apos; + result));</span><br><span class="line">    console.log(&apos;after&apos;);</span><br></pre></td></tr></table></figure>
+<p>输出结果： before after Result: 3</p>
+<p>然而回调函数有个著名的坑就是“callback hell”，比如：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">doSomething1(function(value1) &#123;</span><br><span class="line">	doSomething2(function(value2) &#123;</span><br><span class="line">		doSomething3(function(value3) &#123;</span><br><span class="line">			console.log(&quot;done! The values are: &quot; + [value1, value2, value3].join(&apos;,&apos;));</span><br><span class="line">		&#125;)</span><br><span class="line">	&#125;)</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+<p>为了等value1， value2， value3数据都准备好，必须要一层一层嵌套回调函数。如果一直嵌套下去，就形成了callback hell，不利于代码的阅读。</p>
+<p>如果改用Promise的写法，只要写成如下方式就行。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">doSomething1().then(function() &#123;</span><br><span class="line">	return value1;</span><br><span class="line">&#125;).then(function(tempValue1) &#123;</span><br><span class="line">	return [tempValue1, value2].join(&apos;,&apos;);		</span><br><span class="line">&#125;).then(function(tempValue2) &#123;</span><br><span class="line">	console.log(&quot;done! &quot;, [tempValue2, value3].join(&apos;,&apos;));</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+<p>可以注意到，Promise实际上是把回调函数从doSomething函数中提取到了后面的then方法里面，从而防止多重嵌套的问题。</p>
+<p>2.Promise对象和状态</p>
+<p>2.1 resolve &amp; reject</p>
+<p>Promise构造函数用来构造一个Promise对象，其中入参匿名函数中resolve和reject这两个也都是函数。如果resolve执行了，则触发promise.then中成功的回调函数；如果reject执行了，则触发promise.then中拒绝的回调函数。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">var promise = new Promise(function(resolve, reject) &#123;</span><br><span class="line">	// IF 如果符合预期条件，调用resolve</span><br><span class="line">	resolve(&apos;success&apos;);</span><br><span class="line"></span><br><span class="line">	// ELSE 如果不符合预期条件，调用reject</span><br><span class="line">	reject(&apos;failure&apos;)</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+<p>2.2 Fulfilled &amp; Rejected<br>Promise对象一开始的值是Pending准备状态。<br>执行了resolve()后，该Promise对象的状态值变为onFulfilled状态。<br>执行了reject()后，该Promise对象的状态值变为onRejected状态。<br>Promise对象的状态值一旦确定(onFulfilled或onRejected)，就不会再改变。即不会从onFulfilled转为onRejected，或者从onRejected转为onFulfilled。<br>2.3 快捷方法<br>获取一个onFulfilled状态的Promise对象：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">Promise.resolve(1);</span><br><span class="line"></span><br><span class="line">// 等价于</span><br><span class="line"></span><br><span class="line">new Promise((resolve) =&gt; resolve(1));</span><br></pre></td></tr></table></figure>
+<p>获取一个onRejected状态的Promise对象：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">Promise.reject(new Error(&quot;BOOM&quot;)) </span><br><span class="line"></span><br><span class="line">// 等价于</span><br><span class="line"></span><br><span class="line">new Promise((resolve, reject) </span><br><span class="line">	=&gt; reject(new Error(&quot;BOOM&quot;)));</span><br></pre></td></tr></table></figure>
+<p>3.异常捕获：then和catch</p>
+<p>Promise的异常捕获有两种方式：</p>
+<p>then匿名函数中的reject方法<br>catch方法<br>3.1 then中的reject方法捕获异常</p>
+<p>这种方法只能捕获前一个Promise对象中的异常，即调用then函数的Promise对象中出现的异常。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">var promise = Promise.resolve();</span><br><span class="line"></span><br><span class="line">promise.then(function() &#123;</span><br><span class="line">    throw new Error(&quot;BOOM!&quot;)</span><br><span class="line">&#125;).then(function (success) &#123;</span><br><span class="line">    console.log(success);</span><br><span class="line">&#125;, function (error) &#123;</span><br><span class="line">	// 捕捉的是第一个then返回的Promise对象的错误</span><br><span class="line">    console.log(error);</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+<p>但该种方法无法捕捉当前Promise对象的异常，如：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">var promise = Promise.resolve();</span><br><span class="line"></span><br><span class="line">promise.then(function() &#123;</span><br><span class="line">    return &apos;success&apos;;</span><br><span class="line">&#125;).then(function (success) &#123;</span><br><span class="line">    console.log(success);</span><br><span class="line">	throw new Error(&quot;Another BOOM!&quot;);</span><br><span class="line">&#125;, function (error) &#123;</span><br><span class="line">    console.log(error);  // 无法捕捉当前then中抛出的异常</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+<p>3.2 catch捕获异常</p>
+<p>上述栗子若改写成如下形式，最后追加一个catch函数，则可以正常捕捉到异常。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">var promise = Promise.resolve();</span><br><span class="line"></span><br><span class="line">promise.then(function() &#123;</span><br><span class="line">    return &apos;success&apos;;</span><br><span class="line">&#125;).then(function (success) &#123;</span><br><span class="line">    console.log(success);</span><br><span class="line">	throw new Error(&quot;Another BOOM!&quot;);</span><br><span class="line">&#125;).catch(function (error) &#123;</span><br><span class="line">       console.log(error); // 可以正常捕捉到异常</span><br><span class="line">   &#125;);</span><br></pre></td></tr></table></figure>
+<p>catch方法可以捕获到then中抛出的错误，也能捕获前面Promise抛出的错误。 因此建议都通过catch方法捕捉异常。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">var promise = Promise.reject(&quot;BOOM!&quot;);</span><br><span class="line"></span><br><span class="line">promise.then(function() &#123;</span><br><span class="line">    return &apos;success&apos;;</span><br><span class="line">&#125;).then(function (success) &#123;</span><br><span class="line">    console.log(success);</span><br><span class="line">	throw new Error(&quot;Another BOOM!&quot;);</span><br><span class="line">&#125;).catch(function (error) &#123;</span><br><span class="line">       console.log(error);  // BOOM！</span><br><span class="line">   &#125;);</span><br></pre></td></tr></table></figure>
+<p>值得注意的是：catch方法其实等价于then(null, reject)，上面可以写成：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">promise.then(function() &#123;</span><br><span class="line">	return &apos;success&apos;;</span><br><span class="line">&#125;).then(function (success) &#123;</span><br><span class="line">    console.log(success);</span><br><span class="line">	throw new Error(&quot;Another BOOM!&quot;);</span><br><span class="line">&#125;).then(null, function(error) &#123;</span><br><span class="line">	console.log(error);</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
+<p>总结来说就是：</p>
+<ul>
+<li>使用promise.then(onFulfilled, onRejected)的话，在 onFulfilled中发生异常的话，在onRejected中是捕获不到这个异常的。</li>
 </ul>
-<h5 id="context-arc-参数1-参数2-参数3-参数4-参数5-参数6"><a href="#context-arc-参数1-参数2-参数3-参数4-参数5-参数6" class="headerlink" title="context.arc(参数1,参数2,参数3,参数4,参数5,参数6);"></a>context.arc(参数1,参数2,参数3,参数4,参数5,参数6);</h5><ul>
-<li>参数1 参数2 圆形原点的坐标</li>
-<li>参数3 半径</li>
-<li>参数4 绘制圆形的起始角度</li>
-<li>参数5 绘制圆形的结束角度</li>
-<li>参数6 顺时针 | 逆时针 参数是布尔：true  逆时针，false  顺时针</li>
+<ul>
+<li>在promise.then(onFulfilled).catch(onRejected)的情况下then中产生的异常能在.catch中捕获</li>
 </ul>
-<p>context.arc(200,100,100,0,Math.PI,false);</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">//画圆 </span><br><span class="line">context.beginPath(); // 重新开启一个新的图层</span><br><span class="line">context.arc(200,100,100,0,Math.PI,false);</span><br><span class="line">context.lineCap = &quot;round&quot;;</span><br><span class="line">context.lineWidth = 15;</span><br><span class="line">context.strokeStyle = &quot;aquamarine&quot;;</span><br><span class="line">context.stroke();</span><br></pre></td></tr></table></figure>
-<h3 id="3-矩形"><a href="#3-矩形" class="headerlink" title="3. 矩形"></a>3. 矩形</h3><h5 id="context-rect-参数1-参数2-参数3-参数4"><a href="#context-rect-参数1-参数2-参数3-参数4" class="headerlink" title="context.rect(参数1,参数2,参数3,参数4);"></a>context.rect(参数1,参数2,参数3,参数4);</h5><ul>
-<li>参数1 ,参数2 矩形绘制的起点位置（参数1为X轴的坐标，参数2为Y轴的坐标）</li>
-<li>参数3,矩形的宽</li>
-<li>参数4矩形的高<h5 id="创建线条渐变-context-createLinearGradient-参数1-参数2-参数3-参数4"><a href="#创建线条渐变-context-createLinearGradient-参数1-参数2-参数3-参数4" class="headerlink" title="创建线条渐变 context.createLinearGradient(参数1,参数2,参数3,参数4);"></a>创建线条渐变 context.createLinearGradient(参数1,参数2,参数3,参数4);</h5></li>
-<li>参数1 ,参数2 渐变颜色开始的位置（参数1为X轴的坐标，参数2为Y轴的坐标）</li>
-<li>参数3,参数4 渐变颜色结束的位置（参数3为X轴的坐标，参数4为Y轴的坐标）<h5 id="grd-addColorStop-参数1-参数2"><a href="#grd-addColorStop-参数1-参数2" class="headerlink" title="grd.addColorStop(参数1,参数2);"></a>grd.addColorStop(参数1,参数2);</h5></li>
-<li>参数1 ,0~1之间的数</li>
-<li>参数3,参数4  颜色</li>
+<ul>
+<li>.then和 .catch在本质上是没有区别的需要分场合使用。</li>
 </ul>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">//矩形</span><br><span class="line">context.beginPath();</span><br><span class="line">context.rect(0,200,200,100);</span><br><span class="line">var grd = context.createLinearGradient(0,200,200,200);</span><br><span class="line">grd.addColorStop(0,&quot;red&quot;);</span><br><span class="line">grd.addColorStop(0.5,&quot;green&quot;);</span><br><span class="line">grd.addColorStop(1,&quot;blue&quot;);</span><br><span class="line">context.fillStyle = grd;</span><br><span class="line">context.fill();</span><br></pre></td></tr></table></figure>
-<h5 id="创建一个径向-圆渐变-context-createRadialGradient-xStart-yStart-radiusStart-xEnd-yEnd-radiusEnd"><a href="#创建一个径向-圆渐变-context-createRadialGradient-xStart-yStart-radiusStart-xEnd-yEnd-radiusEnd" class="headerlink" title="创建一个径向/圆渐变 context.createRadialGradient(xStart, yStart,radiusStart,xEnd, yEnd,radiusEnd);"></a>创建一个径向/圆渐变 context.createRadialGradient(xStart, yStart,radiusStart,xEnd, yEnd,radiusEnd);</h5><ul>
-<li>xStart, yStart    开始圆的圆心的坐标。</li>
-<li>radiusStart    开始圆的半径。</li>
-<li>xEnd, yEnd    结束圆的圆心的坐标。</li>
-<li>radiusEnd    结束圆的半径。</li>
-</ul>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">context.beginPath();</span><br><span class="line">context.rect(0,200,200,100);</span><br><span class="line">var grd = context.createRadialGradient(200,200,50,200,200,200);</span><br><span class="line">grd.addColorStop(0,&quot;red&quot;);</span><br><span class="line">grd.addColorStop(0.5,&quot;green&quot;);</span><br><span class="line">grd.addColorStop(1,&quot;blue&quot;);</span><br><span class="line">context.fillStyle = grd;</span><br><span class="line">context.fill();</span><br></pre></td></tr></table></figure>
-<h3 id="4-文本"><a href="#4-文本" class="headerlink" title="4. 文本"></a>4. 文本</h3><ul>
-<li>font - 定义字体</li>
-<li>fillText(text,x,y) - 在 canvas 上绘制实心的文本</li>
-<li>strokeText(text,x,y) - 在 canvas 上绘制空心的文本</li>
-<li>context.textBaseline 垂直对齐方式</li>
-<li>context.textAlign 水平对齐方式 </li>
-</ul>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">// bold 可以省略   Arial 不可以省略</span><br><span class="line">context.font = &quot;bold 50px Arial&quot;;</span><br><span class="line">context.textBaseline = &quot;middle&quot;;</span><br><span class="line">context.textAlign = &quot;center&quot;;</span><br><span class="line">var grd = context.createLinearGradient(0,0,200,0);</span><br><span class="line">grd.addColorStop(0,&quot;blue&quot;);</span><br><span class="line">grd.addColorStop(0.5,&quot;yellow&quot;);</span><br><span class="line">grd.addColorStop(1,&quot;red&quot;);</span><br><span class="line">context.fillStyle = grd; </span><br><span class="line">context.fillText(&quot;hello&quot;,100,100);</span><br></pre></td></tr></table></figure>
 
       
 
@@ -306,7 +311,7 @@
     <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
     <p>扫一扫，分享到微信</p>
     <div class="wx-qrcode">
-      <img src="//pan.baidu.com/share/qrcode?url=http://yoursite.com/2017/12/25/canvas简述/" alt="微信分享二维码">
+      <img src="//pan.baidu.com/share/qrcode?url=http://yoursite.com/2018/01/18/理解Promise运行原理/" alt="微信分享二维码">
     </div>
 </div>
 
@@ -320,18 +325,9 @@
   
 <nav id="article-nav">
   
-    <a href="/2017/12/26/高级版刮刮乐/" id="article-nav-newer" class="article-nav-link-wrap">
-      <i class="icon-circle-left"></i>
-      <div class="article-nav-title">
-        
-          高级版刮刮乐
-        
-      </div>
-    </a>
   
-  
-    <a href="/2017/12/22/构造函数-继承详解/" id="article-nav-older" class="article-nav-link-wrap">
-      <div class="article-nav-title">构造函数--继承详解</div>
+    <a href="/2018/01/18/ES6的7个实用技巧/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">ES6的7个实用技巧</div>
       <i class="icon-circle-right"></i>
     </a>
   
@@ -359,7 +355,7 @@
   
   <div class="duoshuo">
 	<!-- 多说评论框 start -->
-	<div class="ds-thread" data-thread-key="canvas简述" data-title="canvas简述" data-url="http://yoursite.com/2017/12/25/canvas简述/"></div>
+	<div class="ds-thread" data-thread-key="理解Promise运行原理" data-title="理解Promise运行原理" data-url="http://yoursite.com/2018/01/18/理解Promise运行原理/"></div>
 	<!-- 多说评论框 end -->
 	<!-- 多说公共JS代码 start (一个网页只需插入一次) -->
 	<script type="text/javascript">
@@ -381,7 +377,7 @@
   
 
   
-  <div id="SOHUCS" sid="canvas简述" ></div> 
+  <div id="SOHUCS" sid="理解Promise运行原理" ></div> 
 <script charset="utf-8" type="text/javascript" src="//changyan.sohu.com/upload/changyan.js" ></script>
 <script type="text/javascript">
     window.changyan.api.config({

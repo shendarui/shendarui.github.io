@@ -158,6 +158,92 @@
           <div id="js-content" class="content-ll">
             
   
+    <article id="post-Cookie和Session详解" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2017/11/20/Cookie和Session详解/">Cookie和Session详解</a>
+    </h1>
+  
+
+        
+        <a href="/2017/11/20/Cookie和Session详解/" class="archive-article-date">
+  	<time datetime="2017-11-20T14:25:53.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-11-20</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="Cookie"><a href="#Cookie" class="headerlink" title="Cookie"></a>Cookie</h2><h4 id="1-什么是Cookie"><a href="#1-什么是Cookie" class="headerlink" title="1. 什么是Cookie"></a>1. 什么是Cookie</h4><p>Cookie实际上是一小段的文本信息。客户请求服务器，如果服务器需要记录该用户状态，就使用response想客户端浏览器颁发一个Cookie。客户端浏览器会把Cookie保存起来。当浏览器再次请求该网站时，浏览器把请求的网址连同该Cookie一同提交给服务器。服务器检查该Cookie，以此来辨认用户状态。服务器还可以根据需要修改Cookie的内容，换句话说，Cookie不适合用带有隐私类信息。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">&lt;?php</span><br><span class="line">	print_r($_COOKIE);</span><br><span class="line">	if(!empty($_COOKIE[&apos;num&apos;])) &#123;</span><br><span class="line">		$_COOKIE[&apos;num&apos;]++;</span><br><span class="line">		setcookie(&quot;num&quot;,$_COOKIE[&apos;num&apos;]);</span><br><span class="line">		echo $_COOKIE[&apos;num&apos;];</span><br><span class="line">	&#125;else &#123;</span><br><span class="line">		setcookie(&apos;num&apos;,1);</span><br><span class="line">	&#125;</span><br><span class="line">	setcookie(&apos;name&apos;,&apos;da&apos;,time()+24*3600);</span><br><span class="line">?&gt;</span><br></pre></td></tr></table></figure>
+<p>例如上端代码，当每次刷新界面的时候num都会自增1，实现界面浏览次数。</p>
+<h4 id="2-Cookie的不可跨域性"><a href="#2-Cookie的不可跨域性" class="headerlink" title="2. Cookie的不可跨域性"></a>2. Cookie的不可跨域性</h4><p>Cookie在客户端是由浏览器管理的，浏览器能够保证Google只会操作Google的Cookie，而不会操作baidu的Cookie，从而保证用户的隐私安全</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">&lt;script type=&quot;text/javascript&quot;&gt;</span><br><span class="line">		var indexDate = new Date();</span><br><span class="line">		$.ajax(&#123;</span><br><span class="line">			type:&quot;get&quot;,</span><br><span class="line">			url:&quot;count.php?actionC=content&quot;,</span><br><span class="line">			async:true,</span><br><span class="line">			data: &#123;&#125;,</span><br><span class="line">			success: function(data) &#123;</span><br><span class="line">				$(&quot;#boxContent&quot;).html(&quot;这是content的数据：　&quot;+data);</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;);</span><br><span class="line">		document.cookie = &quot;contentTime=&quot;+indexDate;	</span><br><span class="line">	&lt;/script&gt;</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">&lt;?php</span><br><span class="line">			if(!empty($_COOKIE[$val1])) &#123;</span><br><span class="line">				$_COOKIE[$val1]++;</span><br><span class="line">				setcookie($val1,$_COOKIE[$val1]);</span><br><span class="line">				echo $_COOKIE[$val1];</span><br><span class="line">			&#125;else &#123;</span><br><span class="line">				setcookie($val1,1);</span><br><span class="line">			&#125;	</span><br><span class="line">?&gt;</span><br></pre></td></tr></table></figure>
+<h4 id="3-Cookie的值"><a href="#3-Cookie的值" class="headerlink" title="3. Cookie的值"></a>3. Cookie的值</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">&lt;script type=&quot;text/javascript&quot;&gt;</span><br><span class="line">			//设置一个cookie</span><br><span class="line">			document.cookie = &quot;user=sdr;&quot;;</span><br><span class="line">			//获取所有的cookie</span><br><span class="line">			var str = document.cookie;</span><br><span class="line">			//如何从所有cookie中取出特定名的cookie值</span><br><span class="line">			//cookie特点：  以键值对形式存储 用分号空格分隔每一个cookie</span><br><span class="line">			//取num值</span><br><span class="line">			var start = str.indexOf(&apos;num=&apos;)+4;</span><br><span class="line">			var end = str.indexOf(&apos;;&apos;,start);</span><br><span class="line">			//使用substring获取值</span><br><span class="line">			var val = str.substring(start,end);</span><br><span class="line">&lt;/script&gt;</span><br></pre></td></tr></table></figure>
+<h4 id="4-Cookie的有效期"><a href="#4-Cookie的有效期" class="headerlink" title="4. Cookie的有效期"></a>4. Cookie的有效期</h4><ul>
+<li>后台设置</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">//设置一个有生命期的cookie</span><br><span class="line">	//过期时间是时间数，比如 一天后失效  那就是24*3600秒后失效</span><br><span class="line">	setcookie(&quot;newMember&quot;,&quot;rrrr&quot;,time()+24*3600);</span><br></pre></td></tr></table></figure>
+<ul>
+<li>前台设置</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">&lt;script type=&quot;text/javascript&quot;&gt;</span><br><span class="line">			function setCookie(name,value,path,expires) &#123;</span><br><span class="line">				//设置一天之后失效</span><br><span class="line">				var current_data = new Date();</span><br><span class="line">				//将日期设置为一天之后的日期</span><br><span class="line">				current_data.setDate(current_data.getDate() + expires);</span><br><span class="line">				//将日期转成GMT字符串  得到的是对象</span><br><span class="line">				var expires_str = current_data.toGMTString();</span><br><span class="line">				//设置cookie的过期日期</span><br><span class="line">				document.cookie = name+&quot;=&quot;+value+&quot;; path=&quot;+path+&quot;;expires=&quot;+expires_str;</span><br><span class="line">			&#125;</span><br><span class="line">			setCookie(&quot;user&quot;,&quot;dddd&quot;,&quot;/&quot;,1);	</span><br><span class="line">		&lt;/script&gt;</span><br></pre></td></tr></table></figure>
+<p>###Cookie总结</p>
+<pre><code> - Cookie 是存储在浏览器哭护短的一片数据
+- 可以同时被前台和后台操作。当前台刷新后，刷新后台，此时num会在前台基础上增1。
+- 可以跨页面存储
+- Cookie是由生命期，默认与浏览器进程相同，如果浏览器退出，  Cookie会被注销
+- Cookie特点，以键值对形式存储，用分号空格分隔每一个Cookie
+</code></pre><h2 id="Session"><a href="#Session" class="headerlink" title="Session"></a>Session</h2><h4 id="1-什么是Session"><a href="#1-什么是Session" class="headerlink" title="1. 什么是Session"></a>1. 什么是Session</h4><p>Session是一种记录客户状态的机制，不同的是Cookie保存在客户端浏览器中，为Session保存在服务器上。客户端浏览器访问服务器的时候，服务器把客户端信息以某种形式记录在服务器上。这就是Session。客户端浏览器再次访问时只需要从该Session中查找客户的状态就可以了。<br>如果说Cookie是通过检查客户身上的“通行证”来确定客户身份的话，那么Session机制就是通过检查服务器上的“客户明细表”来确认客户身份。Session相当于程序在服务器上建立的一份客户档案，客户来访的时候只需要查询客户档案袋就可以了。</p>
+<h4 id="2-Session实现用户登录"><a href="#2-Session实现用户登录" class="headerlink" title="2. Session实现用户登录"></a>2. Session实现用户登录</h4><p>上面提到过，Session数据存储在服务器中，每个会话分配一个单独的Sessioin_id，该Session_id通过Cookie传送到前台，默认的session_id名称就是PHPSESSION，前台只能看到Session的id，为不能修改Session，这样我们就可以用Session来保存一些隐私信息。</p>
+<h4 id="3-Session-使用"><a href="#3-Session-使用" class="headerlink" title="3. Session 使用"></a>3. Session 使用</h4><p>使用Session之前，需要先开启会话。Session存储在Session数组$_SESSION里面。相对于Cookie，Session存储比较安全，但如果Session数量较多，会导致服务器性能下降。</p>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2017/11/20/Cookie和Session详解/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
     <article id="post-简易版网上订餐" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -847,11 +933,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
           <ul class="article-tag-list" q-show="showTags">
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">面向对象</a>
+                <a href="javascript:void(0)" class="js-tag color1">浅谈OOP</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">浅谈OOP</a>
+                <a href="javascript:void(0)" class="js-tag color5">面向对象</a>
               </li>
             
             <div class="clearfix"></div>
