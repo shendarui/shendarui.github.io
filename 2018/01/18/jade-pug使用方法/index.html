@@ -6,25 +6,20 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="http://yoursite.com">
-  <title>XMLHttpRequest | 大瑞</title>
+  <title>jade,pug使用方法 | 大瑞</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="创建XMLHttpRequest对象Ajax是对Asc也能长荣偶数JavaScript+ XML的简写，这一技术弄呢狗狗向服务器请求额外的数据而无需卸载页面，Ajax技术的核心是XMLHttpRequest（简称XHR）对象，XHR为服务器发送请求和解析服务器响应提供了流畅的接口，能够以异步方式从服务器区获取更多信息而不必刷新页面。使用XML对象取得新数据然后再通过DOM将数据插入到页面中。 XM">
+  <meta name="description" content="Jade是一款基于haml的html模版引擎，采用Java cript实现，可以方便地 在Node.js、Yeoman等框架中使用，已改名为pug 1. 全局安装 npm install jade -g  -g代表全局安装，如果安装出错，可能是权限问题，在前面加上sudo  sudo npm install jade -g  下载的时候可能会有点慢，所以在此之前可以下下载一个淘宝镜像，毕竟这些都是">
 <meta property="og:type" content="article">
-<meta property="og:title" content="XMLHttpRequest">
-<meta property="og:url" content="http://yoursite.com/2017/11/14/AJAX/index.html">
+<meta property="og:title" content="jade,pug使用方法">
+<meta property="og:url" content="http://yoursite.com/2018/01/18/jade-pug使用方法/index.html">
 <meta property="og:site_name" content="大瑞">
-<meta property="og:description" content="创建XMLHttpRequest对象Ajax是对Asc也能长荣偶数JavaScript+ XML的简写，这一技术弄呢狗狗向服务器请求额外的数据而无需卸载页面，Ajax技术的核心是XMLHttpRequest（简称XHR）对象，XHR为服务器发送请求和解析服务器响应提供了流畅的接口，能够以异步方式从服务器区获取更多信息而不必刷新页面。使用XML对象取得新数据然后再通过DOM将数据插入到页面中。 XM">
-<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/7426605-4515edd921cdd883.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
-<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/7426605-758bd1c84499fbfb.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
-<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/7426605-9fc5a75070dc9b10.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
-<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/7426605-615489ee7cc32445.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
-<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/7426605-fc5c216ca48b3028.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
-<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/7426605-42884c20c738ab1c.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
-<meta property="og:updated_time" content="2017-11-17T13:17:19.000Z">
+<meta property="og:description" content="Jade是一款基于haml的html模版引擎，采用Java cript实现，可以方便地 在Node.js、Yeoman等框架中使用，已改名为pug 1. 全局安装 npm install jade -g  -g代表全局安装，如果安装出错，可能是权限问题，在前面加上sudo  sudo npm install jade -g  下载的时候可能会有点慢，所以在此之前可以下下载一个淘宝镜像，毕竟这些都是">
+<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/7426605-9a2da1e9052dee02.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta property="og:updated_time" content="2018-01-18T12:31:23.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="XMLHttpRequest">
-<meta name="twitter:description" content="创建XMLHttpRequest对象Ajax是对Asc也能长荣偶数JavaScript+ XML的简写，这一技术弄呢狗狗向服务器请求额外的数据而无需卸载页面，Ajax技术的核心是XMLHttpRequest（简称XHR）对象，XHR为服务器发送请求和解析服务器响应提供了流畅的接口，能够以异步方式从服务器区获取更多信息而不必刷新页面。使用XML对象取得新数据然后再通过DOM将数据插入到页面中。 XM">
-<meta name="twitter:image" content="http://upload-images.jianshu.io/upload_images/7426605-4515edd921cdd883.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta name="twitter:title" content="jade,pug使用方法">
+<meta name="twitter:description" content="Jade是一款基于haml的html模版引擎，采用Java cript实现，可以方便地 在Node.js、Yeoman等框架中使用，已改名为pug 1. 全局安装 npm install jade -g  -g代表全局安装，如果安装出错，可能是权限问题，在前面加上sudo  sudo npm install jade -g  下载的时候可能会有点慢，所以在此之前可以下下载一个淘宝镜像，毕竟这些都是">
+<meta name="twitter:image" content="http://upload-images.jianshu.io/upload_images/7426605-9a2da1e9052dee02.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
   
     <link rel="alternative" href="/atom.xml" title="大瑞" type="application/atom+xml">
   
@@ -164,52 +159,127 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            <article id="XMLHttpRequest-AJAX" class="article article-type-XMLHttpRequest " itemscope itemprop="blogPost">
+            <article id="post-jade-pug使用方法" class="article article-type-post " itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
     <h1 class="article-title" itemprop="name">
-      XMLHttpRequest
+      jade,pug使用方法
     </h1>
   
 
         
-        <a href="/2017/11/14/AJAX/" class="archive-article-date">
-  	<time datetime="2017-11-14T13:06:47.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-11-14</time>
+        <a href="/2018/01/18/jade-pug使用方法/" class="archive-article-date">
+  	<time datetime="2018-01-18T12:25:21.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-01-18</time>
 </a>
         
       </header>
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h2 id="创建XMLHttpRequest对象"><a href="#创建XMLHttpRequest对象" class="headerlink" title="创建XMLHttpRequest对象"></a>创建XMLHttpRequest对象</h2><p>Ajax是对Asc也能长荣偶数JavaScript+ XML的简写，这一技术弄呢狗狗向服务器请求额外的数据而无需卸载页面，Ajax技术的核心是XMLHttpRequest（简称XHR）对象，XHR为服务器发送请求和解析服务器响应提供了流畅的接口，能够以异步方式从服务器区获取更多信息而不必刷新页面。使用XML对象取得新数据然后再通过DOM将数据插入到页面中。<br><img src="http://upload-images.jianshu.io/upload_images/7426605-4515edd921cdd883.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="image.png"></p>
-<h2 id="XML请求"><a href="#XML请求" class="headerlink" title="XML请求"></a>XML请求</h2><ul>
-<li><h4 id="GET请求"><a href="#GET请求" class="headerlink" title="GET请求"></a>GET请求</h4>  对XHR而言，位于传入open（）方法的URL末尾的查询字符串必须经过正确的编码才行。使用GET请求经常发生一个错误，就是查询字符串格式有问题。查询字符串中每个参数的名称和值都必须使用encodeURIComponent()进行编码，然后才能放到URL的末尾，而且所用名-值都必须有&amp;分割</li>
-<li><h4 id="POST请求"><a href="#POST请求" class="headerlink" title="POST请求"></a>POST请求</h4>  服务器对post请求不一样，所以，服务器端必须有程序来读取发送过来的原始数据，并从中解析有用的部分。<br><img src="http://upload-images.jianshu.io/upload_images/7426605-758bd1c84499fbfb.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="image.png"></li>
-</ul>
-<p>通过上面的两个ajax的实例，我们可以看出get请求和post请求的一些特点：</p>
+        <p>Jade是一款基于haml的html模版引擎，采用Java cript实现，可以方便地 在Node.js、Yeoman等框架中使用，已改名为pug</p>
+<h3 id="1-全局安装"><a href="#1-全局安装" class="headerlink" title="1. 全局安装"></a>1. 全局安装</h3><blockquote>
+<p>npm install jade -g</p>
+</blockquote>
+<p>-g代表全局安装，如果安装出错，可能是权限问题，在前面加上sudo</p>
+<blockquote>
+<p>sudo npm install jade -g</p>
+</blockquote>
+<p>下载的时候可能会有点慢，所以在此之前可以下下载一个淘宝镜像，毕竟这些都是国外的东西，每次安装的时候都要翻墙，而淘宝镜像类似于一比一还原国外的中国地址，从这上面下载不需要翻墙，会必将快。<br>首先安装淘宝镜像</p>
+<blockquote>
+<p>$ npm install -g cnpm<br>然后全局安装jade<br>sudo cnpm install jade -g</p>
+</blockquote>
+<h3 id="2-创建文件，后缀名为jade"><a href="#2-创建文件，后缀名为jade" class="headerlink" title="2. 创建文件，后缀名为jade"></a>2. 创建文件，后缀名为jade</h3><div style="text-align:center">
+
+<p><img src="http://upload-images.jianshu.io/upload_images/7426605-9a2da1e9052dee02.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="image.png"></p>
+<p></p></div><p></p>
+<h3 id="3-在控制台，进入当前文件的文件夹下，输入命令"><a href="#3-在控制台，进入当前文件的文件夹下，输入命令" class="headerlink" title="3. 在控制台，进入当前文件的文件夹下，输入命令"></a>3. 在控制台，进入当前文件的文件夹下，输入命令</h3><blockquote>
+<p>jade -P -w test.jade</p>
+</blockquote>
+<p>-P 代表不压缩HTML<br>-w 监听文件变化，在test.jade里面输入东西保存之后，会自动生成一个test.html文件</p>
+<h3 id="4-jade-语法"><a href="#4-jade-语法" class="headerlink" title="4. jade 语法"></a>4. jade 语法</h3><ol>
+<li><p>jade通过缩进关系，代替以往HTML的层级包含关系。注意要统一使用Tab或者空格缩进，不要混用</p>
 <ol>
-<li><p>get请求：</p>
-<ul>
-<li>GET 请求可被缓存</li>
-<li>GET 请求保留在浏览器历史记录中</li>
-<li>GET 请求可被收藏为书签</li>
-<li>GET 请求不应在处理敏感数据时使用</li>
-<li>GET 请求有长度限制</li>
-<li>GET 请求只应当用于取回数据</li>
-</ul>
-</li>
-<li><p>post请求：</p>
-<ul>
-<li>POST 请求不会被缓存</li>
-<li>POST 请求不会保留在浏览器历史记录中</li>
-<li>POST 不能被收藏为书签</li>
-<li>POST 请求对数据长度没有要求<h2 id="XML响应"><a href="#XML响应" class="headerlink" title="XML响应"></a>XML响应</h2>responseText 将响应信息作为字符串返回。 XMLHTTP尝试将响应信息解码为Unicode字符串，XMLHTTP默认将响应数据的编码定为UTF-8，如果服务器返回的数据带BOM(byte-order mark)，XMLHTTP可以解码任何UCS-2 (big or little endian)或者UCS-4 数据。注意，如果服务器返回的是xml文档，此属性并不处理xml文档中的编码声明。你需要使用responseXML来处理。<br>js代码会等到服务器响应之后再继续执行。收到响应后，响应数据会自动填充XHR对象的属性，相关属性如下：<br>responseText：作为响应主体被返回的文本；<br>responseXML：作为相应的内容类型是text/xml或application/xml，这个属性中将保存包含着相应数据的XMLDOM文档；<br>status：相应的http状态；<br>statusText：http状态的说明。<br><img src="http://upload-images.jianshu.io/upload_images/7426605-9fc5a75070dc9b10.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="image.png"><br><img src="http://upload-images.jianshu.io/upload_images/7426605-615489ee7cc32445.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="image.png"><h2 id="XML-readyState"><a href="#XML-readyState" class="headerlink" title="XML readyState"></a>XML readyState</h2>在接收到响应之后，第一步检查status属性，当xhr.status为200时候，说明接受成功.<br>0：未初始化，尚未调用open()方法。<br>1.启动。已经调用open()方法，但尚未调用send()方法。<br>2.发送，已经调用send()方法，为接受到响应。<br>3.接受。已经接受部分响应数据。<br>4.完成。全部接受响应的数据，并且可以在客户端使用。<br><img src="http://upload-images.jianshu.io/upload_images/7426605-fc5c216ca48b3028.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="image.png"><br><img src="http://upload-images.jianshu.io/upload_images/7426605-42884c20c738ab1c.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="image.png"><br>当执行xhr.onload = function(){}方法的时候 表明XML已经响应完毕</li>
-</ul>
+<li>内联书写层级  </li>
+</ol>
 </li>
 </ol>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">a: img</span><br></pre></td></tr></table></figure>
+<p>在HTML里面会解析成</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;a&gt;&lt;img&gt;&lt;/a&gt;</span><br></pre></td></tr></table></figure>
+<ol>
+<li>style属性</li>
+</ol>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">div(style=&#123;width:&quot;100px&quot;,height:&quot;100px&quot;&#125;)</span><br></pre></td></tr></table></figure>
+<p>解析后</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;div style=&quot;width:100px;height:100px&quot;&gt;&lt;/div&gt;</span><br></pre></td></tr></table></figure>
+<ol>
+<li>使用“-”来定义变量，使用“=”把变量输出到元素内，通过#{var}插到相应标签里面</li>
+</ol>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">-var a = 9;</span><br><span class="line">        p a的值为#&#123;a&#125;</span><br></pre></td></tr></table></figure>
+<p>解析后</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;p&gt;a的值为9&lt;/p&gt;</span><br></pre></td></tr></table></figure>
+<ul>
+<li><ol>
+<li>文本 通过在文字前添加符号”|”可以让jade原样输出内容，在HTML标记后，通过空格隔开。<br>不加“|”是，gg会被当成自定义标签解析</li>
+</ol>
+</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">p</span><br><span class="line">     gg</span><br></pre></td></tr></table></figure>
+<p>解析后</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&lt;p&gt;</span><br><span class="line">      &lt;gg&gt;&lt;/gg&gt;</span><br><span class="line"> &lt;/p&gt;</span><br></pre></td></tr></table></figure>
+<p>加上“|”，就是内容，而且可以多行写</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">p</span><br><span class="line">           | gg</span><br></pre></td></tr></table></figure>
+<p>解析后</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;p&gt;gg&lt;/p&gt;</span><br></pre></td></tr></table></figure>
+<ol>
+<li>注释。可以通过双斜杠进行注释</li>
+</ol>
+<p>一种是能被解析的注释 —- //</p>
+<p>一种是不能被解析的注释 —- //-</p>
+<ol>
+<li>for循环</li>
+</ol>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">-for(var i = 0;i &lt; 3;i++)</span><br><span class="line">      p 这是for循环中的span#&#123;i&#125;</span><br></pre></td></tr></table></figure>
+<p>解析后</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&lt;p&gt;这是for循环中的span0&lt;/p&gt;</span><br><span class="line">&lt;p&gt;这是for循环中的span1&lt;/p&gt;</span><br><span class="line">&lt;p&gt;这是for循环中的span2&lt;/p&gt;</span><br></pre></td></tr></table></figure>
+<p>  8.for in 循环</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">-var str = [&quot;这是字符串1&quot;,&quot;这是字符串2&quot;,&quot;这是字符串3&quot;];</span><br><span class="line">            for val in str</span><br><span class="line">                p #&#123;val&#125;</span><br></pre></td></tr></table></figure>
+<p>解析后</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&lt;p&gt;这是字符串1&lt;/p&gt;</span><br><span class="line">&lt;p&gt;这是字符串2&lt;/p&gt;</span><br><span class="line">&lt;p&gt;这是字符串3&lt;/p&gt;</span><br></pre></td></tr></table></figure>
+<p>  9.for in 解析对象</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">-var obj = [&#123;name:&quot;张三&quot;,age:&quot;18&quot;&#125;,&#123;name:&quot;李四&quot;,age:&quot;19&quot;&#125;,&#123;name:&quot;王二&quot;,age:&quot;20&quot;&#125;];</span><br><span class="line">            for item in obj</span><br><span class="line">                p 姓名是#&#123;item.name&#125;,年龄是#&#123;item.age&#125;</span><br></pre></td></tr></table></figure>
+<p>解析后</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&lt;p&gt;姓名是张三,年龄是18&lt;/p&gt;</span><br><span class="line">&lt;p&gt;姓名是李四,年龄是19&lt;/p&gt;</span><br><span class="line">&lt;p&gt;姓名是王二,年龄是20&lt;/p&gt;</span><br></pre></td></tr></table></figure>
+<ol>
+<li>if 判断</li>
+</ol>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">-var flag = true;</span><br><span class="line">            if flag</span><br><span class="line">                p flag是true</span><br><span class="line">            else</span><br><span class="line">                p flag是false</span><br></pre></td></tr></table></figure>
+<p>解析后</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;p&gt;flag是true&lt;/p&gt;</span><br></pre></td></tr></table></figure>
+<p>  -11. switch……case语句<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">-var a = 3;</span><br><span class="line">            case a</span><br><span class="line">                when 1</span><br><span class="line">                    p a的值是1</span><br><span class="line">                when 1</span><br><span class="line">                    p a的值是1</span><br><span class="line">                default</span><br><span class="line">                    p a的值是其他值</span><br></pre></td></tr></table></figure></p>
+<p>解析后</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;p&gt;a的值是其他值&lt;/p&gt;</span><br></pre></td></tr></table></figure>
+<p>解析后</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">&lt;ul&gt;</span><br><span class="line">          &lt;li&gt;这里是ul里面的li 0&lt;/li&gt;</span><br><span class="line">          &lt;li&gt;这里是ul里面的li 1&lt;/li&gt;</span><br><span class="line">          &lt;li&gt;这里是ul里面的li 2&lt;/li&gt;</span><br><span class="line">        &lt;/ul&gt;</span><br><span class="line">        &lt;p&gt;宠物的名字是大黄,它的性别是 公&lt;/p&gt;</span><br></pre></td></tr></table></figure>
+<ol>
+<li>mixin混合模式</li>
+</ol>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">mixin list</span><br><span class="line">            ul</span><br><span class="line">                -for(var i = 0;i &lt; 3;i++)</span><br><span class="line">                    li 这里是ul里面的li #&#123;i&#125;</span><br><span class="line"></span><br><span class="line">        +list</span><br><span class="line">        mixin pet(name,sex)</span><br><span class="line">            p 宠物的名字是#&#123;name&#125;,它的性别是 #&#123;sex&#125;</span><br><span class="line">        +pet(&quot;大黄&quot;,&quot;公&quot;)</span><br></pre></td></tr></table></figure>
+<p>解析后</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;p&gt;flag是true&lt;/p&gt;</span><br></pre></td></tr></table></figure>
+<p>13.引入script文件</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">script(type=&quot;text/javascript&quot;).</span><br><span class="line">        function()&#123;</span><br><span class="line">            console.log(11111)</span><br><span class="line">        &#125;</span><br></pre></td></tr></table></figure>
+<p>解析后</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">&lt;script type=&quot;text/javascript&quot;&gt;</span><br><span class="line">    function()&#123;</span><br><span class="line">        console.log(11111)</span><br><span class="line">    &#125;</span><br><span class="line">  &lt;/script&gt;</span><br></pre></td></tr></table></figure>
+<p>解析后</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;p&gt;flag是true&lt;/p&gt;</span><br></pre></td></tr></table></figure>
+<p>  14.添加类名和id名</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">div.box 带有类名为box的div</span><br><span class="line">        div#box 带有id名为box的div</span><br><span class="line">        div.box#box1 带有类名和id名为box的div</span><br></pre></td></tr></table></figure>
+<p>解析后</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&lt;div class=&quot;box&quot;&gt;带有类名为box的div&lt;/div&gt;</span><br><span class="line">    &lt;div id=&quot;box&quot;&gt;带有id名为box的div&lt;/div&gt;</span><br><span class="line">    &lt;div id=&quot;box1&quot; class=&quot;box&quot;&gt;带有类名和id名为box的div&lt;/div&gt;</span><br></pre></td></tr></table></figure>
 
       
 
@@ -299,7 +369,7 @@
     <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
     <p>扫一扫，分享到微信</p>
     <div class="wx-qrcode">
-      <img src="//pan.baidu.com/share/qrcode?url=http://yoursite.com/2017/11/14/AJAX/" alt="微信分享二维码">
+      <img src="//pan.baidu.com/share/qrcode?url=http://yoursite.com/2018/01/18/jade-pug使用方法/" alt="微信分享二维码">
     </div>
 </div>
 
@@ -313,15 +383,11 @@
   
 <nav id="article-nav">
   
-    <a href="/2017/11/15/JSONP 的工作原理/" id="article-nav-newer" class="article-nav-link-wrap">
-      <i class="icon-circle-left"></i>
-      <div class="article-nav-title">
-        
-          JSONP 的工作原理
-        
-      </div>
-    </a>
   
+    <a href="/2018/01/10/1. 可以兼容HTML/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title"></div>
+      <i class="icon-circle-right"></i>
+    </a>
   
 </nav>
 
@@ -347,7 +413,7 @@
   
   <div class="duoshuo">
 	<!-- 多说评论框 start -->
-	<div class="ds-thread" data-thread-key="AJAX" data-title="XMLHttpRequest" data-url="http://yoursite.com/2017/11/14/AJAX/"></div>
+	<div class="ds-thread" data-thread-key="jade-pug使用方法" data-title="jade,pug使用方法" data-url="http://yoursite.com/2018/01/18/jade-pug使用方法/"></div>
 	<!-- 多说评论框 end -->
 	<!-- 多说公共JS代码 start (一个网页只需插入一次) -->
 	<script type="text/javascript">
@@ -369,7 +435,7 @@
   
 
   
-  <div id="SOHUCS" sid="AJAX" ></div> 
+  <div id="SOHUCS" sid="jade-pug使用方法" ></div> 
 <script charset="utf-8" type="text/javascript" src="//changyan.sohu.com/upload/changyan.js" ></script>
 <script type="text/javascript">
     window.changyan.api.config({
