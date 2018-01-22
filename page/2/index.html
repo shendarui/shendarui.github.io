@@ -158,6 +158,75 @@
           <div id="js-content" class="content-ll">
             
   
+    <article id="post-模拟贝塞尔曲线（isPointInPath）" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2017/12/26/模拟贝塞尔曲线（isPointInPath）/">模拟贝塞尔曲线（isPointInPath）</a>
+    </h1>
+  
+
+        
+        <a href="/2017/12/26/模拟贝塞尔曲线（isPointInPath）/" class="archive-article-date">
+  	<time datetime="2017-12-26T14:34:46.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-12-26</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h3 id="贝塞尔曲线"><a href="#贝塞尔曲线" class="headerlink" title="贝塞尔曲线"></a>贝塞尔曲线</h3><p>bezierCurveTo(cpx,cpy,cpx2,cpx2,dx,dy);创建一条表示贝塞尔曲线的路径.</p>
+<p>该函数接受六个参数,分别代表三个点.</p>
+<p>(cpx,cpy),(cpx2,cpx2)代表控制点,决定曲线的形状</p>
+<p>(dx,dy)代表终点</p>
+<h4 id="模拟贝塞尔曲线（isPointInPath）"><a href="#模拟贝塞尔曲线（isPointInPath）" class="headerlink" title="模拟贝塞尔曲线（isPointInPath）"></a>模拟贝塞尔曲线（isPointInPath）</h4><h5 id="isPointInPath方法"><a href="#isPointInPath方法" class="headerlink" title="isPointInPath方法"></a>isPointInPath方法</h5><h6 id="isPointInPath"><a href="#isPointInPath" class="headerlink" title="isPointInPath"></a>isPointInPath</h6><p>是 Canvas 2D API 用于检测某点是否在路径的描边线上的方法。返回值是一个布尔值，当这个点在路径的描边线上，则返回true，否则返回false。<br>首先强调isPointInPath(x,y)方法是针对路径的，比如canvas中的rect、arc方法都可以用，但是fillRect不可以用，因为它不是路径；而且仅对当前的路径有效，而且如果当前路径有多个子路径（currentPath可以有多个subPath：比如进行了rect()之后，再进行arc()，最后关闭路径，进行stroke，那么rect()和arc()所绘制的就是当前路径的两个子路径），只对第一个子路径有效<br>所以要在每次判断之前要创建要移动的元素</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br></pre></td><td class="code"><pre><span class="line">&lt;script type=&quot;text/javascript&quot;&gt;</span><br><span class="line">		var canvas = document.getElementById(&quot;myCanvas&quot;);</span><br><span class="line">		var context = canvas.getContext(&quot;2d&quot;);</span><br><span class="line">		var redX1 = 100;</span><br><span class="line">		var redY1 = 200;</span><br><span class="line">		var blueX1 = 400;</span><br><span class="line">		var blueY1 = 200;</span><br><span class="line">		function createLine(moveTo1,moveTo2,lineTo1,lineTo2,lineWidth,color)&#123;</span><br><span class="line">			context.beginPath();</span><br><span class="line">			context.moveTo(moveTo1,moveTo2);</span><br><span class="line">			context.lineTo(lineTo1,lineTo2);</span><br><span class="line">			context.lineWidth = lineWidth;</span><br><span class="line">			context.strokeStyle = color;</span><br><span class="line">			context.stroke();</span><br><span class="line">		&#125;</span><br><span class="line">		drawLine(redX1,redY1,blueX1,blueY1);</span><br><span class="line">		function drawLine(redX1,redY1,blueX1,blueY1)&#123;</span><br><span class="line">			//半透明的粗线</span><br><span class="line">			createLine(0,500,500,0,10,&quot;rgba(0,0,0,0.2)&quot;);</span><br><span class="line">			//连接到红色小球的黑线</span><br><span class="line">			createLine(0,500,redX1,redY1,5,&quot;black&quot;);</span><br><span class="line">			//连接到蓝球的黑线</span><br><span class="line">			createLine(500,0,blueX1,blueY1,5,&quot;black&quot;);</span><br><span class="line">			//绘制贝塞尔曲线</span><br><span class="line">			context.beginPath();</span><br><span class="line">			context.moveTo(0,500);</span><br><span class="line">			context.bezierCurveTo(redX1,redY1,blueX1,blueY1,500,0);</span><br><span class="line">			context.stroke();</span><br><span class="line">			function createBall(color,x,y)&#123;</span><br><span class="line">				console.log(x,y)</span><br><span class="line">				context.beginPath();</span><br><span class="line">				context.fillStyle = color;</span><br><span class="line">				context.arc(x,y,10,0,Math.PI*2);</span><br><span class="line">				context.fill();</span><br><span class="line">			&#125;</span><br><span class="line">			function createBallB(color,x,y)&#123;</span><br><span class="line">				console.log(x,y)</span><br><span class="line">				context.beginPath();</span><br><span class="line">				context.fillStyle = color;</span><br><span class="line">				context.arc(x,y,10,0,Math.PI*2);</span><br><span class="line">				context.fill();</span><br><span class="line">			&#125;</span><br><span class="line">			//蓝球</span><br><span class="line">			createBallB(&quot;blue&quot;,blueX1,blueY1);</span><br><span class="line">			//红球</span><br><span class="line">			createBall(&quot;red&quot;,redX1,redY1);</span><br><span class="line">			</span><br><span class="line">			canvas.onmousedown = function(e)&#123;</span><br><span class="line">				var ev = window.event || e;</span><br><span class="line">				var x = ev.clientX - canvas.offsetLeft;</span><br><span class="line">				var y = ev.clientY - canvas.offsetTop;</span><br><span class="line">				createBallB(&quot;blue&quot;,blueX1,blueY1);</span><br><span class="line">				if(context.isPointInPath(x,y))&#123;</span><br><span class="line">					canvas.onmousemove = function(e)&#123;</span><br><span class="line">						var ev = window.event || e;</span><br><span class="line">						var xx = ev.clientX - canvas.offsetLeft;</span><br><span class="line">						var yy = ev.clientY - canvas.offsetTop;</span><br><span class="line">						blueX1 = xx;</span><br><span class="line">						blueY1 = yy;</span><br><span class="line">						context.clearRect(0,0,canvas.offsetWidth,canvas.offsetHeight);</span><br><span class="line">						drawLine(redX1,redY1,blueX1,blueY1);</span><br><span class="line">					&#125;</span><br><span class="line">				&#125;</span><br><span class="line">				createBall(&quot;red&quot;,redX1,redY1);</span><br><span class="line">				if(context.isPointInPath(x,y))&#123;</span><br><span class="line">					canvas.onmousemove = function(e)&#123;</span><br><span class="line">						var ev = window.event || e;</span><br><span class="line">						var xx = ev.clientX - canvas.offsetLeft;</span><br><span class="line">						var yy = ev.clientY - canvas.offsetTop;</span><br><span class="line">						redX1 = xx;</span><br><span class="line">						redY1 = yy;</span><br><span class="line">						context.clearRect(0,0,canvas.offsetWidth,canvas.offsetHeight);</span><br><span class="line">						drawLine(redX1,redY1,blueX1,blueY1);</span><br><span class="line">					&#125;</span><br><span class="line">				&#125;</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line">		document.onmouseup = function()&#123;</span><br><span class="line">			canvas.onmousemove = &quot;&quot;;</span><br><span class="line">		&#125;</span><br><span class="line">	&lt;/script&gt;</span><br></pre></td></tr></table></figure>
+<h4 id="原生方法"><a href="#原生方法" class="headerlink" title="原生方法"></a>原生方法</h4><p>利用点击该点的位置到圆心的距离与半径相比，如果大于半径，则表明点击的位置不在小球内部，反之，则在小球内部</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br></pre></td><td class="code"><pre><span class="line">&lt;script type=&quot;text/javascript&quot;&gt;</span><br><span class="line">		var canvas = document.getElementById(&quot;myCanvas&quot;);</span><br><span class="line">		var context = canvas.getContext(&quot;2d&quot;);</span><br><span class="line">		var x1 = 100;</span><br><span class="line">		var y1 = 100;</span><br><span class="line">		var x2 = 400;</span><br><span class="line">		var y2 = 400;</span><br><span class="line">		draw(x1,y1,x2,y2);</span><br><span class="line">		function draw(x1,y1,x2,y2)&#123;</span><br><span class="line">			//画半透明的线</span><br><span class="line">			context.beginPath();</span><br><span class="line">			context.moveTo(500,0);</span><br><span class="line">			context.lineTo(0,500);</span><br><span class="line">			context.lineWidth = 10;</span><br><span class="line">			context.strokeStyle = &quot;rgba(0,0,0,0.2)&quot;;</span><br><span class="line">			context.stroke();</span><br><span class="line">			</span><br><span class="line">			//画连接线</span><br><span class="line">			context.beginPath();</span><br><span class="line">			context.moveTo(0,500);</span><br><span class="line">			context.lineTo(x1,y1);</span><br><span class="line">			context.lineWidth = 4;</span><br><span class="line">			context.strokeStyle = &quot;#000000&quot;;</span><br><span class="line">			context.stroke()</span><br><span class="line">			</span><br><span class="line">			//画连接线</span><br><span class="line">			context.beginPath();</span><br><span class="line">			context.moveTo(500,0);</span><br><span class="line">			context.lineTo(x2,y2);</span><br><span class="line">			context.lineWidth = 4;</span><br><span class="line">			context.strokeStyle = &quot;#000000&quot;;</span><br><span class="line">			context.stroke()</span><br><span class="line">			</span><br><span class="line">			//花红球</span><br><span class="line">			context.beginPath();</span><br><span class="line">			context.arc(x1,y1,10,0,Math.PI*2);</span><br><span class="line">			context.fillStyle = &quot;#FF0000&quot;;</span><br><span class="line">			context.fill();</span><br><span class="line">			//花蓝球</span><br><span class="line">			context.beginPath();</span><br><span class="line">			context.arc(x2,y2,10,0,Math.PI*2);</span><br><span class="line">			context.fillStyle = &quot;blue&quot;;</span><br><span class="line">			context.fill();</span><br><span class="line">			</span><br><span class="line">			//画贝塞尔曲线</span><br><span class="line">			context.beginPath();</span><br><span class="line">			context.moveTo(0,500);</span><br><span class="line">			context.bezierCurveTo(x1,y1,x2,y2,500,0);</span><br><span class="line">			context.lineWidth = 10;</span><br><span class="line">			context.stroke();</span><br><span class="line">			//拖动小球 做动画</span><br><span class="line">			//判断是否拖动小球</span><br><span class="line">			//如果在小球上就做动画</span><br><span class="line">			canvas.onmousedown = function(e)&#123;</span><br><span class="line">				var ev = e || window.event;</span><br><span class="line">				var x= ev.clientX - canvas.offsetLeft;</span><br><span class="line">				var y = ev.clientY - canvas.offsetTop;</span><br><span class="line">				//判断是否在红球上</span><br><span class="line">				var disRed = Math.pow((x - x1),2) + Math.pow((y - y1),2);</span><br><span class="line">				if(disRed &lt; 100)&#123;</span><br><span class="line">					console.log(&quot;鼠标在红球上&quot;);</span><br><span class="line">					canvas.onmousemove = function(e)&#123;</span><br><span class="line">						var ev = window.event || e;</span><br><span class="line">						var xx = ev.clientX - canvas.offsetLeft;</span><br><span class="line">						var yy = ev.clientY - canvas.offsetTop;</span><br><span class="line">						//清除画布</span><br><span class="line">						context.clearRect(0,0,canvas.width,canvas.height);</span><br><span class="line">						//重绘</span><br><span class="line">						x1 = xx;</span><br><span class="line">						y1 = yy;</span><br><span class="line">						draw(x1,y1,x2,y2);</span><br><span class="line">					&#125;</span><br><span class="line">				&#125;</span><br><span class="line">				//判断是否在蓝球上</span><br><span class="line">				var disBlue = Math.pow((x - x2),2) + Math.pow((y - y2),2);</span><br><span class="line">				if(disBlue &lt; 100)&#123;</span><br><span class="line">					console.log(&quot;鼠标在红球上&quot;);</span><br><span class="line">					canvas.onmousemove = function(e)&#123;</span><br><span class="line">						var ev = window.event || e;</span><br><span class="line">						var xx = ev.clientX - canvas.offsetLeft;</span><br><span class="line">						var yy = ev.clientY - canvas.offsetTop;</span><br><span class="line">						//清除画布</span><br><span class="line">						context.clearRect(0,0,canvas.width,canvas.height);</span><br><span class="line">						//重绘</span><br><span class="line">						x2 = xx;</span><br><span class="line">						y2 = yy;</span><br><span class="line">						draw(x1,y1,x2,y2);</span><br><span class="line">					&#125;</span><br><span class="line">				&#125;</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line">		document.onmouseup = function()&#123;</span><br><span class="line">			canvas.onmousemove = &quot;&quot;;</span><br><span class="line">		&#125;</span><br><span class="line">	&lt;/script&gt;</span><br></pre></td></tr></table></figure>
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2017/12/26/模拟贝塞尔曲线（isPointInPath）/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
     <article id="post-高级版刮刮乐" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -971,118 +1040,6 @@
 
 
   
-    <article id="post-mysqli用法" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2017/11/22/mysqli用法/">mysqli用法</a>
-    </h1>
-  
-
-        
-        <a href="/2017/11/22/mysqli用法/" class="archive-article-date">
-  	<time datetime="2017-11-22T14:14:42.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-11-22</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h2 id="一、mysql与mysqli的概念相关："><a href="#一、mysql与mysqli的概念相关：" class="headerlink" title="一、mysql与mysqli的概念相关："></a>一、mysql与mysqli的概念相关：</h2><ol>
-<li><p>mysql与mysqli都是php方面的函数集，与mysql数据库关联不大。</p>
-<ol>
-<li>在php5版本之前，一般是用php的mysql函数去驱动mysql数据库的，比如mysql_query()的函数，属于面向过程3、在php5版本以后，增加了mysqli的函数功能，某种意义上讲，它是mysql系统函数的增强版，更稳定更高效更安全，与mysql_query()对应的有mysqli_query()，属于面向对象，用对象的方式操作驱动mysql数据库</li>
-</ol>
-</li>
-<li><p>mysql_connect()与mysqli_connect()</p>
-<ul>
-<li><p>使用mysqli，可以把数据库名称当作参数传给mysqli_connect()函数，也可以传递给mysqli的构造函数；</p>
-</li>
-<li><p>如果调用mysqli_query()或mysqli的对象查询query()方法，则连接标识是必需的。</p>
-</li>
-</ul>
-</li>
-<li><p>mysql与mysqli的区别：</p>
-<ul>
-<li><p>mysql是非持继连接函数，mysql每次链接都会打开一个连接的进程。</p>
-</li>
-<li><p>mysqli是永远连接函数，mysqli多次运行mysqli将使用同一连接进程,从而减少了服务器的开销。mysqli封装了诸如事务等一些高级操作，同时封装了DB操作过程中的很多可用的方法。返回记录集类型为array mysql_fetch_array ( resource $result [, int $ result_type ] )有一点很重要必须指出，用 mysql_fetch_array() 并不比用 mysql_fetch_row()慢，而且还提供了明显更多的值。 mysql_fetch_array() 中可选的第二个参数 是一个常量，可以接受以下值：MYSQL_ASSOC，MYSQL_NUM 和 MYSQL_BOTH。参数的默认值是 MYSQL_BOTH。如果用了 MYSQL_BOTH，将得到一个同时包含关联和数字索引的数组。用 MYSQL_ASSOC 只得到关联索引（如同 mysql_fetch_assoc()那样 mysql_fetch_assoc() 函数从结果集中取得一行作为关联数组。返回根据从结果集取得的行生成的关联数组，如果没有更多行，则返回 false。），用 MYSQL_NUM 只得到数字索引[]。例如：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">   $con = mysqli_connect(&quot;localhost&quot;,&quot;root&quot;,&quot;&quot;,&quot;mydb&quot;);    </span><br><span class="line">   $select1 = &quot;select * from mysql_table where age &gt; 20&quot;;</span><br><span class="line">$re_select1 = mysqli_query($con, $select1);</span><br><span class="line">print_r($re_select1);</span><br><span class="line">$data = mysqli_fetch_all($re_select1,MYSQLI_ASSOC);</span><br><span class="line">print_r($data);</span><br></pre></td></tr></table></figure>
-</li>
-</ul>
-</li>
-</ol>
-<div style="text-align:center"><br>    <img width="500" src="http://upload-images.jianshu.io/upload_images/7426605-8f4c18c346afffdd.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240"><br></div>
-
-<h2 id="数据库操作关键函数"><a href="#数据库操作关键函数" class="headerlink" title="数据库操作关键函数"></a>数据库操作关键函数</h2><blockquote>
-<p>  * mysqli_connect: 连接数据库</p>
-<pre><code>* mysqli_error: 最后一次SQL动作错误信息
- * mysql_errno(): 函数返回上一个 MySQL 操作中的错误信息的数字编码。
-                      返回上一个 MySQL 函数的错误号码，如果没有出错则返回 0（零）。
- * mysqli_query: 执行SQL语句，增删改查
- * mysqli_select_db: 选择数据库
- * mysqli_fetch_array(): 从查询结果去1条查询记录
- * mysqli_fetch_all()： 函数从结果集中取得所有行作为关联数组
- * mysqli_close: 关闭数据库
-</code></pre><p> 假设数据库的名称为mydb</p>
-</blockquote>
-<h3 id="连接数据库"><a href="#连接数据库" class="headerlink" title="连接数据库"></a>连接数据库</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">/**</span><br><span class="line">*&apos;localhost&apos;,  /* The host to connect to 连接MySQL地址 */     </span><br><span class="line">*&apos;root&apos;,      /* The user to connect as 连接MySQL用户名 */     </span><br><span class="line">*&apos;password&apos;,  /* The password to use 连接MySQL密码 */     </span><br><span class="line">*&apos;mydb&apos;);    /* The default database to query 连接数据库名称*/ </span><br><span class="line">/</span><br><span class="line">$connect = mysqli_connect(&quot;localhost&quot;,&quot;root&quot;,&quot;&quot;,&quot;mydb&quot;);</span><br></pre></td></tr></table></figure>
-<h3 id="创建数据表-person"><a href="#创建数据表-person" class="headerlink" title="创建数据表 person"></a>创建数据表 person</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">$create_table = &quot;create table mysql_table(id int NOT NULL AUTO_INCREMENT,PRIMARY KEY(id),name varchar(15),age int)&quot;;</span><br><span class="line">mysqli_query($con,$create_table);</span><br></pre></td></tr></table></figure>
-<h3 id="插入数据"><a href="#插入数据" class="headerlink" title="插入数据"></a>插入数据</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">   $insert1 = &quot;insert into mysql_table (`name`, `age`) values(&apos;yyy&apos;,90)&quot;;</span><br><span class="line">mysqli_query($con,$insert1);</span><br></pre></td></tr></table></figure>
-<h3 id="查询数据"><a href="#查询数据" class="headerlink" title="查询数据"></a>查询数据</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">$select1 = &quot;select * from mysql_table where age &gt; 20&quot;;</span><br><span class="line">$re_select1 = mysqli_query($con, $select1);</span><br><span class="line">print_r($re_select1);</span><br></pre></td></tr></table></figure>
-<h3 id="关闭数据"><a href="#关闭数据" class="headerlink" title="关闭数据"></a>关闭数据</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">mysqli_close($con);</span><br></pre></td></tr></table></figure>
-<h4 id="如何将创建的文档放到指定目录"><a href="#如何将创建的文档放到指定目录" class="headerlink" title="如何将创建的文档放到指定目录"></a>如何将创建的文档放到指定目录</h4><ul>
-<li>例如如何将创建的txt文件到指定的txt目录下，或者如何将拷贝后的图片放入img目录下</li>
-</ul>
-<div style="text-align:center"><br>    <img width="700" src="http://upload-images.jianshu.io/upload_images/7426605-aef25c06258a145e.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240"><br></div>
-
-
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">//html 文件</span><br><span class="line"></span><br><span class="line">   &lt;body&gt;</span><br><span class="line">	&lt;form action=&quot;../php/test.php&quot; method=&quot;post&quot; enctype=&quot;multipart/form-data&quot;&gt;</span><br><span class="line">		&lt;input type=&quot;file&quot; name=&quot;pic&quot; id=&quot;pic&quot; value=&quot;&quot; /&gt;</span><br><span class="line">		&lt;input type=&quot;submit&quot; name=&quot;submit&quot; value=&quot;提交&quot;/&gt;</span><br><span class="line">	&lt;/form&gt;</span><br><span class="line">&lt;/body&gt;</span><br></pre></td></tr></table></figure>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line">// php 文件</span><br><span class="line"></span><br><span class="line">&lt;?php</span><br><span class="line">	if(!empty($_POST[&apos;submit&apos;])) &#123;</span><br><span class="line">		if(!empty($_FILES[&apos;pic&apos;][&apos;name&apos;])) &#123;</span><br><span class="line">			$type = $_FILES[&apos;pic&apos;][&apos;type&apos;];</span><br><span class="line">			if($type == &quot;image/jpeg&quot; || $type == &quot;image/png&quot;) &#123;</span><br><span class="line">             </span><br><span class="line">                // 定义一个变量，存储相对该PHP的相对位置</span><br><span class="line">				$path = &quot;../img/&quot;;</span><br><span class="line">				//								path. 将拷贝完成的图片，拼接好指定目录</span><br><span class="line">				$result = move_uploaded_file($_FILES[&apos;pic&apos;][&apos;tmp_name&apos;],$path.$_FILES[&apos;pic&apos;][&apos;name&apos;]);</span><br><span class="line">			&#125;</span><br><span class="line">			if($result) &#123;</span><br><span class="line">				$val = $_FILES[&apos;pic&apos;][&apos;name&apos;];</span><br><span class="line">				// 在创建文件的时候将文件创建到指定位置</span><br><span class="line">				$fp = fopen(&quot;../txt/test.txt&quot;,&quot;a+&quot;);</span><br><span class="line">				fwrite($fp,$val);</span><br><span class="line">				fclose($fp);</span><br><span class="line">			&#125;		</span><br><span class="line">		&#125;		</span><br><span class="line">	&#125;</span><br><span class="line">?&gt;</span><br></pre></td></tr></table></figure>
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2017/11/22/mysqli用法/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
   
     <nav id="page-nav">
       <a class="extend prev" rel="prev" href="/">&laquo; Prev</a><a class="page-number" href="/">1</a><span class="page-number current">2</span><a class="page-number" href="/page/3/">3</a><a class="extend next" rel="next" href="/page/3/">Next &raquo;</a>
@@ -1180,11 +1137,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
           <ul class="article-tag-list" q-show="showTags">
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">浅谈OOP</a>
+                <a href="javascript:void(0)" class="js-tag color5">面向对象</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">面向对象</a>
+                <a href="javascript:void(0)" class="js-tag color1">浅谈OOP</a>
               </li>
             
             <div class="clearfix"></div>
