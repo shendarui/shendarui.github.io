@@ -158,6 +158,75 @@
           <div id="js-content" class="content-ll">
             
   
+    <article id="post-如何将创建的文档放到指定目录" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2017/11/23/如何将创建的文档放到指定目录/">如何将创建的文档放到指定目录</a>
+    </h1>
+  
+
+        
+        <a href="/2017/11/23/如何将创建的文档放到指定目录/" class="archive-article-date">
+  	<time datetime="2017-11-23T14:39:22.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-11-23</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h4 id="如何将创建的文档放到指定目录"><a href="#如何将创建的文档放到指定目录" class="headerlink" title="如何将创建的文档放到指定目录"></a>如何将创建的文档放到指定目录</h4><ul>
+<li>例如如何将创建的txt文件到指定的txt目录下，或者如何将拷贝后的图片放入img目录下</li>
+</ul>
+<div style="text-align:center"><br>    <img width="700" src="http://upload-images.jianshu.io/upload_images/7426605-aef25c06258a145e.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240"><br></div>
+
+
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">//html 文件</span><br><span class="line"></span><br><span class="line">   &lt;body&gt;</span><br><span class="line">	&lt;form action=&quot;../php/test.php&quot; method=&quot;post&quot; enctype=&quot;multipart/form-data&quot;&gt;</span><br><span class="line">		&lt;input type=&quot;file&quot; name=&quot;pic&quot; id=&quot;pic&quot; value=&quot;&quot; /&gt;</span><br><span class="line">		&lt;input type=&quot;submit&quot; name=&quot;submit&quot; value=&quot;提交&quot;/&gt;</span><br><span class="line">	&lt;/form&gt;</span><br><span class="line">&lt;/body&gt;</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line">// php 文件</span><br><span class="line"></span><br><span class="line">&lt;?php</span><br><span class="line">	if(!empty($_POST[&apos;submit&apos;])) &#123;</span><br><span class="line">		if(!empty($_FILES[&apos;pic&apos;][&apos;name&apos;])) &#123;</span><br><span class="line">			$type = $_FILES[&apos;pic&apos;][&apos;type&apos;];</span><br><span class="line">			if($type == &quot;image/jpeg&quot; || $type == &quot;image/png&quot;) &#123;</span><br><span class="line">             </span><br><span class="line">                // 定义一个变量，存储相对该PHP的相对位置</span><br><span class="line">				$path = &quot;../img/&quot;;</span><br><span class="line">				//								path. 将拷贝完成的图片，拼接好指定目录</span><br><span class="line">				$result = move_uploaded_file($_FILES[&apos;pic&apos;][&apos;tmp_name&apos;],$path.$_FILES[&apos;pic&apos;][&apos;name&apos;]);</span><br><span class="line">			&#125;</span><br><span class="line">			if($result) &#123;</span><br><span class="line">				$val = $_FILES[&apos;pic&apos;][&apos;name&apos;];</span><br><span class="line">				// 在创建文件的时候将文件创建到指定位置</span><br><span class="line">				$fp = fopen(&quot;../txt/test.txt&quot;,&quot;a+&quot;);</span><br><span class="line">				fwrite($fp,$val);</span><br><span class="line">				fclose($fp);</span><br><span class="line">			&#125;		</span><br><span class="line">		&#125;		</span><br><span class="line">	&#125;</span><br><span class="line">?&gt;</span><br></pre></td></tr></table></figure>
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2017/11/23/如何将创建的文档放到指定目录/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
     <article id="post-前后台小程序" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -940,97 +1009,9 @@ this;  //调用本次ajax请求时传递的options参数
 
 
   
-    <article id="XMLHttpRequest-AJAX" class="article article-type-XMLHttpRequest  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2017/11/14/AJAX/">XMLHttpRequest</a>
-    </h1>
-  
-
-        
-        <a href="/2017/11/14/AJAX/" class="archive-article-date">
-  	<time datetime="2017-11-14T13:06:47.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-11-14</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h2 id="创建XMLHttpRequest对象"><a href="#创建XMLHttpRequest对象" class="headerlink" title="创建XMLHttpRequest对象"></a>创建XMLHttpRequest对象</h2><p>Ajax是对Asc也能长荣偶数JavaScript+ XML的简写，这一技术弄呢狗狗向服务器请求额外的数据而无需卸载页面，Ajax技术的核心是XMLHttpRequest（简称XHR）对象，XHR为服务器发送请求和解析服务器响应提供了流畅的接口，能够以异步方式从服务器区获取更多信息而不必刷新页面。使用XML对象取得新数据然后再通过DOM将数据插入到页面中。<br><img src="http://upload-images.jianshu.io/upload_images/7426605-4515edd921cdd883.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="image.png"></p>
-<h2 id="XML请求"><a href="#XML请求" class="headerlink" title="XML请求"></a>XML请求</h2><ul>
-<li><h4 id="GET请求"><a href="#GET请求" class="headerlink" title="GET请求"></a>GET请求</h4>  对XHR而言，位于传入open（）方法的URL末尾的查询字符串必须经过正确的编码才行。使用GET请求经常发生一个错误，就是查询字符串格式有问题。查询字符串中每个参数的名称和值都必须使用encodeURIComponent()进行编码，然后才能放到URL的末尾，而且所用名-值都必须有&amp;分割</li>
-<li><h4 id="POST请求"><a href="#POST请求" class="headerlink" title="POST请求"></a>POST请求</h4>  服务器对post请求不一样，所以，服务器端必须有程序来读取发送过来的原始数据，并从中解析有用的部分。<br><img src="http://upload-images.jianshu.io/upload_images/7426605-758bd1c84499fbfb.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="image.png"></li>
-</ul>
-<p>通过上面的两个ajax的实例，我们可以看出get请求和post请求的一些特点：</p>
-<ol>
-<li><p>get请求：</p>
-<ul>
-<li>GET 请求可被缓存</li>
-<li>GET 请求保留在浏览器历史记录中</li>
-<li>GET 请求可被收藏为书签</li>
-<li>GET 请求不应在处理敏感数据时使用</li>
-<li>GET 请求有长度限制</li>
-<li>GET 请求只应当用于取回数据</li>
-</ul>
-</li>
-<li><p>post请求：</p>
-<ul>
-<li>POST 请求不会被缓存</li>
-<li>POST 请求不会保留在浏览器历史记录中</li>
-<li>POST 不能被收藏为书签</li>
-<li>POST 请求对数据长度没有要求<h2 id="XML响应"><a href="#XML响应" class="headerlink" title="XML响应"></a>XML响应</h2>responseText 将响应信息作为字符串返回。 XMLHTTP尝试将响应信息解码为Unicode字符串，XMLHTTP默认将响应数据的编码定为UTF-8，如果服务器返回的数据带BOM(byte-order mark)，XMLHTTP可以解码任何UCS-2 (big or little endian)或者UCS-4 数据。注意，如果服务器返回的是xml文档，此属性并不处理xml文档中的编码声明。你需要使用responseXML来处理。<br>js代码会等到服务器响应之后再继续执行。收到响应后，响应数据会自动填充XHR对象的属性，相关属性如下：<br>responseText：作为响应主体被返回的文本；<br>responseXML：作为相应的内容类型是text/xml或application/xml，这个属性中将保存包含着相应数据的XMLDOM文档；<br>status：相应的http状态；<br>statusText：http状态的说明。<br><img src="http://upload-images.jianshu.io/upload_images/7426605-9fc5a75070dc9b10.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="image.png"><br><img src="http://upload-images.jianshu.io/upload_images/7426605-615489ee7cc32445.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="image.png"><h2 id="XML-readyState"><a href="#XML-readyState" class="headerlink" title="XML readyState"></a>XML readyState</h2>在接收到响应之后，第一步检查status属性，当xhr.status为200时候，说明接受成功.<br>0：未初始化，尚未调用open()方法。<br>1.启动。已经调用open()方法，但尚未调用send()方法。<br>2.发送，已经调用send()方法，为接受到响应。<br>3.接受。已经接受部分响应数据。<br>4.完成。全部接受响应的数据，并且可以在客户端使用。<br><img src="http://upload-images.jianshu.io/upload_images/7426605-fc5c216ca48b3028.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="image.png"><br><img src="http://upload-images.jianshu.io/upload_images/7426605-42884c20c738ab1c.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="image.png"><br>当执行xhr.onload = function(){}方法的时候 表明XML已经响应完毕</li>
-</ul>
-</li>
-</ol>
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2017/11/14/AJAX/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
   
     <nav id="page-nav">
-      <a class="extend prev" rel="prev" href="/page/2/">&laquo; Prev</a><a class="page-number" href="/">1</a><a class="page-number" href="/page/2/">2</a><span class="page-number current">3</span>
+      <a class="extend prev" rel="prev" href="/page/2/">&laquo; Prev</a><a class="page-number" href="/">1</a><a class="page-number" href="/page/2/">2</a><span class="page-number current">3</span><a class="page-number" href="/page/4/">4</a><a class="extend next" rel="next" href="/page/4/">Next &raquo;</a>
     </nav>
   
 
@@ -1125,11 +1106,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
           <ul class="article-tag-list" q-show="showTags">
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">浅谈OOP</a>
+                <a href="javascript:void(0)" class="js-tag color5">面向对象</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">面向对象</a>
+                <a href="javascript:void(0)" class="js-tag color1">浅谈OOP</a>
               </li>
             
             <div class="clearfix"></div>

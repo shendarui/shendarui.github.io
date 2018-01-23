@@ -6,25 +6,18 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="http://yoursite.com">
-  <title>XMLHttpRequest | 大瑞</title>
+  <title>Node.js之Stream理解 | 大瑞</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="创建XMLHttpRequest对象Ajax是对Asc也能长荣偶数JavaScript+ XML的简写，这一技术弄呢狗狗向服务器请求额外的数据而无需卸载页面，Ajax技术的核心是XMLHttpRequest（简称XHR）对象，XHR为服务器发送请求和解析服务器响应提供了流畅的接口，能够以异步方式从服务器区获取更多信息而不必刷新页面。使用XML对象取得新数据然后再通过DOM将数据插入到页面中。 XM">
+  <meta name="description" content="在nodejs中可以通过fs模块读写文件，上篇文章页简单介绍了一下fs的用法 ####1. fs.readFile(filename,fn) 异步读取文件，filename是要读取的文件名称，如果是相对路径，则通过当前进程执行的路径来查找文件。 fn是回调函数，有两个参数 第一个参数err（如果没有报错，该值为null），进行操作时，应先判断err是否有值。 第二个参数是代表文件内容的Buffe">
 <meta property="og:type" content="article">
-<meta property="og:title" content="XMLHttpRequest">
-<meta property="og:url" content="http://yoursite.com/2017/11/14/AJAX/index.html">
+<meta property="og:title" content="Node.js之Stream理解">
+<meta property="og:url" content="http://yoursite.com/2018/01/23/Node-js之Stream理解/index.html">
 <meta property="og:site_name" content="大瑞">
-<meta property="og:description" content="创建XMLHttpRequest对象Ajax是对Asc也能长荣偶数JavaScript+ XML的简写，这一技术弄呢狗狗向服务器请求额外的数据而无需卸载页面，Ajax技术的核心是XMLHttpRequest（简称XHR）对象，XHR为服务器发送请求和解析服务器响应提供了流畅的接口，能够以异步方式从服务器区获取更多信息而不必刷新页面。使用XML对象取得新数据然后再通过DOM将数据插入到页面中。 XM">
-<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/7426605-4515edd921cdd883.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
-<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/7426605-758bd1c84499fbfb.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
-<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/7426605-9fc5a75070dc9b10.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
-<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/7426605-615489ee7cc32445.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
-<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/7426605-fc5c216ca48b3028.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
-<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/7426605-42884c20c738ab1c.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
-<meta property="og:updated_time" content="2017-11-17T13:17:19.000Z">
+<meta property="og:description" content="在nodejs中可以通过fs模块读写文件，上篇文章页简单介绍了一下fs的用法 ####1. fs.readFile(filename,fn) 异步读取文件，filename是要读取的文件名称，如果是相对路径，则通过当前进程执行的路径来查找文件。 fn是回调函数，有两个参数 第一个参数err（如果没有报错，该值为null），进行操作时，应先判断err是否有值。 第二个参数是代表文件内容的Buffe">
+<meta property="og:updated_time" content="2018-01-23T12:29:04.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="XMLHttpRequest">
-<meta name="twitter:description" content="创建XMLHttpRequest对象Ajax是对Asc也能长荣偶数JavaScript+ XML的简写，这一技术弄呢狗狗向服务器请求额外的数据而无需卸载页面，Ajax技术的核心是XMLHttpRequest（简称XHR）对象，XHR为服务器发送请求和解析服务器响应提供了流畅的接口，能够以异步方式从服务器区获取更多信息而不必刷新页面。使用XML对象取得新数据然后再通过DOM将数据插入到页面中。 XM">
-<meta name="twitter:image" content="http://upload-images.jianshu.io/upload_images/7426605-4515edd921cdd883.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta name="twitter:title" content="Node.js之Stream理解">
+<meta name="twitter:description" content="在nodejs中可以通过fs模块读写文件，上篇文章页简单介绍了一下fs的用法 ####1. fs.readFile(filename,fn) 异步读取文件，filename是要读取的文件名称，如果是相对路径，则通过当前进程执行的路径来查找文件。 fn是回调函数，有两个参数 第一个参数err（如果没有报错，该值为null），进行操作时，应先判断err是否有值。 第二个参数是代表文件内容的Buffe">
   
     <link rel="alternative" href="/atom.xml" title="大瑞" type="application/atom+xml">
   
@@ -164,52 +157,52 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            <article id="XMLHttpRequest-AJAX" class="article article-type-XMLHttpRequest " itemscope itemprop="blogPost">
+            <article id="post-Node-js之Stream理解" class="article article-type-post " itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
     <h1 class="article-title" itemprop="name">
-      XMLHttpRequest
+      Node.js之Stream理解
     </h1>
   
 
         
-        <a href="/2017/11/14/AJAX/" class="archive-article-date">
-  	<time datetime="2017-11-14T13:06:47.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-11-14</time>
+        <a href="/2018/01/23/Node-js之Stream理解/" class="archive-article-date">
+  	<time datetime="2018-01-23T12:26:49.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-01-23</time>
 </a>
         
       </header>
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h2 id="创建XMLHttpRequest对象"><a href="#创建XMLHttpRequest对象" class="headerlink" title="创建XMLHttpRequest对象"></a>创建XMLHttpRequest对象</h2><p>Ajax是对Asc也能长荣偶数JavaScript+ XML的简写，这一技术弄呢狗狗向服务器请求额外的数据而无需卸载页面，Ajax技术的核心是XMLHttpRequest（简称XHR）对象，XHR为服务器发送请求和解析服务器响应提供了流畅的接口，能够以异步方式从服务器区获取更多信息而不必刷新页面。使用XML对象取得新数据然后再通过DOM将数据插入到页面中。<br><img src="http://upload-images.jianshu.io/upload_images/7426605-4515edd921cdd883.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="image.png"></p>
-<h2 id="XML请求"><a href="#XML请求" class="headerlink" title="XML请求"></a>XML请求</h2><ul>
-<li><h4 id="GET请求"><a href="#GET请求" class="headerlink" title="GET请求"></a>GET请求</h4>  对XHR而言，位于传入open（）方法的URL末尾的查询字符串必须经过正确的编码才行。使用GET请求经常发生一个错误，就是查询字符串格式有问题。查询字符串中每个参数的名称和值都必须使用encodeURIComponent()进行编码，然后才能放到URL的末尾，而且所用名-值都必须有&amp;分割</li>
-<li><h4 id="POST请求"><a href="#POST请求" class="headerlink" title="POST请求"></a>POST请求</h4>  服务器对post请求不一样，所以，服务器端必须有程序来读取发送过来的原始数据，并从中解析有用的部分。<br><img src="http://upload-images.jianshu.io/upload_images/7426605-758bd1c84499fbfb.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="image.png"></li>
-</ul>
-<p>通过上面的两个ajax的实例，我们可以看出get请求和post请求的一些特点：</p>
-<ol>
-<li><p>get请求：</p>
+        <p>在nodejs中可以通过fs模块读写文件，上篇文章页简单介绍了一下fs的用法</p>
+<p>####1. fs.readFile(filename,fn)</p>
+<p>异步读取文件，filename是要读取的文件名称，如果是相对路径，则通过当前进程执行的路径来查找文件。</p>
+<p>fn是回调函数，有两个参数</p>
+<p>第一个参数err（如果没有报错，该值为null），进行操作时，应先判断err是否有值。</p>
+<p>第二个参数是代表文件内容的Buffer实例。</p>
+<p>####2. fs.writeFile(filename,content,[,encode],fn)</p>
+<p>异步写入文件，content是要写入的内容，encode为编码格式，默认是utf-8。</p>
+<p>既然有异步，自然也会有同步，在每个异步函数后面加上Sync。</p>
+<p>上面几个接口，无论是异步是同步，都是等文件读取完成才进行操作的。</p>
+<p>如果操作的文件是一些小文件，这种操作是没有问题。</p>
+<p>但是在服务器端，文件体积一般很大，用这种方式效率低，导致线程阻塞，甚至会因为内存不足而崩溃。</p>
+<p>所以就有了stream</p>
+<p>nodejs中Stream是EventEmitter的实现，你可以理解为程序后台打开了一个文件（不占用主线程）<br>程序会一点点的读取（写入）文件</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">var fs = require(&apos;fs&apos;);</span><br><span class="line">// 创建一个可读流</span><br><span class="line">var readStream = fs.createReadStream(&apos;/path/to/source&apos;);</span><br><span class="line">var writeStream = fs.createWriteStream(&apos;/path/to/dest&apos;);</span><br><span class="line"> </span><br><span class="line">readStream.on(&apos;data&apos;, function(chunk)&#123;</span><br><span class="line">  // 可读流收到data事件时，将内容写入到可写流</span><br><span class="line">  writeStream.write(chunk);</span><br><span class="line">&#125;);</span><br><span class="line"> </span><br><span class="line">readStream.on(&apos;end&apos;, function()&#123;</span><br><span class="line">  // 当可读流读取完成，会发出end事件，这时我们要把可写流关闭</span><br><span class="line">  writeStream.end();</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+<p>当调用fs.createReadStream时，相当于创建一个文件读取流。<br>可以通过监听Data事件，来读取的部分数据，来进行一些操作。也可以用pipe的写法</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">var http = require(&quot;http&quot;);</span><br><span class="line">var url = require(&quot;url&quot;);</span><br><span class="line">var fs = require(&quot;fs&quot;);</span><br><span class="line">var server = http.createServer(function (req,res) &#123;</span><br><span class="line">    var pathname = url.parse(req.url,true).pathname;</span><br><span class="line">    if(pathname == &quot;/&quot; || pathname == &quot;/index&quot;)&#123;</span><br><span class="line">        var rs = fs.createReadStream(&quot;./index.html&quot;);</span><br><span class="line">        rs.pipe(res);</span><br><span class="line">    &#125;else if(pathname == &quot;/goods&quot;)&#123;</span><br><span class="line">        var rs = fs.createReadStream(&quot;./goods.html&quot;);</span><br><span class="line">        rs.pipe(res);</span><br><span class="line">    &#125;else if(pathname != &quot;/favicon.ico&quot;)&#123;</span><br><span class="line">        var rs = fs.createReadStream(&quot;.&quot;+pathname);</span><br><span class="line">        rs.pipe(res);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;)</span><br><span class="line">server.listen(8787);</span><br></pre></td></tr></table></figure>
+<p>###总结</p>
+<p>通过上述例子，可以知道stream应该还拥有如何合并等更复杂的应用方式。总之整体上符合如下特性：</p>
 <ul>
-<li>GET 请求可被缓存</li>
-<li>GET 请求保留在浏览器历史记录中</li>
-<li>GET 请求可被收藏为书签</li>
-<li>GET 请求不应在处理敏感数据时使用</li>
-<li>GET 请求有长度限制</li>
-<li>GET 请求只应当用于取回数据</li>
+<li>Stream分为readable、writeable</li>
+<li>Stream通过pipe方法控制流向</li>
+<li>httpServer和httpClient和flie system 和 process.stdin\out\err通常可以作为Stream</li>
+<li>Stream可以被on转化为普通的变量，普通变量可以被write转换成Stream</li>
+<li>Stream自身可以被拆分、合并、过滤</li>
 </ul>
-</li>
-<li><p>post请求：</p>
-<ul>
-<li>POST 请求不会被缓存</li>
-<li>POST 请求不会保留在浏览器历史记录中</li>
-<li>POST 不能被收藏为书签</li>
-<li>POST 请求对数据长度没有要求<h2 id="XML响应"><a href="#XML响应" class="headerlink" title="XML响应"></a>XML响应</h2>responseText 将响应信息作为字符串返回。 XMLHTTP尝试将响应信息解码为Unicode字符串，XMLHTTP默认将响应数据的编码定为UTF-8，如果服务器返回的数据带BOM(byte-order mark)，XMLHTTP可以解码任何UCS-2 (big or little endian)或者UCS-4 数据。注意，如果服务器返回的是xml文档，此属性并不处理xml文档中的编码声明。你需要使用responseXML来处理。<br>js代码会等到服务器响应之后再继续执行。收到响应后，响应数据会自动填充XHR对象的属性，相关属性如下：<br>responseText：作为响应主体被返回的文本；<br>responseXML：作为相应的内容类型是text/xml或application/xml，这个属性中将保存包含着相应数据的XMLDOM文档；<br>status：相应的http状态；<br>statusText：http状态的说明。<br><img src="http://upload-images.jianshu.io/upload_images/7426605-9fc5a75070dc9b10.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="image.png"><br><img src="http://upload-images.jianshu.io/upload_images/7426605-615489ee7cc32445.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="image.png"><h2 id="XML-readyState"><a href="#XML-readyState" class="headerlink" title="XML readyState"></a>XML readyState</h2>在接收到响应之后，第一步检查status属性，当xhr.status为200时候，说明接受成功.<br>0：未初始化，尚未调用open()方法。<br>1.启动。已经调用open()方法，但尚未调用send()方法。<br>2.发送，已经调用send()方法，为接受到响应。<br>3.接受。已经接受部分响应数据。<br>4.完成。全部接受响应的数据，并且可以在客户端使用。<br><img src="http://upload-images.jianshu.io/upload_images/7426605-fc5c216ca48b3028.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="image.png"><br><img src="http://upload-images.jianshu.io/upload_images/7426605-42884c20c738ab1c.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="image.png"><br>当执行xhr.onload = function(){}方法的时候 表明XML已经响应完毕</li>
-</ul>
-</li>
-</ol>
 
       
 
@@ -299,7 +292,7 @@
     <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
     <p>扫一扫，分享到微信</p>
     <div class="wx-qrcode">
-      <img src="//pan.baidu.com/share/qrcode?url=http://yoursite.com/2017/11/14/AJAX/" alt="微信分享二维码">
+      <img src="//pan.baidu.com/share/qrcode?url=http://yoursite.com/2018/01/23/Node-js之Stream理解/" alt="微信分享二维码">
     </div>
 </div>
 
@@ -313,15 +306,11 @@
   
 <nav id="article-nav">
   
-    <a href="/2017/11/15/JSONP 的工作原理/" id="article-nav-newer" class="article-nav-link-wrap">
-      <i class="icon-circle-left"></i>
-      <div class="article-nav-title">
-        
-          JSONP 的工作原理
-        
-      </div>
-    </a>
   
+    <a href="/2018/01/22/nodeJs使用教程/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">nodeJs使用教程</div>
+      <i class="icon-circle-right"></i>
+    </a>
   
 </nav>
 
@@ -347,7 +336,7 @@
   
   <div class="duoshuo">
 	<!-- 多说评论框 start -->
-	<div class="ds-thread" data-thread-key="AJAX" data-title="XMLHttpRequest" data-url="http://yoursite.com/2017/11/14/AJAX/"></div>
+	<div class="ds-thread" data-thread-key="Node-js之Stream理解" data-title="Node.js之Stream理解" data-url="http://yoursite.com/2018/01/23/Node-js之Stream理解/"></div>
 	<!-- 多说评论框 end -->
 	<!-- 多说公共JS代码 start (一个网页只需插入一次) -->
 	<script type="text/javascript">
@@ -369,7 +358,7 @@
   
 
   
-  <div id="SOHUCS" sid="AJAX" ></div> 
+  <div id="SOHUCS" sid="Node-js之Stream理解" ></div> 
 <script charset="utf-8" type="text/javascript" src="//changyan.sohu.com/upload/changyan.js" ></script>
 <script type="text/javascript">
     window.changyan.api.config({

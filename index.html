@@ -158,6 +158,94 @@
           <div id="js-content" class="content-ll">
             
   
+    <article id="post-Node-js之Stream理解" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2018/01/23/Node-js之Stream理解/">Node.js之Stream理解</a>
+    </h1>
+  
+
+        
+        <a href="/2018/01/23/Node-js之Stream理解/" class="archive-article-date">
+  	<time datetime="2018-01-23T12:26:49.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-01-23</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>在nodejs中可以通过fs模块读写文件，上篇文章页简单介绍了一下fs的用法</p>
+<p>####1. fs.readFile(filename,fn)</p>
+<p>异步读取文件，filename是要读取的文件名称，如果是相对路径，则通过当前进程执行的路径来查找文件。</p>
+<p>fn是回调函数，有两个参数</p>
+<p>第一个参数err（如果没有报错，该值为null），进行操作时，应先判断err是否有值。</p>
+<p>第二个参数是代表文件内容的Buffer实例。</p>
+<p>####2. fs.writeFile(filename,content,[,encode],fn)</p>
+<p>异步写入文件，content是要写入的内容，encode为编码格式，默认是utf-8。</p>
+<p>既然有异步，自然也会有同步，在每个异步函数后面加上Sync。</p>
+<p>上面几个接口，无论是异步是同步，都是等文件读取完成才进行操作的。</p>
+<p>如果操作的文件是一些小文件，这种操作是没有问题。</p>
+<p>但是在服务器端，文件体积一般很大，用这种方式效率低，导致线程阻塞，甚至会因为内存不足而崩溃。</p>
+<p>所以就有了stream</p>
+<p>nodejs中Stream是EventEmitter的实现，你可以理解为程序后台打开了一个文件（不占用主线程）<br>程序会一点点的读取（写入）文件</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">var fs = require(&apos;fs&apos;);</span><br><span class="line">// 创建一个可读流</span><br><span class="line">var readStream = fs.createReadStream(&apos;/path/to/source&apos;);</span><br><span class="line">var writeStream = fs.createWriteStream(&apos;/path/to/dest&apos;);</span><br><span class="line"> </span><br><span class="line">readStream.on(&apos;data&apos;, function(chunk)&#123;</span><br><span class="line">  // 可读流收到data事件时，将内容写入到可写流</span><br><span class="line">  writeStream.write(chunk);</span><br><span class="line">&#125;);</span><br><span class="line"> </span><br><span class="line">readStream.on(&apos;end&apos;, function()&#123;</span><br><span class="line">  // 当可读流读取完成，会发出end事件，这时我们要把可写流关闭</span><br><span class="line">  writeStream.end();</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+<p>当调用fs.createReadStream时，相当于创建一个文件读取流。<br>可以通过监听Data事件，来读取的部分数据，来进行一些操作。也可以用pipe的写法</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">var http = require(&quot;http&quot;);</span><br><span class="line">var url = require(&quot;url&quot;);</span><br><span class="line">var fs = require(&quot;fs&quot;);</span><br><span class="line">var server = http.createServer(function (req,res) &#123;</span><br><span class="line">    var pathname = url.parse(req.url,true).pathname;</span><br><span class="line">    if(pathname == &quot;/&quot; || pathname == &quot;/index&quot;)&#123;</span><br><span class="line">        var rs = fs.createReadStream(&quot;./index.html&quot;);</span><br><span class="line">        rs.pipe(res);</span><br><span class="line">    &#125;else if(pathname == &quot;/goods&quot;)&#123;</span><br><span class="line">        var rs = fs.createReadStream(&quot;./goods.html&quot;);</span><br><span class="line">        rs.pipe(res);</span><br><span class="line">    &#125;else if(pathname != &quot;/favicon.ico&quot;)&#123;</span><br><span class="line">        var rs = fs.createReadStream(&quot;.&quot;+pathname);</span><br><span class="line">        rs.pipe(res);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;)</span><br><span class="line">server.listen(8787);</span><br></pre></td></tr></table></figure>
+<p>###总结</p>
+<p>通过上述例子，可以知道stream应该还拥有如何合并等更复杂的应用方式。总之整体上符合如下特性：</p>
+<ul>
+<li>Stream分为readable、writeable</li>
+<li>Stream通过pipe方法控制流向</li>
+<li>httpServer和httpClient和flie system 和 process.stdin\out\err通常可以作为Stream</li>
+<li>Stream可以被on转化为普通的变量，普通变量可以被write转换成Stream</li>
+<li>Stream自身可以被拆分、合并、过滤</li>
+</ul>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2018/01/23/Node-js之Stream理解/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
     <article id="post-nodeJs使用教程" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -1216,74 +1304,9 @@ context.drawImage(img,0,0);
 
 
   
-    <article id="post-构造函数" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2017/12/27/构造函数/">构造函数</a>
-    </h1>
-  
-
-        
-        <a href="/2017/12/27/构造函数/" class="archive-article-date">
-  	<time datetime="2017-12-27T14:28:39.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-12-27</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h3 id="1-构造函数-canvas小球碰撞"><a href="#1-构造函数-canvas小球碰撞" class="headerlink" title="1. 构造函数   canvas小球碰撞"></a>1. 构造函数   canvas小球碰撞</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br></pre></td><td class="code"><pre><span class="line">&lt;!DOCTYPE html&gt;</span><br><span class="line">&lt;html&gt;</span><br><span class="line">	&lt;head&gt;</span><br><span class="line">		&lt;meta charset=&quot;UTF-8&quot;&gt;</span><br><span class="line">		&lt;title&gt;构造函数运动球&lt;/title&gt;</span><br><span class="line">		&lt;style type=&quot;text/css&quot;&gt;</span><br><span class="line">			canvas &#123;</span><br><span class="line">				border: 1px solid red;</span><br><span class="line">			&#125;</span><br><span class="line">		&lt;/style&gt;</span><br><span class="line">	&lt;/head&gt;</span><br><span class="line">	&lt;body&gt;</span><br><span class="line">		&lt;canvas id=&quot;myCanvas&quot; width=&quot;500&quot; height=&quot;400&quot;&gt;你的浏览器不支持canvas&lt;/canvas&gt;</span><br><span class="line">	&lt;/body&gt;</span><br><span class="line">	&lt;script type=&quot;text/javascript&quot;&gt;</span><br><span class="line">		var canvas = document.getElementById(&quot;myCanvas&quot;);</span><br><span class="line">		var context = canvas.getContext(&quot;2d&quot;);</span><br><span class="line">		</span><br><span class="line">		//定义球的构造函数</span><br><span class="line">		function Ball(x,y,r,color,speedx,speedy)&#123;</span><br><span class="line">			this.x = x;</span><br><span class="line">			this.y = y;</span><br><span class="line">			this.r = r;</span><br><span class="line">			this.color = color;</span><br><span class="line">			this.speedx = speedx;</span><br><span class="line">			this.speedy = speedy;</span><br><span class="line">		&#125;</span><br><span class="line">		//花的方法</span><br><span class="line">		Ball.prototype.draw = function()&#123;</span><br><span class="line">			context.beginPath();</span><br><span class="line">			context.arc(this.x,this.y,this.r,0,Math.PI*2);</span><br><span class="line">			context.fillStyle = this.color;</span><br><span class="line">			context.fill();</span><br><span class="line">		&#125;</span><br><span class="line">		//球的移动方法</span><br><span class="line">		Ball.prototype.move = function()&#123;</span><br><span class="line">			this.x += this.speedx;</span><br><span class="line">			this.y += this.speedy;</span><br><span class="line">			//碰壁检测</span><br><span class="line">			if(this.x &lt; this.r || this.x &gt; canvas.width - this.r)&#123;</span><br><span class="line">				this.speedx *= -1;</span><br><span class="line">			&#125;</span><br><span class="line">			if(this.y &lt; this.r || this.y &gt; canvas.height - this.r)&#123;</span><br><span class="line">				this.speedy *= -1;</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line">		</span><br><span class="line">		//随机数函数</span><br><span class="line">		function randomNum(min,max)&#123;</span><br><span class="line">			return parseInt(Math.random()*(max-min)+min);</span><br><span class="line">		&#125;</span><br><span class="line">		function randomColor()&#123;</span><br><span class="line">			return &quot;rgb(&quot;+randomNum(0,256)+&quot;,&quot;+randomNum(0,256)+&quot;,&quot;+randomNum(0,256)+&quot;)&quot;;</span><br><span class="line">		&#125;</span><br><span class="line">		var arr = [];</span><br><span class="line">		for(var i = 0;i &lt; 100;i++)&#123;</span><br><span class="line">			var r = randomNum(1,50);</span><br><span class="line">			var x = randomNum(r,canvas.width - r);</span><br><span class="line">			var y = randomNum(r,canvas.height - r);</span><br><span class="line">			var speedx = randomNum(1,10);</span><br><span class="line">			var speedy = randomNum(1,10);</span><br><span class="line">			var color = randomColor();</span><br><span class="line">			var newBall = new Ball(x,y,r,color,speedx,speedy);</span><br><span class="line">			arr.push(newBall);</span><br><span class="line">		&#125;</span><br><span class="line">		</span><br><span class="line">		//实例化球</span><br><span class="line">		function act()&#123;</span><br><span class="line">			context.clearRect(0,0,canvas.width,canvas.height);</span><br><span class="line">			for(var i = 0;i &lt; arr.length;i++)&#123;</span><br><span class="line">				arr[i].draw();</span><br><span class="line">				arr[i].move();</span><br><span class="line">			&#125;</span><br><span class="line">			window.requestAnimationFrame(act);</span><br><span class="line">		&#125;</span><br><span class="line">		act();</span><br><span class="line">	&lt;/script&gt;</span><br><span class="line">&lt;/html&gt;</span><br></pre></td></tr></table></figure>
-<h3 id="2-类-canvas小球碰撞"><a href="#2-类-canvas小球碰撞" class="headerlink" title="2. 类   canvas小球碰撞"></a>2. 类   canvas小球碰撞</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br></pre></td><td class="code"><pre><span class="line">&lt;!DOCTYPE html&gt;</span><br><span class="line">&lt;html&gt;</span><br><span class="line">	&lt;head&gt;</span><br><span class="line">		&lt;meta charset=&quot;UTF-8&quot;&gt;</span><br><span class="line">		&lt;title&gt;构造函数运动球&lt;/title&gt;</span><br><span class="line">		&lt;style type=&quot;text/css&quot;&gt;</span><br><span class="line">			canvas &#123;</span><br><span class="line">				border: 1px solid red;</span><br><span class="line">			&#125;</span><br><span class="line">		&lt;/style&gt;</span><br><span class="line">	&lt;/head&gt;</span><br><span class="line">	&lt;body&gt;</span><br><span class="line">		&lt;canvas id=&quot;myCanvas&quot; width=&quot;500&quot; height=&quot;400&quot;&gt;你的浏览器不支持canvas&lt;/canvas&gt;</span><br><span class="line">	&lt;/body&gt;</span><br><span class="line">	&lt;script type=&quot;text/javascript&quot;&gt;</span><br><span class="line">		var canvas = document.getElementById(&quot;myCanvas&quot;);</span><br><span class="line">		var context = canvas.getContext(&quot;2d&quot;);</span><br><span class="line">		class Ball&#123;</span><br><span class="line">			constructor(x,y,r,color,speedx,speedy)&#123;</span><br><span class="line">				this.x = x;</span><br><span class="line">				this.y = y;</span><br><span class="line">				this.r = r;</span><br><span class="line">				this.color = color;</span><br><span class="line">				this.speedx = speedx;</span><br><span class="line">				this.speedy = speedy;</span><br><span class="line">			&#125;</span><br><span class="line">			//花的方法</span><br><span class="line">			draw()&#123;</span><br><span class="line">				context.beginPath();</span><br><span class="line">				context.arc(this.x,this.y,this.r,0,Math.PI*2);</span><br><span class="line">				context.fillStyle = this.color;</span><br><span class="line">				context.fill();</span><br><span class="line">			&#125;</span><br><span class="line">			//球的移动方法</span><br><span class="line">			move()&#123;</span><br><span class="line">				this.x += this.speedx;</span><br><span class="line">				this.y += this.speedy;</span><br><span class="line">				//碰壁检测</span><br><span class="line">				if(this.x &lt; this.r || this.x &gt; canvas.width - this.r)&#123;</span><br><span class="line">					this.speedx *= -1;</span><br><span class="line">				&#125;</span><br><span class="line">				if(this.y &lt; this.r || this.y &gt; canvas.height - this.r)&#123;</span><br><span class="line">					this.speedy *= -1;</span><br><span class="line">				&#125;</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line">		</span><br><span class="line">		//随机数函数</span><br><span class="line">		function randomNum(min,max)&#123;</span><br><span class="line">			return parseInt(Math.random()*(max-min)+min);</span><br><span class="line">		&#125;</span><br><span class="line">		function randomColor()&#123;</span><br><span class="line">			return &quot;rgb(&quot;+randomNum(0,256)+&quot;,&quot;+randomNum(0,256)+&quot;,&quot;+randomNum(0,256)+&quot;)&quot;;</span><br><span class="line">		&#125;</span><br><span class="line">		var arr = [];</span><br><span class="line">		for(var i = 0;i &lt; 100;i++)&#123;</span><br><span class="line">			var r = randomNum(1,50);</span><br><span class="line">			var x = randomNum(r,canvas.width - r);</span><br><span class="line">			var y = randomNum(r,canvas.height - r);</span><br><span class="line">			var speedx = randomNum(1,10);</span><br><span class="line">			var speedy = randomNum(1,10);</span><br><span class="line">			var color = randomColor();</span><br><span class="line">			var newBall = new Ball(x,y,r,color,speedx,speedy);</span><br><span class="line">			arr.push(newBall);</span><br><span class="line">		&#125;</span><br><span class="line">		</span><br><span class="line">		//实例化球</span><br><span class="line">		function act()&#123;</span><br><span class="line">			context.clearRect(0,0,canvas.width,canvas.height);</span><br><span class="line">			for(var i = 0;i &lt; arr.length;i++)&#123;</span><br><span class="line">				arr[i].draw();</span><br><span class="line">				arr[i].move();</span><br><span class="line">			&#125;</span><br><span class="line">			window.requestAnimationFrame(act);</span><br><span class="line">		&#125;</span><br><span class="line">		act();</span><br><span class="line">	&lt;/script&gt;</span><br><span class="line">&lt;/html&gt;</span><br></pre></td></tr></table></figure>
-<p>有上可以看出，用类写面向对象的方法，思路更清晰。当然，在考虑兼容的情况下，还是使用构造函数</p>
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2017/12/27/构造函数/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
   
     <nav id="page-nav">
-      <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="page-number" href="/page/3/">3</a><a class="extend next" rel="next" href="/page/2/">Next &raquo;</a>
+      <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="page-number" href="/page/3/">3</a><a class="page-number" href="/page/4/">4</a><a class="extend next" rel="next" href="/page/2/">Next &raquo;</a>
     </nav>
   
 
@@ -1378,11 +1401,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
           <ul class="article-tag-list" q-show="showTags">
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">浅谈OOP</a>
+                <a href="javascript:void(0)" class="js-tag color5">面向对象</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">面向对象</a>
+                <a href="javascript:void(0)" class="js-tag color1">浅谈OOP</a>
               </li>
             
             <div class="clearfix"></div>
