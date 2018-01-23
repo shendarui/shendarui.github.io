@@ -158,6 +158,88 @@
           <div id="js-content" class="content-ll">
             
   
+    <article id="post-formidable模块的方法和属性" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2018/01/23/formidable模块的方法和属性/">formidable模块的方法和属性</a>
+    </h1>
+  
+
+        
+        <a href="/2018/01/23/formidable模块的方法和属性/" class="archive-article-date">
+  	<time datetime="2018-01-23T13:47:04.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-01-23</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>formidable模块实现了上传和编码图片和视频。它支持GB级上传数据处理，支持多种客户端数据提交。</p>
+<ol>
+<li>引入formidable模板</li>
+</ol>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">var http = require(&quot;http&quot;);</span><br><span class="line">var fs = require(&quot;fs&quot;);</span><br><span class="line">var url = require(&quot;url&quot;);</span><br><span class="line">var formidable = require(&quot;formidable&quot;);</span><br></pre></td></tr></table></figure>
+<ol>
+<li>创建服务器，然后通过GET方式获取到URL，继而找到我们在前台输入的路径</li>
+</ol>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">var pathname = url.parse(req.url,true).pathname;</span><br></pre></td></tr></table></figure>
+<ol>
+<li>创建一个名为upload的HTML，通过form实现图片上传</li>
+</ol>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">&lt;form action=&quot;/upload&quot; method=&quot;post&quot; enctype=&quot;multipart/form-data&quot;&gt;</span><br><span class="line">        姓名：&lt;input type=&quot;text&quot; name=&quot;username&quot;&gt;&lt;br /&gt;</span><br><span class="line">        年龄：&lt;input type=&quot;text&quot; name=&quot;age&quot;&gt;&lt;br /&gt;</span><br><span class="line">        图像：&lt;input type=&quot;file&quot; name=&quot;img&quot;&gt;&lt;br /&gt;</span><br><span class="line">        &lt;input type=&quot;submit&quot; value=&quot;提交&quot;&gt;&lt;br /&gt;</span><br><span class="line">    &lt;/form&gt;</span><br></pre></td></tr></table></figure>
+<ol>
+<li>通过pathname可以判断用户是否提交信息。</li>
+</ol>
+<p>var form = new formidable.IncomingForm();创建一个form表单</p>
+<p>form里面的parse方法解析node.js中request请求中包含的form表单提交的数据，回调函数里面会有我们在前端提交的字段（fileds），以及图片的详细信息（files）。<br>返回的字段是一个对象，如果想保存到文档里面，需要解析成字符串。</p>
+<p>如果想吧上传后的图片保存到文件夹里面，我们首先要回的图片的路径，然后看是否有这个文件夹，如果没有创建一个文件夹，将图片保存到该路径下，并已该图片的原始名命名</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">if(pathname == &quot;/upload&quot;)&#123;</span><br><span class="line">        var form = new formidable.IncomingForm();</span><br><span class="line">        form.parse(req,function (err,fileds,files) &#123;</span><br><span class="line">            if(err)&#123;</span><br><span class="line">                return console.log(err);</span><br><span class="line">            &#125;else&#123;</span><br><span class="line">                var dataFileds = JSON.stringify(fileds);</span><br><span class="line">                fs.writeFileSync(&quot;22.txt&quot;,dataFileds);</span><br><span class="line">                console.log(files);</span><br><span class="line">                var rs = fs.createReadStream(files.img.path);</span><br><span class="line">                if(!fs.existsSync(&quot;img&quot;))&#123;</span><br><span class="line">                    fs.mkdirSync(&quot;img&quot;);</span><br><span class="line">                &#125;</span><br><span class="line">                var ws = fs.createWriteStream(&quot;./img/&quot;+files.img.name);</span><br><span class="line">                rs.pipe(ws);</span><br><span class="line">                rs.on(&quot;end&quot;,function () &#123;</span><br><span class="line">                    res.setHeader(&quot;Content-type&quot;,&quot;text/html;charset=utf-8&quot;)</span><br><span class="line">                    res.write(&quot;上传成功&quot;);</span><br><span class="line">                    res.end();</span><br><span class="line">                &#125;)</span><br><span class="line">            &#125;</span><br></pre></td></tr></table></figure>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2018/01/23/formidable模块的方法和属性/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
     <article id="post-Node-js之Stream理解" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -1223,87 +1305,6 @@
 
 
   
-    <article id="post-canvas版像素碰撞" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2017/12/28/canvas版像素碰撞/">canvas版像素碰撞</a>
-    </h1>
-  
-
-        
-        <a href="/2017/12/28/canvas版像素碰撞/" class="archive-article-date">
-  	<time datetime="2017-12-28T14:21:11.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-12-28</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h4 id="canvas像素碰撞思路："><a href="#canvas像素碰撞思路：" class="headerlink" title="canvas像素碰撞思路："></a>canvas像素碰撞思路：</h4><ul>
-<li>创建两个图片</li>
-<li>将第一张图片拷贝到canvas中，带该图片加载完毕之后</li>
-<li>拖动第二张图片，用于测试像素碰撞</li>
-<li>像素碰撞的前提必须是先普通碰撞</li>
-<li>像素碰撞，两个图片交叉的地方，一定存在一个点，在目标图中的透明度不为0，并且在原图中的透明度不为0。</li>
-</ul>
-<h4 id="canvas像素碰撞解释："><a href="#canvas像素碰撞解释：" class="headerlink" title="canvas像素碰撞解释："></a>canvas像素碰撞解释：</h4><ul>
-<li><p>function Rect(x,y,w,h)<br>用于后期获取目标图片与原图片交叉所得到的位置，因为canvas没有节点，不能通过节点找到我们想要的东西。<br><img src="http://upload-images.jianshu.io/upload_images/7426605-5474933673b5e2da.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="image.png"></p>
-</li>
-<li><p>context.drawImage(img,0,0);<br>context.drawImage(img2,x,y);<br>将两张图片绘制到canvas上</p>
-</li>
-<li>context.drawImage(img,0,0);<br>var imgData1 = context.getImageData(nrect.res.x,nrect.res.y,nrect.res.w,nrect.res.h);<br>canvas每次保存最后一个绘画的内容，所以在晴空画布之后重新绘制图片1，并获取到目标图与原图交叉的地方在目标图中的所有像素点。</li>
-<li>context.clearRect(0,0,canvas.width,canvas.height);<pre><code>context.drawImage(img2,x,y);
-var imgData2 = context.getImageData(nrect.res.x,nrect.res.y,nrect.res.w,nrect.res.h);
-context.drawImage(img,0,0);
-</code></pre>与上面一样，canvas只保存最后一次绘制的内容，所以每次要清空画布的时候还有将图片绘制上去</li>
-<li>for(var i = 0;i &lt; imgData1.data.length;i+=4)<br>获取到的像素点每4个为一组，即RGBA……一次循环，所以遍历交叉的地方的像素点时，只要遍历没一组中的最后一个值是否大于0，如果大于0 表示该点不是透明色。表明两图像素碰撞</li>
-</ul>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br></pre></td><td class="code"><pre><span class="line">&lt;script type=&quot;text/javascript&quot;&gt;</span><br><span class="line">	var canvas = document.getElementById(&quot;myCanvas&quot;);</span><br><span class="line">	var context = canvas.getContext(&quot;2d&quot;);</span><br><span class="line">	var img = new Image();</span><br><span class="line">	img.src = &quot;../../canvas进阶/55.png&quot;;</span><br><span class="line">	var img2 = new Image();</span><br><span class="line">	img2.src = &quot;../../file/Play.png&quot;;</span><br><span class="line">	function Rect(x,y,w,h)&#123;</span><br><span class="line">		this.x = x;</span><br><span class="line">		this.y = y;</span><br><span class="line">		this.w = w;</span><br><span class="line">		this.h = h;</span><br><span class="line">	&#125;</span><br><span class="line">	img.onload = function()&#123;</span><br><span class="line">		context.beginPath();</span><br><span class="line">		context.drawImage(img,0,0);</span><br><span class="line">		var rect1 = new Rect(0,0,img.width,img.height);</span><br><span class="line">		canvas.onmousedown = function()&#123;</span><br><span class="line">			canvas.onmousemove = function(e)&#123;</span><br><span class="line">				context.clearRect(0,0,canvas.width,canvas.height);</span><br><span class="line">				var ev = window.event || e;</span><br><span class="line">				var x = ev.clientX - canvas.offsetLeft;</span><br><span class="line">				var y = ev.clientY - canvas.offsetTop;</span><br><span class="line">				context.drawImage(img,0,0);</span><br><span class="line">				context.drawImage(img2,x,y);</span><br><span class="line">				var rect2 = new Rect(x,y,img2.width,img2.height);</span><br><span class="line">				var nrect = isCrash(rect1,rect2);</span><br><span class="line">				if(nrect.judeg)&#123;</span><br><span class="line">					console.log(&quot;普通碰撞&quot;);</span><br><span class="line">					context.drawImage(img,0,0);</span><br><span class="line">					var imgData1 = context.getImageData(nrect.res.x,nrect.res.y,nrect.res.w,nrect.res.h);</span><br><span class="line">					context.clearRect(0,0,canvas.width,canvas.height);</span><br><span class="line">					context.drawImage(img2,x,y);</span><br><span class="line">					var imgData2 = context.getImageData(nrect.res.x,nrect.res.y,nrect.res.w,nrect.res.h);</span><br><span class="line">					context.drawImage(img,0,0);</span><br><span class="line">					for(var i = 0;i &lt; imgData1.data.length;i+=4)&#123;</span><br><span class="line">						if(imgData1.data[i+3] &gt; 0 &amp;&amp; imgData2.data[i+3] &gt; 0)&#123;</span><br><span class="line">							console.log(&quot;像素碰撞&quot;);</span><br><span class="line">							break;</span><br><span class="line">						&#125;</span><br><span class="line">					&#125;</span><br><span class="line">				&#125;</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line">		document.onmouseup = function()&#123;</span><br><span class="line">			canvas.onmousemove = &quot;&quot;;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">	function isCrash(rect1,rect2)&#123;</span><br><span class="line">		var nMinx = Math.max(rect1.x,rect2.x);</span><br><span class="line">		var nMiny = Math.max(rect1.y,rect2.y);</span><br><span class="line">		var nMaxx = Math.min(rect1.x+rect1.w,rect2.x+rect2.w);</span><br><span class="line">		var nMaxy = Math.min(rect1.y+rect1.h,rect2.y+rect2.h);</span><br><span class="line">		var nrect = new Rect(nMinx,nMiny,(nMaxx - nMinx),(nMaxy - nMiny));</span><br><span class="line">		if(nMaxx &gt; nMinx &amp;&amp; nMaxy &gt; nMiny)&#123;</span><br><span class="line">			return &#123;</span><br><span class="line">				judeg: true,</span><br><span class="line">				res: nrect</span><br><span class="line">			&#125;;</span><br><span class="line">		&#125;else&#123;</span><br><span class="line">			return &#123;</span><br><span class="line">				judeg: false</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">&lt;/script&gt;</span><br></pre></td></tr></table></figure>
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2017/12/28/canvas版像素碰撞/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
   
     <nav id="page-nav">
       <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="page-number" href="/page/3/">3</a><a class="page-number" href="/page/4/">4</a><a class="extend next" rel="next" href="/page/2/">Next &raquo;</a>
@@ -1401,11 +1402,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
           <ul class="article-tag-list" q-show="showTags">
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">面向对象</a>
+                <a href="javascript:void(0)" class="js-tag color1">浅谈OOP</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">浅谈OOP</a>
+                <a href="javascript:void(0)" class="js-tag color5">面向对象</a>
               </li>
             
             <div class="clearfix"></div>
