@@ -158,6 +158,396 @@
           <div id="js-content" class="content-ll">
             
   
+    <article id="post-1. 可以兼容HTML" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h2 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h2><ul>
+<li>Markdown 的目标是实现「易读易写」。</li>
+<li>Markdown 语法的目标是：成为一种适用于网络的书写语言。(可以兼容HTML)</li>
+<li>HTML 是一种发布的格式，Markdown 是一种书写的格式。</li>
+</ul>
+<h4 id="1-可以兼容HTML"><a href="#1-可以兼容HTML" class="headerlink" title="1. 可以兼容HTML"></a>1. 可以兼容HTML</h4><ul>
+<li><h5 id="原生markdowm用法"><a href="#原生markdowm用法" class="headerlink" title="原生markdowm用法"></a>原生markdowm用法</h5><ul>
+<li><p>斜体 <em>yyy</em> <em>yyy</em></p>
+</li>
+<li><p>加粗 <strong>加粗</strong> <strong>加粗</strong></p>
+</li>
+<li><p>加粗斜体 <strong><em>加粗</em></strong></p>
+</li>
+<li><h4 id="我是H4标签"><a href="#我是H4标签" class="headerlink" title="我是H4标签"></a>我是H4标签</h4></li>
+<li><p>删除线  <del>删除线</del></p>
+</li>
+<li><p>无序列表</p>
+<ul>
+<li>无序列表项1</li>
+</ul>
+<ul>
+<li>无序列表项2</li>
+</ul>
+<ul>
+<li>无序列表项3</li>
+</ul>
+</li>
+<li><p>有序列表</p>
+<ol>
+<li>有序列表1</li>
+<li>有序列表2</li>
+</ol>
+</li>
+<li><p>表格</p>
+</li>
+</ul>
+<p>|学号|姓名|分数|<br>|—|—-|—|<br>|小明|男|75|<br>|小红|女|79|<br>|小陆|男|92|</p>
+<p>产品|价格<br>—|—:<br>Leanote 高级账号|60元/年<br>Leanote 超级账号|120元/年</p>
+</li>
+</ul>
+<ul>
+<li><h5 id="兼容HTML用法"><a href="#兼容HTML用法" class="headerlink" title="兼容HTML用法"></a>兼容HTML用法</h5><ul>
+<li><p>斜体 <em>yyy</em></p>
+</li>
+<li><h4>我是H4标签</h4>
+</li>
+<li><p>加粗 <strong> 加粗 </strong></p>
+</li>
+<li><p>加粗斜体 <strong><em>加粗</em></strong></p>
+</li>
+<li><p>删除线 <del>删除线<del> </del></del></p>
+</li>
+<li><p>无序列表</p>
+  <ul><br>      <li>无序列表1</li><br>      <li>无序列表2</li><br>      <li>无序列表3</li><br>  </ul>
+</li>
+<li><p>有序列表</p>
+  <ol><br>      <li>有序列表1</li><br>      <li>有序列表2</li><br>      <li>有序列表3</li><br>  </ol></li>
+<li>表格</li>
+</ul>
+<table><br>    <tr><br>        <th>food</th><br>        <th>price</th><br>    </tr><br>     <tr><br>        <td>apple</td><br>        <td>$88</td><br>    </tr><br></table>
+
+</li>
+</ul>
+<h4 id="2-特殊字符自动转换"><a href="#2-特殊字符自动转换" class="headerlink" title="2. 特殊字符自动转换"></a>2. 特殊字符自动转换</h4><p>在 HTML 文件中，有两个字符需要特殊处理： &lt; 和 &amp; 。 &lt; 符号用于起始标签，&amp; 符号则用于标记 HTML 实体，如果你只是想要显示这些字符的原型，你必须要使用实体的形式，像是 &lt; 和 &amp;。</p>
+<p>&amp; 字符尤其让网络文档编写者受折磨，如果你要打「AT&amp;T」 ，你必须要写成「AT&amp;T」。而网址中的 &amp; 字符也要转换。比如你要链接到：</p>
+<pre><code>http://images.google.com/images?num=30&amp;q=larry+bird
+</code></pre><p>你必须要把网址转换写为：</p>
+<pre><code>http://images.google.com/images?num=30&amp;amp;q=larry+bird
+</code></pre><p>才能放到链接标签的 href 属性里。不用说也知道这很容易忽略，</p>
+<h1 id="这是-H1"><a href="#这是-H1" class="headerlink" title="这是 H1"></a>这是 H1</h1><h2 id="这是-H2"><a href="#这是-H2" class="headerlink" title="这是 H2"></a>这是 H2</h2><h3 id="这是-H3"><a href="#这是-H3" class="headerlink" title="这是 H3"></a>这是 H3</h3><h4 id="3-区块引用-Blockquotes"><a href="#3-区块引用-Blockquotes" class="headerlink" title="3. 区块引用 Blockquotes"></a>3. 区块引用 Blockquotes</h4><blockquote>
+<p>这是区块引用1</p>
+<p>这是区块引用2<br>这是区块引用3</p>
+<blockquote>
+<p>这是区块引用4</p>
+</blockquote>
+</blockquote>
+<p>Markdown 也允许你偷懒只在整个段落的第一行最前面加上 &gt; ：</p>
+<blockquote>
+<p>这是很大很大很大很大很大很大很大很大很大很大很大很大很大很大很大很大很大很大很大很大很大很大很大很大很大很大很大很大很大很大很大很大很大很大很大一块区块引用</p>
+</blockquote>
+<p>如果要在列表项目内放进引用，那 &gt; 就需要缩进：</p>
+<ul>
+<li><p>A list item with a blockquote:</p>
+<blockquote>
+<p>This is a blockquote</p>
+<p>inside a list item.</p>
+</blockquote>
+</li>
+</ul>
+<p>如果要放代码区块的话，该区块就需要缩进两次，也就是 8 个空格或是 2 个制表符：</p>
+<ul>
+<li><p>一列表项包含一个列表区块：</p>
+<pre><code>&lt;代码写在这&gt;
+</code></pre></li>
+</ul>
+<p>当然，项目列表很可能会不小心产生，像是下面这样的写法：</p>
+<ol>
+<li>What a great season.</li>
+</ol>
+<p>换句话说，也就是在行首出现数字-句点-空白，要避免这样的状况，你可以在句点前面加上反斜杠。</p>
+<p>1986. What a great season.</p>
+<p>但是如果你的 * 和 _ 两边都有空白的话，它们就只会被当成普通的符号。</p>
+<p>如果要在文字前后直接插入普通的星号或底线，你可以用反斜线：</p>
+<p>ih*hh*</p>
+<p>如果要标记一小段行内代码，你可以用反引号把它包起来（`），例如：</p>
+<p>Use the <code>printf()</code> function.</p>
+<p>如果要在代码区段内插入反引号，你可以用多个反引号来开启和结束代码区段：</p>
+<p><code>There is a literal backtick (`) here.</code></p>
+<h4 id="4-图片"><a href="#4-图片" class="headerlink" title="4. 图片"></a>4. 图片</h4><p>很明显地，要在纯文字应用中设计一个「自然」的语法来插入图片是有一定难度的。</p>
+<p>Markdown 使用一种和链接很相似的语法来标记图片，同样也允许两种样式： 行内式和参考式。</p>
+<p>行内式的图片语法看起来像是：</p>
+<p><img src="/path/to/img.jpg" alt="Alt text"></p>
+<p><img src="/path/to/img.jpg" alt="Alt text" title="Optional title"></p>
+<p>详细叙述如下：</p>
+<ul>
+<li><p>一个惊叹号 !</p>
+</li>
+<li><p>接着一个方括号，里面放上图片的替代文字</p>
+</li>
+</ul>
+<ul>
+<li>接着一个普通括号，里面放上图片的网址，最后还可以用引号包住并加上 选择性的 ‘title’ 文字。</li>
+</ul>
+<p><img src="file:///Users/lanou/Desktop/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202018-01-11%20%E4%B8%8A%E5%8D%8810.37.10.png" alt="Alt text"></p>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2018/01/10/1. 可以兼容HTML/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
+    <article id="post-thinkPHP框架使用方法" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2018/01/05/thinkPHP框架使用方法/">thinkPHP框架使用方法</a>
+    </h1>
+  
+
+        
+        <a href="/2018/01/05/thinkPHP框架使用方法/" class="archive-article-date">
+  	<time datetime="2018-01-05T12:30:44.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-01-05</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h3 id="1-thinkPHP思想"><a href="#1-thinkPHP思想" class="headerlink" title="1. thinkPHP思想"></a>1. thinkPHP思想</h3><p>thinkPHP基于MVC思想，MVC是一种设计模式，他强制的使用应用程序的输入、处理和输出分开。MVC应用程序被分为三个核心部分：模型（model）、视图（view）、控制器（control），他们各自处理自己的任务。<br>例如：</p>
+<div align="center"><br><br><img src="file:///Users/lanou/Desktop/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202018-01-05%20%E4%B8%8B%E5%8D%887.27.10.png" alt="thinkPHP" title="thinkPHP"><br><br></div>
+
+
+
+<h3 id="2-单入口创建项目"><a href="#2-单入口创建项目" class="headerlink" title="2. 单入口创建项目"></a>2. 单入口创建项目</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">&lt;?php</span><br><span class="line">	//单入口 ||  主入口 ：路由分配</span><br><span class="line">	</span><br><span class="line">	//开启调试模式:部分做缓存</span><br><span class="line">	define(&quot;APP_DEBUG&quot;,true);</span><br><span class="line">	//定义项目名称</span><br><span class="line">	define(&quot;APP_NAME&quot;,&quot;Index&quot;);</span><br><span class="line">	//定义项目路径</span><br><span class="line">	define(&quot;APP_PATH&quot;,&quot;Index/&quot;);</span><br><span class="line">	</span><br><span class="line">	//引入核心文件</span><br><span class="line">	require &quot;ThinkPHP/ThinkPHP.php&quot;;</span><br><span class="line">?&gt;</span><br></pre></td></tr></table></figure>
+<p>执行上述代码时，系统自动创建一个文件夹，里面包含的内容与系统封装的thinkPHP一样，而这里面的文件就是我们要写的代码。</p>
+<p><img src="file:///Users/lanou/Desktop/%E5%B1%8F%E5%B9%95%E5%BF%AB%E7%85%A7%202018-01-05%20%E4%B8%8B%E5%8D%888.45.16.png" alt="thinkPHP" title="thinkPHP"></p>
+<ul>
+<li>thinkPHP官方地址：<a href="http://www.thinkphp.cn/" target="_blank" rel="external">http://www.thinkphp.cn/</a></li>
+</ul>
+<h3 id="3-库目录结构-thinkphp"><a href="#3-库目录结构-thinkphp" class="headerlink" title="3. 库目录结构(thinkphp)"></a>3. 库目录结构(thinkphp)</h3><p> Lib/Think: 为Thinkphp框架核心目录</p>
+<p> Lib/ORG : 为Thinkphp框架自带扩展目录 </p>
+<h3 id="4-项目目录结构-home"><a href="#4-项目目录结构-home" class="headerlink" title="4. 项目目录结构(home)"></a>4. 项目目录结构(home)</h3><ul>
+<li>Lib：放置控制层类和模型层类<pre><code>- Action：相当于controler
+- Model: model层
+</code></pre></li>
+<li>Tpl:放置着模板（皮肤）文件，相当于view</li>
+<li>Conf:系统项目配置目录</li>
+<li>Common：项目中公共用到的资源，如js,css，图片等</li>
+<li>Runtime：系统运行时临时目录（若运行中产生缓存现象，可以将该目录中内容进行删除）<pre><code>- Cache：模板页面缓存
+- Data：数据字段缓存
+- Logs：系统运行日志
+- Temp：临时文件缓存
+- app：系统配置文件编译缓存
+</code></pre></li>
+</ul>
+<h3 id="5-thinkPHP的访问规则"><a href="#5-thinkPHP的访问规则" class="headerlink" title="5. thinkPHP的访问规则"></a>5. thinkPHP的访问规则</h3><ul>
+<li>http:localhost/thinkphp/index.php/index/index</li>
+<li>Thinkphp规定：所有的主入口文件默认访问index控制器，且所有的控制器默认是去找index方法（动作）</li>
+<li>控制器类名必须是于文件名相同（除去.class.php），首字母必须大写，后面加上Action，且要继承Action</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br></pre></td><td class="code"><pre><span class="line">// 本类由系统自动生成，仅供测试用途</span><br><span class="line">class IndexAction extends Action &#123;</span><br><span class="line">    public function index()&#123;</span><br><span class="line">    		$name = &quot;DR&quot;;</span><br><span class="line">    		//将变量输出到模板</span><br><span class="line">    		//1、(不常用)</span><br><span class="line">    		$this-&gt;name = &quot;DR&quot;;</span><br><span class="line">    		//2、（常用）</span><br><span class="line">    		$this-&gt;assign(&quot;height&quot;,&quot;183cm&quot;);</span><br><span class="line">    		$this-&gt;assign(&quot;showTime&quot;,$showTime);</span><br><span class="line">    		//加载index模板  默认加载</span><br><span class="line">//  		$this-&gt;display();	</span><br><span class="line">    		//加载到指定的模板  不加后缀</span><br><span class="line">    		$this-&gt;display(&quot;test&quot;);</span><br><span class="line">    &#125;</span><br></pre></td></tr></table></figure>
+<ul>
+<li>方法名通常是public（默认），否则thinkphp无法正常解析</li>
+</ul>
+<h3 id="6-控制器与模板之间的关系"><a href="#6-控制器与模板之间的关系" class="headerlink" title="6. 控制器与模板之间的关系"></a>6. 控制器与模板之间的关系</h3><ul>
+<li><ol>
+<li><p>Thinkphp中模板和控制器之间的访问原则</p>
+<ul>
+<li>加载模板（跨模板）: $this-&gt;display(Action:模板名称)</li>
+<li>加载模板（本模板）：$this-&gt;display([模板名称])</li>
+</ul>
+</li>
+</ol>
+</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">//加载到指定的模板  不加后缀</span><br><span class="line">$this-&gt;display(&quot;test&quot;);</span><br></pre></td></tr></table></figure>
+<ul>
+<li><ol>
+<li>控制器与模板之间的变量传递<ul>
+<li>$this-&gt;assign(‘变量名’,’变量值’)</li>
+<li>在模板中采用{$变量名}的形式输出变量值</li>
+</ul>
+</li>
+</ol>
+</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br></pre></td><td class="code"><pre><span class="line">	&lt;ul&gt;</span><br><span class="line">	&lt;!-- offset=&quot;1&quot;从什么位置输出  length=&quot;2&quot;输出几条 empty=&quot;暂时没有数据&quot; 当数据没有的时候显示 --&gt;</span><br><span class="line">	&lt;volist name=&quot;arr&quot; id=&quot;val&quot; offset=&quot;1&quot; length=&quot;1&quot; empty=&quot;暂时没有数据&quot; &gt;</span><br><span class="line">		&lt;li&gt;姓名是：&#123;$val.name&#125;,年龄是：&#123;$val[&quot;age&quot;]&#125;,身高是：&#123;$val.height&#125;&lt;/li&gt;</span><br><span class="line">	&lt;/volist&gt;</span><br><span class="line">	</span><br><span class="line">	&lt;foreach name=&quot;arr&quot; item=&quot;val&quot;&gt;</span><br><span class="line">		&lt;p&gt;姓名是：&#123;$val.name&#125;，年龄是：&#123;$val.age&#125;，身高是：&#123;$val[&quot;name&quot;]&#125;&lt;/p&gt;</span><br><span class="line">	&lt;/foreach&gt;</span><br><span class="line">	</span><br><span class="line">	&lt;!--</span><br><span class="line">		gt : 大于</span><br><span class="line">		egt: 大于等于</span><br><span class="line">		lt: 小于</span><br><span class="line">		elt: 小于等于</span><br><span class="line">		eq: 等于</span><br><span class="line">		neq: 不等于</span><br><span class="line">		heq: ===</span><br><span class="line">		nheq: !==</span><br><span class="line">	--&gt;</span><br><span class="line">	&lt;if condition=&quot;$num gt 5&quot;&gt;</span><br><span class="line">		num的值大于5</span><br><span class="line">		&lt;elseif condition=&quot;$num lt 5&quot; /&gt;</span><br><span class="line">			num的值小于5</span><br><span class="line">		&lt;else /&gt;</span><br><span class="line">			num的值等于5</span><br><span class="line">	&lt;/if&gt;</span><br><span class="line">&lt;/ul&gt;</span><br><span class="line">&lt;!--对str进行加密--&gt;</span><br><span class="line">&#123;$str|md5&#125;;</span><br><span class="line">&lt;hr /&gt;</span><br><span class="line">当前时间：&#123;$nowTime|date=&quot;Y-m-d H:i:s&quot;,###&#125;</span><br><span class="line">&lt;hr /&gt;</span><br><span class="line">处理之后的时间：&#123;$showTime&#125;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">&lt;for start=&quot;1&quot; end=&quot;10&quot;&gt;</span><br><span class="line">	&#123;$i&#125; &lt;br /&gt;</span><br><span class="line">&lt;/for&gt;</span><br><span class="line"></span><br><span class="line"></span><br><span class="line">&lt;switch name=&quot;randNum&quot;&gt;</span><br><span class="line">	&lt;case value=&quot;1&quot; break=&quot;1&quot;&gt;&#123;$randNum&#125;的值等于1&lt;/case&gt;</span><br><span class="line">	&lt;case value=&quot;2&quot; break=&quot;1&quot;&gt;&#123;$randNum&#125;的值等于2&lt;/case&gt;</span><br><span class="line">	&lt;default /&gt;&#123;$randNum&#125;的值不是1，2</span><br><span class="line">&lt;/switch&gt;</span><br><span class="line"></span><br><span class="line">&lt;hr /&gt;</span><br><span class="line">&lt;eq name=&quot;randNum&quot; value=&quot;2&quot;&gt;&#123;$randNum&#125;的值等于2&lt;/eq&gt;</span><br><span class="line"></span><br><span class="line">&lt;hr /&gt;</span><br><span class="line">&#123;$randNum &gt; 2 ? &quot;大于2&quot; : &quot;小于2&quot;&#125;</span><br><span class="line"></span><br><span class="line">&lt;hr /&gt;</span><br><span class="line">&lt;!--in  ||  notin--&gt;</span><br><span class="line">&lt;in name=&quot;randNum&quot; value=&quot;2,3,4,5&quot;&gt;&#123;$randNum&#125;在值里面&lt;/in&gt;</span><br><span class="line">&lt;hr /&gt;</span><br><span class="line">&lt;!--between--&gt;</span><br><span class="line">&lt;between name=&quot;randNum&quot; value=&quot;2,5&quot;&gt;</span><br><span class="line">	&#123;$randNum&#125;在值2~5里面</span><br><span class="line">	&lt;else /&gt;</span><br><span class="line">	&#123;$randNum&#125;的值等于1</span><br><span class="line">&lt;/between&gt;</span><br><span class="line"></span><br><span class="line">&lt;!--引入外部文件  后面不加后缀--&gt;</span><br><span class="line">&lt;include file=&quot;commonView&quot; /&gt;</span><br><span class="line">&lt;!--引入外部文件的时候，如果是外部文件夹里面的文件</span><br><span class="line">	会生成类，要先引入里面的类</span><br><span class="line">--&gt;</span><br><span class="line">&lt;include file=&quot;Public:header&quot; /&gt;</span><br><span class="line">&lt;!--也可以用相对路径--&gt;</span><br><span class="line">&lt;include file=&quot;../Public/header&quot; /&gt;</span><br></pre></td></tr></table></figure>
+<ul>
+<li><ol>
+<li>控制器调用模板的方式<ul>
+<li><strong>URL</strong>: 代表当前操作所在木块地址（同控制方法跳转）</li>
+<li><strong>APP</strong>:代表当前项目的入口文件的地址（跨控制器方法跳转）</li>
+<li><strong>ROOT</strong>:代表网站根目录地址（跨前、后台控制器方法跳转，范围最广）</li>
+</ul>
+</li>
+</ol>
+</li>
+</ul>
+<h3 id="7-配置文件"><a href="#7-配置文件" class="headerlink" title="7. 配置文件"></a>7. 配置文件</h3><ul>
+<li>属性配置<ol>
+<li>配置文件在config.php文件里<br>配置的属性通过大C方法来实例化</li>
+</ol>
+</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">&lt;?php</span><br><span class="line">	class ProductAction extends Action&#123;</span><br><span class="line">		function getUrlModel()&#123;</span><br><span class="line">			//实例化配置项  C()方法调用Conf里面的方法</span><br><span class="line">//			echo C(&quot;URL_MODEL&quot;);</span><br><span class="line">			//实例化自定义</span><br><span class="line">//			echo C(&quot;name&quot;);</span><br><span class="line">			echo C(&quot;height&quot;);</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">?&gt;</span><br></pre></td></tr></table></figure>
+<pre><code>2. 如果有多个配置文件的话，可以通过“LOAD_EXT_CONFIG”=&gt;&quot;user&quot;来进行配置
+</code></pre><p>“LOAD_EXT_CONFIG” =&gt; “user”, 在config.php里面配置</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">&lt;?php</span><br><span class="line">return array(</span><br><span class="line">	//&apos;配置项&apos;=&gt;&apos;配置值&apos;</span><br><span class="line">//	&quot;URL_MODEL&quot; =&gt; 0</span><br><span class="line">	&quot;name&quot; =&gt; &quot;D2222&quot;,</span><br><span class="line">	&quot;age&quot; =&gt; &quot;19&quot;,</span><br><span class="line">	//加入其他配置项文件</span><br><span class="line">	&quot;LOAD_EXT_CONFIG&quot; =&gt; &quot;user&quot;,</span><br><span class="line">);</span><br><span class="line">?&gt;</span><br></pre></td></tr></table></figure>
+<h3 id="8-连接数据库"><a href="#8-连接数据库" class="headerlink" title="8. 连接数据库"></a>8. 连接数据库</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">//数据库配置信息</span><br><span class="line">   &apos;DB_TYPE&apos;   =&gt; &apos;mysql&apos;, // 数据库类型</span><br><span class="line">   &apos;DB_HOST&apos;   =&gt; &apos;localhost&apos;, // 服务器地址</span><br><span class="line">   &apos;DB_NAME&apos;   =&gt; &apos;thinkphp&apos;, // 数据库名</span><br><span class="line">   &apos;DB_USER&apos;   =&gt; &apos;root&apos;, // 用户名</span><br><span class="line">   &apos;DB_PWD&apos;    =&gt; &apos;&apos;, // 密码</span><br><span class="line">   &apos;DB_PORT&apos;   =&gt; 3306, // 端口</span><br><span class="line">   &apos;DB_PREFIX&apos; =&gt; &apos;&apos;, // 数据库表前缀</span><br></pre></td></tr></table></figure>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2018/01/05/thinkPHP框架使用方法/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
+    <article id="js-如何移除一个匿名函数的绑定事件" class="article article-type-js  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2018/01/03/如何移除一个匿名函数的绑定事件/">如何移除一个匿名函数的绑定事件</a>
+    </h1>
+  
+
+        
+        <a href="/2018/01/03/如何移除一个匿名函数的绑定事件/" class="archive-article-date">
+  	<time datetime="2018-01-03T06:29:55.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-01-03</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>大家都知道 addEventListener的用法 绑定事件</p>
+<p>例如</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">element.addEventListener(type,handler,false);</span><br></pre></td></tr></table></figure>
+<p>element是dom元素 type是事件比如click handler 是一个函数表达式，false 代表是冒泡阶段 true是捕获阶段</p>
+<p>如果移除事件的话 这样写：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">element.removeEventListener(type,handler);</span><br></pre></td></tr></table></figure>
+<p>如果handler是个匿名函数呢</p>
+<p>比如</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">element.addEventListener(type,function()&#123;</span><br><span class="line"></span><br><span class="line">&#125;,false);</span><br></pre></td></tr></table></figure>
+<p>这样是不是就没有办法移除了呢</p>
+<p>当然可以的</p>
+<p>可以把条件设置在匿名函数里面进行</p>
+<p>代码如下：测试成功</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">var dom=document.getElementById(&quot;content&quot;),clickt=0;</span><br><span class="line">dom.addEventListener(&quot;click&quot;,function(e)&#123;</span><br><span class="line">clickt++;</span><br><span class="line">alert(&apos;你摸了我&apos;+clickt+&apos;下了。最多摸2下哦&apos;);</span><br><span class="line">if(clickt&gt;=2)&#123;</span><br><span class="line">dom.removeEventListener(e.type,arguments.callee,false);</span><br><span class="line">console.log(this);</span><br><span class="line">&#125;</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2018/01/03/如何移除一个匿名函数的绑定事件/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
     <article id="post-canvas版像素碰撞" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -743,276 +1133,6 @@ context.drawImage(img,0,0);
       
         <p class="article-more-link">
           <a class="article-more-a" href="/2017/12/22/构造函数-继承详解/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-typeof与instanceof用法小记" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2017/12/21/typeof与instanceof用法小记/">typeof与instanceof用法小记</a>
-    </h1>
-  
-
-        
-        <a href="/2017/12/21/typeof与instanceof用法小记/" class="archive-article-date">
-  	<time datetime="2017-12-21T13:54:06.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-12-21</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h3 id="JavaScript中typeof-instanceof常用老判断一个变量是否为空，或者是什么类型的。但是他们之间还是有区别的"><a href="#JavaScript中typeof-instanceof常用老判断一个变量是否为空，或者是什么类型的。但是他们之间还是有区别的" class="headerlink" title="JavaScript中typeof instanceof常用老判断一个变量是否为空，或者是什么类型的。但是他们之间还是有区别的"></a>JavaScript中typeof instanceof常用老判断一个变量是否为空，或者是什么类型的。但是他们之间还是有区别的</h3><h2 id="1-typeof"><a href="#1-typeof" class="headerlink" title="1. typeof"></a>1. typeof</h2><p>typeof是一个一元运算，放在一个运算数之前，运算数可以是任意类型<br>它返回值是一个字符串，该字符串说明运算符的类型<br>typeof一般只能返回如下几个结果：“number”,“string”,“boolean”,“object”,“function”,“undefined”.</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">&lt;script type=&quot;text/javascript&quot;&gt;</span><br><span class="line">	var str = &quot;hhhh&quot;;</span><br><span class="line">	var num = 12334;</span><br><span class="line">	var obj = &#123;&#125;;</span><br><span class="line">	var fn = function()&#123;</span><br><span class="line">		console.log(11111)</span><br><span class="line">	&#125;</span><br><span class="line">	var arr = [];</span><br><span class="line">	var boolea = false;</span><br><span class="line">	var a = null;</span><br><span class="line">	var b;</span><br><span class="line">	//            string       number      object     function     object      boolean     object   undefined</span><br><span class="line">	console.log(typeof str, typeof(num), typeof obj, typeof fn, typeof arr, typeof boolea, typeof a, typeof b)</span><br><span class="line">&lt;/script&gt;</span><br></pre></td></tr></table></figure>
-<p>即我们可以通过typeof判断一个变量是否存在。例如</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">if(typeof a!=&quot;undefined&quot;)&#123;alert(&quot;ok&quot;)&#125;</span><br></pre></td></tr></table></figure>
-<p>而不要去使用if(a)，因为如果a不存在（为声明）则会报错。对于 Array,Null 等特殊对象使用 typeof 一律返回 object，这正是 typeof 的局限性。</p>
-<p>经常会在js里用到数组,比如 多个名字相同的input, 若是动态生成的, 提交时就需要判断其是否是数组. </p>
-<p>if(document.mylist.length != “undefined” ) {} //这个用法有误. </p>
-<p>正确的是<br>if( typeof(document.mylist.length) != “undefined” ) {} </p>
-<p>或 if( !isNaN(document.mylist.length) ) {} </p>
-<p>在JavaScript中，判断一个变量的类型常常会用typeof运算符，在使用该运算符时采用引用类型存储值会出现一个问题，无论引用的是什么类型的对象，他都返回”object“，这时就要用到instanceof</p>
-<h2 id="2-instanceof-检测某个对象是不是另一个对象的实例，即测试一个对象在其原型链中是否存在一个构造函数的prototype属性"><a href="#2-instanceof-检测某个对象是不是另一个对象的实例，即测试一个对象在其原型链中是否存在一个构造函数的prototype属性" class="headerlink" title="2. instanceof 检测某个对象是不是另一个对象的实例，即测试一个对象在其原型链中是否存在一个构造函数的prototype属性"></a>2. instanceof 检测某个对象是不是另一个对象的实例，即测试一个对象在其原型链中是否存在一个构造函数的prototype属性</h2><p>语法： object(要检测是对象) instanceof constructor（某个构造函数）<br>如 :var a=new Array();</p>
-<p>alert(a instanceof Array); // true，</p>
-<p>同时 alert(a instanceof Object) //也会返回 true;</p>
-<p>这是因为 Array 是 object 的子类。</p>
-<p>再如：function test(){};</p>
-<p>var a=new test();</p>
-<p>alert(a instanceof test) 会返回true</p>
-<p>另外，更重的一点是 instanceof 可以在继承关系中用来判断一个实例是否属于它的父类型。</p>
-<p>例如：</p>
-<p>function Foo(){}<br>Foo.prototype = new Aoo();//JavaScript 原型继承<br>var foo = new Foo();<br>console.log(foo instanceof Foo)//true<br>console.log(foo instanceof Aoo)//true</p>
-<p>上面的代码中是判断了一层继承关系中的父类，在多层继承关系中，instanceof 运算符同样适用。</p>
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2017/12/21/typeof与instanceof用法小记/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="面向对象-解决增删改查" class="article article-type-面向对象  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2017/12/21/解决增删改查/">解决增删改查</a>
-    </h1>
-  
-
-        
-        <a href="/2017/12/21/解决增删改查/" class="archive-article-date">
-  	<time datetime="2017-12-21T12:40:09.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-12-21</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h2 id="面向对象"><a href="#面向对象" class="headerlink" title="面向对象"></a>面向对象</h2><h4 id="1-用构造函数方法"><a href="#1-用构造函数方法" class="headerlink" title="1. 用构造函数方法"></a>1. 用构造函数方法</h4><p>构造函数类似于类，但不是类，在ES6出来之前常规用法。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br></pre></td><td class="code"><pre><span class="line">&lt;!DOCTYPE html&gt;</span><br><span class="line">&lt;html&gt;</span><br><span class="line">	&lt;head&gt;</span><br><span class="line">		&lt;meta charset=&quot;UTF-8&quot;&gt;</span><br><span class="line">		&lt;title&gt;&lt;/title&gt;</span><br><span class="line">	&lt;/head&gt;</span><br><span class="line">	&lt;body&gt;</span><br><span class="line">		&lt;div class=&quot;wrap&quot;&gt;&lt;/div&gt;</span><br><span class="line">		姓名：&lt;input class=&quot;addName&quot; type=&quot;text&quot; /&gt; 电话：&lt;input class=&quot;addPhone&quot; type=&quot;text&quot; /&gt;&lt;button onclick=&quot;addPhone()&quot;&gt;添加电话&lt;/button&gt;&lt;br /&gt;</span><br><span class="line">		姓名：&lt;input class=&quot;searchName&quot; type=&quot;text&quot; /&gt;&lt;button onclick=&quot;searchBtn()&quot;&gt;查询电话&lt;/button&gt;&lt;br /&gt;</span><br><span class="line">		姓名：&lt;input class=&quot;delName&quot; type=&quot;text&quot; /&gt;&lt;button onclick=&quot;delBtn()&quot;&gt;删除电话&lt;/button&gt;&lt;br /&gt;</span><br><span class="line">	&lt;/body&gt;</span><br><span class="line">	&lt;script src=&quot;http://libs.baidu.com/jquery/2.0.0/jquery.min.js&quot;&gt;&lt;/script&gt;</span><br><span class="line">	&lt;script type=&quot;text/javascript&quot;&gt;</span><br><span class="line">		var data = [&#123;name:&quot;张三&quot;,tel:&quot;11111111&quot;&#125;,&#123;name:&quot;李四&quot;,tel:&quot;2222222&quot;&#125;];</span><br><span class="line">		function PhoneBook(data)&#123;</span><br><span class="line">			this.data = data;</span><br><span class="line">		&#125;</span><br><span class="line">		PhoneBook.prototype.showPhone = function()&#123;</span><br><span class="line">			console.log(1111111)</span><br><span class="line">			$(&apos;.wrap&apos;).html(&quot;&quot;);</span><br><span class="line">			var html = &quot;&quot;;</span><br><span class="line">			console.log(this.data)</span><br><span class="line">			for(let i = 0; i &lt; this.data.length;i++)&#123;</span><br><span class="line">				html += `&lt;p&gt;姓名:$&#123;this.data[i].name&#125;;电话:$&#123;this.data[i].tel&#125;&lt;/p&gt;`;</span><br><span class="line">			&#125;</span><br><span class="line">			$(html).appendTo(&quot;.wrap&quot;);</span><br><span class="line">		&#125;</span><br><span class="line">		PhoneBook.prototype.addPhone = function(name, tel)&#123;</span><br><span class="line">			var obj = &#123;name,tel&#125;;</span><br><span class="line">			this.data.push(obj);</span><br><span class="line">		&#125;</span><br><span class="line">		PhoneBook.prototype.searchPhone = function(name)&#123;</span><br><span class="line">			for(var i = 0; i &lt; this.data.length; i++)&#123;</span><br><span class="line">				if(name == this.data[i].name)&#123;</span><br><span class="line">					alert(this.data[i].tel)</span><br><span class="line">				&#125;</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line">		PhoneBook.prototype.delPhone = function(name)&#123;</span><br><span class="line">			for(var i = 0; i &lt; this.data.length; i++)&#123;</span><br><span class="line">				if(name == this.data[i].name)&#123;</span><br><span class="line">					this.data.splice(i,1);	</span><br><span class="line">				&#125;</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line">		var newPhoneBook = new PhoneBook(data);</span><br><span class="line">		newPhoneBook.showPhone();</span><br><span class="line">		function addPhone()&#123;</span><br><span class="line">			console.log(11111)</span><br><span class="line">			var myName = $(&apos;.addName&apos;).val();</span><br><span class="line">			var myTel = $(&apos;.addPhone&apos;).val();</span><br><span class="line">			newPhoneBook.addPhone(myName, myTel);</span><br><span class="line">			newPhoneBook.showPhone();</span><br><span class="line">		&#125;</span><br><span class="line">		function searchBtn()&#123;</span><br><span class="line">			var myName = $(&apos;.searchName&apos;).val();</span><br><span class="line">			newPhoneBook.searchPhone(myName);</span><br><span class="line">		&#125;</span><br><span class="line">		function delBtn()&#123;</span><br><span class="line">			var myName = $(&apos;.delName&apos;).val();</span><br><span class="line">			newPhoneBook.delPhone(myName);</span><br><span class="line">			newPhoneBook.showPhone();</span><br><span class="line">		&#125;</span><br><span class="line">	&lt;/script&gt;</span><br><span class="line">&lt;/html&gt;</span><br></pre></td></tr></table></figure>
-<h4 id="2-用类方法"><a href="#2-用类方法" class="headerlink" title="2. 用类方法"></a>2. 用类方法</h4><p>ES6出来之后，逐渐取代构造函数，代表着JS越来越像正规军靠近</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br></pre></td><td class="code"><pre><span class="line">&lt;!DOCTYPE html&gt;</span><br><span class="line">&lt;html&gt;</span><br><span class="line">	&lt;head&gt;</span><br><span class="line">		&lt;meta charset=&quot;UTF-8&quot;&gt;</span><br><span class="line">		&lt;title&gt;&lt;/title&gt;</span><br><span class="line">	&lt;/head&gt;</span><br><span class="line">	&lt;body&gt;</span><br><span class="line">		&lt;div class=&quot;wrap&quot;&gt;&lt;/div&gt;</span><br><span class="line">		姓名：&lt;input class=&quot;addName&quot; type=&quot;text&quot; /&gt; 电话：&lt;input class=&quot;addPhone&quot; type=&quot;text&quot; /&gt;&lt;button onclick=&quot;addPhone()&quot;&gt;添加电话&lt;/button&gt;&lt;br /&gt;</span><br><span class="line">		姓名：&lt;input class=&quot;searchName&quot; type=&quot;text&quot; /&gt;&lt;button onclick=&quot;searchBtn()&quot;&gt;查询电话&lt;/button&gt;&lt;br /&gt;</span><br><span class="line">		姓名：&lt;input class=&quot;delName&quot; type=&quot;text&quot; /&gt;&lt;button onclick=&quot;delBtn()&quot;&gt;删除电话&lt;/button&gt;&lt;br /&gt;</span><br><span class="line">	&lt;/body&gt;</span><br><span class="line">	&lt;script src=&quot;http://libs.baidu.com/jquery/2.0.0/jquery.min.js&quot;&gt;&lt;/script&gt;</span><br><span class="line">	&lt;script type=&quot;text/javascript&quot;&gt;</span><br><span class="line">		var data = [&#123;name:&quot;张三&quot;,tel:&quot;11111111&quot;&#125;,&#123;name:&quot;李四&quot;,tel:&quot;2222222&quot;&#125;];</span><br><span class="line">		class PhoneBook&#123;</span><br><span class="line">			constructor(data)&#123;</span><br><span class="line">				this.data = data;</span><br><span class="line">			&#125;</span><br><span class="line">			showPhone()&#123;</span><br><span class="line">				$(&apos;.wrap&apos;).html(&quot;&quot;);</span><br><span class="line">				var html = &quot;&quot;;</span><br><span class="line">				for(let i = 0; i &lt; this.data.length;i++)&#123;</span><br><span class="line">					html += `&lt;p&gt;姓名:$&#123;this.data[i].name&#125;;电话:$&#123;this.data[i].tel&#125;&lt;/p&gt;`;</span><br><span class="line">				&#125;</span><br><span class="line">				$(html).appendTo(&quot;.wrap&quot;);</span><br><span class="line">			&#125;</span><br><span class="line">			addPhone(name, tel)&#123;</span><br><span class="line">				var obj = &#123;name,tel&#125;;</span><br><span class="line">				this.data.push(obj);</span><br><span class="line">			&#125;</span><br><span class="line">			searchPhone(name)&#123;</span><br><span class="line">				for(var i = 0; i &lt; this.data.length; i++)&#123;</span><br><span class="line">					if(name == this.data[i].name)&#123;</span><br><span class="line">						alert(this.data[i].tel)</span><br><span class="line">					&#125;</span><br><span class="line">				&#125;</span><br><span class="line">			&#125;</span><br><span class="line">			delPhone(name)&#123;</span><br><span class="line">				for(var i = 0; i &lt; this.data.length; i++)&#123;</span><br><span class="line">					if(name == this.data[i].name)&#123;</span><br><span class="line">						this.data.splice(i,1);	</span><br><span class="line">					&#125;</span><br><span class="line">				&#125;</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line">		var newPhoneBook = new PhoneBook(data);</span><br><span class="line">		newPhoneBook.showPhone();</span><br><span class="line">		function addPhone()&#123;</span><br><span class="line">			var myName = $(&apos;.addName&apos;).val();</span><br><span class="line">			var myTel = $(&apos;.addPhone&apos;).val();</span><br><span class="line">			newPhoneBook.addPhone(myName, myTel);</span><br><span class="line">			newPhoneBook.showPhone();</span><br><span class="line">		&#125;</span><br><span class="line">		function searchBtn()&#123;</span><br><span class="line">			var myName = $(&apos;.searchName&apos;).val();</span><br><span class="line">			newPhoneBook.searchPhone(myName);</span><br><span class="line">		&#125;</span><br><span class="line">		function delBtn()&#123;</span><br><span class="line">			var myName = $(&apos;.delName&apos;).val();</span><br><span class="line">			newPhoneBook.delPhone(myName);</span><br><span class="line">			newPhoneBook.showPhone();</span><br><span class="line">		&#125;</span><br><span class="line">	&lt;/script&gt;</span><br><span class="line">&lt;/html&gt;</span><br></pre></td></tr></table></figure>
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color5">面向对象</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2017/12/21/解决增删改查/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-浅谈OOP" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2017/12/20/浅谈OOP/">浅谈OOP</a>
-    </h1>
-  
-
-        
-        <a href="/2017/12/20/浅谈OOP/" class="archive-article-date">
-  	<time datetime="2017-12-20T11:54:15.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-12-20</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h2 id="1-对象定义的方法"><a href="#1-对象定义的方法" class="headerlink" title="1. 对象定义的方法"></a>1. 对象定义的方法</h2><h4 id="方法1：-直接定义"><a href="#方法1：-直接定义" class="headerlink" title="方法1： 直接定义"></a>方法1： 直接定义</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">var obj1  = &#123;</span><br><span class="line">    name : &quot;小丸子1&quot;,</span><br><span class="line">    age : 18,</span><br><span class="line">    active: function()&#123;</span><br><span class="line">          console.log(&quot;吃喝玩乐&quot;);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<h4 id="方法2：-追加定义"><a href="#方法2：-追加定义" class="headerlink" title="方法2： 追加定义"></a>方法2： 追加定义</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">var obj2 = new Object();</span><br><span class="line">obj2.name = &quot;小丸子2&quot;;</span><br><span class="line">obj2.age = 19,</span><br><span class="line">obj2.active = function()&#123;</span><br><span class="line">    console.log(&quot;吃喝玩乐2&quot;);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>但是当</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">obj2 = &#123;</span><br><span class="line">    name: &quot;哆啦A梦&quot;，</span><br><span class="line">    age: 10,</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>此时上面定义的对象会将之前定义的覆盖掉，所以不推荐使用</p>
-<h4 id="方法3：不经常使用"><a href="#方法3：不经常使用" class="headerlink" title="方法3：不经常使用"></a>方法3：不经常使用</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">var obj3 = Object.create(&#123;name:&quot;小丸子3&quot;,age:20&#125;)</span><br></pre></td></tr></table></figure>
-<h2 id="2-传值-？-传址"><a href="#2-传值-？-传址" class="headerlink" title="2. 传值 ？ 传址"></a>2. 传值 ？ 传址</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">var a = 10;</span><br><span class="line">var b = a;</span><br><span class="line">b = 20;</span><br><span class="line">console.log(a); // a = 10</span><br></pre></td></tr></table></figure>
-<p>上述小demo可以知道，此时a的值为10，因为b = a 只是将a的值赋给b,除此之外a,b没有任何联系。<br>但是……</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">var a = [1, 2, 3, 4, 5];</span><br><span class="line">var b = a;</span><br><span class="line">b[2] = 9;</span><br><span class="line">console.log(a); // a = [1, 9, 3, 4, 5]</span><br></pre></td></tr></table></figure>
-<p>此时将 b = a； 是将a的地址传给b，a,b公用同一个地址，所以当改变b里面的值的时候 对应的a也会发生改变<br>此时的a 为数组，赋值的时候传的是地址，那么如果是对象呢？</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">var obj4 = obj2;</span><br><span class="line">obj4.name = &quot;唐老鸭&quot;;</span><br><span class="line">console.log(obj2);  // &#123;name: &quot;唐老鸭&quot;, age: 19, active: ƒ&#125;</span><br></pre></td></tr></table></figure>
-<p>那么问题来了，如果只想单纯的想拷贝obj2里面的值这么办呢？<br>这时就要利用JSON.stringify  与  JSON.parse方法，前者将对象转换为字符串，后者将字符串转化为对象。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">var obj4 = JSON.parse(JSON.stringify(obj2));</span><br><span class="line">obj4.name = &quot;唐老鸭222&quot;;</span><br><span class="line">console.log(obj2); // &#123;name: &quot;小丸子2&quot;, age: 19, active: ƒ&#125;</span><br></pre></td></tr></table></figure>
-<p>即即使我们改变obj4里面的属性值，obj2里面对应的值也不会改变。<br>因为在将解析后的字符串转化为对象的时候，系统会重新创建一个新的地址，将变量存储。这种方法叫做深拷贝。</p>
-<h2 id="3-ES5-与-ES6的区别"><a href="#3-ES5-与-ES6的区别" class="headerlink" title="3. ES5 与 ES6的区别"></a>3. ES5 与 ES6的区别</h2><h5 id="1-定义变量"><a href="#1-定义变量" class="headerlink" title="1. 定义变量"></a>1. 定义变量</h5><p>新增了 let 与 const，let与var差别不大，甚至可以完全取代var，当然是在不用考虑兼容的情况下，毕竟ES6刚出来，很多浏览器还不支持。<br>至于const,定义常量</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">const PI = &quot;3.1415926&quot;;</span><br><span class="line">console.log(PI); // 3.1415926</span><br><span class="line">const PI = &quot;3.14&quot;;</span><br><span class="line">console.log(PI); //报错，因为常量只能定义一次，</span><br></pre></td></tr></table></figure>
-<h5 id="2-模板代码"><a href="#2-模板代码" class="headerlink" title="2. 模板代码"></a>2. 模板代码</h5><p>传统的代码拼接 ES5</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">var name = &quot;米老鼠&quot;;</span><br><span class="line">var age = 18;</span><br><span class="line">console.log(&quot;名字是：&quot;+name +&quot;年龄为：&quot;+age);</span><br></pre></td></tr></table></figure>
-<p>当前的代码拼接 ES6</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">var name = &quot;米老鼠&quot;;</span><br><span class="line">var age = 18;</span><br><span class="line">console.log(`名字是：$&#123;name&#125; 年龄为：$&#123;age&#125;`);</span><br></pre></td></tr></table></figure>
-<p>在对象中<br>ES5 写法</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">var name = &quot;米老鼠&quot;;</span><br><span class="line">var age = 18;</span><br><span class="line">var obj = &#123;</span><br><span class="line">    name: name,</span><br><span class="line">    age: age</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>ES6 写法</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">var name = &quot;米老鼠&quot;;</span><br><span class="line">var age = 18;</span><br><span class="line">var obj = &#123;</span><br><span class="line">    name,</span><br><span class="line">    age</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>当有函数的时候 function可以省略</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">var obj1 = &#123;</span><br><span class="line">    name: &quot;tttt&quot;,</span><br><span class="line">    age: 18,</span><br><span class="line">    active()&#123;</span><br><span class="line">        console.log(&quot;hhhh&quot;);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>ES6  箭头函数</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">      var test = (str) =&gt; str;</span><br><span class="line">console.log(test(&quot;hello&quot;));</span><br><span class="line">var test1 = () =&gt; &#123;</span><br><span class="line">	var str = &quot;hhhh&quot;;</span><br><span class="line">	return str;</span><br><span class="line">&#125;</span><br><span class="line">console.log(test1())</span><br><span class="line">var test2 = () =&gt; (&#123;</span><br><span class="line">	name: &quot;tt&quot;,</span><br><span class="line">	age: 18</span><br><span class="line">&#125;)</span><br><span class="line">console.log(test2())</span><br></pre></td></tr></table></figure>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">		var obj2 = &#123;</span><br><span class="line">			name: &quot;大瑞&quot;,</span><br><span class="line">			age: 18,</span><br><span class="line">//			active: function()&#123;</span><br><span class="line">//				console.log(this);</span><br><span class="line">//				console.log(this.name);</span><br><span class="line">//			&#125;</span><br><span class="line">			action:() =&gt; &#123;</span><br><span class="line">				console.log(this);</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line">//		obj2.active();  //  指向 obj2</span><br><span class="line">		obj2.action(); //  指向 window  （this穿透）</span><br></pre></td></tr></table></figure>
-<h2 id="4-传统的工厂模式"><a href="#4-传统的工厂模式" class="headerlink" title="4. 传统的工厂模式"></a>4. 传统的工厂模式</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">function Factory(age)&#123;</span><br><span class="line">    var obj = &#123;&#125;;</span><br><span class="line">    obj.name= &quot;QQ&quot;;</span><br><span class="line">    obj.age= age;</span><br><span class="line">    obj.active = function()&#123;</span><br><span class="line">        console.log(&quot;吃喝玩乐&quot;);</span><br><span class="line">    &#125;</span><br><span class="line">    return obj;</span><br><span class="line">&#125;</span><br><span class="line">var newFactory = new Factory(18);</span><br><span class="line">console.log(newFactory.age); // 18</span><br></pre></td></tr></table></figure>
-<p>但是在构造函数下，传统的工厂模式不怎么使用</p>
-<h2 id="5-构造函数"><a href="#5-构造函数" class="headerlink" title="5. 构造函数"></a>5. 构造函数</h2><p>构造函数是由其本身与原型共同构成的， 构造函数的原型 prototype<br>对象是由其自身与原型共同构成的，对象的原型<strong>proto</strong><br>构造函数 与 对象的原型之间 只差一个new（实例化）<br>但是在本质上是一样的</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">            function Person(name, age)&#123;</span><br><span class="line">	this.name = name;</span><br><span class="line">	this.age = age;</span><br><span class="line">&#125;</span><br><span class="line">Person.prototype.active = function()&#123;</span><br><span class="line">	console.log(&quot;吃喝玩乐&quot;);</span><br><span class="line">&#125;</span><br><span class="line">var newPerson = new Person(&quot;QQ&quot;, 18);</span><br><span class="line">console.log(newPerson.__proto__ === Person.prototype); // true</span><br></pre></td></tr></table></figure>
-<p>在构造函数里面，this指向实例化对象（即谁调用指向谁）并且 构造函数与其原型公用同一个this</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">              function Person2(name, age)&#123;</span><br><span class="line">	this.name = name;</span><br><span class="line">	this.age = age;</span><br><span class="line">&#125;</span><br><span class="line">Person2.prototype.active = function()&#123;</span><br><span class="line">	console.log(this.name);</span><br><span class="line">&#125;</span><br><span class="line">var newPerson2 = new Person2(&quot;海绵宝宝&quot;, 9);</span><br><span class="line">newPerson2.active(); // 海绵宝宝</span><br><span class="line">var newPerson3 = new Person2(&quot;派大星&quot;, 9);</span><br><span class="line">newPerson3.active(); // 派大星</span><br></pre></td></tr></table></figure>
-<h2 id="6-构造函数的封装"><a href="#6-构造函数的封装" class="headerlink" title="6. 构造函数的封装"></a>6. 构造函数的封装</h2><p>构造函数模拟类的特性 但不是类</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line">      function Fatcher(firstName)&#123;</span><br><span class="line">	//私有属性</span><br><span class="line">	var firstName = firstName;</span><br><span class="line">	//共有属性</span><br><span class="line">	this.money = &quot;$10000000&quot;;</span><br><span class="line">	//设置共有方法，返回私有属性</span><br><span class="line">	this.get = function()&#123;</span><br><span class="line">		return firstName;</span><br><span class="line">	&#125;</span><br><span class="line">	//set 方法 设置私有属性</span><br><span class="line">	this.set = function(firstName)&#123;</span><br><span class="line">		firstName = firstName;</span><br><span class="line">		console.log(firstName);</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line">var newFatcher = new Fatcher(&quot;shen&quot;);</span><br><span class="line">console.log(newFatcher.money); // $10000000</span><br><span class="line">console.log(newFatcher.firstName); // undefined</span><br><span class="line">console.log(newFatcher.get()); // shen</span><br><span class="line">newFatcher.set(&quot;shen&quot;); // shen</span><br></pre></td></tr></table></figure>
-<h2 id="7-构造函数的继承"><a href="#7-构造函数的继承" class="headerlink" title="7. 构造函数的继承"></a>7. 构造函数的继承</h2><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">     function Dad(money)&#123;</span><br><span class="line">	this.money = money;</span><br><span class="line">&#125;</span><br><span class="line">function Son(money)&#123;</span><br><span class="line">	Dad.call(this,money);</span><br><span class="line">&#125;</span><br><span class="line">var newSon = new Son(&quot;100000&quot;);</span><br><span class="line">console.log(newSon.money); // 100000</span><br></pre></td></tr></table></figure>
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-	<div class="article-tag tagcloud">
-		<i class="icon-price-tags icon"></i>
-		<ul class="article-tag-list">
-			 
-        		<li class="article-tag-list-item">
-        			<a href="javascript:void(0)" class="js-tag article-tag-list-link color1">浅谈OOP</a>
-        		</li>
-      		
-		</ul>
-	</div>
-
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2017/12/20/浅谈OOP/">展开全文 >></a>
         </p>
       
 
