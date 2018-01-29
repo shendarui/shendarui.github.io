@@ -8,16 +8,16 @@
   <link rel="dns-prefetch" href="http://yoursite.com">
   <title>nodejs | 大瑞</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="宠辱不惊 漫观天外云卷云舒">
+  <meta name="description" content="expressExpress 是一个简洁而灵活的 node.js Web应用框架, 提供了一系列强大特性帮助你创建各种 Web 应用，和丰富的 HTTP 工具。使用 Express 可以快速地搭建一个完整功能的网站 12var express = require(“express”);var app = express(); get方法  – 根据请求路径来处理客户端发出的GET请求 app.ge">
 <meta property="og:type" content="article">
 <meta property="og:title" content="nodejs">
 <meta property="og:url" content="http://yoursite.com/2018/01/29/nodejs-1/index.html">
 <meta property="og:site_name" content="大瑞">
-<meta property="og:description" content="宠辱不惊 漫观天外云卷云舒">
-<meta property="og:updated_time" content="2018-01-29T06:17:08.000Z">
+<meta property="og:description" content="expressExpress 是一个简洁而灵活的 node.js Web应用框架, 提供了一系列强大特性帮助你创建各种 Web 应用，和丰富的 HTTP 工具。使用 Express 可以快速地搭建一个完整功能的网站 12var express = require(“express”);var app = express(); get方法  – 根据请求路径来处理客户端发出的GET请求 app.ge">
+<meta property="og:updated_time" content="2018-01-29T06:30:45.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="nodejs">
-<meta name="twitter:description" content="宠辱不惊 漫观天外云卷云舒">
+<meta name="twitter:description" content="expressExpress 是一个简洁而灵活的 node.js Web应用框架, 提供了一系列强大特性帮助你创建各种 Web 应用，和丰富的 HTTP 工具。使用 Express 可以快速地搭建一个完整功能的网站 12var express = require(“express”);var app = express(); get方法  – 根据请求路径来处理客户端发出的GET请求 app.ge">
   
     <link rel="alternative" href="/atom.xml" title="大瑞" type="application/atom+xml">
   
@@ -177,7 +177,58 @@
     
     <div class="article-entry" itemprop="articleBody">
       
-        
+        <h3 id="express"><a href="#express" class="headerlink" title="express"></a>express</h3><p>Express 是一个简洁而灵活的 node.js Web应用框架, 提供了一系列强大特性帮助你创建各种 Web 应用，和丰富的 HTTP 工具。<br>使用 Express 可以快速地搭建一个完整功能的网站</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">var express = require(“express”);</span><br><span class="line">var app = express();</span><br></pre></td></tr></table></figure>
+<p>get方法  – 根据请求路径来处理客户端发出的GET请求</p>
+<p>app.get(path,cb);</p>
+<ul>
+<li><p>path: 为请求的路径</p>
+</li>
+<li><p>cb: 第二个参数为处理函数的回调，有两个参数request和response，代表请求信息和相应信息</p>
+</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">var express = require(&quot;express&quot;);</span><br><span class="line">var app = express();</span><br><span class="line">app.get(&quot;/&quot;,function (req,res) &#123;</span><br><span class="line">    res.send(&quot;111111&quot;);</span><br><span class="line">&#125;);</span><br><span class="line">app.listen(6777);</span><br></pre></td></tr></table></figure>
+<h4 id="获取请求的数据"><a href="#获取请求的数据" class="headerlink" title="获取请求的数据"></a>获取请求的数据</h4><ul>
+<li><p>req.host: 返回请求头里取主机名（不含端口号）</p>
+</li>
+<li><p>req.path：返回请求的URL路径名</p>
+</li>
+<li><p>req.query：是一个可获取客户端GET请求路径参数的对象属性，包含着呗解析过的请求参数对象，默认为{}</p>
+</li>
+<li><p>req.params：获取路由的parameters</p>
+</li>
+</ul>
+<h4 id="返回参数"><a href="#返回参数" class="headerlink" title="返回参数"></a>返回参数</h4><ul>
+<li><p>res.send()：返回数据，默认会转为字符串，编码为utf-8</p>
+</li>
+<li><p>res.sendFile（）：返回文件</p>
+</li>
+<li><p>res.sendStatus（）；返回状态码</p>
+</li>
+</ul>
+<h3 id="中间件"><a href="#中间件" class="headerlink" title="中间件"></a>中间件</h3><p>中间件就是处理HTTP请求的函数，用来完成各种特定的任务，比如检测用户是否登录，分析数据，以及其他在需要最终将数据发送给用户之前完成的任务</p>
+<ul>
+<li><p>每个中间件都可以控制流程是否继续执行</p>
+</li>
+<li><p>每个req,res都是用同一个对象</p>
+</li>
+<li><p>如果出错了，转交错误中间件进行处理</p>
+</li>
+<li><p>一个中间件处理完，可以把相应数据再传递给下一个中间件</p>
+</li>
+<li><p>如果调用会地哦啊函数的next参数表示请求数据传递给下一个中间件</p>
+</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br></pre></td><td class="code"><pre><span class="line">var express = require(&quot;express&quot;);</span><br><span class="line">var app = express();</span><br><span class="line"></span><br><span class="line">//中间件</span><br><span class="line">app.use(function (req,res,next) &#123;</span><br><span class="line">    //省政府</span><br><span class="line">    req.money = 100;</span><br><span class="line">    next();</span><br><span class="line">&#125;)</span><br><span class="line">app.use(function (req,res,next) &#123;</span><br><span class="line">    //市政府</span><br><span class="line">    req.money -= 20;</span><br><span class="line">    next();</span><br><span class="line">&#125;)</span><br><span class="line"></span><br><span class="line">app.use(function (req,res,next) &#123;</span><br><span class="line">    //区政府</span><br><span class="line">    req.money -= 20;</span><br><span class="line">    next(&quot;钱丢了&quot;);</span><br><span class="line">&#125;)</span><br><span class="line"></span><br><span class="line">//错误处理中间件</span><br><span class="line">app.use(function (err,req,res,next) &#123;</span><br><span class="line">    if(err)&#123;</span><br><span class="line">        console.log(err);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;)</span><br><span class="line"></span><br><span class="line">app.all(&quot;/&quot;,function (req,res) &#123;</span><br><span class="line">    //send里面只能是字符串 不能是数字</span><br><span class="line">    res.send(&quot;&quot;+req.money);</span><br><span class="line">    // console.log(req.money);</span><br><span class="line">&#125;)</span><br><span class="line">app.listen(8887);</span><br></pre></td></tr></table></figure>
+<h3 id="cookie"><a href="#cookie" class="headerlink" title="cookie"></a>cookie</h3><p>下载 express/cookie-parser<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">var express = require(&quot;express&quot;);</span><br><span class="line">var cookieParser = require(&quot;cookie-parser&quot;);</span><br></pre></td></tr></table></figure></p>
+<p>expires: cookie的国旗事件，GMT格式，如果没有指定或者设置0，则产生新的Cookie</p>
+<p>maxAge：是设置过去事件的方便选项，值为过期时间到当前时间的毫秒数</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">var express = require(&quot;express&quot;);</span><br><span class="line">var cookieParser = require(&quot;cookie-parser&quot;);</span><br><span class="line">var app = express();</span><br><span class="line">app.use(cookieParser());</span><br><span class="line"></span><br><span class="line">//设置Cookie</span><br><span class="line">app.get(&quot;/setcookie&quot;,function (req,res) &#123;</span><br><span class="line">    var nowtime = new Date();</span><br><span class="line">    nowtime.setDate(nowtime.getDate()+7);</span><br><span class="line">    // &apos;username&apos; 设置Cookie的名称，&quot;DR&quot; Cookie的内容</span><br><span class="line">    res.cookie(&quot;username&quot;,&quot;DR&quot;,&#123;expires:nowtime&#125;);</span><br><span class="line">    res.send(&quot;设置Cookie&quot;);</span><br><span class="line">&#125;)</span><br><span class="line">app.get(&quot;/getcookie&quot;,function (req,res) &#123;</span><br><span class="line">    var username = req.cookies.username;</span><br><span class="line">    res.send(`取到的Cookie内容是$&#123;username&#125;`);</span><br><span class="line">&#125;)</span><br><span class="line">app.listen(6767);</span><br></pre></td></tr></table></figure>
+<h3 id="session"><a href="#session" class="headerlink" title="session"></a>session</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">var express = require(&quot;express&quot;);</span><br><span class="line">var session = require(&quot;express-session&quot;);</span><br><span class="line">var app = express();</span><br><span class="line">app.use(session(&#123;</span><br><span class="line">    secret:&quot;mysecret&quot;,</span><br><span class="line">    saveUninitialized:true,</span><br><span class="line">    resave:false</span><br><span class="line">&#125;))</span><br><span class="line">app.get(&quot;/sersession&quot;,function (req,res) &#123;</span><br><span class="line">    req.session.usern = &quot;RR&quot;;</span><br><span class="line">    res.send(&quot;session设置成功&quot;);</span><br><span class="line">&#125;)</span><br><span class="line">app.get(&quot;/getsession&quot;,function (req,res) &#123;</span><br><span class="line">    var usern = req.session.usern;</span><br><span class="line">    console.log(usern);</span><br><span class="line">    res.send(&quot;Session内容是：&quot;+usern);</span><br><span class="line">&#125;)</span><br><span class="line">app.listen(5656);</span><br></pre></td></tr></table></figure>
+<p>模板</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">var express = require(&quot;express&quot;);</span><br><span class="line">var app = express();</span><br><span class="line">app.set(&quot;view engine&quot;,&quot;jade&quot;);</span><br><span class="line">app.set(&quot;ciews&quot;,__dirname);</span><br><span class="line">app.get(&quot;/&quot;,function (req,res) &#123;</span><br><span class="line">    var arr = [&#123;name:&quot;DR&quot;,age:18&#125;,&#123;name:&quot;RR&quot;,age:18&#125;];</span><br><span class="line">    res.render(&quot;test.jade&quot;,&#123;</span><br><span class="line">        arr</span><br><span class="line">    &#125;)</span><br><span class="line">&#125;)</span><br><span class="line">app.listen(6767);</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">doctype html</span><br><span class="line">html</span><br><span class="line">    head</span><br><span class="line">        title test</span><br><span class="line">        meta(charset=&apos;utf-8&apos;)</span><br><span class="line">    body</span><br><span class="line">        ul</span><br><span class="line">            -each val in arr</span><br><span class="line">                li name:#&#123;val.name&#125;,age:#&#123;val.age&#125;</span><br></pre></td></tr></table></figure>
+
       
 
       
