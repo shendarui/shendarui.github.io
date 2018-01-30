@@ -158,6 +158,83 @@
           <div id="js-content" class="content-ll">
             
   
+    <article id="post-Vue组件化入门详解" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2018/01/30/Vue组件化入门详解/">Vue组件化入门详解</a>
+    </h1>
+  
+
+        
+        <a href="/2018/01/30/Vue组件化入门详解/" class="archive-article-date">
+  	<time datetime="2018-01-30T13:36:04.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-01-30</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h4 id="init文件"><a href="#init文件" class="headerlink" title="init文件"></a>init文件</h4><p>首先创建文件，在终端进入该文件目录下,输入</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">vue init webpack vuetest</span><br></pre></td></tr></table></figure>
+<p>这一步实例化一个Vue构造函数，会执行Vue的init方法，在init方法中只要执行三部分，一是初始化环境变量，而是处理Vue组件数据，三是解析挂载组件。</p>
+<p>根据自己要求安装</p>
+<p><img src="http://upload-images.jianshu.io/upload_images/7426605-89743aa497976d11.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="image.png"></p>
+<p>最后会出现一=一个地址，这个地址不是上线地址，而是Vue调试地址，上线的话还有执行打包</p>
+<p><img src="http://upload-images.jianshu.io/upload_images/7426605-4a1a1eb3b6221fa2.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="image1.png"></p>
+<p>执行上述文件时会自动生成下列文件夹，src文件里面放置未打包之前的文件，src中assets文件夹存放需要打包的文件，component文件存放各种组件</p>
+<p><img src="http://upload-images.jianshu.io/upload_images/7426605-f1a8121ce1d4382d.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="image2.png"></p>
+<p>如果最后文件写好需要打包，执行命令</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">npm run build</span><br></pre></td></tr></table></figure>
+<p>执行之后会自动生成一个dis文件，如果文件不需要打包，可以把文件放置在static文件里面，例如JQ文件，但不打包的文件就需要引用，static里面有个.gitkeep文件，这个文件是防止文件打包上传到github时避免被过滤掉，因为如果是空文件，是传不到github中的。</p>
+<p><img src="http://upload-images.jianshu.io/upload_images/7426605-718fe3d2f9d3a2cf.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="image4.png"></p>
+<p>如下图所示，我们需要的JQ文件不需要打包的话就需要在index.html文件头部引入，index.html是Vue的进入口</p>
+<p><img src="http://upload-images.jianshu.io/upload_images/7426605-ffe08673abc3e4bd.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="image5.png"></p>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2018/01/30/Vue组件化入门详解/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
     <article id="post-nodejs-1" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -1068,169 +1145,6 @@
 
 
   
-    <article id="post-jade-pug使用方法" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2018/01/18/jade-pug使用方法/">jade,pug使用方法</a>
-    </h1>
-  
-
-        
-        <a href="/2018/01/18/jade-pug使用方法/" class="archive-article-date">
-  	<time datetime="2018-01-18T12:25:21.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-01-18</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>Jade是一款基于haml的html模版引擎，采用Java cript实现，可以方便地 在Node.js、Yeoman等框架中使用，已改名为pug</p>
-<h3 id="1-全局安装"><a href="#1-全局安装" class="headerlink" title="1. 全局安装"></a>1. 全局安装</h3><blockquote>
-<p>npm install jade -g</p>
-</blockquote>
-<p>-g代表全局安装，如果安装出错，可能是权限问题，在前面加上sudo</p>
-<blockquote>
-<p>sudo npm install jade -g</p>
-</blockquote>
-<p>下载的时候可能会有点慢，所以在此之前可以下下载一个淘宝镜像，毕竟这些都是国外的东西，每次安装的时候都要翻墙，而淘宝镜像类似于一比一还原国外的中国地址，从这上面下载不需要翻墙，会必将快。<br>首先安装淘宝镜像</p>
-<blockquote>
-<p>$ npm install -g cnpm<br>然后全局安装jade<br>sudo cnpm install jade -g</p>
-</blockquote>
-<h3 id="2-创建文件，后缀名为jade"><a href="#2-创建文件，后缀名为jade" class="headerlink" title="2. 创建文件，后缀名为jade"></a>2. 创建文件，后缀名为jade</h3><div style="text-align:center">
-
-<p><img src="http://upload-images.jianshu.io/upload_images/7426605-9a2da1e9052dee02.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="image.png"></p>
-<p></p></div><p></p>
-<h3 id="3-在控制台，进入当前文件的文件夹下，输入命令"><a href="#3-在控制台，进入当前文件的文件夹下，输入命令" class="headerlink" title="3. 在控制台，进入当前文件的文件夹下，输入命令"></a>3. 在控制台，进入当前文件的文件夹下，输入命令</h3><blockquote>
-<p>jade -P -w test.jade</p>
-</blockquote>
-<p>-P 代表不压缩HTML<br>-w 监听文件变化，在test.jade里面输入东西保存之后，会自动生成一个test.html文件</p>
-<h3 id="4-jade-语法"><a href="#4-jade-语法" class="headerlink" title="4. jade 语法"></a>4. jade 语法</h3><ol>
-<li><p>jade通过缩进关系，代替以往HTML的层级包含关系。注意要统一使用Tab或者空格缩进，不要混用</p>
-<ol>
-<li>内联书写层级  </li>
-</ol>
-</li>
-</ol>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">a: img</span><br></pre></td></tr></table></figure>
-<p>在HTML里面会解析成</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;a&gt;&lt;img&gt;&lt;/a&gt;</span><br></pre></td></tr></table></figure>
-<ol>
-<li>style属性</li>
-</ol>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">div(style=&#123;width:&quot;100px&quot;,height:&quot;100px&quot;&#125;)</span><br></pre></td></tr></table></figure>
-<p>解析后</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;div style=&quot;width:100px;height:100px&quot;&gt;&lt;/div&gt;</span><br></pre></td></tr></table></figure>
-<ol>
-<li>使用“-”来定义变量，使用“=”把变量输出到元素内，通过#{var}插到相应标签里面</li>
-</ol>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">-var a = 9;</span><br><span class="line">        p a的值为#&#123;a&#125;</span><br></pre></td></tr></table></figure>
-<p>解析后</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;p&gt;a的值为9&lt;/p&gt;</span><br></pre></td></tr></table></figure>
-<ul>
-<li><ol>
-<li>文本 通过在文字前添加符号”|”可以让jade原样输出内容，在HTML标记后，通过空格隔开。<br>不加“|”是，gg会被当成自定义标签解析</li>
-</ol>
-</li>
-</ul>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">p</span><br><span class="line">     gg</span><br></pre></td></tr></table></figure>
-<p>解析后</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&lt;p&gt;</span><br><span class="line">      &lt;gg&gt;&lt;/gg&gt;</span><br><span class="line"> &lt;/p&gt;</span><br></pre></td></tr></table></figure>
-<p>加上“|”，就是内容，而且可以多行写</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">p</span><br><span class="line">           | gg</span><br></pre></td></tr></table></figure>
-<p>解析后</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;p&gt;gg&lt;/p&gt;</span><br></pre></td></tr></table></figure>
-<ol>
-<li>注释。可以通过双斜杠进行注释</li>
-</ol>
-<p>一种是能被解析的注释 —- //</p>
-<p>一种是不能被解析的注释 —- //-</p>
-<ol>
-<li>for循环</li>
-</ol>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">-for(var i = 0;i &lt; 3;i++)</span><br><span class="line">      p 这是for循环中的span#&#123;i&#125;</span><br></pre></td></tr></table></figure>
-<p>解析后</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&lt;p&gt;这是for循环中的span0&lt;/p&gt;</span><br><span class="line">&lt;p&gt;这是for循环中的span1&lt;/p&gt;</span><br><span class="line">&lt;p&gt;这是for循环中的span2&lt;/p&gt;</span><br></pre></td></tr></table></figure>
-<p>  8.for in 循环</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">-var str = [&quot;这是字符串1&quot;,&quot;这是字符串2&quot;,&quot;这是字符串3&quot;];</span><br><span class="line">            for val in str</span><br><span class="line">                p #&#123;val&#125;</span><br></pre></td></tr></table></figure>
-<p>解析后</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&lt;p&gt;这是字符串1&lt;/p&gt;</span><br><span class="line">&lt;p&gt;这是字符串2&lt;/p&gt;</span><br><span class="line">&lt;p&gt;这是字符串3&lt;/p&gt;</span><br></pre></td></tr></table></figure>
-<p>  9.for in 解析对象</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">-var obj = [&#123;name:&quot;张三&quot;,age:&quot;18&quot;&#125;,&#123;name:&quot;李四&quot;,age:&quot;19&quot;&#125;,&#123;name:&quot;王二&quot;,age:&quot;20&quot;&#125;];</span><br><span class="line">            for item in obj</span><br><span class="line">                p 姓名是#&#123;item.name&#125;,年龄是#&#123;item.age&#125;</span><br></pre></td></tr></table></figure>
-<p>解析后</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&lt;p&gt;姓名是张三,年龄是18&lt;/p&gt;</span><br><span class="line">&lt;p&gt;姓名是李四,年龄是19&lt;/p&gt;</span><br><span class="line">&lt;p&gt;姓名是王二,年龄是20&lt;/p&gt;</span><br></pre></td></tr></table></figure>
-<ol>
-<li>if 判断</li>
-</ol>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">-var flag = true;</span><br><span class="line">            if flag</span><br><span class="line">                p flag是true</span><br><span class="line">            else</span><br><span class="line">                p flag是false</span><br></pre></td></tr></table></figure>
-<p>解析后</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;p&gt;flag是true&lt;/p&gt;</span><br></pre></td></tr></table></figure>
-<p>  -11. switch……case语句<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">-var a = 3;</span><br><span class="line">            case a</span><br><span class="line">                when 1</span><br><span class="line">                    p a的值是1</span><br><span class="line">                when 1</span><br><span class="line">                    p a的值是1</span><br><span class="line">                default</span><br><span class="line">                    p a的值是其他值</span><br></pre></td></tr></table></figure></p>
-<p>解析后</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;p&gt;a的值是其他值&lt;/p&gt;</span><br></pre></td></tr></table></figure>
-<p>解析后</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">&lt;ul&gt;</span><br><span class="line">          &lt;li&gt;这里是ul里面的li 0&lt;/li&gt;</span><br><span class="line">          &lt;li&gt;这里是ul里面的li 1&lt;/li&gt;</span><br><span class="line">          &lt;li&gt;这里是ul里面的li 2&lt;/li&gt;</span><br><span class="line">        &lt;/ul&gt;</span><br><span class="line">        &lt;p&gt;宠物的名字是大黄,它的性别是 公&lt;/p&gt;</span><br></pre></td></tr></table></figure>
-<ol>
-<li>mixin混合模式</li>
-</ol>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">mixin list</span><br><span class="line">            ul</span><br><span class="line">                -for(var i = 0;i &lt; 3;i++)</span><br><span class="line">                    li 这里是ul里面的li #&#123;i&#125;</span><br><span class="line"></span><br><span class="line">        +list</span><br><span class="line">        mixin pet(name,sex)</span><br><span class="line">            p 宠物的名字是#&#123;name&#125;,它的性别是 #&#123;sex&#125;</span><br><span class="line">        +pet(&quot;大黄&quot;,&quot;公&quot;)</span><br></pre></td></tr></table></figure>
-<p>解析后</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;p&gt;flag是true&lt;/p&gt;</span><br></pre></td></tr></table></figure>
-<p>13.引入script文件</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">script(type=&quot;text/javascript&quot;).</span><br><span class="line">        function()&#123;</span><br><span class="line">            console.log(11111)</span><br><span class="line">        &#125;</span><br></pre></td></tr></table></figure>
-<p>解析后</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">&lt;script type=&quot;text/javascript&quot;&gt;</span><br><span class="line">    function()&#123;</span><br><span class="line">        console.log(11111)</span><br><span class="line">    &#125;</span><br><span class="line">  &lt;/script&gt;</span><br></pre></td></tr></table></figure>
-<p>解析后</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;p&gt;flag是true&lt;/p&gt;</span><br></pre></td></tr></table></figure>
-<p>  14.添加类名和id名</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">div.box 带有类名为box的div</span><br><span class="line">        div#box 带有id名为box的div</span><br><span class="line">        div.box#box1 带有类名和id名为box的div</span><br></pre></td></tr></table></figure>
-<p>解析后</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&lt;div class=&quot;box&quot;&gt;带有类名为box的div&lt;/div&gt;</span><br><span class="line">    &lt;div id=&quot;box&quot;&gt;带有id名为box的div&lt;/div&gt;</span><br><span class="line">    &lt;div id=&quot;box1&quot; class=&quot;box&quot;&gt;带有类名和id名为box的div&lt;/div&gt;</span><br></pre></td></tr></table></figure>
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2018/01/18/jade-pug使用方法/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
   
     <nav id="page-nav">
       <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="page-number" href="/page/3/">3</a><a class="page-number" href="/page/4/">4</a><a class="extend next" rel="next" href="/page/2/">Next &raquo;</a>
@@ -1328,11 +1242,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
           <ul class="article-tag-list" q-show="showTags">
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">浅谈OOP</a>
+                <a href="javascript:void(0)" class="js-tag color5">面向对象</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">面向对象</a>
+                <a href="javascript:void(0)" class="js-tag color1">浅谈OOP</a>
               </li>
             
             <div class="clearfix"></div>

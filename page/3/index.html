@@ -158,6 +158,121 @@
           <div id="js-content" class="content-ll">
             
   
+    <article id="post-构造函数-继承详解" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2017/12/22/构造函数-继承详解/">构造函数--继承详解</a>
+    </h1>
+  
+
+        
+        <a href="/2017/12/22/构造函数-继承详解/" class="archive-article-date">
+  	<time datetime="2017-12-22T13:41:34.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-12-22</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>先写一个父级的构造函数</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">      function Parent(name)&#123;</span><br><span class="line">	this.name = name;</span><br><span class="line">	this.money = 10000000;</span><br><span class="line">	this.hobby = function()&#123;</span><br><span class="line">		console.log(&quot;Parent this.hobby&quot;);</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line">Parent.prototype.active = function()&#123;</span><br><span class="line">	console.log(&quot;Parent.prototype&quot;);</span><br><span class="line">&#125;</span><br><span class="line">Parent.prototype.eat = function()&#123;</span><br><span class="line">	console.log(&quot;Parent.prototype.eat&quot;);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>接着子集的构造方法</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">function Son(name)&#123;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>子集想要继承父级里面的内容就要在里面加上</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">function Son(name)&#123;</span><br><span class="line">	Parent.call(this,name);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>这样就可以继承父级里面的内容</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">var newSon = new Son(&quot;rrrr&quot;);</span><br><span class="line">console.log(newSon.name);  // rrrr</span><br><span class="line">console.log(newSon.money); // 10000000</span><br><span class="line">newSon.hobby(); // Parent this.hobby</span><br></pre></td></tr></table></figure>
+<p>这样写看似没什么问题，但是当我们在子集里面写上与父级相同的属性或者方法呢？</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">function Son(name)&#123;</span><br><span class="line">	Parent.call(this,name);  // rrrr</span><br><span class="line">	this.money = 10; </span><br><span class="line">	this.hobby = function()&#123;</span><br><span class="line">		console.log(&quot;Son this.hobby&quot;);</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line">var newSon = new Son(&quot;rrrr&quot;);</span><br><span class="line">console.log(newSon.name);  // rrrr</span><br><span class="line">console.log(newSon.money); // 10</span><br><span class="line">newSon.hobby(); // Son this.hobby</span><br></pre></td></tr></table></figure>
+<p>上述代码表明，子集继承父级，在自身重写该方法的时候以自身为准<br>回到上述继承   <strong><em>构造继承</em></strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line">            function Parent(name)&#123;</span><br><span class="line">          //属性</span><br><span class="line">	this.name = name;</span><br><span class="line">	this.money = 10000000</span><br><span class="line">          //实例方法</span><br><span class="line">	this.hobby = function()&#123;</span><br><span class="line">		console.log(&quot;Parent this.hobby&quot;);</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line">      //原型方法</span><br><span class="line">Parent.prototype.active = function()&#123;</span><br><span class="line">	console.log(&quot;Parent.prototype&quot;);</span><br><span class="line">&#125;</span><br><span class="line">Parent.prototype.eat = function()&#123;</span><br><span class="line">	console.log(&quot;Parent.prototype.eat&quot;);</span><br><span class="line">&#125;</span><br><span class="line">function Son(name)&#123;</span><br><span class="line">	Parent.call(this,name);</span><br><span class="line">&#125;</span><br><span class="line">var newSon = new Son(&quot;rrrr&quot;);</span><br><span class="line">console.log(newSon.name);  // rrrr</span><br><span class="line">console.log(newSon.money);  // 100000</span><br><span class="line">console.log(newSon instanceof Parent); // false</span><br><span class="line">console.log(newSon instanceof Son); // true</span><br><span class="line">newSon.hobby()  //  Parent this.hobby</span><br><span class="line">newSon.active();  // 报错</span><br><span class="line">newSon.eat();  // 报错</span><br></pre></td></tr></table></figure>
+<p>由上述可知，子集继承父级，只继承父级本身的属性和方法，不会继承父级原型上的方法，因为构造继承的核心就是使用父类的构造函数来增强子类的实例，等于是复制父类的实例属性给子类（没用到原型）</p>
+<p>特点：</p>
+<ul>
+<li>解决子类实例共享父类引用属性的问题</li>
+<li>创建子类实例时，可以向父类传参数</li>
+<li>可以实现多继承，（call多个父类对象）</li>
+</ul>
+<p>缺点：</p>
+<ul>
+<li>实例并不是父类的实例，只是子类的实例</li>
+<li>只能继承父类的实例属性和方法，不能继承原型属性和方法</li>
+<li>无法实现函数复用，每个子类都有父类实力函数的副本，影响性能</li>
+</ul>
+<p>这就可以利用到   <strong><em>实例继承</em></strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">function Son(name)&#123;</span><br><span class="line">	var ins = new Parent(name);</span><br><span class="line">	return ins;</span><br><span class="line">&#125;</span><br><span class="line">var newSon = new Son(&quot;ggg&quot;);</span><br><span class="line">console.log(newSon.name);   // ggg</span><br><span class="line">console.log(newSon.money);   // 10000000</span><br><span class="line">console.log(newSon instanceof Parent);   // true</span><br><span class="line">console.log(newSon instanceof Son);   // false</span><br><span class="line">newSon.hobby()  //  Parent this.hobby</span><br><span class="line">newSon.active();  //  Parent.prototype</span><br><span class="line">newSon.eat(); //  Parent.prototype.eat</span><br></pre></td></tr></table></figure>
+<p>实例继承的核心。为父类实例添加新特性，作为子类实例返回</p>
+<p>特点：</p>
+<ul>
+<li>不限制调用方式，不管是 new 子类（） 还是 子类（） ，返回的对象具有相同的效果</li>
+</ul>
+<p>缺点：</p>
+<ul>
+<li>实例是父级的实例，不是子类的实例</li>
+<li>不支持多继承</li>
+</ul>
+<p>再有  <strong><em>组合继承</em></strong></p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">function Son(name)&#123;</span><br><span class="line">	Parent.call(this,name);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">Son.prototype.eat = function()&#123;</span><br><span class="line">	console.log(&quot;Son.prototype.eat&quot;);</span><br><span class="line">&#125;</span><br><span class="line">Son.prototype = new Parent();</span><br><span class="line">var newSon = new Son(&quot;ggg&quot;);</span><br><span class="line">console.log(newSon.name);   // ggg</span><br><span class="line">console.log(newSon.money);   // 10000000</span><br><span class="line">console.log(newSon instanceof Parent);   // true</span><br><span class="line">console.log(newSon instanceof Son);   // true</span><br><span class="line">newSon.hobby()  //  Parent this.hobby</span><br><span class="line">newSon.active();  //  Parent.prototype</span><br><span class="line">newSon.eat(); //  Parent.prototype.eat</span><br></pre></td></tr></table></figure>
+<p>  <strong><em>组合继承</em></strong>的核心是通过父类构造，继承父类的属性并保留传参的优点，然后通过降幅及实例子类原型，实现函数复用</p>
+<p>特点：</p>
+<ul>
+<li>可以继承实例属性、方法，也可以继承原型属性、方法</li>
+<li>即是子类的实例，也是父类的实例</li>
+<li>不存在引用属性共享问题</li>
+<li>可传参</li>
+<li>函数可复用</li>
+</ul>
+<p>缺点：</p>
+<ul>
+<li>调用了两次父类构造函数，生成两份实例（父类实例将子类原型上的那份屏蔽了），</li>
+</ul>
+<p>最后<strong><em>寄生组合继承</em></strong>，通过创建一个空的构造函数。</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line">function Son(name)&#123;</span><br><span class="line">	Parent.call(this,name);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">Son.prototype.eat = function()&#123;</span><br><span class="line">	console.log(&quot;Son.prototype.eat&quot;);</span><br><span class="line">&#125;</span><br><span class="line">//创建一个空的构造函数</span><br><span class="line">function Link()&#123;&#125;</span><br><span class="line">//将Person4 里面的构造函数的原型 传址赋值 到 Link构造函数的原型里面</span><br><span class="line">Link.prototype = Parent.prototype;</span><br><span class="line">//实例化Student的构造方法的原型。此时  实例化的时候会重新创建一个新的地址存储，所以改变</span><br><span class="line">//Student里面的方法的时候 不会影响Link  当然 也不会影响Person4</span><br><span class="line">Son.prototype = new Link();</span><br><span class="line">var newSon = new Son(&quot;tt&quot;)</span><br><span class="line">console.log(newSon.name);   // tt</span><br><span class="line">console.log(newSon.money);   // 10000000</span><br><span class="line">console.log(newSon instanceof Parent);   // true</span><br><span class="line">console.log(newSon instanceof Son);   // true</span><br><span class="line">newSon.hobby()  //  Parent this.hobby</span><br><span class="line">newSon.active();  //  Parent.prototype</span><br><span class="line">newSon.eat(); //  Parent.prototype.eat</span><br></pre></td></tr></table></figure>
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2017/12/22/构造函数-继承详解/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
     <article id="post-typeof与instanceof用法小记" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -928,72 +1043,6 @@
 
 
   
-    <article id="简易版-分页" class="article article-type-简易版  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2017/11/17/分页/">分页</a>
-    </h1>
-  
-
-        
-        <a href="/2017/11/17/分页/" class="archive-article-date">
-  	<time datetime="2017-11-17T13:06:47.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-11-17</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>HTML 代码段</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br></pre></td><td class="code"><pre><span class="line">&lt;!DOCTYPE html&gt;</span><br><span class="line">&lt;html&gt;</span><br><span class="line">	&lt;head&gt;</span><br><span class="line">		&lt;meta charset=&quot;UTF-8&quot;&gt;</span><br><span class="line">		&lt;title&gt;&lt;/title&gt;</span><br><span class="line">	&lt;/head&gt;</span><br><span class="line">	&lt;style type=&quot;text/css&quot;&gt;</span><br><span class="line">		.wrap &#123;</span><br><span class="line">			width: 400px;</span><br><span class="line">			height: 200px;</span><br><span class="line">		&#125;</span><br><span class="line">		#pagenav &#123;</span><br><span class="line">			overflow: hidden;</span><br><span class="line">			width: 300px;</span><br><span class="line">			margin: 0 auto;</span><br><span class="line">		&#125;</span><br><span class="line">		a &#123;</span><br><span class="line">			display: block;</span><br><span class="line">			border: 1px solid lightgray;</span><br><span class="line">			width: 30px;</span><br><span class="line">			height: 20px;</span><br><span class="line">			float: left;</span><br><span class="line">			font-size: 12px;</span><br><span class="line">			text-align: center;</span><br><span class="line">			line-height: 20px;</span><br><span class="line">			text-decoration: none;</span><br><span class="line">		&#125;</span><br><span class="line">		#content &#123;</span><br><span class="line">			width: 400px;</span><br><span class="line">			height: 200px;</span><br><span class="line">			background: #f5f5f5;</span><br><span class="line">		&#125;</span><br><span class="line">	&lt;/style&gt;</span><br><span class="line">	&lt;body&gt;</span><br><span class="line">		&lt;div class=&quot;wrap&quot;&gt;</span><br><span class="line">			&lt;div id=&quot;content&quot;&gt;&lt;/div&gt;</span><br><span class="line">			&lt;!--页码导航 --&gt;</span><br><span class="line">			&lt;div id=&quot;pagenav&quot;&gt;&lt;/div&gt;</span><br><span class="line">		&lt;/div&gt;</span><br><span class="line">	&lt;/body&gt;</span><br><span class="line">	&lt;script src=&quot;http://libs.baidu.com/jquery/2.0.0/jquery.min.js&quot;&gt;&lt;/script&gt;</span><br><span class="line">	&lt;script type=&quot;text/javascript&quot;&gt;</span><br><span class="line">		totalNum = 100;//总页数 </span><br><span class="line">		pageSize = 3;//每页显示数量 </span><br><span class="line">		totalPage = Math.ceil(totalNum/pageSize);//总页数的计算公式</span><br><span class="line">		createPageNav(1);</span><br><span class="line">		function createPageNav(pageIndex) &#123;</span><br><span class="line">			//每页页码不超过9页</span><br><span class="line">			//pageIndex保持在中间</span><br><span class="line">			var pageIndex = parseInt(pageIndex);</span><br><span class="line">			start = pageIndex - 4 &gt; 0 ? pageIndex - 4 : 1;</span><br><span class="line">			end = pageIndex + 4 &lt; totalPage ? pageIndex + 4 : totalPage;</span><br><span class="line">			end = end - start &lt; 8 ? (start+8&gt;totalPage ? totalPage : start+8) : end;</span><br><span class="line">			//如果是最后一页，向前保持所有的</span><br><span class="line">			if(end == totalPage) &#123;</span><br><span class="line">				start = totalPage - 8 &gt; 0 ? totalPage - 8 : 1;</span><br><span class="line">			&#125;</span><br><span class="line">			document.getElementById(&apos;pagenav&apos;).innerHTML = &quot;&quot;;</span><br><span class="line">			for(var i=start; i&lt;=end; i++)&#123;	</span><br><span class="line">				var a = document.createElement(&apos;a&apos;);</span><br><span class="line">				a.innerHTML = i;</span><br><span class="line">				//自定义属性  在标签a里面会显示 &lt;a data-page=&quot;i&quot;&gt;i&lt;/a&gt;</span><br><span class="line">				a.dataset.page = i;</span><br><span class="line">				a.href = &quot;###&quot;;</span><br><span class="line">				a.onclick = ViewNews;</span><br><span class="line">				document.getElementById(&apos;pagenav&apos;).appendChild(a);</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line">		function ViewNews()&#123;</span><br><span class="line">			var pageIndex = this.dataset.page;</span><br><span class="line">			createPageNav(pageIndex);</span><br><span class="line">			$.ajax(&#123;</span><br><span class="line">				type: &quot;get&quot;,</span><br><span class="line">				url: &quot;news.php&quot;,</span><br><span class="line">				data: &#123;&quot;pageIndex&quot;:pageIndex&#125;,</span><br><span class="line">				async: true,</span><br><span class="line">				dataType: &quot;json&quot;,</span><br><span class="line">				success: function(data) &#123;</span><br><span class="line">					//将新闻数据显示出来</span><br><span class="line">					createNews(data);</span><br><span class="line">				&#125;</span><br><span class="line">			&#125;)</span><br><span class="line">		&#125;</span><br><span class="line">		function createNews(data) &#123;</span><br><span class="line">			var news = &quot;&quot;;</span><br><span class="line">			for(var i = 0;i&lt; data.length;i++) &#123;</span><br><span class="line">				news += &quot;&lt;li&gt;&quot;+data[i][0]+&quot;&lt;/li&gt;&quot;;</span><br><span class="line">			&#125;</span><br><span class="line">			$(&apos;#content&apos;).html(news);</span><br><span class="line">		&#125;</span><br><span class="line">	&lt;/script&gt;</span><br><span class="line">&lt;/html&gt;</span><br></pre></td></tr></table></figure>
-<p>PHP代码段</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line">&lt;?php</span><br><span class="line">	/**</span><br><span class="line">	 * intval 将字符串转换成整数</span><br><span class="line">	 * pageIndex  第几页新闻</span><br><span class="line">	 * pageIndex = 3  (从1 开始)</span><br><span class="line">	 * pageSize = 3  每页显示几条新闻</span><br><span class="line">	 */</span><br><span class="line">	$news = array();</span><br><span class="line">	for($i=0;$i&lt;100;$i++) &#123;</span><br><span class="line">		$news[] = array(&quot;新闻$i&quot;);</span><br><span class="line">	&#125;</span><br><span class="line">	$pagaIndex = empty($_GET[&apos;pageIndex&apos;]) ? 1 : intval($_GET[&apos;pageIndex&apos;]);</span><br><span class="line">	$pageSize = 3;</span><br><span class="line">	$start = ($pagaIndex - 1) * $pageSize;</span><br><span class="line">	$outNews = array();</span><br><span class="line">	for($i=0;$i&lt;$pageSize;$i++) &#123;</span><br><span class="line">		if(!empty($news[$start + $i]))&#123;</span><br><span class="line">			$outNews[] = $news[$start + $i];</span><br><span class="line">		&#125;	</span><br><span class="line">	&#125;</span><br><span class="line">	echo json_encode($outNews);</span><br><span class="line">?&gt;</span><br></pre></td></tr></table></figure>
-<h3 id="欢迎来到大瑞的微博"><a href="#欢迎来到大瑞的微博" class="headerlink" title="欢迎来到大瑞的微博"></a>欢迎来到<a href="https://shendarui.github.io/" target="_blank" rel="external">大瑞的微博</a></h3>
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2017/11/17/分页/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
   
     <nav id="page-nav">
       <a class="extend prev" rel="prev" href="/page/2/">&laquo; Prev</a><a class="page-number" href="/">1</a><a class="page-number" href="/page/2/">2</a><span class="page-number current">3</span><a class="page-number" href="/page/4/">4</a><a class="extend next" rel="next" href="/page/4/">Next &raquo;</a>
@@ -1091,11 +1140,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
           <ul class="article-tag-list" q-show="showTags">
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">浅谈OOP</a>
+                <a href="javascript:void(0)" class="js-tag color5">面向对象</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">面向对象</a>
+                <a href="javascript:void(0)" class="js-tag color1">浅谈OOP</a>
               </li>
             
             <div class="clearfix"></div>

@@ -158,6 +158,169 @@
           <div id="js-content" class="content-ll">
             
   
+    <article id="post-jade-pug使用方法" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2018/01/18/jade-pug使用方法/">jade,pug使用方法</a>
+    </h1>
+  
+
+        
+        <a href="/2018/01/18/jade-pug使用方法/" class="archive-article-date">
+  	<time datetime="2018-01-18T12:25:21.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-01-18</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>Jade是一款基于haml的html模版引擎，采用Java cript实现，可以方便地 在Node.js、Yeoman等框架中使用，已改名为pug</p>
+<h3 id="1-全局安装"><a href="#1-全局安装" class="headerlink" title="1. 全局安装"></a>1. 全局安装</h3><blockquote>
+<p>npm install jade -g</p>
+</blockquote>
+<p>-g代表全局安装，如果安装出错，可能是权限问题，在前面加上sudo</p>
+<blockquote>
+<p>sudo npm install jade -g</p>
+</blockquote>
+<p>下载的时候可能会有点慢，所以在此之前可以下下载一个淘宝镜像，毕竟这些都是国外的东西，每次安装的时候都要翻墙，而淘宝镜像类似于一比一还原国外的中国地址，从这上面下载不需要翻墙，会必将快。<br>首先安装淘宝镜像</p>
+<blockquote>
+<p>$ npm install -g cnpm<br>然后全局安装jade<br>sudo cnpm install jade -g</p>
+</blockquote>
+<h3 id="2-创建文件，后缀名为jade"><a href="#2-创建文件，后缀名为jade" class="headerlink" title="2. 创建文件，后缀名为jade"></a>2. 创建文件，后缀名为jade</h3><div style="text-align:center">
+
+<p><img src="http://upload-images.jianshu.io/upload_images/7426605-9a2da1e9052dee02.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="image.png"></p>
+<p></p></div><p></p>
+<h3 id="3-在控制台，进入当前文件的文件夹下，输入命令"><a href="#3-在控制台，进入当前文件的文件夹下，输入命令" class="headerlink" title="3. 在控制台，进入当前文件的文件夹下，输入命令"></a>3. 在控制台，进入当前文件的文件夹下，输入命令</h3><blockquote>
+<p>jade -P -w test.jade</p>
+</blockquote>
+<p>-P 代表不压缩HTML<br>-w 监听文件变化，在test.jade里面输入东西保存之后，会自动生成一个test.html文件</p>
+<h3 id="4-jade-语法"><a href="#4-jade-语法" class="headerlink" title="4. jade 语法"></a>4. jade 语法</h3><ol>
+<li><p>jade通过缩进关系，代替以往HTML的层级包含关系。注意要统一使用Tab或者空格缩进，不要混用</p>
+<ol>
+<li>内联书写层级  </li>
+</ol>
+</li>
+</ol>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">a: img</span><br></pre></td></tr></table></figure>
+<p>在HTML里面会解析成</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;a&gt;&lt;img&gt;&lt;/a&gt;</span><br></pre></td></tr></table></figure>
+<ol>
+<li>style属性</li>
+</ol>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">div(style=&#123;width:&quot;100px&quot;,height:&quot;100px&quot;&#125;)</span><br></pre></td></tr></table></figure>
+<p>解析后</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;div style=&quot;width:100px;height:100px&quot;&gt;&lt;/div&gt;</span><br></pre></td></tr></table></figure>
+<ol>
+<li>使用“-”来定义变量，使用“=”把变量输出到元素内，通过#{var}插到相应标签里面</li>
+</ol>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">-var a = 9;</span><br><span class="line">        p a的值为#&#123;a&#125;</span><br></pre></td></tr></table></figure>
+<p>解析后</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;p&gt;a的值为9&lt;/p&gt;</span><br></pre></td></tr></table></figure>
+<ul>
+<li><ol>
+<li>文本 通过在文字前添加符号”|”可以让jade原样输出内容，在HTML标记后，通过空格隔开。<br>不加“|”是，gg会被当成自定义标签解析</li>
+</ol>
+</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">p</span><br><span class="line">     gg</span><br></pre></td></tr></table></figure>
+<p>解析后</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&lt;p&gt;</span><br><span class="line">      &lt;gg&gt;&lt;/gg&gt;</span><br><span class="line"> &lt;/p&gt;</span><br></pre></td></tr></table></figure>
+<p>加上“|”，就是内容，而且可以多行写</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">p</span><br><span class="line">           | gg</span><br></pre></td></tr></table></figure>
+<p>解析后</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;p&gt;gg&lt;/p&gt;</span><br></pre></td></tr></table></figure>
+<ol>
+<li>注释。可以通过双斜杠进行注释</li>
+</ol>
+<p>一种是能被解析的注释 —- //</p>
+<p>一种是不能被解析的注释 —- //-</p>
+<ol>
+<li>for循环</li>
+</ol>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">-for(var i = 0;i &lt; 3;i++)</span><br><span class="line">      p 这是for循环中的span#&#123;i&#125;</span><br></pre></td></tr></table></figure>
+<p>解析后</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&lt;p&gt;这是for循环中的span0&lt;/p&gt;</span><br><span class="line">&lt;p&gt;这是for循环中的span1&lt;/p&gt;</span><br><span class="line">&lt;p&gt;这是for循环中的span2&lt;/p&gt;</span><br></pre></td></tr></table></figure>
+<p>  8.for in 循环</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">-var str = [&quot;这是字符串1&quot;,&quot;这是字符串2&quot;,&quot;这是字符串3&quot;];</span><br><span class="line">            for val in str</span><br><span class="line">                p #&#123;val&#125;</span><br></pre></td></tr></table></figure>
+<p>解析后</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&lt;p&gt;这是字符串1&lt;/p&gt;</span><br><span class="line">&lt;p&gt;这是字符串2&lt;/p&gt;</span><br><span class="line">&lt;p&gt;这是字符串3&lt;/p&gt;</span><br></pre></td></tr></table></figure>
+<p>  9.for in 解析对象</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">-var obj = [&#123;name:&quot;张三&quot;,age:&quot;18&quot;&#125;,&#123;name:&quot;李四&quot;,age:&quot;19&quot;&#125;,&#123;name:&quot;王二&quot;,age:&quot;20&quot;&#125;];</span><br><span class="line">            for item in obj</span><br><span class="line">                p 姓名是#&#123;item.name&#125;,年龄是#&#123;item.age&#125;</span><br></pre></td></tr></table></figure>
+<p>解析后</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&lt;p&gt;姓名是张三,年龄是18&lt;/p&gt;</span><br><span class="line">&lt;p&gt;姓名是李四,年龄是19&lt;/p&gt;</span><br><span class="line">&lt;p&gt;姓名是王二,年龄是20&lt;/p&gt;</span><br></pre></td></tr></table></figure>
+<ol>
+<li>if 判断</li>
+</ol>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">-var flag = true;</span><br><span class="line">            if flag</span><br><span class="line">                p flag是true</span><br><span class="line">            else</span><br><span class="line">                p flag是false</span><br></pre></td></tr></table></figure>
+<p>解析后</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;p&gt;flag是true&lt;/p&gt;</span><br></pre></td></tr></table></figure>
+<p>  -11. switch……case语句<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">-var a = 3;</span><br><span class="line">            case a</span><br><span class="line">                when 1</span><br><span class="line">                    p a的值是1</span><br><span class="line">                when 1</span><br><span class="line">                    p a的值是1</span><br><span class="line">                default</span><br><span class="line">                    p a的值是其他值</span><br></pre></td></tr></table></figure></p>
+<p>解析后</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;p&gt;a的值是其他值&lt;/p&gt;</span><br></pre></td></tr></table></figure>
+<p>解析后</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">&lt;ul&gt;</span><br><span class="line">          &lt;li&gt;这里是ul里面的li 0&lt;/li&gt;</span><br><span class="line">          &lt;li&gt;这里是ul里面的li 1&lt;/li&gt;</span><br><span class="line">          &lt;li&gt;这里是ul里面的li 2&lt;/li&gt;</span><br><span class="line">        &lt;/ul&gt;</span><br><span class="line">        &lt;p&gt;宠物的名字是大黄,它的性别是 公&lt;/p&gt;</span><br></pre></td></tr></table></figure>
+<ol>
+<li>mixin混合模式</li>
+</ol>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">mixin list</span><br><span class="line">            ul</span><br><span class="line">                -for(var i = 0;i &lt; 3;i++)</span><br><span class="line">                    li 这里是ul里面的li #&#123;i&#125;</span><br><span class="line"></span><br><span class="line">        +list</span><br><span class="line">        mixin pet(name,sex)</span><br><span class="line">            p 宠物的名字是#&#123;name&#125;,它的性别是 #&#123;sex&#125;</span><br><span class="line">        +pet(&quot;大黄&quot;,&quot;公&quot;)</span><br></pre></td></tr></table></figure>
+<p>解析后</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;p&gt;flag是true&lt;/p&gt;</span><br></pre></td></tr></table></figure>
+<p>13.引入script文件</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">script(type=&quot;text/javascript&quot;).</span><br><span class="line">        function()&#123;</span><br><span class="line">            console.log(11111)</span><br><span class="line">        &#125;</span><br></pre></td></tr></table></figure>
+<p>解析后</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">&lt;script type=&quot;text/javascript&quot;&gt;</span><br><span class="line">    function()&#123;</span><br><span class="line">        console.log(11111)</span><br><span class="line">    &#125;</span><br><span class="line">  &lt;/script&gt;</span><br></pre></td></tr></table></figure>
+<p>解析后</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">&lt;p&gt;flag是true&lt;/p&gt;</span><br></pre></td></tr></table></figure>
+<p>  14.添加类名和id名</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">div.box 带有类名为box的div</span><br><span class="line">        div#box 带有id名为box的div</span><br><span class="line">        div.box#box1 带有类名和id名为box的div</span><br></pre></td></tr></table></figure>
+<p>解析后</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&lt;div class=&quot;box&quot;&gt;带有类名为box的div&lt;/div&gt;</span><br><span class="line">    &lt;div id=&quot;box&quot;&gt;带有id名为box的div&lt;/div&gt;</span><br><span class="line">    &lt;div id=&quot;box1&quot; class=&quot;box&quot;&gt;带有类名和id名为box的div&lt;/div&gt;</span><br></pre></td></tr></table></figure>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2018/01/18/jade-pug使用方法/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
     <article id="post-1. 可以兼容HTML" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -1047,121 +1210,6 @@ context.drawImage(img,0,0);
 
 
   
-    <article id="post-构造函数-继承详解" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2017/12/22/构造函数-继承详解/">构造函数--继承详解</a>
-    </h1>
-  
-
-        
-        <a href="/2017/12/22/构造函数-继承详解/" class="archive-article-date">
-  	<time datetime="2017-12-22T13:41:34.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-12-22</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>先写一个父级的构造函数</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">      function Parent(name)&#123;</span><br><span class="line">	this.name = name;</span><br><span class="line">	this.money = 10000000;</span><br><span class="line">	this.hobby = function()&#123;</span><br><span class="line">		console.log(&quot;Parent this.hobby&quot;);</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line">Parent.prototype.active = function()&#123;</span><br><span class="line">	console.log(&quot;Parent.prototype&quot;);</span><br><span class="line">&#125;</span><br><span class="line">Parent.prototype.eat = function()&#123;</span><br><span class="line">	console.log(&quot;Parent.prototype.eat&quot;);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>接着子集的构造方法</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">function Son(name)&#123;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>子集想要继承父级里面的内容就要在里面加上</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">function Son(name)&#123;</span><br><span class="line">	Parent.call(this,name);</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
-<p>这样就可以继承父级里面的内容</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">var newSon = new Son(&quot;rrrr&quot;);</span><br><span class="line">console.log(newSon.name);  // rrrr</span><br><span class="line">console.log(newSon.money); // 10000000</span><br><span class="line">newSon.hobby(); // Parent this.hobby</span><br></pre></td></tr></table></figure>
-<p>这样写看似没什么问题，但是当我们在子集里面写上与父级相同的属性或者方法呢？</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">function Son(name)&#123;</span><br><span class="line">	Parent.call(this,name);  // rrrr</span><br><span class="line">	this.money = 10; </span><br><span class="line">	this.hobby = function()&#123;</span><br><span class="line">		console.log(&quot;Son this.hobby&quot;);</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line">var newSon = new Son(&quot;rrrr&quot;);</span><br><span class="line">console.log(newSon.name);  // rrrr</span><br><span class="line">console.log(newSon.money); // 10</span><br><span class="line">newSon.hobby(); // Son this.hobby</span><br></pre></td></tr></table></figure>
-<p>上述代码表明，子集继承父级，在自身重写该方法的时候以自身为准<br>回到上述继承   <strong><em>构造继承</em></strong></p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br></pre></td><td class="code"><pre><span class="line">            function Parent(name)&#123;</span><br><span class="line">          //属性</span><br><span class="line">	this.name = name;</span><br><span class="line">	this.money = 10000000</span><br><span class="line">          //实例方法</span><br><span class="line">	this.hobby = function()&#123;</span><br><span class="line">		console.log(&quot;Parent this.hobby&quot;);</span><br><span class="line">	&#125;</span><br><span class="line">&#125;</span><br><span class="line">      //原型方法</span><br><span class="line">Parent.prototype.active = function()&#123;</span><br><span class="line">	console.log(&quot;Parent.prototype&quot;);</span><br><span class="line">&#125;</span><br><span class="line">Parent.prototype.eat = function()&#123;</span><br><span class="line">	console.log(&quot;Parent.prototype.eat&quot;);</span><br><span class="line">&#125;</span><br><span class="line">function Son(name)&#123;</span><br><span class="line">	Parent.call(this,name);</span><br><span class="line">&#125;</span><br><span class="line">var newSon = new Son(&quot;rrrr&quot;);</span><br><span class="line">console.log(newSon.name);  // rrrr</span><br><span class="line">console.log(newSon.money);  // 100000</span><br><span class="line">console.log(newSon instanceof Parent); // false</span><br><span class="line">console.log(newSon instanceof Son); // true</span><br><span class="line">newSon.hobby()  //  Parent this.hobby</span><br><span class="line">newSon.active();  // 报错</span><br><span class="line">newSon.eat();  // 报错</span><br></pre></td></tr></table></figure>
-<p>由上述可知，子集继承父级，只继承父级本身的属性和方法，不会继承父级原型上的方法，因为构造继承的核心就是使用父类的构造函数来增强子类的实例，等于是复制父类的实例属性给子类（没用到原型）</p>
-<p>特点：</p>
-<ul>
-<li>解决子类实例共享父类引用属性的问题</li>
-<li>创建子类实例时，可以向父类传参数</li>
-<li>可以实现多继承，（call多个父类对象）</li>
-</ul>
-<p>缺点：</p>
-<ul>
-<li>实例并不是父类的实例，只是子类的实例</li>
-<li>只能继承父类的实例属性和方法，不能继承原型属性和方法</li>
-<li>无法实现函数复用，每个子类都有父类实力函数的副本，影响性能</li>
-</ul>
-<p>这就可以利用到   <strong><em>实例继承</em></strong></p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">function Son(name)&#123;</span><br><span class="line">	var ins = new Parent(name);</span><br><span class="line">	return ins;</span><br><span class="line">&#125;</span><br><span class="line">var newSon = new Son(&quot;ggg&quot;);</span><br><span class="line">console.log(newSon.name);   // ggg</span><br><span class="line">console.log(newSon.money);   // 10000000</span><br><span class="line">console.log(newSon instanceof Parent);   // true</span><br><span class="line">console.log(newSon instanceof Son);   // false</span><br><span class="line">newSon.hobby()  //  Parent this.hobby</span><br><span class="line">newSon.active();  //  Parent.prototype</span><br><span class="line">newSon.eat(); //  Parent.prototype.eat</span><br></pre></td></tr></table></figure>
-<p>实例继承的核心。为父类实例添加新特性，作为子类实例返回</p>
-<p>特点：</p>
-<ul>
-<li>不限制调用方式，不管是 new 子类（） 还是 子类（） ，返回的对象具有相同的效果</li>
-</ul>
-<p>缺点：</p>
-<ul>
-<li>实例是父级的实例，不是子类的实例</li>
-<li>不支持多继承</li>
-</ul>
-<p>再有  <strong><em>组合继承</em></strong></p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">function Son(name)&#123;</span><br><span class="line">	Parent.call(this,name);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">Son.prototype.eat = function()&#123;</span><br><span class="line">	console.log(&quot;Son.prototype.eat&quot;);</span><br><span class="line">&#125;</span><br><span class="line">Son.prototype = new Parent();</span><br><span class="line">var newSon = new Son(&quot;ggg&quot;);</span><br><span class="line">console.log(newSon.name);   // ggg</span><br><span class="line">console.log(newSon.money);   // 10000000</span><br><span class="line">console.log(newSon instanceof Parent);   // true</span><br><span class="line">console.log(newSon instanceof Son);   // true</span><br><span class="line">newSon.hobby()  //  Parent this.hobby</span><br><span class="line">newSon.active();  //  Parent.prototype</span><br><span class="line">newSon.eat(); //  Parent.prototype.eat</span><br></pre></td></tr></table></figure>
-<p>  <strong><em>组合继承</em></strong>的核心是通过父类构造，继承父类的属性并保留传参的优点，然后通过降幅及实例子类原型，实现函数复用</p>
-<p>特点：</p>
-<ul>
-<li>可以继承实例属性、方法，也可以继承原型属性、方法</li>
-<li>即是子类的实例，也是父类的实例</li>
-<li>不存在引用属性共享问题</li>
-<li>可传参</li>
-<li>函数可复用</li>
-</ul>
-<p>缺点：</p>
-<ul>
-<li>调用了两次父类构造函数，生成两份实例（父类实例将子类原型上的那份屏蔽了），</li>
-</ul>
-<p>最后<strong><em>寄生组合继承</em></strong>，通过创建一个空的构造函数。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br></pre></td><td class="code"><pre><span class="line">function Son(name)&#123;</span><br><span class="line">	Parent.call(this,name);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">Son.prototype.eat = function()&#123;</span><br><span class="line">	console.log(&quot;Son.prototype.eat&quot;);</span><br><span class="line">&#125;</span><br><span class="line">//创建一个空的构造函数</span><br><span class="line">function Link()&#123;&#125;</span><br><span class="line">//将Person4 里面的构造函数的原型 传址赋值 到 Link构造函数的原型里面</span><br><span class="line">Link.prototype = Parent.prototype;</span><br><span class="line">//实例化Student的构造方法的原型。此时  实例化的时候会重新创建一个新的地址存储，所以改变</span><br><span class="line">//Student里面的方法的时候 不会影响Link  当然 也不会影响Person4</span><br><span class="line">Son.prototype = new Link();</span><br><span class="line">var newSon = new Son(&quot;tt&quot;)</span><br><span class="line">console.log(newSon.name);   // tt</span><br><span class="line">console.log(newSon.money);   // 10000000</span><br><span class="line">console.log(newSon instanceof Parent);   // true</span><br><span class="line">console.log(newSon instanceof Son);   // true</span><br><span class="line">newSon.hobby()  //  Parent this.hobby</span><br><span class="line">newSon.active();  //  Parent.prototype</span><br><span class="line">newSon.eat(); //  Parent.prototype.eat</span><br></pre></td></tr></table></figure>
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2017/12/22/构造函数-继承详解/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
   
     <nav id="page-nav">
       <a class="extend prev" rel="prev" href="/">&laquo; Prev</a><a class="page-number" href="/">1</a><span class="page-number current">2</span><a class="page-number" href="/page/3/">3</a><a class="page-number" href="/page/4/">4</a><a class="extend next" rel="next" href="/page/3/">Next &raquo;</a>
@@ -1259,11 +1307,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
           <ul class="article-tag-list" q-show="showTags">
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">浅谈OOP</a>
+                <a href="javascript:void(0)" class="js-tag color5">面向对象</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">面向对象</a>
+                <a href="javascript:void(0)" class="js-tag color1">浅谈OOP</a>
               </li>
             
             <div class="clearfix"></div>
