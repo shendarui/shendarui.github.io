@@ -158,6 +158,108 @@
           <div id="js-content" class="content-ll">
             
   
+    <article id="post-canvas简述" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2017/12/25/canvas简述/">canvas简述</a>
+    </h1>
+  
+
+        
+        <a href="/2017/12/25/canvas简述/" class="archive-article-date">
+  	<time datetime="2017-12-25T14:33:55.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-12-25</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h3 id="1-绘制三角形"><a href="#1-绘制三角形" class="headerlink" title="1. 绘制三角形"></a>1. 绘制三角形</h3><h5 id="fill是填充面（实心），stroke是画线（空心）"><a href="#fill是填充面（实心），stroke是画线（空心）" class="headerlink" title="fill是填充面（实心），stroke是画线（空心）"></a>fill是填充面（实心），stroke是画线（空心）</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line">	&lt;script type=&quot;text/javascript&quot;&gt;</span><br><span class="line">		//首先，找到 &lt;canvas&gt; 元素:</span><br><span class="line">		var canvas = document.getElementById(&apos;myCanvas&apos;);</span><br><span class="line">		//然后，创建 context 对象：</span><br><span class="line">		//getContext(&quot;2d&quot;) 对象是内建的 HTML5 对象，</span><br><span class="line">		//拥有多种绘制路径、矩形、圆形、字符以及添加图像的方法。</span><br><span class="line">		var context = canvas.getContext(&apos;2d&apos;);</span><br><span class="line">		</span><br><span class="line">		//canvas 是一个二维网格。</span><br><span class="line">		//canvas 的左上角坐标为 (0,0)</span><br><span class="line">		context.beginPath();</span><br><span class="line">		//moveTo(x,y) 定义线条开始坐标</span><br><span class="line">		context.moveTo(0,0);</span><br><span class="line">		//lineTo(x,y) 定义线条结束坐标</span><br><span class="line">		//绘制三角形</span><br><span class="line">		context.lineTo(0,100);</span><br><span class="line">		context.lineTo(100,100);</span><br><span class="line">		context.lineTo(0,0)</span><br><span class="line">		context.strokeStyle = &quot;#0000FF&quot;;</span><br><span class="line">		context.stroke();</span><br><span class="line">//		context.lineWidth = 10;</span><br><span class="line">//		context.fillStyle = &quot;#008000&quot;;</span><br><span class="line">//		context.fill();</span><br></pre></td></tr></table></figure>
+<h3 id="2-画圆"><a href="#2-画圆" class="headerlink" title="2. 画圆"></a>2. 画圆</h3><h5 id="lineCap-线帽-有三个参数"><a href="#lineCap-线帽-有三个参数" class="headerlink" title="lineCap:线帽 有三个参数"></a>lineCap:线帽 有三个参数</h5><ul>
+<li>butt    默认。向线条的每个末端添加平直的边缘。</li>
+<li>round    向线条的每个末端添加圆形线帽。</li>
+<li>square    向线条的每个末端添加正方形线帽。</li>
+</ul>
+<h5 id="context-arc-参数1-参数2-参数3-参数4-参数5-参数6"><a href="#context-arc-参数1-参数2-参数3-参数4-参数5-参数6" class="headerlink" title="context.arc(参数1,参数2,参数3,参数4,参数5,参数6);"></a>context.arc(参数1,参数2,参数3,参数4,参数5,参数6);</h5><ul>
+<li>参数1 参数2 圆形原点的坐标</li>
+<li>参数3 半径</li>
+<li>参数4 绘制圆形的起始角度</li>
+<li>参数5 绘制圆形的结束角度</li>
+<li>参数6 顺时针 | 逆时针 参数是布尔：true  逆时针，false  顺时针</li>
+</ul>
+<p>context.arc(200,100,100,0,Math.PI,false);</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">//画圆 </span><br><span class="line">context.beginPath(); // 重新开启一个新的图层</span><br><span class="line">context.arc(200,100,100,0,Math.PI,false);</span><br><span class="line">context.lineCap = &quot;round&quot;;</span><br><span class="line">context.lineWidth = 15;</span><br><span class="line">context.strokeStyle = &quot;aquamarine&quot;;</span><br><span class="line">context.stroke();</span><br></pre></td></tr></table></figure>
+<h3 id="3-矩形"><a href="#3-矩形" class="headerlink" title="3. 矩形"></a>3. 矩形</h3><h5 id="context-rect-参数1-参数2-参数3-参数4"><a href="#context-rect-参数1-参数2-参数3-参数4" class="headerlink" title="context.rect(参数1,参数2,参数3,参数4);"></a>context.rect(参数1,参数2,参数3,参数4);</h5><ul>
+<li>参数1 ,参数2 矩形绘制的起点位置（参数1为X轴的坐标，参数2为Y轴的坐标）</li>
+<li>参数3,矩形的宽</li>
+<li>参数4矩形的高<h5 id="创建线条渐变-context-createLinearGradient-参数1-参数2-参数3-参数4"><a href="#创建线条渐变-context-createLinearGradient-参数1-参数2-参数3-参数4" class="headerlink" title="创建线条渐变 context.createLinearGradient(参数1,参数2,参数3,参数4);"></a>创建线条渐变 context.createLinearGradient(参数1,参数2,参数3,参数4);</h5></li>
+<li>参数1 ,参数2 渐变颜色开始的位置（参数1为X轴的坐标，参数2为Y轴的坐标）</li>
+<li>参数3,参数4 渐变颜色结束的位置（参数3为X轴的坐标，参数4为Y轴的坐标）<h5 id="grd-addColorStop-参数1-参数2"><a href="#grd-addColorStop-参数1-参数2" class="headerlink" title="grd.addColorStop(参数1,参数2);"></a>grd.addColorStop(参数1,参数2);</h5></li>
+<li>参数1 ,0~1之间的数</li>
+<li>参数3,参数4  颜色</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">//矩形</span><br><span class="line">context.beginPath();</span><br><span class="line">context.rect(0,200,200,100);</span><br><span class="line">var grd = context.createLinearGradient(0,200,200,200);</span><br><span class="line">grd.addColorStop(0,&quot;red&quot;);</span><br><span class="line">grd.addColorStop(0.5,&quot;green&quot;);</span><br><span class="line">grd.addColorStop(1,&quot;blue&quot;);</span><br><span class="line">context.fillStyle = grd;</span><br><span class="line">context.fill();</span><br></pre></td></tr></table></figure>
+<h5 id="创建一个径向-圆渐变-context-createRadialGradient-xStart-yStart-radiusStart-xEnd-yEnd-radiusEnd"><a href="#创建一个径向-圆渐变-context-createRadialGradient-xStart-yStart-radiusStart-xEnd-yEnd-radiusEnd" class="headerlink" title="创建一个径向/圆渐变 context.createRadialGradient(xStart, yStart,radiusStart,xEnd, yEnd,radiusEnd);"></a>创建一个径向/圆渐变 context.createRadialGradient(xStart, yStart,radiusStart,xEnd, yEnd,radiusEnd);</h5><ul>
+<li>xStart, yStart    开始圆的圆心的坐标。</li>
+<li>radiusStart    开始圆的半径。</li>
+<li>xEnd, yEnd    结束圆的圆心的坐标。</li>
+<li>radiusEnd    结束圆的半径。</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">context.beginPath();</span><br><span class="line">context.rect(0,200,200,100);</span><br><span class="line">var grd = context.createRadialGradient(200,200,50,200,200,200);</span><br><span class="line">grd.addColorStop(0,&quot;red&quot;);</span><br><span class="line">grd.addColorStop(0.5,&quot;green&quot;);</span><br><span class="line">grd.addColorStop(1,&quot;blue&quot;);</span><br><span class="line">context.fillStyle = grd;</span><br><span class="line">context.fill();</span><br></pre></td></tr></table></figure>
+<h3 id="4-文本"><a href="#4-文本" class="headerlink" title="4. 文本"></a>4. 文本</h3><ul>
+<li>font - 定义字体</li>
+<li>fillText(text,x,y) - 在 canvas 上绘制实心的文本</li>
+<li>strokeText(text,x,y) - 在 canvas 上绘制空心的文本</li>
+<li>context.textBaseline 垂直对齐方式</li>
+<li>context.textAlign 水平对齐方式 </li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">// bold 可以省略   Arial 不可以省略</span><br><span class="line">context.font = &quot;bold 50px Arial&quot;;</span><br><span class="line">context.textBaseline = &quot;middle&quot;;</span><br><span class="line">context.textAlign = &quot;center&quot;;</span><br><span class="line">var grd = context.createLinearGradient(0,0,200,0);</span><br><span class="line">grd.addColorStop(0,&quot;blue&quot;);</span><br><span class="line">grd.addColorStop(0.5,&quot;yellow&quot;);</span><br><span class="line">grd.addColorStop(1,&quot;red&quot;);</span><br><span class="line">context.fillStyle = grd; </span><br><span class="line">context.fillText(&quot;hello&quot;,100,100);</span><br></pre></td></tr></table></figure>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2017/12/25/canvas简述/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
     <article id="post-构造函数-继承详解" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -977,72 +1079,6 @@
 
 
   
-    <article id="post-简易版网上订餐" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2017/11/18/简易版网上订餐/">简易版网上订餐</a>
-    </h1>
-  
-
-        
-        <a href="/2017/11/18/简易版网上订餐/" class="archive-article-date">
-  	<time datetime="2017-11-18T10:22:55.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-11-18</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h3 id="简易版网上订餐，包括从后台添加菜品图片，菜品，价格"><a href="#简易版网上订餐，包括从后台添加菜品图片，菜品，价格" class="headerlink" title="简易版网上订餐，包括从后台添加菜品图片，菜品，价格"></a>简易版网上订餐，包括从后台添加菜品图片，菜品，价格</h3><h4 id="HTML代码"><a href="#HTML代码" class="headerlink" title="HTML代码"></a>HTML代码</h4><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br><span class="line">79</span><br><span class="line">80</span><br><span class="line">81</span><br><span class="line">82</span><br><span class="line">83</span><br><span class="line">84</span><br><span class="line">85</span><br><span class="line">86</span><br><span class="line">87</span><br><span class="line">88</span><br><span class="line">89</span><br><span class="line">90</span><br><span class="line">91</span><br><span class="line">92</span><br><span class="line">93</span><br><span class="line">94</span><br><span class="line">95</span><br><span class="line">96</span><br><span class="line">97</span><br><span class="line">98</span><br><span class="line">99</span><br><span class="line">100</span><br><span class="line">101</span><br><span class="line">102</span><br><span class="line">103</span><br><span class="line">104</span><br><span class="line">105</span><br><span class="line">106</span><br><span class="line">107</span><br><span class="line">108</span><br><span class="line">109</span><br><span class="line">110</span><br><span class="line">111</span><br><span class="line">112</span><br><span class="line">113</span><br><span class="line">114</span><br><span class="line">115</span><br><span class="line">116</span><br><span class="line">117</span><br><span class="line">118</span><br><span class="line">119</span><br><span class="line">120</span><br><span class="line">121</span><br><span class="line">122</span><br><span class="line">123</span><br><span class="line">124</span><br><span class="line">125</span><br><span class="line">126</span><br><span class="line">127</span><br><span class="line">128</span><br><span class="line">129</span><br><span class="line">130</span><br><span class="line">131</span><br><span class="line">132</span><br><span class="line">133</span><br><span class="line">134</span><br><span class="line">135</span><br><span class="line">136</span><br><span class="line">137</span><br><span class="line">138</span><br><span class="line">139</span><br><span class="line">140</span><br><span class="line">141</span><br><span class="line">142</span><br><span class="line">143</span><br></pre></td><td class="code"><pre><span class="line">&lt;!DOCTYPE html&gt;</span><br><span class="line">&lt;html&gt;</span><br><span class="line">	&lt;head&gt;</span><br><span class="line">		&lt;meta charset=&quot;UTF-8&quot;&gt;</span><br><span class="line">		&lt;title&gt;&lt;/title&gt;</span><br><span class="line">		&lt;style type=&quot;text/css&quot;&gt;</span><br><span class="line">			.box &#123;</span><br><span class="line">				width: 600px;</span><br><span class="line">				height: 400px;</span><br><span class="line">				border: 2px solid black;</span><br><span class="line">				margin: 50px auto;</span><br><span class="line">				text-align: center;</span><br><span class="line">				position: relative;</span><br><span class="line">			&#125;</span><br><span class="line">			.myPhp&#123;</span><br><span class="line">				height: 140px;</span><br><span class="line">				margin-top: 150px;</span><br><span class="line">				width: 800px;</span><br><span class="line">			&#125;</span><br><span class="line">			#order, #show &#123;</span><br><span class="line">				text-align: left;</span><br><span class="line">			&#125;</span><br><span class="line">			#show &#123;</span><br><span class="line">				border: 2px solid black;</span><br><span class="line">				width: 600px;</span><br><span class="line">				margin-top: 150px;</span><br><span class="line">			&#125;</span><br><span class="line">			#show div, form div &#123;</span><br><span class="line">				height: 50px;</span><br><span class="line">			&#125;</span><br><span class="line">			#show div span:nth-of-type(1), form div span:nth-of-type(1), #show div span:nth-of-type(2), form div span:nth-of-type(2) &#123;</span><br><span class="line">				display: inline-block;</span><br><span class="line">				width: 140px;</span><br><span class="line">			&#125;</span><br><span class="line">			img &#123;</span><br><span class="line">				width: 40px;</span><br><span class="line">				vertical-align: middle;</span><br><span class="line">				margin: 0 8px;</span><br><span class="line">			&#125;</span><br><span class="line">			#btn1, #btn2 &#123;</span><br><span class="line">				width: 50px;</span><br><span class="line">				font-size: 16px;</span><br><span class="line">				background: #F5F5F5;</span><br><span class="line">			&#125;</span><br><span class="line">			#btn2 &#123;</span><br><span class="line">				margin-left: 8pxs;</span><br><span class="line">			&#125;</span><br><span class="line">			#btn1 &#123;</span><br><span class="line">				position: absolute;</span><br><span class="line">				bottom: 10px;</span><br><span class="line">				right: 20px;</span><br><span class="line">			&#125;</span><br><span class="line">		&lt;/style&gt;</span><br><span class="line">	&lt;/head&gt;</span><br><span class="line">	&lt;script src=&quot;http://libs.baidu.com/jquery/2.0.0/jquery.min.js&quot;&gt;&lt;/script&gt;</span><br><span class="line">	&lt;body&gt;</span><br><span class="line">		&lt;!--前台界面--&gt;</span><br><span class="line">		&lt;div class=&quot;myHtml box&quot;&gt;</span><br><span class="line">			&lt;h1&gt;丽德国际大酒店&lt;/h1&gt;</span><br><span class="line">			&lt;form id=&quot;order&quot; action=&quot;&quot; method=&quot;post&quot; enctype=&quot;multipart/form-data&quot;&gt;		</span><br><span class="line">				&lt;input type=&quot;button&quot; id=&quot;btn1&quot; name=&quot;submit1&quot; value=&quot;提交&quot;/&gt;</span><br><span class="line">			&lt;/form&gt;</span><br><span class="line">		&lt;/div&gt;</span><br><span class="line">		&lt;div id=&quot;show&quot;&gt;&lt;/div&gt;</span><br><span class="line">		&lt;!--老板添加菜单--&gt;</span><br><span class="line">		&lt;!--</span><br><span class="line">			老板往后台添加菜单，到文件中，后台从文件中获取菜品，返回到前台，形成订单界面</span><br><span class="line">			用户通过点击勾选，前台将所选菜品和份数传到后台，后台经过计算，将结果反倒浅谈</span><br><span class="line">		--&gt;</span><br><span class="line">		&lt;div class=&quot;myPhp box&quot;&gt;</span><br><span class="line">			&lt;h2&gt;添加菜单&lt;/h2&gt;</span><br><span class="line">			图片：&lt;input type=&quot;file&quot; id=&quot;pic&quot; name=&quot;pic&quot; /&gt;</span><br><span class="line">			菜品：&lt;input type=&quot;text&quot; name=&quot;caipin&quot; id=&quot;caipin&quot; value=&quot;&quot; /&gt;</span><br><span class="line">			价格：&lt;input type=&quot;text&quot; name=&quot;price&quot; id=&quot;price&quot; /&gt;元</span><br><span class="line">			&lt;input type=&quot;button&quot; id=&quot;btn2&quot; name=&quot;submit2&quot; value=&quot;提交&quot;/&gt;</span><br><span class="line">		&lt;/div&gt;</span><br><span class="line">	&lt;/body&gt;</span><br><span class="line">	&lt;script type=&quot;text/javascript&quot;&gt;</span><br><span class="line">		//老板添加菜</span><br><span class="line">		$(&apos;#btn2&apos;).click(function() &#123;</span><br><span class="line">			var str = $(&apos;#caipin&apos;).val()+&quot; &quot;+$(&apos;#price&apos;).val();</span><br><span class="line">			var formDate = new FormData();</span><br><span class="line">			formDate.append(&quot;str&quot;,str);</span><br><span class="line">			formDate.append(&quot;pic&quot;,$(&apos;#pic&apos;)[0].files[0]);</span><br><span class="line">			$.ajax(&#123;</span><br><span class="line">				type:&quot;post&quot;,</span><br><span class="line">				url:&quot;writeDan.php&quot;,</span><br><span class="line">				async:true,</span><br><span class="line">				data: formDate,</span><br><span class="line">				processData: false,</span><br><span class="line">				contentType: false,</span><br><span class="line">				success: function() &#123;&#125;,</span><br><span class="line">			&#125;);</span><br><span class="line">		&#125;)</span><br><span class="line">		//前台发送请求，获取菜单</span><br><span class="line">		$.ajax(&#123;</span><br><span class="line">			type:&quot;get&quot;,</span><br><span class="line">			url:&quot;dingDan.php?action=caidan&quot;,</span><br><span class="line">			async:true,</span><br><span class="line">			data: &#123;&#125;,</span><br><span class="line">			dataType: &quot;json&quot;,</span><br><span class="line">			success: function(data) &#123;</span><br><span class="line">				createCai(data);</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;);</span><br><span class="line">		//创建前台点菜界面</span><br><span class="line">		function createCai(data) &#123;</span><br><span class="line">			console.log(data)</span><br><span class="line">			for(var i = 0; i &lt; data.length-1; i++) &#123;</span><br><span class="line">				$(&quot;&lt;div&gt;&lt;img src=&quot;+data[i].split(&apos; &apos;)[0]+&quot; &gt;&lt;span&gt;菜品：&quot;+data[i].split(&apos; &apos;)[1]+&quot;&lt;/span&gt;&lt;span&gt;　　价格：￥&quot;+data[i].split(&apos; &apos;)[2]+&quot;元&lt;/span&gt;　　份数：&lt;input type=&apos;text&apos;&gt;&lt;input type=&apos;checkbox&apos;&gt;&lt;/div&gt;&quot;).appendTo(&quot;#order&quot;);</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line">	</span><br><span class="line">		//点击 点餐的时候  获取勾选菜品，所选份数</span><br><span class="line">		$(&quot;#btn1&quot;).click(function() &#123;</span><br><span class="line">			var arrIndex = [];</span><br><span class="line">			var arrCount = [];</span><br><span class="line">			$(&apos;input:checkbox&apos;).each(function(index,obj) &#123;</span><br><span class="line">				if($(&apos;input:checkbox&apos;)[index].checked == true) &#123;</span><br><span class="line">					var count = parseInt($(&apos;input:text&apos;)[index].value);</span><br><span class="line">					arrIndex.push(index);</span><br><span class="line">					arrCount.push(count);	</span><br><span class="line">				&#125;</span><br><span class="line">			&#125;)</span><br><span class="line"></span><br><span class="line">			$.ajax(&#123;</span><br><span class="line">				type:&quot;post&quot;,</span><br><span class="line">				url:&quot;dingDan.php&quot;,</span><br><span class="line">				async:true,</span><br><span class="line">				data: &#123;&quot;index&quot;:arrIndex,&quot;count&quot;:arrCount&#125;,</span><br><span class="line">				dataType: &quot;json&quot;,</span><br><span class="line">				success: function(data) &#123;</span><br><span class="line">					console.log(data)</span><br><span class="line">					$(&quot;&lt;h3&gt;您所选购：&lt;/h3&gt;&quot;).appendTo(&apos;#show&apos;);</span><br><span class="line">					for(var i = 0; i&lt;data.length-1;i++) &#123;</span><br><span class="line">						$(&quot;&lt;div&gt;&lt;img src=&quot;+data[i].split(&apos; &apos;)[0]+&quot; &gt;&lt;span&gt;&quot;+data[i].split(&apos; &apos;)[1]+&quot;&lt;/span&gt;&lt;span&gt; 单价：&quot;+data[i].split(&apos; &apos;)[2]+&quot;&lt;/span&gt;&lt;span&gt; 小计：&quot;+data[i].split(&apos; &apos;)[2]+&quot;&lt;/span&gt;&lt;/div&gt;&quot;).appendTo(&apos;#show&apos;);</span><br><span class="line">					&#125;</span><br><span class="line">					$(&quot;&lt;h4&gt;总价：&quot;+data[data.length-1]+&quot;&lt;/h4&gt;&quot;).appendTo(&apos;#show&apos;);</span><br><span class="line">				&#125;</span><br><span class="line">			&#125;);</span><br><span class="line">		&#125;)</span><br><span class="line">	&lt;/script&gt;</span><br><span class="line">&lt;/html&gt;</span><br></pre></td></tr></table></figure>
-<p>####PHP代码1 往后台上传图片，添加菜品和价格</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br></pre></td><td class="code"><pre><span class="line">&lt;?php</span><br><span class="line">	if(!empty($_POST[&apos;str&apos;])) &#123;</span><br><span class="line">		$result = false;</span><br><span class="line">		if(!empty($_FILES[&apos;pic&apos;][&apos;name&apos;]))&#123;</span><br><span class="line">			$type = $_FILES[&apos;pic&apos;][&apos;type&apos;];</span><br><span class="line">			if($type == &quot;image/jpeg&quot; || $type == &quot;image/png&quot; || $type == &quot;image/gif&quot;)&#123;</span><br><span class="line">				$result = move_uploaded_file($_FILES[&apos;pic&apos;][&apos;tmp_name&apos;],$_FILES[&apos;pic&apos;][&apos;name&apos;]);</span><br><span class="line">			&#125;	</span><br><span class="line">		&#125;</span><br><span class="line">		if($result) &#123;</span><br><span class="line">			$str = $_FILES[&apos;pic&apos;][&apos;name&apos;].&quot; &quot;.$_POST[&apos;str&apos;].&quot;\n&quot;;</span><br><span class="line">			$fp = fopen(&quot;dingDan.txt&quot;,&quot;a+&quot;);</span><br><span class="line">			fwrite($fp,$str);</span><br><span class="line">			fclose($fp);</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;	</span><br><span class="line">?&gt;</span><br></pre></td></tr></table></figure>
-<p>####PHP代码2 从后台去数据</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br></pre></td><td class="code"><pre><span class="line">&lt;?php</span><br><span class="line">	if(!empty($_GET[&apos;action&apos;])) &#123;</span><br><span class="line">		$fp = fopen(&quot;dingDan.txt&quot;,&quot;r&quot;);</span><br><span class="line">		$arr = array();</span><br><span class="line">		while(!feof($fp)) &#123;</span><br><span class="line">			$arr[] = fgets($fp);</span><br><span class="line">		&#125;</span><br><span class="line">		$arr1 = json_encode($arr);</span><br><span class="line">		echo $arr1;</span><br><span class="line">		fclose($fp);</span><br><span class="line">	&#125;</span><br><span class="line">	if($_POST) &#123;</span><br><span class="line">		$fp = fopen(&quot;dingDan.txt&quot;,&quot;r&quot;);</span><br><span class="line">		$arr = array();</span><br><span class="line">		while(!feof($fp)) &#123;</span><br><span class="line">			$arr[] = fgets($fp);</span><br><span class="line">		&#125;</span><br><span class="line">		fclose($fp);</span><br><span class="line">		$index = $_POST[&apos;index&apos;];</span><br><span class="line">		$count = $_POST[&apos;count&apos;];</span><br><span class="line">		$allTotal = 0;</span><br><span class="line">		$arr2 = array();</span><br><span class="line">		for($i=0;$i&lt;count($index);$i++) &#123;</span><br><span class="line">			$picture = explode(&quot; &quot;,$arr[$index[$i]])[0];</span><br><span class="line">			$caiPin = explode(&quot; &quot;,$arr[$index[$i]])[1];</span><br><span class="line">			$price = explode(&quot; &quot;,$arr[$index[$i]])[2];</span><br><span class="line">			$total = $price * $count[$i];</span><br><span class="line">			$arr2[] = $picture.&quot; &quot;.$caiPin.&quot; &quot;.$price.&quot; &quot;.$total;</span><br><span class="line">			$allTotal += $total;	</span><br><span class="line">		&#125;</span><br><span class="line">		$arr2[] = $allTotal;</span><br><span class="line">		$num = json_encode($arr2);</span><br><span class="line">		echo $num;	</span><br><span class="line">	&#125;</span><br><span class="line">?&gt;</span><br></pre></td></tr></table></figure>
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2017/11/18/简易版网上订餐/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
   
     <nav id="page-nav">
       <a class="extend prev" rel="prev" href="/page/2/">&laquo; Prev</a><a class="page-number" href="/">1</a><a class="page-number" href="/page/2/">2</a><span class="page-number current">3</span><a class="page-number" href="/page/4/">4</a><a class="extend next" rel="next" href="/page/4/">Next &raquo;</a>
@@ -1140,11 +1176,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
           <ul class="article-tag-list" q-show="showTags">
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">面向对象</a>
+                <a href="javascript:void(0)" class="js-tag color1">浅谈OOP</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">浅谈OOP</a>
+                <a href="javascript:void(0)" class="js-tag color5">面向对象</a>
               </li>
             
             <div class="clearfix"></div>

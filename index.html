@@ -158,6 +158,102 @@
           <div id="js-content" class="content-ll">
             
   
+    <article id="post-Vue组件化使用详解" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2018/01/30/Vue组件化使用详解/">Vue组件化使用详解</a>
+    </h1>
+  
+
+        
+        <a href="/2018/01/30/Vue组件化使用详解/" class="archive-article-date">
+  	<time datetime="2018-01-30T14:20:34.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-01-30</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>上篇我们已经详细介绍Vue组件化入门详解中提到过，我们创建的组件在src文件夹下的component文件中。我们知道前段界面由html,css,js组成，与之相似，Vue组件话由template(模板)、script（脚本）、style（样式）组成。</p>
+<ol>
+<li><p>template里面写我们需要的模板，但所有写的标签都要用一个仅且只有一个容器存放</p>
+</li>
+<li><p>script 里面存放我们定义的变量以方法，值得注意的是，在Vue中定义存放变量的data容器可以直接用花括号{}包裹起来，但是在组件化中，会报错，因为会造成传址问题，所以Data里面的变量需要放在一个函数里面。</p>
+</li>
+<li><p>style与前端界面一样，设置元素的样式，只是比之前的style 多了一个scoped，带有scoped标明在该style标签里面设置的样式，只会在该文件下有效，即不会对其他文件造成影响。</p>
+</li>
+</ol>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">&lt;template&gt;</span><br><span class="line">    &lt;div&gt;</span><br><span class="line">      &lt;h1&gt;我是MyCompontent里面的内容&lt;/h1&gt;</span><br><span class="line">      &#123;&#123; message &#125;&#125;</span><br><span class="line">    &lt;/div&gt;</span><br><span class="line">&lt;/template&gt;</span><br><span class="line">&lt;script&gt;</span><br><span class="line">    export default &#123;</span><br><span class="line">        name: &quot;my-compontent&quot;,</span><br><span class="line">        data:function () &#123;</span><br><span class="line">          return&#123;</span><br><span class="line">            message:&quot;这是MyComponent里面的测试数据&quot;</span><br><span class="line">          &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&lt;/script&gt;</span><br><span class="line">&lt;style scoped&gt;</span><br><span class="line">&lt;/style&gt;</span><br></pre></td></tr></table></figure>
+<p>在主入口App.vue中，我们需要将上述组件化的Vue导入进来。导入当然要在script中导入</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">import MyCompontent from &apos;@/components/MyCompontent&apos;</span><br></pre></td></tr></table></figure>
+<p>然后在component组建中加入导入的文件名称，之后在模板template中定义的仅且只有一个容器中引用。注意，可以是单标签引用，也可以是双标签引用。两者没有什么区别，只是双标签可以利用插槽传数据</p>
+<h4 id="父级往子级传递数据"><a href="#父级往子级传递数据" class="headerlink" title="父级往子级传递数据"></a>父级往子级传递数据</h4><ol>
+<li>通过属性传参</li>
+</ol>
+<p>重新创建一个Person.vue组件</p>
+<p>在父级template中将Person文件引入进来，并在div中编写</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">&lt;person</span><br><span class="line">    username=&quot;张三&quot;</span><br><span class="line">    :height=&quot;183&quot;</span><br><span class="line">    color=&quot;黄色&quot;</span><br><span class="line">    &gt;&lt;/person&gt;</span><br><span class="line"></span><br><span class="line">    &lt;person</span><br><span class="line">      username=&quot;李四&quot;</span><br><span class="line">      :height=&quot;186&quot;</span><br><span class="line">      color=&quot;黑色&quot;</span><br><span class="line">    &gt;&lt;/person&gt;</span><br></pre></td></tr></table></figure>
+<p>在Person标签中添加属性，类似于我们在div中编写行间样式一样。height前面加上: 表示变成动态属性。</p>
+<p>由于组件实例的作用域是独立的，这意味着在子组件的模板中不能直接引用父组件的数据，而要子组件使用父组件的数据，我们需要通过子组件的props选项<br>而props可以直接定义为<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">props:[&apos;username&apos;,&apos;sex&apos;,&apos;height&apos;],</span><br></pre></td></tr></table></figure></p>
+<p>也可以类似于Schema定义方式,这样定义类型之后，由于我们在父组件中的height是动态属性，即会根据子组件中的类型进行匹配，所以此时传过来的height数Number类型的值</p>
+<p>获取到父组件传过来的数据后，就可以直接在页面中直接使用</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">props:&#123;</span><br><span class="line">          username:&#123;type:String&#125;,</span><br><span class="line">          sex:&#123;type:String&#125;,</span><br><span class="line">          height:&#123;type:Number&#125;</span><br><span class="line">        &#125;</span><br></pre></td></tr></table></figure>
+<ol>
+<li>使用插槽方法</li>
+</ol>
+<p>这种方法可以直接引用公共部分，如引用公共部分的头部，尾部等</p>
+<p>新建一个mySlot组件<br>在父组件中引用该组件，并在div中编写</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">&lt;my-slot&gt;</span><br><span class="line">      &lt;!--具名插槽--&gt;</span><br><span class="line">      &lt;p slot=&quot;header&quot;&gt;我是头部&lt;/p&gt;</span><br><span class="line">      &lt;p slot=&quot;footer&quot;&gt;我是底部&lt;/p&gt;</span><br><span class="line">      &lt;p&gt;我是插槽里的内容&lt;/p&gt;</span><br><span class="line">    &lt;/my-slot&gt;</span><br></pre></td></tr></table></figure>
+<p>在mySlot文件中的div接收从父组件传递过来的数据，用slot标签，而且使用header 、 footer文件时，需要早mySlot 加上name属性</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">&lt;template&gt;</span><br><span class="line">    &lt;div&gt;</span><br><span class="line">      &lt;!--这里的标签必须用slot--&gt;</span><br><span class="line">      &lt;!--这里引用header footer的时候 用name属性引用--&gt;</span><br><span class="line">      &lt;slot name=&quot;header&quot;&gt;&lt;/slot&gt;</span><br><span class="line">      &lt;slot&gt;这里是Slot里面的数据&lt;/slot&gt;</span><br><span class="line">      &lt;slot name=&quot;footer&quot;&gt;&lt;/slot&gt;</span><br><span class="line">    &lt;/div&gt;</span><br><span class="line">&lt;/template&gt;</span><br><span class="line"></span><br><span class="line">&lt;script&gt;</span><br><span class="line">    export default &#123;</span><br><span class="line">        name: &quot;my-slot&quot;</span><br><span class="line">    &#125;</span><br><span class="line">&lt;/script&gt;</span><br><span class="line"></span><br><span class="line">&lt;style scoped&gt;</span><br><span class="line"></span><br><span class="line">&lt;/style&gt;</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">&lt;template&gt;</span><br><span class="line">    &lt;div&gt;</span><br><span class="line">      &lt;p&gt;姓名是：&#123;&#123;username&#125;&#125;&lt;/p&gt;</span><br><span class="line">      &lt;p&gt;年龄是：&#123;&#123;sex&#125;&#125;&lt;/p&gt;</span><br><span class="line">      &lt;p&gt;身高是：&#123;&#123;height&#125;&#125;&lt;/p&gt;</span><br><span class="line">    &lt;/div&gt;</span><br><span class="line">&lt;/template&gt;</span><br><span class="line">&lt;script&gt;</span><br><span class="line">    export default &#123;</span><br><span class="line">        name: &quot;person&quot;,</span><br><span class="line">        // props:[&apos;username&apos;,&apos;sex&apos;,&apos;height&apos;],</span><br><span class="line">        props:&#123;</span><br><span class="line">          username:&#123;type:String&#125;,</span><br><span class="line">          sex:&#123;type:String&#125;,</span><br><span class="line">          height:&#123;type:String&#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&lt;/script&gt;</span><br><span class="line">&lt;style scoped&gt;</span><br><span class="line"></span><br><span class="line">&lt;/style&gt;</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br></pre></td><td class="code"><pre><span class="line">&lt;template&gt;</span><br><span class="line">  &lt;div id=&quot;app&quot;&gt;</span><br><span class="line">    &lt;!--&lt;img src=&quot;./assets/logo.png&quot;&gt;--&gt;</span><br><span class="line">    &lt;!--&lt;HelloWorld/&gt;--&gt;</span><br><span class="line">    &lt;!--&lt;MyCompontent&gt;&lt;/MyCompontent&gt;--&gt;</span><br><span class="line"></span><br><span class="line">    &lt;!--&lt;Person--&gt;</span><br><span class="line">      &lt;!--username=&quot;DR&quot;--&gt;</span><br><span class="line">      &lt;!--sex=&quot;1&quot;--&gt;</span><br><span class="line">      &lt;!--height=&quot;168xm&quot;--&gt;</span><br><span class="line">    &lt;!--&amp;gt;&lt;/Person&gt;--&gt;</span><br><span class="line">    &lt;!--&lt;Person--&gt;</span><br><span class="line">      &lt;!--username=&quot;RR&quot;--&gt;</span><br><span class="line">      &lt;!--sex=&quot;2&quot;--&gt;</span><br><span class="line">      &lt;!--height=&quot;168cm&quot;--&gt;</span><br><span class="line">    &lt;!--&amp;gt;&lt;/Person&gt;--&gt;</span><br><span class="line"></span><br><span class="line">    &lt;!--&lt;my-slot&gt;--&gt;</span><br><span class="line">      &lt;!--&lt;p&gt;这是App里面的mySlot数据1&lt;/p&gt;--&gt;</span><br><span class="line">      &lt;!--&lt;p slot=&quot;header&quot;&gt;这是头部&lt;/p&gt;--&gt;</span><br><span class="line">      &lt;!--&lt;p slot=&quot;footer&quot;&gt;这是尾部&lt;/p&gt;--&gt;</span><br><span class="line">    &lt;!--&lt;/my-slot&gt;--&gt;</span><br><span class="line"></span><br><span class="line">    &lt;!--@myfn 是自己传过来的事件--&gt;</span><br><span class="line">    &lt;!--fn 是父级接受子级传递过来的数据存放的地址--&gt;</span><br><span class="line">    &lt;!--&lt;Emit @myfn=&quot;fn&quot;&gt;&lt;/Emit&gt;--&gt;</span><br><span class="line"></span><br><span class="line">    &lt;Transition&gt;&lt;/Transition&gt;</span><br><span class="line">  &lt;/div&gt;</span><br><span class="line">&lt;/template&gt;</span><br><span class="line"></span><br><span class="line">&lt;script&gt;</span><br><span class="line">import HelloWorld from &apos;./components/HelloWorld&apos;</span><br><span class="line">import MyCompontent from &apos;@/components/MyCompontent&apos;</span><br><span class="line">import Person from &apos;@/components/Person&apos;</span><br><span class="line">import mySlot from &apos;@/components/mySlot&apos;</span><br><span class="line">import Emit from &apos;@/components/Emit&apos;</span><br><span class="line">import Transition from &apos;@/components/Transition&apos;</span><br><span class="line"></span><br><span class="line">export default &#123;</span><br><span class="line">  name: &apos;App&apos;,</span><br><span class="line">  components: &#123;</span><br><span class="line">    HelloWorld,</span><br><span class="line">    MyCompontent,</span><br><span class="line">    Person,</span><br><span class="line">    mySlot,</span><br><span class="line">    Emit,</span><br><span class="line">    Transition,</span><br><span class="line">  &#125;,</span><br><span class="line">  methods:&#123;</span><br><span class="line">    //mydata是从父级传递过来的事件、参数</span><br><span class="line">    fn:function (mydata) &#123;</span><br><span class="line">      console.log(mydata)</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line">&lt;/script&gt;</span><br><span class="line"></span><br><span class="line">&lt;style&gt;</span><br><span class="line">#app &#123;</span><br><span class="line">  font-family: &apos;Avenir&apos;, Helvetica, Arial, sans-serif;</span><br><span class="line">  -webkit-font-smoothing: antialiased;</span><br><span class="line">  -moz-osx-font-smoothing: grayscale;</span><br><span class="line">  text-align: center;</span><br><span class="line">  color: #2c3e50;</span><br><span class="line">  margin-top: 60px;</span><br><span class="line">&#125;</span><br><span class="line">&lt;/style&gt;</span><br></pre></td></tr></table></figure>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2018/01/30/Vue组件化使用详解/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
     <article id="post-Vue组件化入门详解" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -1069,82 +1165,6 @@
 
 
   
-    <article id="post-ES6的7个实用技巧" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2018/01/18/ES6的7个实用技巧/">ES6的7个实用技巧</a>
-    </h1>
-  
-
-        
-        <a href="/2018/01/18/ES6的7个实用技巧/" class="archive-article-date">
-  	<time datetime="2018-01-18T12:45:55.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-01-18</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>###1 交换元素<br>利用数组解构来实现值的互换</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">let a = &apos;world&apos;, b = &apos;hello&apos;</span><br><span class="line">[a, b] = [b, a]</span><br><span class="line">console.log(a) // -&gt; hello</span><br><span class="line">console.log(b) // -&gt; world</span><br></pre></td></tr></table></figure>
-<p>###2 调试<br>我们经常使用console.log()来进行调试，试试console.table()也无妨。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">const a = 5, b = 6, c = 7</span><br><span class="line">console.log(&#123; a, b, c &#125;);</span><br><span class="line">console.table(&#123;a, b, c, m: &#123;name: &apos;xixi&apos;, age: 27&#125;&#125;);</span><br></pre></td></tr></table></figure>
-<p>###3 单条语句<br>ES6时代，操作数组的语句将会更加的紧凑</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">// 寻找数组中的最大值</span><br><span class="line">const max = (arr) =&gt; Math.max(...arr);</span><br><span class="line">max([123, 321, 32]) // outputs: 321</span><br><span class="line">// 计算数组的总和</span><br><span class="line">const sum = (arr) =&gt; arr.reduce((a, b) =&gt; (a + b), 0)</span><br><span class="line">sum([1, 2, 3, 4]) // output: 10</span><br></pre></td></tr></table></figure>
-<p>###4 数组拼接<br>展开运算符可以取代concat的地位了</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">const one = [&apos;a&apos;, &apos;b&apos;, &apos;c&apos;]</span><br><span class="line">const two = [&apos;d&apos;, &apos;e&apos;, &apos;f&apos;]</span><br><span class="line">const three = [&apos;g&apos;, &apos;h&apos;, &apos;i&apos;]</span><br><span class="line"></span><br><span class="line">const result = [...one, ...two, ...three]</span><br></pre></td></tr></table></figure>
-<p>###5 制作副本<br>我们可以很容易的实现数组和对象的浅拷贝</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">const obj = &#123; ...oldObj &#125;</span><br><span class="line">const arr = [ ...oldArr ]</span><br></pre></td></tr></table></figure>
-<p>###6 命名参数<br>解构使得函数声明和函数的调用更加可读</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">// 我们尝尝使用的写法</span><br><span class="line">const getStuffNotBad = (id, force, verbose) =&gt; &#123;</span><br><span class="line">  ...do stuff</span><br><span class="line">&#125;</span><br><span class="line">// 当我们调用函数时， 明天再看，尼玛 150是啥，true是啥</span><br><span class="line">getStuffNotBad(150, true, true)</span><br><span class="line"></span><br><span class="line">// 看完本文你啥都可以忘记, 希望够记住下面的就可以了</span><br><span class="line">const getStuffAwesome = (&#123;id, name, force, verbose&#125;) =&gt; &#123;</span><br><span class="line">  ...do stuff</span><br><span class="line">&#125;</span><br><span class="line">// 完美</span><br><span class="line">getStuffAwesome(&#123; id: 150, force: true, verbose: true &#125;)</span><br></pre></td></tr></table></figure>
-<p>###7  Async/Await结合数组解构<br>数组解构非常赞!结合Promise.all和解构和await会使代码变得更加的简洁</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">const [user, account] = await Promise.all([</span><br><span class="line">  fetch(&apos;/user&apos;),</span><br><span class="line">  fetch(&apos;/account&apos;)</span><br><span class="line">])</span><br></pre></td></tr></table></figure>
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2018/01/18/ES6的7个实用技巧/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
   
     <nav id="page-nav">
       <span class="page-number current">1</span><a class="page-number" href="/page/2/">2</a><a class="page-number" href="/page/3/">3</a><a class="page-number" href="/page/4/">4</a><a class="extend next" rel="next" href="/page/2/">Next &raquo;</a>
@@ -1242,11 +1262,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
           <ul class="article-tag-list" q-show="showTags">
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">面向对象</a>
+                <a href="javascript:void(0)" class="js-tag color1">浅谈OOP</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">浅谈OOP</a>
+                <a href="javascript:void(0)" class="js-tag color5">面向对象</a>
               </li>
             
             <div class="clearfix"></div>

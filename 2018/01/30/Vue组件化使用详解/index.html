@@ -6,18 +6,18 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="http://yoursite.com">
-  <title>canvas简述 | 大瑞</title>
+  <title>Vue组件化使用详解 | 大瑞</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="1. 绘制三角形fill是填充面（实心），stroke是画线（空心）1234567891011121314151617181920212223	&amp;lt;script type=&amp;quot;text/javascript&amp;quot;&amp;gt;		//首先，找到 &amp;lt;canvas&amp;gt; 元素:		var canvas = document.getElementById(&amp;apos;myCanvas">
+  <meta name="description" content="上篇我们已经详细介绍Vue组件化入门详解中提到过，我们创建的组件在src文件夹下的component文件中。我们知道前段界面由html,css,js组成，与之相似，Vue组件话由template(模板)、script（脚本）、style（样式）组成。  template里面写我们需要的模板，但所有写的标签都要用一个仅且只有一个容器存放  script 里面存放我们定义的变量以方法，值得注意的是，在">
 <meta property="og:type" content="article">
-<meta property="og:title" content="canvas简述">
-<meta property="og:url" content="http://yoursite.com/2017/12/25/canvas简述/index.html">
+<meta property="og:title" content="Vue组件化使用详解">
+<meta property="og:url" content="http://yoursite.com/2018/01/30/Vue组件化使用详解/index.html">
 <meta property="og:site_name" content="大瑞">
-<meta property="og:description" content="1. 绘制三角形fill是填充面（实心），stroke是画线（空心）1234567891011121314151617181920212223	&amp;lt;script type=&amp;quot;text/javascript&amp;quot;&amp;gt;		//首先，找到 &amp;lt;canvas&amp;gt; 元素:		var canvas = document.getElementById(&amp;apos;myCanvas">
-<meta property="og:updated_time" content="2017-12-25T14:36:36.000Z">
+<meta property="og:description" content="上篇我们已经详细介绍Vue组件化入门详解中提到过，我们创建的组件在src文件夹下的component文件中。我们知道前段界面由html,css,js组成，与之相似，Vue组件话由template(模板)、script（脚本）、style（样式）组成。  template里面写我们需要的模板，但所有写的标签都要用一个仅且只有一个容器存放  script 里面存放我们定义的变量以方法，值得注意的是，在">
+<meta property="og:updated_time" content="2018-01-30T14:21:17.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="canvas简述">
-<meta name="twitter:description" content="1. 绘制三角形fill是填充面（实心），stroke是画线（空心）1234567891011121314151617181920212223	&amp;lt;script type=&amp;quot;text/javascript&amp;quot;&amp;gt;		//首先，找到 &amp;lt;canvas&amp;gt; 元素:		var canvas = document.getElementById(&amp;apos;myCanvas">
+<meta name="twitter:title" content="Vue组件化使用详解">
+<meta name="twitter:description" content="上篇我们已经详细介绍Vue组件化入门详解中提到过，我们创建的组件在src文件夹下的component文件中。我们知道前段界面由html,css,js组成，与之相似，Vue组件话由template(模板)、script（脚本）、style（样式）组成。  template里面写我们需要的模板，但所有写的标签都要用一个仅且只有一个容器存放  script 里面存放我们定义的变量以方法，值得注意的是，在">
   
     <link rel="alternative" href="/atom.xml" title="大瑞" type="application/atom+xml">
   
@@ -157,66 +157,60 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            <article id="post-canvas简述" class="article article-type-post " itemscope itemprop="blogPost">
+            <article id="post-Vue组件化使用详解" class="article article-type-post " itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
     <h1 class="article-title" itemprop="name">
-      canvas简述
+      Vue组件化使用详解
     </h1>
   
 
         
-        <a href="/2017/12/25/canvas简述/" class="archive-article-date">
-  	<time datetime="2017-12-25T14:33:55.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-12-25</time>
+        <a href="/2018/01/30/Vue组件化使用详解/" class="archive-article-date">
+  	<time datetime="2018-01-30T14:20:34.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-01-30</time>
 </a>
         
       </header>
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h3 id="1-绘制三角形"><a href="#1-绘制三角形" class="headerlink" title="1. 绘制三角形"></a>1. 绘制三角形</h3><h5 id="fill是填充面（实心），stroke是画线（空心）"><a href="#fill是填充面（实心），stroke是画线（空心）" class="headerlink" title="fill是填充面（实心），stroke是画线（空心）"></a>fill是填充面（实心），stroke是画线（空心）</h5><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line">	&lt;script type=&quot;text/javascript&quot;&gt;</span><br><span class="line">		//首先，找到 &lt;canvas&gt; 元素:</span><br><span class="line">		var canvas = document.getElementById(&apos;myCanvas&apos;);</span><br><span class="line">		//然后，创建 context 对象：</span><br><span class="line">		//getContext(&quot;2d&quot;) 对象是内建的 HTML5 对象，</span><br><span class="line">		//拥有多种绘制路径、矩形、圆形、字符以及添加图像的方法。</span><br><span class="line">		var context = canvas.getContext(&apos;2d&apos;);</span><br><span class="line">		</span><br><span class="line">		//canvas 是一个二维网格。</span><br><span class="line">		//canvas 的左上角坐标为 (0,0)</span><br><span class="line">		context.beginPath();</span><br><span class="line">		//moveTo(x,y) 定义线条开始坐标</span><br><span class="line">		context.moveTo(0,0);</span><br><span class="line">		//lineTo(x,y) 定义线条结束坐标</span><br><span class="line">		//绘制三角形</span><br><span class="line">		context.lineTo(0,100);</span><br><span class="line">		context.lineTo(100,100);</span><br><span class="line">		context.lineTo(0,0)</span><br><span class="line">		context.strokeStyle = &quot;#0000FF&quot;;</span><br><span class="line">		context.stroke();</span><br><span class="line">//		context.lineWidth = 10;</span><br><span class="line">//		context.fillStyle = &quot;#008000&quot;;</span><br><span class="line">//		context.fill();</span><br></pre></td></tr></table></figure>
-<h3 id="2-画圆"><a href="#2-画圆" class="headerlink" title="2. 画圆"></a>2. 画圆</h3><h5 id="lineCap-线帽-有三个参数"><a href="#lineCap-线帽-有三个参数" class="headerlink" title="lineCap:线帽 有三个参数"></a>lineCap:线帽 有三个参数</h5><ul>
-<li>butt    默认。向线条的每个末端添加平直的边缘。</li>
-<li>round    向线条的每个末端添加圆形线帽。</li>
-<li>square    向线条的每个末端添加正方形线帽。</li>
-</ul>
-<h5 id="context-arc-参数1-参数2-参数3-参数4-参数5-参数6"><a href="#context-arc-参数1-参数2-参数3-参数4-参数5-参数6" class="headerlink" title="context.arc(参数1,参数2,参数3,参数4,参数5,参数6);"></a>context.arc(参数1,参数2,参数3,参数4,参数5,参数6);</h5><ul>
-<li>参数1 参数2 圆形原点的坐标</li>
-<li>参数3 半径</li>
-<li>参数4 绘制圆形的起始角度</li>
-<li>参数5 绘制圆形的结束角度</li>
-<li>参数6 顺时针 | 逆时针 参数是布尔：true  逆时针，false  顺时针</li>
-</ul>
-<p>context.arc(200,100,100,0,Math.PI,false);</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">//画圆 </span><br><span class="line">context.beginPath(); // 重新开启一个新的图层</span><br><span class="line">context.arc(200,100,100,0,Math.PI,false);</span><br><span class="line">context.lineCap = &quot;round&quot;;</span><br><span class="line">context.lineWidth = 15;</span><br><span class="line">context.strokeStyle = &quot;aquamarine&quot;;</span><br><span class="line">context.stroke();</span><br></pre></td></tr></table></figure>
-<h3 id="3-矩形"><a href="#3-矩形" class="headerlink" title="3. 矩形"></a>3. 矩形</h3><h5 id="context-rect-参数1-参数2-参数3-参数4"><a href="#context-rect-参数1-参数2-参数3-参数4" class="headerlink" title="context.rect(参数1,参数2,参数3,参数4);"></a>context.rect(参数1,参数2,参数3,参数4);</h5><ul>
-<li>参数1 ,参数2 矩形绘制的起点位置（参数1为X轴的坐标，参数2为Y轴的坐标）</li>
-<li>参数3,矩形的宽</li>
-<li>参数4矩形的高<h5 id="创建线条渐变-context-createLinearGradient-参数1-参数2-参数3-参数4"><a href="#创建线条渐变-context-createLinearGradient-参数1-参数2-参数3-参数4" class="headerlink" title="创建线条渐变 context.createLinearGradient(参数1,参数2,参数3,参数4);"></a>创建线条渐变 context.createLinearGradient(参数1,参数2,参数3,参数4);</h5></li>
-<li>参数1 ,参数2 渐变颜色开始的位置（参数1为X轴的坐标，参数2为Y轴的坐标）</li>
-<li>参数3,参数4 渐变颜色结束的位置（参数3为X轴的坐标，参数4为Y轴的坐标）<h5 id="grd-addColorStop-参数1-参数2"><a href="#grd-addColorStop-参数1-参数2" class="headerlink" title="grd.addColorStop(参数1,参数2);"></a>grd.addColorStop(参数1,参数2);</h5></li>
-<li>参数1 ,0~1之间的数</li>
-<li>参数3,参数4  颜色</li>
-</ul>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">//矩形</span><br><span class="line">context.beginPath();</span><br><span class="line">context.rect(0,200,200,100);</span><br><span class="line">var grd = context.createLinearGradient(0,200,200,200);</span><br><span class="line">grd.addColorStop(0,&quot;red&quot;);</span><br><span class="line">grd.addColorStop(0.5,&quot;green&quot;);</span><br><span class="line">grd.addColorStop(1,&quot;blue&quot;);</span><br><span class="line">context.fillStyle = grd;</span><br><span class="line">context.fill();</span><br></pre></td></tr></table></figure>
-<h5 id="创建一个径向-圆渐变-context-createRadialGradient-xStart-yStart-radiusStart-xEnd-yEnd-radiusEnd"><a href="#创建一个径向-圆渐变-context-createRadialGradient-xStart-yStart-radiusStart-xEnd-yEnd-radiusEnd" class="headerlink" title="创建一个径向/圆渐变 context.createRadialGradient(xStart, yStart,radiusStart,xEnd, yEnd,radiusEnd);"></a>创建一个径向/圆渐变 context.createRadialGradient(xStart, yStart,radiusStart,xEnd, yEnd,radiusEnd);</h5><ul>
-<li>xStart, yStart    开始圆的圆心的坐标。</li>
-<li>radiusStart    开始圆的半径。</li>
-<li>xEnd, yEnd    结束圆的圆心的坐标。</li>
-<li>radiusEnd    结束圆的半径。</li>
-</ul>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">context.beginPath();</span><br><span class="line">context.rect(0,200,200,100);</span><br><span class="line">var grd = context.createRadialGradient(200,200,50,200,200,200);</span><br><span class="line">grd.addColorStop(0,&quot;red&quot;);</span><br><span class="line">grd.addColorStop(0.5,&quot;green&quot;);</span><br><span class="line">grd.addColorStop(1,&quot;blue&quot;);</span><br><span class="line">context.fillStyle = grd;</span><br><span class="line">context.fill();</span><br></pre></td></tr></table></figure>
-<h3 id="4-文本"><a href="#4-文本" class="headerlink" title="4. 文本"></a>4. 文本</h3><ul>
-<li>font - 定义字体</li>
-<li>fillText(text,x,y) - 在 canvas 上绘制实心的文本</li>
-<li>strokeText(text,x,y) - 在 canvas 上绘制空心的文本</li>
-<li>context.textBaseline 垂直对齐方式</li>
-<li>context.textAlign 水平对齐方式 </li>
-</ul>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">// bold 可以省略   Arial 不可以省略</span><br><span class="line">context.font = &quot;bold 50px Arial&quot;;</span><br><span class="line">context.textBaseline = &quot;middle&quot;;</span><br><span class="line">context.textAlign = &quot;center&quot;;</span><br><span class="line">var grd = context.createLinearGradient(0,0,200,0);</span><br><span class="line">grd.addColorStop(0,&quot;blue&quot;);</span><br><span class="line">grd.addColorStop(0.5,&quot;yellow&quot;);</span><br><span class="line">grd.addColorStop(1,&quot;red&quot;);</span><br><span class="line">context.fillStyle = grd; </span><br><span class="line">context.fillText(&quot;hello&quot;,100,100);</span><br></pre></td></tr></table></figure>
+        <p>上篇我们已经详细介绍Vue组件化入门详解中提到过，我们创建的组件在src文件夹下的component文件中。我们知道前段界面由html,css,js组成，与之相似，Vue组件话由template(模板)、script（脚本）、style（样式）组成。</p>
+<ol>
+<li><p>template里面写我们需要的模板，但所有写的标签都要用一个仅且只有一个容器存放</p>
+</li>
+<li><p>script 里面存放我们定义的变量以方法，值得注意的是，在Vue中定义存放变量的data容器可以直接用花括号{}包裹起来，但是在组件化中，会报错，因为会造成传址问题，所以Data里面的变量需要放在一个函数里面。</p>
+</li>
+<li><p>style与前端界面一样，设置元素的样式，只是比之前的style 多了一个scoped，带有scoped标明在该style标签里面设置的样式，只会在该文件下有效，即不会对其他文件造成影响。</p>
+</li>
+</ol>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">&lt;template&gt;</span><br><span class="line">    &lt;div&gt;</span><br><span class="line">      &lt;h1&gt;我是MyCompontent里面的内容&lt;/h1&gt;</span><br><span class="line">      &#123;&#123; message &#125;&#125;</span><br><span class="line">    &lt;/div&gt;</span><br><span class="line">&lt;/template&gt;</span><br><span class="line">&lt;script&gt;</span><br><span class="line">    export default &#123;</span><br><span class="line">        name: &quot;my-compontent&quot;,</span><br><span class="line">        data:function () &#123;</span><br><span class="line">          return&#123;</span><br><span class="line">            message:&quot;这是MyComponent里面的测试数据&quot;</span><br><span class="line">          &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&lt;/script&gt;</span><br><span class="line">&lt;style scoped&gt;</span><br><span class="line">&lt;/style&gt;</span><br></pre></td></tr></table></figure>
+<p>在主入口App.vue中，我们需要将上述组件化的Vue导入进来。导入当然要在script中导入</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">import MyCompontent from &apos;@/components/MyCompontent&apos;</span><br></pre></td></tr></table></figure>
+<p>然后在component组建中加入导入的文件名称，之后在模板template中定义的仅且只有一个容器中引用。注意，可以是单标签引用，也可以是双标签引用。两者没有什么区别，只是双标签可以利用插槽传数据</p>
+<h4 id="父级往子级传递数据"><a href="#父级往子级传递数据" class="headerlink" title="父级往子级传递数据"></a>父级往子级传递数据</h4><ol>
+<li>通过属性传参</li>
+</ol>
+<p>重新创建一个Person.vue组件</p>
+<p>在父级template中将Person文件引入进来，并在div中编写</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br></pre></td><td class="code"><pre><span class="line">&lt;person</span><br><span class="line">    username=&quot;张三&quot;</span><br><span class="line">    :height=&quot;183&quot;</span><br><span class="line">    color=&quot;黄色&quot;</span><br><span class="line">    &gt;&lt;/person&gt;</span><br><span class="line"></span><br><span class="line">    &lt;person</span><br><span class="line">      username=&quot;李四&quot;</span><br><span class="line">      :height=&quot;186&quot;</span><br><span class="line">      color=&quot;黑色&quot;</span><br><span class="line">    &gt;&lt;/person&gt;</span><br></pre></td></tr></table></figure>
+<p>在Person标签中添加属性，类似于我们在div中编写行间样式一样。height前面加上: 表示变成动态属性。</p>
+<p>由于组件实例的作用域是独立的，这意味着在子组件的模板中不能直接引用父组件的数据，而要子组件使用父组件的数据，我们需要通过子组件的props选项<br>而props可以直接定义为<br><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">props:[&apos;username&apos;,&apos;sex&apos;,&apos;height&apos;],</span><br></pre></td></tr></table></figure></p>
+<p>也可以类似于Schema定义方式,这样定义类型之后，由于我们在父组件中的height是动态属性，即会根据子组件中的类型进行匹配，所以此时传过来的height数Number类型的值</p>
+<p>获取到父组件传过来的数据后，就可以直接在页面中直接使用</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">props:&#123;</span><br><span class="line">          username:&#123;type:String&#125;,</span><br><span class="line">          sex:&#123;type:String&#125;,</span><br><span class="line">          height:&#123;type:Number&#125;</span><br><span class="line">        &#125;</span><br></pre></td></tr></table></figure>
+<ol>
+<li>使用插槽方法</li>
+</ol>
+<p>这种方法可以直接引用公共部分，如引用公共部分的头部，尾部等</p>
+<p>新建一个mySlot组件<br>在父组件中引用该组件，并在div中编写</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">&lt;my-slot&gt;</span><br><span class="line">      &lt;!--具名插槽--&gt;</span><br><span class="line">      &lt;p slot=&quot;header&quot;&gt;我是头部&lt;/p&gt;</span><br><span class="line">      &lt;p slot=&quot;footer&quot;&gt;我是底部&lt;/p&gt;</span><br><span class="line">      &lt;p&gt;我是插槽里的内容&lt;/p&gt;</span><br><span class="line">    &lt;/my-slot&gt;</span><br></pre></td></tr></table></figure>
+<p>在mySlot文件中的div接收从父组件传递过来的数据，用slot标签，而且使用header 、 footer文件时，需要早mySlot 加上name属性</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">&lt;template&gt;</span><br><span class="line">    &lt;div&gt;</span><br><span class="line">      &lt;!--这里的标签必须用slot--&gt;</span><br><span class="line">      &lt;!--这里引用header footer的时候 用name属性引用--&gt;</span><br><span class="line">      &lt;slot name=&quot;header&quot;&gt;&lt;/slot&gt;</span><br><span class="line">      &lt;slot&gt;这里是Slot里面的数据&lt;/slot&gt;</span><br><span class="line">      &lt;slot name=&quot;footer&quot;&gt;&lt;/slot&gt;</span><br><span class="line">    &lt;/div&gt;</span><br><span class="line">&lt;/template&gt;</span><br><span class="line"></span><br><span class="line">&lt;script&gt;</span><br><span class="line">    export default &#123;</span><br><span class="line">        name: &quot;my-slot&quot;</span><br><span class="line">    &#125;</span><br><span class="line">&lt;/script&gt;</span><br><span class="line"></span><br><span class="line">&lt;style scoped&gt;</span><br><span class="line"></span><br><span class="line">&lt;/style&gt;</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br></pre></td><td class="code"><pre><span class="line">&lt;template&gt;</span><br><span class="line">    &lt;div&gt;</span><br><span class="line">      &lt;p&gt;姓名是：&#123;&#123;username&#125;&#125;&lt;/p&gt;</span><br><span class="line">      &lt;p&gt;年龄是：&#123;&#123;sex&#125;&#125;&lt;/p&gt;</span><br><span class="line">      &lt;p&gt;身高是：&#123;&#123;height&#125;&#125;&lt;/p&gt;</span><br><span class="line">    &lt;/div&gt;</span><br><span class="line">&lt;/template&gt;</span><br><span class="line">&lt;script&gt;</span><br><span class="line">    export default &#123;</span><br><span class="line">        name: &quot;person&quot;,</span><br><span class="line">        // props:[&apos;username&apos;,&apos;sex&apos;,&apos;height&apos;],</span><br><span class="line">        props:&#123;</span><br><span class="line">          username:&#123;type:String&#125;,</span><br><span class="line">          sex:&#123;type:String&#125;,</span><br><span class="line">          height:&#123;type:String&#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&lt;/script&gt;</span><br><span class="line">&lt;style scoped&gt;</span><br><span class="line"></span><br><span class="line">&lt;/style&gt;</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br></pre></td><td class="code"><pre><span class="line">&lt;template&gt;</span><br><span class="line">  &lt;div id=&quot;app&quot;&gt;</span><br><span class="line">    &lt;!--&lt;img src=&quot;./assets/logo.png&quot;&gt;--&gt;</span><br><span class="line">    &lt;!--&lt;HelloWorld/&gt;--&gt;</span><br><span class="line">    &lt;!--&lt;MyCompontent&gt;&lt;/MyCompontent&gt;--&gt;</span><br><span class="line"></span><br><span class="line">    &lt;!--&lt;Person--&gt;</span><br><span class="line">      &lt;!--username=&quot;DR&quot;--&gt;</span><br><span class="line">      &lt;!--sex=&quot;1&quot;--&gt;</span><br><span class="line">      &lt;!--height=&quot;168xm&quot;--&gt;</span><br><span class="line">    &lt;!--&amp;gt;&lt;/Person&gt;--&gt;</span><br><span class="line">    &lt;!--&lt;Person--&gt;</span><br><span class="line">      &lt;!--username=&quot;RR&quot;--&gt;</span><br><span class="line">      &lt;!--sex=&quot;2&quot;--&gt;</span><br><span class="line">      &lt;!--height=&quot;168cm&quot;--&gt;</span><br><span class="line">    &lt;!--&amp;gt;&lt;/Person&gt;--&gt;</span><br><span class="line"></span><br><span class="line">    &lt;!--&lt;my-slot&gt;--&gt;</span><br><span class="line">      &lt;!--&lt;p&gt;这是App里面的mySlot数据1&lt;/p&gt;--&gt;</span><br><span class="line">      &lt;!--&lt;p slot=&quot;header&quot;&gt;这是头部&lt;/p&gt;--&gt;</span><br><span class="line">      &lt;!--&lt;p slot=&quot;footer&quot;&gt;这是尾部&lt;/p&gt;--&gt;</span><br><span class="line">    &lt;!--&lt;/my-slot&gt;--&gt;</span><br><span class="line"></span><br><span class="line">    &lt;!--@myfn 是自己传过来的事件--&gt;</span><br><span class="line">    &lt;!--fn 是父级接受子级传递过来的数据存放的地址--&gt;</span><br><span class="line">    &lt;!--&lt;Emit @myfn=&quot;fn&quot;&gt;&lt;/Emit&gt;--&gt;</span><br><span class="line"></span><br><span class="line">    &lt;Transition&gt;&lt;/Transition&gt;</span><br><span class="line">  &lt;/div&gt;</span><br><span class="line">&lt;/template&gt;</span><br><span class="line"></span><br><span class="line">&lt;script&gt;</span><br><span class="line">import HelloWorld from &apos;./components/HelloWorld&apos;</span><br><span class="line">import MyCompontent from &apos;@/components/MyCompontent&apos;</span><br><span class="line">import Person from &apos;@/components/Person&apos;</span><br><span class="line">import mySlot from &apos;@/components/mySlot&apos;</span><br><span class="line">import Emit from &apos;@/components/Emit&apos;</span><br><span class="line">import Transition from &apos;@/components/Transition&apos;</span><br><span class="line"></span><br><span class="line">export default &#123;</span><br><span class="line">  name: &apos;App&apos;,</span><br><span class="line">  components: &#123;</span><br><span class="line">    HelloWorld,</span><br><span class="line">    MyCompontent,</span><br><span class="line">    Person,</span><br><span class="line">    mySlot,</span><br><span class="line">    Emit,</span><br><span class="line">    Transition,</span><br><span class="line">  &#125;,</span><br><span class="line">  methods:&#123;</span><br><span class="line">    //mydata是从父级传递过来的事件、参数</span><br><span class="line">    fn:function (mydata) &#123;</span><br><span class="line">      console.log(mydata)</span><br><span class="line">    &#125;</span><br><span class="line">  &#125;</span><br><span class="line">&#125;</span><br><span class="line">&lt;/script&gt;</span><br><span class="line"></span><br><span class="line">&lt;style&gt;</span><br><span class="line">#app &#123;</span><br><span class="line">  font-family: &apos;Avenir&apos;, Helvetica, Arial, sans-serif;</span><br><span class="line">  -webkit-font-smoothing: antialiased;</span><br><span class="line">  -moz-osx-font-smoothing: grayscale;</span><br><span class="line">  text-align: center;</span><br><span class="line">  color: #2c3e50;</span><br><span class="line">  margin-top: 60px;</span><br><span class="line">&#125;</span><br><span class="line">&lt;/style&gt;</span><br></pre></td></tr></table></figure>
 
       
 
@@ -306,7 +300,7 @@
     <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
     <p>扫一扫，分享到微信</p>
     <div class="wx-qrcode">
-      <img src="//pan.baidu.com/share/qrcode?url=http://yoursite.com/2017/12/25/canvas简述/" alt="微信分享二维码">
+      <img src="//pan.baidu.com/share/qrcode?url=http://yoursite.com/2018/01/30/Vue组件化使用详解/" alt="微信分享二维码">
     </div>
 </div>
 
@@ -320,18 +314,9 @@
   
 <nav id="article-nav">
   
-    <a href="/2017/12/26/高级版刮刮乐/" id="article-nav-newer" class="article-nav-link-wrap">
-      <i class="icon-circle-left"></i>
-      <div class="article-nav-title">
-        
-          高级版刮刮乐
-        
-      </div>
-    </a>
   
-  
-    <a href="/2017/12/22/构造函数-继承详解/" id="article-nav-older" class="article-nav-link-wrap">
-      <div class="article-nav-title">构造函数--继承详解</div>
+    <a href="/2018/01/30/Vue组件化入门详解/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">Vue组件化入门详解</div>
       <i class="icon-circle-right"></i>
     </a>
   
@@ -359,7 +344,7 @@
   
   <div class="duoshuo">
 	<!-- 多说评论框 start -->
-	<div class="ds-thread" data-thread-key="canvas简述" data-title="canvas简述" data-url="http://yoursite.com/2017/12/25/canvas简述/"></div>
+	<div class="ds-thread" data-thread-key="Vue组件化使用详解" data-title="Vue组件化使用详解" data-url="http://yoursite.com/2018/01/30/Vue组件化使用详解/"></div>
 	<!-- 多说评论框 end -->
 	<!-- 多说公共JS代码 start (一个网页只需插入一次) -->
 	<script type="text/javascript">
@@ -381,7 +366,7 @@
   
 
   
-  <div id="SOHUCS" sid="canvas简述" ></div> 
+  <div id="SOHUCS" sid="Vue组件化使用详解" ></div> 
 <script charset="utf-8" type="text/javascript" src="//changyan.sohu.com/upload/changyan.js" ></script>
 <script type="text/javascript">
     window.changyan.api.config({
