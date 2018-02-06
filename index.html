@@ -158,6 +158,192 @@
           <div id="js-content" class="content-ll">
             
   
+    <article id="post-React组件生命周期" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2018/02/06/React组件生命周期/">React组件生命周期</a>
+    </h1>
+  
+
+        
+        <a href="/2018/02/06/React组件生命周期/" class="archive-article-date">
+  	<time datetime="2018-02-06T14:22:49.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-02-06</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <p>简单地说，React Component通过其定义的几个函数来控制组件在生命周期的各个阶段的动作。</p>
+<p>在ES6中，一个React组件是用一个class来表示的（具体可以参考<a href="https://link.jianshu.com/?t=http://facebook.github.io/react/docs/reusable-components.html#es6-classes" target="_blank" rel="external">官方文档</a>），如下：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">// 定义一个TodoList的React组件，通过继承React.Component来实现</span><br><span class="line">class TodoList extends React.Component &#123;</span><br><span class="line">  ...</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>这几个生命周期相关的函数有：</p>
+<ol>
+<li>构造函数，在创建组件的时候调用一次。</li>
+</ol>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">constructor(props, context)</span><br></pre></td></tr></table></figure>
+<ol>
+<li>构造函数，在创建组件的时候调用一次。</li>
+</ol>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">constructor(props, context)</span><br></pre></td></tr></table></figure>
+<ol>
+<li>在组件挂载之前调用一次。如果在这个函数里面调用setState，本次的render函数可以看到更新后的state，并且只渲染一次。</li>
+</ol>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">void componentWillMount()</span><br></pre></td></tr></table></figure>
+<ol>
+<li>在组件挂载之后调用一次。这个时候，子主键也都挂载好了，可以在这里使用refs。</li>
+</ol>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">void componentDidMount()</span><br></pre></td></tr></table></figure>
+<ol>
+<li>props是父组件传递给子组件的。父组件发生render的时候子组件就会调用componentWillReceiveProps（不管props有没有更新，也不管父子组件之间有没有数据交换）。</li>
+</ol>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">void componentWillReceiveProps(nextProps)</span><br></pre></td></tr></table></figure>
+<ol>
+<li>组件挂载之后，每次调用setState后都会调用shouldComponentUpdate判断是否需要重新渲染组件。默认返回true，需要重新render。在比较复杂的应用里，有一些数据的改变并不影响界面展示，可以在这里做判断，优化渲染效率。</li>
+</ol>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">bool shouldComponentUpdate(nextProps, nextState)</span><br></pre></td></tr></table></figure>
+<ol>
+<li>shouldComponentUpdate返回true或者调用forceUpdate之后，componentWillUpdate会被调用。</li>
+</ol>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">void componentWillUpdate(nextProps, nextState)</span><br></pre></td></tr></table></figure>
+<ol>
+<li>除了首次render之后调用componentDidMount，其它render结束之后都是调用componentDidUpdate。<br>componentWillMount、componentDidMount和componentWillUpdate、componentDidUpdate可以对应起来。区别在于，前者只有在挂载的时候会被调用；而后者在以后的每次更新渲染之后都会被调用。</li>
+</ol>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">void componentDidUpdate()</span><br></pre></td></tr></table></figure>
+<ol>
+<li>render是一个React组件所必不可少的核心函数（上面的其它函数都不是必须的）。记住，不要在render里面修改state。</li>
+</ol>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ReactElement render()</span><br></pre></td></tr></table></figure>
+<ol>
+<li>组件被卸载的时候调用。一般在componentDidMount里面注册的事件需要在这里删除。</li>
+</ol>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">void componentWillUnmount()</span><br></pre></td></tr></table></figure>
+<h3 id="更新方式"><a href="#更新方式" class="headerlink" title="更新方式"></a>更新方式</h3><p>在react中，触发render的有4条路径。</p>
+<p>以下假设shouldComponentUpdate都是按照默认返回true的方式。</p>
+<p>首次渲染Initial Render<br>调用this.setState （并不是一次setState会触发一次render，React可能会合并操作，再一次性进行render）<br>父组件发生更新（一般就是props发生改变，但是就算props没有改变或者父子组件之间没有数据交换也会触发render）<br>调用this.forceUpdate<br>下面是我对React组件四条更新路径地总结：</p>
+<p><img src="https://upload-images.jianshu.io/upload_images/1814354-4bf62e54553a32b7.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/700" alt=""></p>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2018/02/06/React组件生命周期/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
+    <article id="post-vue-router从入门到放弃" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2018/02/06/vue-router从入门到放弃/">vue-router从入门到放弃</a>
+    </h1>
+  
+
+        
+        <a href="/2018/02/06/vue-router从入门到放弃/" class="archive-article-date">
+  	<time datetime="2018-02-06T14:22:36.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-02-06</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <blockquote>
+<p>用命令号创建一个 mytest 文件夹</p>
+</blockquote>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">vue init webpack mytest</span><br></pre></td></tr></table></figure>
+<p>初始化  init myproject之后 手动安装vue-router</p>
+<p><img src="http://upload-images.jianshu.io/upload_images/7426605-96edc6a1f858dc4f.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="image.png"></p>
+<p>再创建三个.vue文件，注意引用文件图片的时候加上./</p>
+<p>引入node_modules文件夹模块  不需要加  ./<br>引入文件要加</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">&lt;template&gt;</span><br><span class="line">  &lt;div&gt;</span><br><span class="line">    &lt;img class=&quot;myImg&quot; src=&quot;./timg.jpeg&quot; alt=&quot;&quot; /&gt;</span><br><span class="line">    &lt;p&gt;这是一只猫&lt;/p&gt;</span><br><span class="line">  &lt;/div&gt;</span><br><span class="line">&lt;/template&gt;</span><br><span class="line"></span><br><span class="line">&lt;script&gt;</span><br><span class="line">  export default &#123;</span><br><span class="line">    name: &quot;cat&quot;</span><br><span class="line">  &#125;</span><br><span class="line">&lt;/script&gt;</span><br><span class="line"></span><br><span class="line">&lt;style scoped&gt;</span><br><span class="line">  .myImg&#123;</span><br><span class="line">    width: 300px;</span><br><span class="line">  &#125;</span><br><span class="line">&lt;/style&gt;</span><br></pre></td></tr></table></figure>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">&lt;template&gt;</span><br><span class="line">  &lt;div id=&quot;app&quot;&gt;</span><br><span class="line">    &lt;!--router-view 相当于将main中component的内容加载到这个地方--&gt;</span><br><span class="line">    &lt;router-view &gt;&lt;/router-view&gt;</span><br><span class="line">    &lt;router-link to=&quot;/dog&quot;&gt;小狗&lt;/router-link&gt;</span><br><span class="line">    &lt;router-link to=&quot;/cat&quot;&gt;小猫&lt;/router-link&gt;</span><br><span class="line">    &lt;router-link to=&quot;/alpaca&quot;&gt;羊驼&lt;/router-link&gt;</span><br><span class="line"></span><br><span class="line">    &lt;!--&lt;router-link :to=&quot;/dog&quot;&gt;小狗&lt;/router-link&gt;--&gt;</span><br><span class="line">    &lt;!--&lt;router-link :to=&quot;/cat&quot;&gt;小猫&lt;/router-link&gt;--&gt;</span><br><span class="line">    &lt;!--&lt;router-link :to=&quot;/alpaca&quot;&gt;羊驼&lt;/router-link&gt;--&gt;</span><br><span class="line">  &lt;/div&gt;</span><br><span class="line">&lt;/template&gt;</span><br></pre></td></tr></table></figure>
+<p><img src="http://upload-images.jianshu.io/upload_images/7426605-89383eb086f08e59.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="image.png"></p>
+<p><img src="http://upload-images.jianshu.io/upload_images/7426605-ef48e9664429d89d.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="image.png"></p>
+<p><img src="http://upload-images.jianshu.io/upload_images/7426605-9eb1f321447dbbb5.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="image.png"></p>
+<p><img src="http://upload-images.jianshu.io/upload_images/7426605-fa963c38cbfa5040.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="image.png"></p>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2018/02/06/vue-router从入门到放弃/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
     <article id="post-Vue组件化使用详解" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -899,243 +1085,6 @@
       
         <p class="article-more-link">
           <a class="article-more-a" href="/2018/01/22/nodeJs使用教程/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-Node-js之fs用法详解" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2018/01/22/Node-js之fs用法详解/">Node.js之fs用法详解</a>
-    </h1>
-  
-
-        
-        <a href="/2018/01/22/Node-js之fs用法详解/" class="archive-article-date">
-  	<time datetime="2018-01-22T13:42:43.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-01-22</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>Node.js 内置的fs模块就是文件系统模块，负责读写文件。和所有其他JS模块不同的是，fs模块同时提供了异步和同步的方法。</p>
-<ul>
-<li>文件写入</li>
-</ul>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">var fs = require(&quot;fs&quot;);</span><br><span class="line">//       要写入的文件   要写入的内容       a追加|w写入（默认）|r（读取）  回调函数</span><br><span class="line">fs.writeFile(&quot;11.txt&quot;,&quot;我是要写入的11.txt文件的内容&quot;,&#123;flag:&quot;a&quot;&#125;,function (err) &#123;</span><br><span class="line">    if(err)&#123;</span><br><span class="line">        return console.log(err);</span><br><span class="line">    &#125;else &#123;</span><br><span class="line">        console.log(&quot;写入成功&quot;);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
-<p>运行上述代码的时候，会发现该父级文件夹下会自动生成一个11.txt文件。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">fs.appendFile(&quot;11.txt&quot;,&quot;这是要追加的内容&quot;,function (err) &#123;</span><br><span class="line">    if(err)&#123;</span><br><span class="line">        return console.log(err);</span><br><span class="line">    &#125;else &#123;</span><br><span class="line">        console.log(&quot;追加成功&quot;);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
-<p><img src="http://upload-images.jianshu.io/upload_images/7426605-08c87fb84e0b5c28.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="image.png"></p>
-<p>因为是追加的内容，所以内容会自动在该文件后面</p>
-<p>上面说的方法都是异步操作，异步操作会返回一个回调函数，在回调函数里面执行结束语句，不然会出现错误</p>
-<p>而所有的同步函数，都只是在异步函数后面加上Sync</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">var res = fs.writeFileSync(&quot;11.txt&quot;,&quot;这里面是使用同步方法写的内容&quot;);</span><br><span class="line">console.log(res);</span><br></pre></td></tr></table></figure>
-<ul>
-<li>文件读取</li>
-</ul>
-<p>异步方法读取文件</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">//文件读取</span><br><span class="line">fs.readFile(&quot;11.txt&quot;,function (err,data) &#123;</span><br><span class="line">    if(err)&#123;</span><br><span class="line">        return console.log(err);</span><br><span class="line">    &#125;else &#123;</span><br><span class="line">        //toString() 将buffer格式转化为中文</span><br><span class="line">        console.log(data.toString());</span><br><span class="line">    &#125;</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
-<p>如果使用同步的方法,不需要在后面使用回调方法</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">var data = fs.readFileSync(&quot;11.txt&quot;);</span><br><span class="line">console.log(data.toString());</span><br></pre></td></tr></table></figure>
-<ul>
-<li>文件修改</li>
-</ul>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">//    要修改名字的文件  修改后的名字  回调函数</span><br><span class="line">fs.rename(&quot;11.txt&quot;,&quot;22.txt&quot;,function (err) &#123;</span><br><span class="line">    if(err)&#123;</span><br><span class="line">        console.log(err);</span><br><span class="line">    &#125;else &#123;</span><br><span class="line">        console.log(&quot;修改成功&quot;);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
-<ul>
-<li>文件删除</li>
-</ul>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">//删除文件</span><br><span class="line">fs.unlink(&quot;11.txt&quot;,function (err) &#123;</span><br><span class="line">    if(err)&#123;</span><br><span class="line">        return console.log(err);</span><br><span class="line">    &#125;else &#123;</span><br><span class="line">        console.log(&quot;删除成功&quot;);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
-<ul>
-<li>文件复制（先读取，在复制）</li>
-</ul>
-<p>异步方法</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">fs.readFile(&quot;22.txt&quot;,function (err,data) &#123;</span><br><span class="line">    if(err)&#123;</span><br><span class="line">        return console.log(err);</span><br><span class="line">    &#125;else&#123;</span><br><span class="line">        var getData = data.toString();</span><br><span class="line">        fs.writeFile(&quot;33.txt&quot;,getData,function (err) &#123;</span><br><span class="line">            if(err)&#123;</span><br><span class="line">                return console.log(err);</span><br><span class="line">            &#125;else &#123;</span><br><span class="line">                console.log(&quot;复制欧克&quot;);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;)</span><br><span class="line">    &#125;</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
-<p>同步方法,相比异步少了很对回调</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">var res = fs.writeFileSync(&quot;44.txt&quot;,fs.readFileSync(&quot;22.txt&quot;));</span><br><span class="line">console.log(res);</span><br></pre></td></tr></table></figure>
-<ul>
-<li>文件夹创建</li>
-</ul>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br></pre></td><td class="code"><pre><span class="line">//文件夹创建</span><br><span class="line">//1 -- 执行   2 -- 写入  4 -- 读取  7=1+2+4  以为创建的文件夹可执行可读可写</span><br><span class="line">fs.mkdir(&quot;img&quot;,0777,function (err) &#123;</span><br><span class="line">    if(err)&#123;</span><br><span class="line">        console.log(err);</span><br><span class="line">    &#125;else &#123;</span><br><span class="line">        console.log(&quot;创建成功&quot;);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
-<p>上述的权限就是在文件简介里面权限<br><img src="http://upload-images.jianshu.io/upload_images/7426605-776dcc5f0d30165b.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="文件权限"></p>
-<ul>
-<li>修改文件夹权限</li>
-</ul>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">fs.chmod(&quot;img&quot;,0333,function (err) &#123;</span><br><span class="line">    if(err)&#123;</span><br><span class="line">        return console.log(err);</span><br><span class="line">    &#125;else &#123;</span><br><span class="line">        console.log(&quot;修改ok&quot;);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
-<p><img src="http://upload-images.jianshu.io/upload_images/7426605-62ef72345b809c91.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="image.png"></p>
-<ul>
-<li>修改文件夹名字，与修改文件是同一个函数</li>
-</ul>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">//修改文件夹名称</span><br><span class="line">fs.rename(&quot;img&quot;,&quot;image&quot;,function (err) &#123;</span><br><span class="line">    if(err)&#123;</span><br><span class="line">        return console.log(err);</span><br><span class="line">    &#125;else &#123;</span><br><span class="line">        console.log(&quot;修好&quot;);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
-<ul>
-<li>判断某个文件件是否存在，如果不存在创建，exists函数，是唯一一个回调函数中不带err的回调函数</li>
-</ul>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">fs.exists(&quot;img&quot;,function (exists) &#123;</span><br><span class="line">    if(exists)&#123;</span><br><span class="line">        console.log(&quot;该文件夹已经存在&quot;);</span><br><span class="line">    &#125;else &#123;</span><br><span class="line">        fs.mkdir(&quot;img&quot;,function (err) &#123;</span><br><span class="line">            if(err)&#123;</span><br><span class="line">                return console.log(err);</span><br><span class="line">            &#125;else &#123;</span><br><span class="line">                console.log(&quot;创建成功&quot;);</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;)</span><br><span class="line">    &#125;</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
-<ul>
-<li>删除文件夹（只能删除空的文件夹）</li>
-</ul>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">fs.rmdir(&quot;img&quot;,function (err) &#123;</span><br><span class="line">    if(err)&#123;</span><br><span class="line">        return console.log(err);</span><br><span class="line">    &#125;else &#123;</span><br><span class="line">        console.log(&quot;删除成功&quot;);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
-<ul>
-<li>读取文件夹里面的信息</li>
-</ul>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">fs.readdir(&quot;image&quot;,function (err,data) &#123;</span><br><span class="line">    if(err)&#123;</span><br><span class="line">        console.log(err);</span><br><span class="line">    &#125;else &#123;</span><br><span class="line">        console.log(data);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
-<p><img src="http://upload-images.jianshu.io/upload_images/7426605-947bcb7b3e661196.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="image.png"></p>
-<ul>
-<li><p>判断一个位置问价是否是文件或者是文件件</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br></pre></td><td class="code"><pre><span class="line">fs.stat(&quot;image&quot;,function (err,data) &#123;</span><br><span class="line">    if(err)&#123;</span><br><span class="line">        return console.log(err);</span><br><span class="line">    &#125;else &#123;</span><br><span class="line">        //判断是否是文件</span><br><span class="line">        if(data.isFile())&#123;</span><br><span class="line">            //是文件</span><br><span class="line">            console.log(&quot;yes&quot;);</span><br><span class="line">        &#125;else&#123;</span><br><span class="line">            //是文件夹</span><br><span class="line">            console.log(&quot;no&quot;);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
-</li>
-<li><p>删除非空文件夹<br>首先获取到该文件夹里面所有的信息，遍历里面的信息，判断是文件还是文件夹，如果是文件直接删除，如果是文件，进入文件，重复上述过程</p>
-</li>
-</ul>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br></pre></td><td class="code"><pre><span class="line">function delFile(url) &#123;</span><br><span class="line">    var data = fs.readdirSync(url);</span><br><span class="line">    for(var i = 0;i &lt; data.length;i++)&#123;</span><br><span class="line">        // console.log(data[i])</span><br><span class="line">        var path = url + &quot;/&quot; +data[i];</span><br><span class="line">        console.log(path);</span><br><span class="line">        var stat = fs.statSync(path);</span><br><span class="line">        if(stat.isFile())&#123;</span><br><span class="line">            fs.unlinkSync(path);</span><br><span class="line">        &#125;else&#123;</span><br><span class="line">            delFile(path);</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">    fs.rmdirSync(url);</span><br><span class="line">&#125;</span><br><span class="line">delFile(&quot;image&quot;);</span><br></pre></td></tr></table></figure>
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2018/01/22/Node-js之fs用法详解/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-理解Promise运行原理" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2018/01/18/理解Promise运行原理/">理解Promise运行原理</a>
-    </h1>
-  
-
-        
-        <a href="/2018/01/18/理解Promise运行原理/" class="archive-article-date">
-  	<time datetime="2018-01-18T13:04:57.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-01-18</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <p>1.什么是Promise<br>Promise可以认为是一种用来解决异步处理的代码规范。常见的异步处理是使用回调函数，回调函数有两种模式，同步的回调和异步的回调。一般回调函数指的是异步的回调。</p>
-<p>同步回调</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">function add(a, b, callback) &#123; callback(a + b) &#125;</span><br><span class="line">        </span><br><span class="line">        console.log(&apos;before&apos;);</span><br><span class="line">        add(1, 2, result =&gt; console.log(&apos;Result: &apos; + result);</span><br><span class="line">        console.log(&apos;after&apos;);</span><br></pre></td></tr></table></figure>
-<p>输出结果为： before Result：3 after</p>
-<p>异步回调</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">function addAsync(a, b, callback) &#123;</span><br><span class="line">        setTimeout( () =&gt; callback(a + b), 1000);</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    console.log(&apos;before&apos;);</span><br><span class="line">    addAsync(1, 2, result =&gt; console.log(&apos;Result: &apos; + result));</span><br><span class="line">    console.log(&apos;after&apos;);</span><br></pre></td></tr></table></figure>
-<p>输出结果： before after Result: 3</p>
-<p>然而回调函数有个著名的坑就是“callback hell”，比如：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">doSomething1(function(value1) &#123;</span><br><span class="line">	doSomething2(function(value2) &#123;</span><br><span class="line">		doSomething3(function(value3) &#123;</span><br><span class="line">			console.log(&quot;done! The values are: &quot; + [value1, value2, value3].join(&apos;,&apos;));</span><br><span class="line">		&#125;)</span><br><span class="line">	&#125;)</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
-<p>为了等value1， value2， value3数据都准备好，必须要一层一层嵌套回调函数。如果一直嵌套下去，就形成了callback hell，不利于代码的阅读。</p>
-<p>如果改用Promise的写法，只要写成如下方式就行。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">doSomething1().then(function() &#123;</span><br><span class="line">	return value1;</span><br><span class="line">&#125;).then(function(tempValue1) &#123;</span><br><span class="line">	return [tempValue1, value2].join(&apos;,&apos;);		</span><br><span class="line">&#125;).then(function(tempValue2) &#123;</span><br><span class="line">	console.log(&quot;done! &quot;, [tempValue2, value3].join(&apos;,&apos;));</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
-<p>可以注意到，Promise实际上是把回调函数从doSomething函数中提取到了后面的then方法里面，从而防止多重嵌套的问题。</p>
-<p>2.Promise对象和状态</p>
-<p>2.1 resolve &amp; reject</p>
-<p>Promise构造函数用来构造一个Promise对象，其中入参匿名函数中resolve和reject这两个也都是函数。如果resolve执行了，则触发promise.then中成功的回调函数；如果reject执行了，则触发promise.then中拒绝的回调函数。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br></pre></td><td class="code"><pre><span class="line">var promise = new Promise(function(resolve, reject) &#123;</span><br><span class="line">	// IF 如果符合预期条件，调用resolve</span><br><span class="line">	resolve(&apos;success&apos;);</span><br><span class="line"></span><br><span class="line">	// ELSE 如果不符合预期条件，调用reject</span><br><span class="line">	reject(&apos;failure&apos;)</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
-<p>2.2 Fulfilled &amp; Rejected<br>Promise对象一开始的值是Pending准备状态。<br>执行了resolve()后，该Promise对象的状态值变为onFulfilled状态。<br>执行了reject()后，该Promise对象的状态值变为onRejected状态。<br>Promise对象的状态值一旦确定(onFulfilled或onRejected)，就不会再改变。即不会从onFulfilled转为onRejected，或者从onRejected转为onFulfilled。<br>2.3 快捷方法<br>获取一个onFulfilled状态的Promise对象：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br></pre></td><td class="code"><pre><span class="line">Promise.resolve(1);</span><br><span class="line"></span><br><span class="line">// 等价于</span><br><span class="line"></span><br><span class="line">new Promise((resolve) =&gt; resolve(1));</span><br></pre></td></tr></table></figure>
-<p>获取一个onRejected状态的Promise对象：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br></pre></td><td class="code"><pre><span class="line">Promise.reject(new Error(&quot;BOOM&quot;)) </span><br><span class="line"></span><br><span class="line">// 等价于</span><br><span class="line"></span><br><span class="line">new Promise((resolve, reject) </span><br><span class="line">	=&gt; reject(new Error(&quot;BOOM&quot;)));</span><br></pre></td></tr></table></figure>
-<p>3.异常捕获：then和catch</p>
-<p>Promise的异常捕获有两种方式：</p>
-<p>then匿名函数中的reject方法<br>catch方法<br>3.1 then中的reject方法捕获异常</p>
-<p>这种方法只能捕获前一个Promise对象中的异常，即调用then函数的Promise对象中出现的异常。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">var promise = Promise.resolve();</span><br><span class="line"></span><br><span class="line">promise.then(function() &#123;</span><br><span class="line">    throw new Error(&quot;BOOM!&quot;)</span><br><span class="line">&#125;).then(function (success) &#123;</span><br><span class="line">    console.log(success);</span><br><span class="line">&#125;, function (error) &#123;</span><br><span class="line">	// 捕捉的是第一个then返回的Promise对象的错误</span><br><span class="line">    console.log(error);</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
-<p>但该种方法无法捕捉当前Promise对象的异常，如：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">var promise = Promise.resolve();</span><br><span class="line"></span><br><span class="line">promise.then(function() &#123;</span><br><span class="line">    return &apos;success&apos;;</span><br><span class="line">&#125;).then(function (success) &#123;</span><br><span class="line">    console.log(success);</span><br><span class="line">	throw new Error(&quot;Another BOOM!&quot;);</span><br><span class="line">&#125;, function (error) &#123;</span><br><span class="line">    console.log(error);  // 无法捕捉当前then中抛出的异常</span><br><span class="line">&#125;);</span><br></pre></td></tr></table></figure>
-<p>3.2 catch捕获异常</p>
-<p>上述栗子若改写成如下形式，最后追加一个catch函数，则可以正常捕捉到异常。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">var promise = Promise.resolve();</span><br><span class="line"></span><br><span class="line">promise.then(function() &#123;</span><br><span class="line">    return &apos;success&apos;;</span><br><span class="line">&#125;).then(function (success) &#123;</span><br><span class="line">    console.log(success);</span><br><span class="line">	throw new Error(&quot;Another BOOM!&quot;);</span><br><span class="line">&#125;).catch(function (error) &#123;</span><br><span class="line">       console.log(error); // 可以正常捕捉到异常</span><br><span class="line">   &#125;);</span><br></pre></td></tr></table></figure>
-<p>catch方法可以捕获到then中抛出的错误，也能捕获前面Promise抛出的错误。 因此建议都通过catch方法捕捉异常。</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br></pre></td><td class="code"><pre><span class="line">var promise = Promise.reject(&quot;BOOM!&quot;);</span><br><span class="line"></span><br><span class="line">promise.then(function() &#123;</span><br><span class="line">    return &apos;success&apos;;</span><br><span class="line">&#125;).then(function (success) &#123;</span><br><span class="line">    console.log(success);</span><br><span class="line">	throw new Error(&quot;Another BOOM!&quot;);</span><br><span class="line">&#125;).catch(function (error) &#123;</span><br><span class="line">       console.log(error);  // BOOM！</span><br><span class="line">   &#125;);</span><br></pre></td></tr></table></figure>
-<p>值得注意的是：catch方法其实等价于then(null, reject)，上面可以写成：</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">promise.then(function() &#123;</span><br><span class="line">	return &apos;success&apos;;</span><br><span class="line">&#125;).then(function (success) &#123;</span><br><span class="line">    console.log(success);</span><br><span class="line">	throw new Error(&quot;Another BOOM!&quot;);</span><br><span class="line">&#125;).then(null, function(error) &#123;</span><br><span class="line">	console.log(error);</span><br><span class="line">&#125;)</span><br></pre></td></tr></table></figure>
-<p>总结来说就是：</p>
-<ul>
-<li>使用promise.then(onFulfilled, onRejected)的话，在 onFulfilled中发生异常的话，在onRejected中是捕获不到这个异常的。</li>
-</ul>
-<ul>
-<li>在promise.then(onFulfilled).catch(onRejected)的情况下then中产生的异常能在.catch中捕获</li>
-</ul>
-<ul>
-<li>.then和 .catch在本质上是没有区别的需要分场合使用。</li>
-</ul>
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2018/01/18/理解Promise运行原理/">展开全文 >></a>
         </p>
       
 

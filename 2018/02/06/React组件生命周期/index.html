@@ -6,21 +6,20 @@
   <meta name="renderer" content="webkit">
   <meta http-equiv="X-UA-Compatible" content="IE=edge" >
   <link rel="dns-prefetch" href="http://yoursite.com">
-  <title>JSONP 的工作原理 | 大瑞</title>
+  <title>React组件生命周期 | 大瑞</title>
   <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-  <meta name="description" content="JSONP 的工作原理1. JSONP由来根据浏览器同源策略，所谓同源就是协议、主机、端口号都相同时成为同源。a 域的js不能直接访问 b域名的信息，但是script 标签的src属性可以跨域引用文件，jsonp是请求之后后台包装好一段json，并且把数据放在一个callback函数，返回一个js文件，动态引入这个文件，下载完成js之后，会去调用这个callback,通过这样访问数据。 2. JS">
+  <meta name="description" content="简单地说，React Component通过其定义的几个函数来控制组件在生命周期的各个阶段的动作。 在ES6中，一个React组件是用一个class来表示的（具体可以参考官方文档），如下： 1234// 定义一个TodoList的React组件，通过继承React.Component来实现class TodoList extends React.Component &amp;#123;  ...&amp;#125">
 <meta property="og:type" content="article">
-<meta property="og:title" content="JSONP 的工作原理">
-<meta property="og:url" content="http://yoursite.com/2017/11/15/JSONP 的工作原理/index.html">
+<meta property="og:title" content="React组件生命周期">
+<meta property="og:url" content="http://yoursite.com/2018/02/06/React组件生命周期/index.html">
 <meta property="og:site_name" content="大瑞">
-<meta property="og:description" content="JSONP 的工作原理1. JSONP由来根据浏览器同源策略，所谓同源就是协议、主机、端口号都相同时成为同源。a 域的js不能直接访问 b域名的信息，但是script 标签的src属性可以跨域引用文件，jsonp是请求之后后台包装好一段json，并且把数据放在一个callback函数，返回一个js文件，动态引入这个文件，下载完成js之后，会去调用这个callback,通过这样访问数据。 2. JS">
-<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/7426605-d8020506f468db57.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
-<meta property="og:image" content="http://upload-images.jianshu.io/upload_images/7426605-1ec09b04fd0d1745.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
-<meta property="og:updated_time" content="2017-11-17T13:15:55.000Z">
+<meta property="og:description" content="简单地说，React Component通过其定义的几个函数来控制组件在生命周期的各个阶段的动作。 在ES6中，一个React组件是用一个class来表示的（具体可以参考官方文档），如下： 1234// 定义一个TodoList的React组件，通过继承React.Component来实现class TodoList extends React.Component &amp;#123;  ...&amp;#125">
+<meta property="og:image" content="https://upload-images.jianshu.io/upload_images/1814354-4bf62e54553a32b7.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/700">
+<meta property="og:updated_time" content="2018-02-06T14:24:58.000Z">
 <meta name="twitter:card" content="summary">
-<meta name="twitter:title" content="JSONP 的工作原理">
-<meta name="twitter:description" content="JSONP 的工作原理1. JSONP由来根据浏览器同源策略，所谓同源就是协议、主机、端口号都相同时成为同源。a 域的js不能直接访问 b域名的信息，但是script 标签的src属性可以跨域引用文件，jsonp是请求之后后台包装好一段json，并且把数据放在一个callback函数，返回一个js文件，动态引入这个文件，下载完成js之后，会去调用这个callback,通过这样访问数据。 2. JS">
-<meta name="twitter:image" content="http://upload-images.jianshu.io/upload_images/7426605-d8020506f468db57.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240">
+<meta name="twitter:title" content="React组件生命周期">
+<meta name="twitter:description" content="简单地说，React Component通过其定义的几个函数来控制组件在生命周期的各个阶段的动作。 在ES6中，一个React组件是用一个class来表示的（具体可以参考官方文档），如下： 1234// 定义一个TodoList的React组件，通过继承React.Component来实现class TodoList extends React.Component &amp;#123;  ...&amp;#125">
+<meta name="twitter:image" content="https://upload-images.jianshu.io/upload_images/1814354-4bf62e54553a32b7.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/700">
   
     <link rel="alternative" href="/atom.xml" title="大瑞" type="application/atom+xml">
   
@@ -160,36 +159,75 @@
             <canvas data-colors="#eaeaea" data-sectionHeight="100" data-contentId="js-content" id="myCanvas1" class="anm-canvas"></canvas>
           </div>
           <div id="js-content" class="content-ll">
-            <article id="JSONP 的工作原理-JSONP 的工作原理" class="article article-type-JSONP 的工作原理 " itemscope itemprop="blogPost">
+            <article id="post-React组件生命周期" class="article article-type-post " itemscope itemprop="blogPost">
   <div class="article-inner">
     
       <header class="article-header">
         
   
     <h1 class="article-title" itemprop="name">
-      JSONP 的工作原理
+      React组件生命周期
     </h1>
   
 
         
-        <a href="/2017/11/15/JSONP 的工作原理/" class="archive-article-date">
-  	<time datetime="2017-11-15T13:06:47.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-11-15</time>
+        <a href="/2018/02/06/React组件生命周期/" class="archive-article-date">
+  	<time datetime="2018-02-06T14:22:49.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-02-06</time>
 </a>
         
       </header>
     
     <div class="article-entry" itemprop="articleBody">
       
-        <h1 id="JSONP-的工作原理"><a href="#JSONP-的工作原理" class="headerlink" title="JSONP 的工作原理"></a>JSONP 的工作原理</h1><h2 id="1-JSONP由来"><a href="#1-JSONP由来" class="headerlink" title="1. JSONP由来"></a>1. JSONP由来</h2><p>根据浏览器同源策略，所谓同源就是协议、主机、端口号都相同时成为同源。a 域的js不能直接访问 b域名的信息，但是script 标签的src属性可以跨域引用文件，jsonp是请求之后后台包装好一段json，并且把数据放在一个callback函数，返回一个js文件，动态引入这个文件，下载完成js之后，会去调用这个callback,通过这样访问数据。</p>
-<h2 id="2-JSONP有什么用"><a href="#2-JSONP有什么用" class="headerlink" title="2. JSONP有什么用"></a>2. JSONP有什么用</h2><p>由于同源从略的限制，XMLHttpRequest只允许请求前源（域名、协议、端口）的资源，为了实现跨域请求，可以通过script标签实现跨域请求，然后再服务端输出JSON数据并执行回调函数，从而解决跨域数据请求</p>
-<h2 id="3-如何使用JSONP"><a href="#3-如何使用JSONP" class="headerlink" title="3. 如何使用JSONP"></a>3. 如何使用JSONP</h2><ul>
-<li>HTML代码<br><img src="http://upload-images.jianshu.io/upload_images/7426605-d8020506f468db57.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="HTML代码"></li>
-<li>PHP代码<br><img src="http://upload-images.jianshu.io/upload_images/7426605-1ec09b04fd0d1745.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="PHP代码"></li>
-</ul>
-<h2 id="4-JSONP原理"><a href="#4-JSONP原理" class="headerlink" title="4. JSONP原理"></a>4. JSONP原理</h2><p>首先在客户端注册一个callback，然后把callback的名字传给服务器。此时，服务器先生成json数据，然后以javascript语法的方式，生成function，function名字就是传递上来I带参数jsonp。最后将json数据直接以入参的方式，放置function中，这样就生成js语法的文档，返回给客户端。客户端浏览器，解析script变迁，并执行返回javascript文档，此时数据作为参数，传入了客户端预先定义好的callback函数里。<br>简单的说，就是利用script标签没有跨域限制的“漏洞”来达到与第三方通讯的目的。</p>
-<h2 id="5-备注"><a href="#5-备注" class="headerlink" title="5. 备注"></a>5. 备注</h2><p>#####json 是一种数据格式</p>
-<p>#####jsonp 是一种数据调用的方式，</p>
-<h5 id="联系-带callback的json就是jsonp"><a href="#联系-带callback的json就是jsonp" class="headerlink" title="联系 带callback的json就是jsonp"></a>联系 带callback的json就是jsonp</h5>
+        <p>简单地说，React Component通过其定义的几个函数来控制组件在生命周期的各个阶段的动作。</p>
+<p>在ES6中，一个React组件是用一个class来表示的（具体可以参考<a href="https://link.jianshu.com/?t=http://facebook.github.io/react/docs/reusable-components.html#es6-classes" target="_blank" rel="external">官方文档</a>），如下：</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">// 定义一个TodoList的React组件，通过继承React.Component来实现</span><br><span class="line">class TodoList extends React.Component &#123;</span><br><span class="line">  ...</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>这几个生命周期相关的函数有：</p>
+<ol>
+<li>构造函数，在创建组件的时候调用一次。</li>
+</ol>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">constructor(props, context)</span><br></pre></td></tr></table></figure>
+<ol>
+<li>构造函数，在创建组件的时候调用一次。</li>
+</ol>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">constructor(props, context)</span><br></pre></td></tr></table></figure>
+<ol>
+<li>在组件挂载之前调用一次。如果在这个函数里面调用setState，本次的render函数可以看到更新后的state，并且只渲染一次。</li>
+</ol>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">void componentWillMount()</span><br></pre></td></tr></table></figure>
+<ol>
+<li>在组件挂载之后调用一次。这个时候，子主键也都挂载好了，可以在这里使用refs。</li>
+</ol>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">void componentDidMount()</span><br></pre></td></tr></table></figure>
+<ol>
+<li>props是父组件传递给子组件的。父组件发生render的时候子组件就会调用componentWillReceiveProps（不管props有没有更新，也不管父子组件之间有没有数据交换）。</li>
+</ol>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">void componentWillReceiveProps(nextProps)</span><br></pre></td></tr></table></figure>
+<ol>
+<li>组件挂载之后，每次调用setState后都会调用shouldComponentUpdate判断是否需要重新渲染组件。默认返回true，需要重新render。在比较复杂的应用里，有一些数据的改变并不影响界面展示，可以在这里做判断，优化渲染效率。</li>
+</ol>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">bool shouldComponentUpdate(nextProps, nextState)</span><br></pre></td></tr></table></figure>
+<ol>
+<li>shouldComponentUpdate返回true或者调用forceUpdate之后，componentWillUpdate会被调用。</li>
+</ol>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">void componentWillUpdate(nextProps, nextState)</span><br></pre></td></tr></table></figure>
+<ol>
+<li>除了首次render之后调用componentDidMount，其它render结束之后都是调用componentDidUpdate。<br>componentWillMount、componentDidMount和componentWillUpdate、componentDidUpdate可以对应起来。区别在于，前者只有在挂载的时候会被调用；而后者在以后的每次更新渲染之后都会被调用。</li>
+</ol>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">void componentDidUpdate()</span><br></pre></td></tr></table></figure>
+<ol>
+<li>render是一个React组件所必不可少的核心函数（上面的其它函数都不是必须的）。记住，不要在render里面修改state。</li>
+</ol>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">ReactElement render()</span><br></pre></td></tr></table></figure>
+<ol>
+<li>组件被卸载的时候调用。一般在componentDidMount里面注册的事件需要在这里删除。</li>
+</ol>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">void componentWillUnmount()</span><br></pre></td></tr></table></figure>
+<h3 id="更新方式"><a href="#更新方式" class="headerlink" title="更新方式"></a>更新方式</h3><p>在react中，触发render的有4条路径。</p>
+<p>以下假设shouldComponentUpdate都是按照默认返回true的方式。</p>
+<p>首次渲染Initial Render<br>调用this.setState （并不是一次setState会触发一次render，React可能会合并操作，再一次性进行render）<br>父组件发生更新（一般就是props发生改变，但是就算props没有改变或者父子组件之间没有数据交换也会触发render）<br>调用this.forceUpdate<br>下面是我对React组件四条更新路径地总结：</p>
+<p><img src="https://upload-images.jianshu.io/upload_images/1814354-4bf62e54553a32b7.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/700" alt=""></p>
+
       
 
       
@@ -278,7 +316,7 @@
     <a class="close js-modal-close" href="javascript:;"><i class="icon icon-close"></i></a>
     <p>扫一扫，分享到微信</p>
     <div class="wx-qrcode">
-      <img src="//pan.baidu.com/share/qrcode?url=http://yoursite.com/2017/11/15/JSONP 的工作原理/" alt="微信分享二维码">
+      <img src="//pan.baidu.com/share/qrcode?url=http://yoursite.com/2018/02/06/React组件生命周期/" alt="微信分享二维码">
     </div>
 </div>
 
@@ -292,18 +330,9 @@
   
 <nav id="article-nav">
   
-    <a href="/2017/11/15/json/" id="article-nav-newer" class="article-nav-link-wrap">
-      <i class="icon-circle-left"></i>
-      <div class="article-nav-title">
-        
-          json_encode
-        
-      </div>
-    </a>
   
-  
-    <a href="/2017/11/14/AJAX/" id="article-nav-older" class="article-nav-link-wrap">
-      <div class="article-nav-title">XMLHttpRequest</div>
+    <a href="/2018/02/06/vue-router从入门到放弃/" id="article-nav-older" class="article-nav-link-wrap">
+      <div class="article-nav-title">vue-router从入门到放弃</div>
       <i class="icon-circle-right"></i>
     </a>
   
@@ -331,7 +360,7 @@
   
   <div class="duoshuo">
 	<!-- 多说评论框 start -->
-	<div class="ds-thread" data-thread-key="JSONP 的工作原理" data-title="JSONP 的工作原理" data-url="http://yoursite.com/2017/11/15/JSONP 的工作原理/"></div>
+	<div class="ds-thread" data-thread-key="React组件生命周期" data-title="React组件生命周期" data-url="http://yoursite.com/2018/02/06/React组件生命周期/"></div>
 	<!-- 多说评论框 end -->
 	<!-- 多说公共JS代码 start (一个网页只需插入一次) -->
 	<script type="text/javascript">
@@ -353,7 +382,7 @@
   
 
   
-  <div id="SOHUCS" sid="JSONP 的工作原理" ></div> 
+  <div id="SOHUCS" sid="React组件生命周期" ></div> 
 <script charset="utf-8" type="text/javascript" src="//changyan.sohu.com/upload/changyan.js" ></script>
 <script type="text/javascript">
     window.changyan.api.config({
