@@ -158,6 +158,117 @@
           <div id="js-content" class="content-ll">
             
   
+    <article id="post-nodeJs使用教程" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2018/01/22/nodeJs使用教程/">nodeJs使用教程</a>
+    </h1>
+  
+
+        
+        <a href="/2018/01/22/nodeJs使用教程/" class="archive-article-date">
+  	<time datetime="2018-01-22T14:20:54.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2018-01-22</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <blockquote>
+<p>一、模块化</p>
+</blockquote>
+<p>我们知道nodeJS是遵循CommonJS规范的，所以每个JS文件都是一个模块，模块的好处就是避免命名空间污染。倘若你想让一个模块对外暴露变量，可以用module.exports = varible;</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br></pre></td><td class="code"><pre><span class="line">var test = &quot;我是test里面的字符串&quot;;</span><br><span class="line">module.exports = &#123;</span><br><span class="line">    test</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<p>而一个模块想要引用另一个模块对外暴露的变量，用require关键字就行了</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br></pre></td><td class="code"><pre><span class="line">var index = require(&quot;./test.js&quot;);</span><br><span class="line">console.log(index.test);</span><br></pre></td></tr></table></figure>
+<p>这样test里面的变量就被index里面引用了</p>
+<p><img src="http://upload-images.jianshu.io/upload_images/7426605-e48171dd56378e59.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="image.png"></p>
+<blockquote>
+<p>二、内置模块</p>
+</blockquote>
+<h3 id="1-http"><a href="#1-http" class="headerlink" title="1. http"></a>1. http</h3><p>创建一个HTTP服务器，监听HTTP客户端请求并返回响应。但是应用程序不直接与HTTP打交道，而是操作HTTP模块提供request和response对象。</p>
+<ul>
+<li><p>request对象封装了HTTP请求，我们调用request对象的属性和方法就可以拿到所有HTTP请求的信息。</p>
+</li>
+<li><p>response对象封装了HTTP响应，我们操作response对象的方法，就可以把黄土坡响应返回给浏览器。</p>
+</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br></pre></td><td class="code"><pre><span class="line">// 导入HTTP模块</span><br><span class="line">var http = require(&quot;http&quot;);</span><br><span class="line">// 创建HTTP server 并传入回调函数</span><br><span class="line">var server = http.createServer(function (req,res) &#123;</span><br><span class="line">    //设置浏览器的编码格式</span><br><span class="line">    res.setHeader(&quot;Content-type&quot;,&quot;text/html;charset=utf-8&quot;);</span><br><span class="line">    // 将HTTP响应的HTML内容写入到浏览器中</span><br><span class="line">    res.write(&quot;你好，世界&quot;);</span><br><span class="line">    res.end();</span><br><span class="line">&#125;)</span><br><span class="line">//让服务器监听8888端口</span><br><span class="line">server.listen(8888);</span><br></pre></td></tr></table></figure>
+<p>在浏览器中输入localhost：8888就可以输出 “你好，世界”。</p>
+<h3 id="2-fs"><a href="#2-fs" class="headerlink" title="2. fs"></a>2. fs</h3><p>该fs模块提供了一个API，用于以与标准POSIX功能紧密相关的方式与文件系统进行交互。</p>
+<p>要使用这个模块：</p>
+<p>const fs = require(‘fs’);<br>所有的文件系统操作都有同步和异步的形式。</p>
+<p>异步表单总是将完成回调作为最后一个参数。传递给完成回调的参数取决于方法，但第一个参数总是保留给一个异常。如果操作成功完成，那么第一个参数将是null或undefined。</p>
+<h3 id="3-url"><a href="#3-url" class="headerlink" title="3.url"></a>3.url</h3><p>解析URL、生成URL、以及拼接URL</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">var url = require(&quot;url&quot;);</span><br><span class="line">var http = require(&quot;http&quot;);</span><br><span class="line">var server = http.createServer(function (req,res) &#123;</span><br><span class="line">    var pathname = url.parse(req.url,true);</span><br><span class="line">    console.log(pathname);</span><br><span class="line">    res.end();</span><br><span class="line">&#125;)</span><br><span class="line">server.listen(8888);</span><br></pre></td></tr></table></figure>
+<div style="text-align:center">
+
+<p><img src="http://upload-images.jianshu.io/upload_images/7426605-601c4a4a65dfd249.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="image.png"></p>
+<p><div style="text-align:left"><br>可以获取从前台地址栏传过来的URL链接</div></p>
+<h3 id="4-querystring"><a href="#4-querystring" class="headerlink" title="4.querystring"></a>4.querystring</h3><p>用于实现URL参数字符串与参数对象的互相转换</p>
+<p>该querystring.escape()方法对给定的URL百分比编码str以针对URL查询字符串的特定需求而优化的方式执行 。</p>
+<p>该querystring.escape()方法被使用querystring.stringify()并且通常不被直接使用。它的导出主要是为了允许应用程序代码通过分配querystring.escape一个替代函数来提供一个替换的百分比编码实现。</p>
+<h3 id="4-express"><a href="#4-express" class="headerlink" title="4. express"></a>4. express</h3><p>express 是Node.js应用最广泛的web框架<br>Express 是一个简洁而灵活的 node.js Web应用框架, 提供了一系列强大特性帮助你创建各种 Web 应用，和丰富的 HTTP 工具。</p>
+<p>使用 Express 可以快速地搭建一个完整功能的网站。</p>
+<p>Express 框架核心特性：</p>
+<p>可以设置中间件来响应 HTTP 请求。</p>
+<p>定义了路由表用于执行不同的 HTTP 请求动作。</p>
+<p>可以通过向模板传递参数来动态渲染 HTML 页面。</p>
+<h3 id="5-cheerio"><a href="#5-cheerio" class="headerlink" title="5. cheerio"></a>5. cheerio</h3><p>可以理解为一个Node.js版的jQuery，用来从网页中以css selector取数据，使用方式跟jQuery一样</p>
+<p>首先就爱那个网页读取为一个字符串，传给cheerio.load函数，返回值即是一个cheerio对象（类似于jQuery对象）</p>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br></pre></td><td class="code"><pre><span class="line">var cheerio = require(&quot;cheerio&quot;);</span><br><span class="line"></span><br><span class="line">function getData(str) &#123;</span><br><span class="line">    var $ = cheerio.load(str);</span><br><span class="line">    var arr = $(&quot;.link-dark&quot;);</span><br><span class="line">    var dataTemp = [];</span><br><span class="line">    arr.each(function (k,v) &#123;</span><br><span class="line">        // console.log($(v).text());</span><br><span class="line">        var title = $(v).text();</span><br><span class="line">        var obj = &#123;</span><br><span class="line">            id:(k+1),</span><br><span class="line">            content:title,</span><br><span class="line">        &#125;</span><br><span class="line">        dataTemp.push(obj);</span><br><span class="line">    &#125;)</span><br><span class="line">    // console.log(dataTemp);</span><br><span class="line">    return dataTemp;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h3 id="6-util"><a href="#6-util" class="headerlink" title="6. util"></a>6. util</h3><p>是 node 里面一个工具模块 ,node 里面几乎所有的模块 都会用到 在这个模块</p>
+<ul>
+<li>1 实现继承 这是主要功能</li>
+<li>2 实现对象的完整输出</li>
+<li>3 实现判断数据类型</li>
+</ul>
+<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br></pre></td><td class="code"><pre><span class="line">//引入工具类</span><br><span class="line">var util = require(&quot;util&quot;);</span><br><span class="line"></span><br><span class="line">function Parent()&#123;</span><br><span class="line">    //继承Parent函数内的内容 为内部继承</span><br><span class="line">    this.name = &quot;爸爸&quot;;</span><br><span class="line">    this.age = &quot;50&quot;;</span><br><span class="line">    this.sayHello = function()&#123;</span><br><span class="line">        console.log(&quot;hello&quot;);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line">//继承Parent的外加属性 为外部继承</span><br><span class="line">Parent.prototype.getName = function()&#123;</span><br><span class="line">    console.log(this.name);</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line">function Child()&#123;</span><br><span class="line">    //不使用inherits实现继承</span><br><span class="line">    Parent.call(this);</span><br><span class="line">&#125;</span><br><span class="line">//实现child继承parent</span><br><span class="line">// 工具类 util 里面的inherits 只能继承原型链(prototype)的方法和属性,无法继承类自有(直接写在类里面的)的方法和属性</span><br><span class="line">util.inherits(Child,Parent);</span><br><span class="line">console.log(Child)</span><br></pre></td></tr></table></figure></div>
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2018/01/22/nodeJs使用教程/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
     <article id="post-Node-js之fs用法详解" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -1141,98 +1252,6 @@ context.drawImage(img,0,0);
       
         <p class="article-more-link">
           <a class="article-more-a" href="/2017/12/27/构造函数/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
-    <article id="post-JS版base64获取" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2017/12/27/JS版base64获取/">JS版base64获取</a>
-    </h1>
-  
-
-        
-        <a href="/2017/12/27/JS版base64获取/" class="archive-article-date">
-  	<time datetime="2017-12-27T14:19:17.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-12-27</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h3 id="1-JS版base64获取"><a href="#1-JS版base64获取" class="headerlink" title="1. JS版base64获取"></a>1. JS版base64获取</h3><p>html代码</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br></pre></td><td class="code"><pre><span class="line">&lt;body&gt;</span><br><span class="line">	&lt;input type=&quot;file&quot; id=&quot;myFile&quot; onchange=&quot;sub()&quot; /&gt;</span><br><span class="line">&lt;/body&gt;</span><br></pre></td></tr></table></figure>
-<p>JS代码</p>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br></pre></td><td class="code"><pre><span class="line">&lt;script type=&quot;text/javascript&quot;&gt;</span><br><span class="line">	function sub()&#123;</span><br><span class="line">		var myFile = document.getElementById(&quot;myFile&quot;).files[0];</span><br><span class="line">		var fileRead = new FileReader();</span><br><span class="line">		fileRead.readAsDataURL(myFile);</span><br><span class="line">		fileRead.onload = function(e)&#123;</span><br><span class="line">			var base64 = e.target.result;</span><br><span class="line">			var img = new Image();</span><br><span class="line">			img.src = base64;</span><br><span class="line">			document.getElementsByTagName(&quot;body&quot;)[0].appendChild(img);</span><br><span class="line">		&#125;</span><br><span class="line">	&#125;</span><br><span class="line">&lt;/script&gt;</span><br></pre></td></tr></table></figure>
-<p>解释：</p>
-<ol>
-<li>var myFile = document.getElementById(“myFile”).files[0];<br>.files[0] 获取 在input上传的图片</li>
-<li><p>var fileRead = new FileReader();<br>HTML5 定义了 FileReader 作为文件API的重要成员用于读取文件，根据W3C的定义FileReader接口提供了读取文件的方法和包含读取结果的事件模型<br>new FileReader的实例有4个方法<br><img src="http://upload-images.jianshu.io/upload_images/7426605-95d86059022d5cf0.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="new FileReader"></p>
-<ul>
-<li><p>readAsText：该方法有两个参数，其中第二个参数是文本的编码方式，默认值为 UTF-8。这个方法非常容易理解，将文件以文本方式读取，读取的结果即是这个文本文件中的内容。</p>
-</li>
-<li><p>readAsBinaryString：该方法将文件读取为二进制字符串，通常我们将它传送到后端，后端可以通过这段字符串存储文件。</p>
-</li>
-<li><p>readAsDataURL：这是例子程序中用到的方法，该方法将文件读取为一段以 data: 开头的字符串，这段字符串的实质就是 Data URL，Data URL是一种将小文件直接嵌入文档的方案。这里的小文件通常是指图像与 html 等格式的文件。</p>
-</li>
-</ul>
-</li>
-</ol>
-<ol>
-<li>fileRead.readAsDataURL(myFile);<br>FileReader随想的readAsDataURL方法可以将读取到的文件编码成Data URL，Data URL是一项特殊技术，可以讲资料（图片）内嵌在网页之中，不用放在外部文件。使用Data URL的好处是，不需要额外的发送一个HTTP请求到服务器端取得的额外资料，缺点是，网页的大小可能会变大，它适合应用在内嵌小图片。</li>
-<li><p>fileRead.onload = function(e)中的e<br>如下图所示，e是一个对象，e.target.result就是我们想获取的上传图片转化为的base64<br><img src="http://upload-images.jianshu.io/upload_images/7426605-1643e51fc6694e05.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240" alt="image.png"></p>
-</li>
-<li><p>var img = new Image();<br>最后我们创建一个img图片，将img的src设置成我们获取到的base64</p>
-</li>
-</ol>
-<h3 id="2-canvas版base64获取"><a href="#2-canvas版base64获取" class="headerlink" title="2. canvas版base64获取"></a>2. canvas版base64获取</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br></pre></td><td class="code"><pre><span class="line">&lt;body&gt;</span><br><span class="line">		&lt;canvas id=&quot;myCanvas&quot; width=&quot;500&quot; height=&quot;500&quot;&gt;&lt;/canvas&gt;</span><br><span class="line">		&lt;button onclick=&quot;sub()&quot;&gt;点击&lt;/button&gt;</span><br><span class="line">	&lt;/body&gt;</span><br><span class="line">	&lt;script type=&quot;text/javascript&quot;&gt;</span><br><span class="line">		var canvas = document.getElementById(&quot;myCanvas&quot;);</span><br><span class="line">		var context = canvas.getContext(&quot;2d&quot;);</span><br><span class="line">		</span><br><span class="line">		context.beginPath();</span><br><span class="line">		context.fillStyle = &quot;red&quot;;</span><br><span class="line">		context.fillRect(100,100,100,100);</span><br><span class="line">		function sub()&#123;</span><br><span class="line">			var base64 = canvas.toDataURL();</span><br><span class="line">			console.log(base64)</span><br><span class="line">			var img = new Image();</span><br><span class="line">			img.src = base64;</span><br><span class="line">			document.getElementsByTagName(&quot;body&quot;)[0].appendChild(img);</span><br><span class="line">		&#125;</span><br><span class="line">	&lt;/script&gt;</span><br></pre></td></tr></table></figure>
-<p>解释：</p>
-<ol>
-<li>canvas.toDataURL()<br>FileReader对象也有类似的方法，比如.readAsDataURL()，然而它只接受file或blob类型，而这两种类型一般只能通过<input[type=file]>元素的files属性获取，或者用Blob()构造函数手工创建一个新的对象。尴尬的是我们当前只有图片路径，受制于浏览器的安全策略，<input[type=file]>的files属性是只读的，而Blob()构造函数只接受文件内容，两种方式都无法通过图片路径直接获取。上文中假设的应用场景迫使我们必先考虑如何通过路径获取到图片内容。<img>是可以的，并且可以被绘制到<canvas>中，而<canvas>正巧拥有.toDataURL()方法。</canvas></canvas></input[type=file]></input[type=file]></li>
-</ol>
-
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2017/12/27/JS版base64获取/">展开全文 >></a>
         </p>
       
 
