@@ -158,6 +158,71 @@
           <div id="js-content" class="content-ll">
             
   
+    <article id="post-构造函数" class="article article-type-post  article-index" itemscope itemprop="blogPost">
+  <div class="article-inner">
+    
+      <header class="article-header">
+        
+  
+    <h1 itemprop="name">
+      <a class="article-title" href="/2017/12/27/构造函数/">构造函数</a>
+    </h1>
+  
+
+        
+        <a href="/2017/12/27/构造函数/" class="archive-article-date">
+  	<time datetime="2017-12-27T14:28:39.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-12-27</time>
+</a>
+        
+      </header>
+    
+    <div class="article-entry" itemprop="articleBody">
+      
+        <h3 id="1-构造函数-canvas小球碰撞"><a href="#1-构造函数-canvas小球碰撞" class="headerlink" title="1. 构造函数   canvas小球碰撞"></a>1. 构造函数   canvas小球碰撞</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br></pre></td><td class="code"><pre><span class="line">&lt;!DOCTYPE html&gt;</span><br><span class="line">&lt;html&gt;</span><br><span class="line">	&lt;head&gt;</span><br><span class="line">		&lt;meta charset=&quot;UTF-8&quot;&gt;</span><br><span class="line">		&lt;title&gt;构造函数运动球&lt;/title&gt;</span><br><span class="line">		&lt;style type=&quot;text/css&quot;&gt;</span><br><span class="line">			canvas &#123;</span><br><span class="line">				border: 1px solid red;</span><br><span class="line">			&#125;</span><br><span class="line">		&lt;/style&gt;</span><br><span class="line">	&lt;/head&gt;</span><br><span class="line">	&lt;body&gt;</span><br><span class="line">		&lt;canvas id=&quot;myCanvas&quot; width=&quot;500&quot; height=&quot;400&quot;&gt;你的浏览器不支持canvas&lt;/canvas&gt;</span><br><span class="line">	&lt;/body&gt;</span><br><span class="line">	&lt;script type=&quot;text/javascript&quot;&gt;</span><br><span class="line">		var canvas = document.getElementById(&quot;myCanvas&quot;);</span><br><span class="line">		var context = canvas.getContext(&quot;2d&quot;);</span><br><span class="line">		</span><br><span class="line">		//定义球的构造函数</span><br><span class="line">		function Ball(x,y,r,color,speedx,speedy)&#123;</span><br><span class="line">			this.x = x;</span><br><span class="line">			this.y = y;</span><br><span class="line">			this.r = r;</span><br><span class="line">			this.color = color;</span><br><span class="line">			this.speedx = speedx;</span><br><span class="line">			this.speedy = speedy;</span><br><span class="line">		&#125;</span><br><span class="line">		//花的方法</span><br><span class="line">		Ball.prototype.draw = function()&#123;</span><br><span class="line">			context.beginPath();</span><br><span class="line">			context.arc(this.x,this.y,this.r,0,Math.PI*2);</span><br><span class="line">			context.fillStyle = this.color;</span><br><span class="line">			context.fill();</span><br><span class="line">		&#125;</span><br><span class="line">		//球的移动方法</span><br><span class="line">		Ball.prototype.move = function()&#123;</span><br><span class="line">			this.x += this.speedx;</span><br><span class="line">			this.y += this.speedy;</span><br><span class="line">			//碰壁检测</span><br><span class="line">			if(this.x &lt; this.r || this.x &gt; canvas.width - this.r)&#123;</span><br><span class="line">				this.speedx *= -1;</span><br><span class="line">			&#125;</span><br><span class="line">			if(this.y &lt; this.r || this.y &gt; canvas.height - this.r)&#123;</span><br><span class="line">				this.speedy *= -1;</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line">		</span><br><span class="line">		//随机数函数</span><br><span class="line">		function randomNum(min,max)&#123;</span><br><span class="line">			return parseInt(Math.random()*(max-min)+min);</span><br><span class="line">		&#125;</span><br><span class="line">		function randomColor()&#123;</span><br><span class="line">			return &quot;rgb(&quot;+randomNum(0,256)+&quot;,&quot;+randomNum(0,256)+&quot;,&quot;+randomNum(0,256)+&quot;)&quot;;</span><br><span class="line">		&#125;</span><br><span class="line">		var arr = [];</span><br><span class="line">		for(var i = 0;i &lt; 100;i++)&#123;</span><br><span class="line">			var r = randomNum(1,50);</span><br><span class="line">			var x = randomNum(r,canvas.width - r);</span><br><span class="line">			var y = randomNum(r,canvas.height - r);</span><br><span class="line">			var speedx = randomNum(1,10);</span><br><span class="line">			var speedy = randomNum(1,10);</span><br><span class="line">			var color = randomColor();</span><br><span class="line">			var newBall = new Ball(x,y,r,color,speedx,speedy);</span><br><span class="line">			arr.push(newBall);</span><br><span class="line">		&#125;</span><br><span class="line">		</span><br><span class="line">		//实例化球</span><br><span class="line">		function act()&#123;</span><br><span class="line">			context.clearRect(0,0,canvas.width,canvas.height);</span><br><span class="line">			for(var i = 0;i &lt; arr.length;i++)&#123;</span><br><span class="line">				arr[i].draw();</span><br><span class="line">				arr[i].move();</span><br><span class="line">			&#125;</span><br><span class="line">			window.requestAnimationFrame(act);</span><br><span class="line">		&#125;</span><br><span class="line">		act();</span><br><span class="line">	&lt;/script&gt;</span><br><span class="line">&lt;/html&gt;</span><br></pre></td></tr></table></figure>
+<h3 id="2-类-canvas小球碰撞"><a href="#2-类-canvas小球碰撞" class="headerlink" title="2. 类   canvas小球碰撞"></a>2. 类   canvas小球碰撞</h3><figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br><span class="line">43</span><br><span class="line">44</span><br><span class="line">45</span><br><span class="line">46</span><br><span class="line">47</span><br><span class="line">48</span><br><span class="line">49</span><br><span class="line">50</span><br><span class="line">51</span><br><span class="line">52</span><br><span class="line">53</span><br><span class="line">54</span><br><span class="line">55</span><br><span class="line">56</span><br><span class="line">57</span><br><span class="line">58</span><br><span class="line">59</span><br><span class="line">60</span><br><span class="line">61</span><br><span class="line">62</span><br><span class="line">63</span><br><span class="line">64</span><br><span class="line">65</span><br><span class="line">66</span><br><span class="line">67</span><br><span class="line">68</span><br><span class="line">69</span><br><span class="line">70</span><br><span class="line">71</span><br><span class="line">72</span><br><span class="line">73</span><br><span class="line">74</span><br><span class="line">75</span><br><span class="line">76</span><br><span class="line">77</span><br><span class="line">78</span><br></pre></td><td class="code"><pre><span class="line">&lt;!DOCTYPE html&gt;</span><br><span class="line">&lt;html&gt;</span><br><span class="line">	&lt;head&gt;</span><br><span class="line">		&lt;meta charset=&quot;UTF-8&quot;&gt;</span><br><span class="line">		&lt;title&gt;构造函数运动球&lt;/title&gt;</span><br><span class="line">		&lt;style type=&quot;text/css&quot;&gt;</span><br><span class="line">			canvas &#123;</span><br><span class="line">				border: 1px solid red;</span><br><span class="line">			&#125;</span><br><span class="line">		&lt;/style&gt;</span><br><span class="line">	&lt;/head&gt;</span><br><span class="line">	&lt;body&gt;</span><br><span class="line">		&lt;canvas id=&quot;myCanvas&quot; width=&quot;500&quot; height=&quot;400&quot;&gt;你的浏览器不支持canvas&lt;/canvas&gt;</span><br><span class="line">	&lt;/body&gt;</span><br><span class="line">	&lt;script type=&quot;text/javascript&quot;&gt;</span><br><span class="line">		var canvas = document.getElementById(&quot;myCanvas&quot;);</span><br><span class="line">		var context = canvas.getContext(&quot;2d&quot;);</span><br><span class="line">		class Ball&#123;</span><br><span class="line">			constructor(x,y,r,color,speedx,speedy)&#123;</span><br><span class="line">				this.x = x;</span><br><span class="line">				this.y = y;</span><br><span class="line">				this.r = r;</span><br><span class="line">				this.color = color;</span><br><span class="line">				this.speedx = speedx;</span><br><span class="line">				this.speedy = speedy;</span><br><span class="line">			&#125;</span><br><span class="line">			//花的方法</span><br><span class="line">			draw()&#123;</span><br><span class="line">				context.beginPath();</span><br><span class="line">				context.arc(this.x,this.y,this.r,0,Math.PI*2);</span><br><span class="line">				context.fillStyle = this.color;</span><br><span class="line">				context.fill();</span><br><span class="line">			&#125;</span><br><span class="line">			//球的移动方法</span><br><span class="line">			move()&#123;</span><br><span class="line">				this.x += this.speedx;</span><br><span class="line">				this.y += this.speedy;</span><br><span class="line">				//碰壁检测</span><br><span class="line">				if(this.x &lt; this.r || this.x &gt; canvas.width - this.r)&#123;</span><br><span class="line">					this.speedx *= -1;</span><br><span class="line">				&#125;</span><br><span class="line">				if(this.y &lt; this.r || this.y &gt; canvas.height - this.r)&#123;</span><br><span class="line">					this.speedy *= -1;</span><br><span class="line">				&#125;</span><br><span class="line">			&#125;</span><br><span class="line">		&#125;</span><br><span class="line">		</span><br><span class="line">		//随机数函数</span><br><span class="line">		function randomNum(min,max)&#123;</span><br><span class="line">			return parseInt(Math.random()*(max-min)+min);</span><br><span class="line">		&#125;</span><br><span class="line">		function randomColor()&#123;</span><br><span class="line">			return &quot;rgb(&quot;+randomNum(0,256)+&quot;,&quot;+randomNum(0,256)+&quot;,&quot;+randomNum(0,256)+&quot;)&quot;;</span><br><span class="line">		&#125;</span><br><span class="line">		var arr = [];</span><br><span class="line">		for(var i = 0;i &lt; 100;i++)&#123;</span><br><span class="line">			var r = randomNum(1,50);</span><br><span class="line">			var x = randomNum(r,canvas.width - r);</span><br><span class="line">			var y = randomNum(r,canvas.height - r);</span><br><span class="line">			var speedx = randomNum(1,10);</span><br><span class="line">			var speedy = randomNum(1,10);</span><br><span class="line">			var color = randomColor();</span><br><span class="line">			var newBall = new Ball(x,y,r,color,speedx,speedy);</span><br><span class="line">			arr.push(newBall);</span><br><span class="line">		&#125;</span><br><span class="line">		</span><br><span class="line">		//实例化球</span><br><span class="line">		function act()&#123;</span><br><span class="line">			context.clearRect(0,0,canvas.width,canvas.height);</span><br><span class="line">			for(var i = 0;i &lt; arr.length;i++)&#123;</span><br><span class="line">				arr[i].draw();</span><br><span class="line">				arr[i].move();</span><br><span class="line">			&#125;</span><br><span class="line">			window.requestAnimationFrame(act);</span><br><span class="line">		&#125;</span><br><span class="line">		act();</span><br><span class="line">	&lt;/script&gt;</span><br><span class="line">&lt;/html&gt;</span><br></pre></td></tr></table></figure>
+<p>有上可以看出，用类写面向对象的方法，思路更清晰。当然，在考虑兼容的情况下，还是使用构造函数</p>
+
+      
+
+      
+    </div>
+    <div class="article-info article-info-index">
+      
+      
+      
+
+      
+        <p class="article-more-link">
+          <a class="article-more-a" href="/2017/12/27/构造函数/">展开全文 >></a>
+        </p>
+      
+
+      
+      <div class="clearfix"></div>
+    </div>
+  </div>
+</article>
+
+<aside class="wrap-side-operation">
+    <div class="mod-side-operation">
+        
+        <div class="jump-container" id="js-jump-container" style="display:none;">
+            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
+                <i class="icon-font icon-back"></i>
+            </a>
+            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
+                <i class="icon-font icon-plane jump-plane"></i>
+            </div>
+        </div>
+        
+        
+    </div>
+</aside>
+
+
+
+
+  
     <article id="post-JS版base64获取" class="article article-type-post  article-index" itemscope itemprop="blogPost">
   <div class="article-inner">
     
@@ -983,78 +1048,9 @@
 
 
   
-    <article id="post-如何将创建的文档放到指定目录" class="article article-type-post  article-index" itemscope itemprop="blogPost">
-  <div class="article-inner">
-    
-      <header class="article-header">
-        
-  
-    <h1 itemprop="name">
-      <a class="article-title" href="/2017/11/23/如何将创建的文档放到指定目录/">如何将创建的文档放到指定目录</a>
-    </h1>
-  
-
-        
-        <a href="/2017/11/23/如何将创建的文档放到指定目录/" class="archive-article-date">
-  	<time datetime="2017-11-23T14:39:22.000Z" itemprop="datePublished"><i class="icon-calendar icon"></i>2017-11-23</time>
-</a>
-        
-      </header>
-    
-    <div class="article-entry" itemprop="articleBody">
-      
-        <h4 id="如何将创建的文档放到指定目录"><a href="#如何将创建的文档放到指定目录" class="headerlink" title="如何将创建的文档放到指定目录"></a>如何将创建的文档放到指定目录</h4><ul>
-<li>例如如何将创建的txt文件到指定的txt目录下，或者如何将拷贝后的图片放入img目录下</li>
-</ul>
-<div style="text-align:center"><br>    <img width="700" src="http://upload-images.jianshu.io/upload_images/7426605-aef25c06258a145e.png?imageMogr2/auto-orient/strip%7CimageView2/2/w/1240"><br></div>
-
-
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br></pre></td><td class="code"><pre><span class="line">//html 文件</span><br><span class="line"></span><br><span class="line">   &lt;body&gt;</span><br><span class="line">	&lt;form action=&quot;../php/test.php&quot; method=&quot;post&quot; enctype=&quot;multipart/form-data&quot;&gt;</span><br><span class="line">		&lt;input type=&quot;file&quot; name=&quot;pic&quot; id=&quot;pic&quot; value=&quot;&quot; /&gt;</span><br><span class="line">		&lt;input type=&quot;submit&quot; name=&quot;submit&quot; value=&quot;提交&quot;/&gt;</span><br><span class="line">	&lt;/form&gt;</span><br><span class="line">&lt;/body&gt;</span><br></pre></td></tr></table></figure>
-<figure class="highlight plain"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br></pre></td><td class="code"><pre><span class="line">// php 文件</span><br><span class="line"></span><br><span class="line">&lt;?php</span><br><span class="line">	if(!empty($_POST[&apos;submit&apos;])) &#123;</span><br><span class="line">		if(!empty($_FILES[&apos;pic&apos;][&apos;name&apos;])) &#123;</span><br><span class="line">			$type = $_FILES[&apos;pic&apos;][&apos;type&apos;];</span><br><span class="line">			if($type == &quot;image/jpeg&quot; || $type == &quot;image/png&quot;) &#123;</span><br><span class="line">             </span><br><span class="line">                // 定义一个变量，存储相对该PHP的相对位置</span><br><span class="line">				$path = &quot;../img/&quot;;</span><br><span class="line">				//								path. 将拷贝完成的图片，拼接好指定目录</span><br><span class="line">				$result = move_uploaded_file($_FILES[&apos;pic&apos;][&apos;tmp_name&apos;],$path.$_FILES[&apos;pic&apos;][&apos;name&apos;]);</span><br><span class="line">			&#125;</span><br><span class="line">			if($result) &#123;</span><br><span class="line">				$val = $_FILES[&apos;pic&apos;][&apos;name&apos;];</span><br><span class="line">				// 在创建文件的时候将文件创建到指定位置</span><br><span class="line">				$fp = fopen(&quot;../txt/test.txt&quot;,&quot;a+&quot;);</span><br><span class="line">				fwrite($fp,$val);</span><br><span class="line">				fclose($fp);</span><br><span class="line">			&#125;		</span><br><span class="line">		&#125;		</span><br><span class="line">	&#125;</span><br><span class="line">?&gt;</span><br></pre></td></tr></table></figure>
-      
-
-      
-    </div>
-    <div class="article-info article-info-index">
-      
-      
-      
-
-      
-        <p class="article-more-link">
-          <a class="article-more-a" href="/2017/11/23/如何将创建的文档放到指定目录/">展开全文 >></a>
-        </p>
-      
-
-      
-      <div class="clearfix"></div>
-    </div>
-  </div>
-</article>
-
-<aside class="wrap-side-operation">
-    <div class="mod-side-operation">
-        
-        <div class="jump-container" id="js-jump-container" style="display:none;">
-            <a href="javascript:void(0)" class="mod-side-operation__jump-to-top">
-                <i class="icon-font icon-back"></i>
-            </a>
-            <div id="js-jump-plan-container" class="jump-plan-container" style="top: -11px;">
-                <i class="icon-font icon-plane jump-plane"></i>
-            </div>
-        </div>
-        
-        
-    </div>
-</aside>
-
-
-
-
-  
   
     <nav id="page-nav">
-      <a class="extend prev" rel="prev" href="/page/2/">&laquo; Prev</a><a class="page-number" href="/">1</a><a class="page-number" href="/page/2/">2</a><span class="page-number current">3</span><a class="page-number" href="/page/4/">4</a><a class="extend next" rel="next" href="/page/4/">Next &raquo;</a>
+      <a class="extend prev" rel="prev" href="/page/2/">&laquo; Prev</a><a class="page-number" href="/">1</a><a class="page-number" href="/page/2/">2</a><span class="page-number current">3</span><a class="page-number" href="/page/4/">4</a><a class="page-number" href="/page/5/">5</a><a class="extend next" rel="next" href="/page/4/">Next &raquo;</a>
     </nav>
   
 
@@ -1149,11 +1145,11 @@ return o(i(t),arguments.length<2?void 0:u(arguments[1]))}})},function(t,n,r){var
           <ul class="article-tag-list" q-show="showTags">
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color1">浅谈OOP</a>
+                <a href="javascript:void(0)" class="js-tag color5">面向对象</a>
               </li>
              
               <li class="article-tag-list-item">
-                <a href="javascript:void(0)" class="js-tag color5">面向对象</a>
+                <a href="javascript:void(0)" class="js-tag color1">浅谈OOP</a>
               </li>
             
             <div class="clearfix"></div>
